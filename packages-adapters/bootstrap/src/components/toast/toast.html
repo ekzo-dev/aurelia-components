@@ -1,0 +1,11 @@
+<template class="toast ${animation ? 'fade' : ''} ${variant ? 'text-bg-' + variant : ''}">
+  <div class="toast-header">
+    <au-slot name="header">
+      <div style="margin-right: auto">${header}</div>
+    </au-slot>
+    <bs-close-button click.trigger="hide()"></bs-close-button>
+  </div>
+  <div class="toast-body">
+    <au-slot></au-slot>
+  </div>
+</template>

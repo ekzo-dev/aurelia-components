@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@ekzo/*": [
+        "packages/*/src",
+        "packages-adapters/*/src",
+      ]
+    }
+  },
+  "include": [
+    "packages",
+    "packages-adapters",
+  ],
+  "exclude": [
+    "**/*.stories.ts"
+  ]
+}

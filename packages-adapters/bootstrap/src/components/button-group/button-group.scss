@@ -1,0 +1,83 @@
+@import '../../utils';
+@import '~bootstrap/scss/button-group';
+
+bs-button-group {
+  > bs-button {
+    position: relative;
+    flex: 1 1 auto;
+  }
+
+  // Sizing
+  //
+  // Remix the default button sizing classes into new ones for easier manipulation.
+
+  &.btn-group-sm > bs-button .btn {
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
+  }
+  &.btn-group-lg > bs-button .btn {
+    @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+  }
+
+  // Bring the hover, focused, and "active" buttons to the front to overlay
+  // the borders properly
+  > .btn-check:checked + .btn,
+  > .btn-check:focus + .btn,
+  > bs-button:hover,
+  > bs-button:focus-within,
+  > bs-button:active,
+  > bs-button.active {
+    z-index: 1;
+  }
+
+  /* stylelint-disable no-descending-specificity */
+  &.btn-group {
+    // Prevent double borders when buttons are next to each other
+    > bs-button:not(:first-child) {
+      margin-left: -$btn-border-width;
+    }
+
+    // The left radius should be 0 if the button is:
+    // - the "third or more" child
+    // - the second child and the previous element isn't `.btn-check` (making it the first child visually)
+    // - part of a btn-group which isn't the first child
+    > bs-button:nth-child(n + 3) .btn,
+    > :not(.btn-check) + bs-button .btn,
+    > .btn-group:not(:first-child) > bs-button .btn {
+      @include border-start-radius(0);
+    }
+
+    // Reset rounded corners
+    > bs-button:not(:last-child) .btn:not(.dropdown-toggle),
+    > bs-button:first-child .btn.dropdown-toggle-split,
+    > .btn-group:not(:last-child) > bs-button .btn {
+      @include border-end-radius(0);
+    }
+  }
+
+  //
+  // Vertical button groups
+  //
+  &.btn-group-vertical {
+    > bs-button,
+    > bs-button .btn {
+      width: 100%;
+    }
+
+    // Prevent double borders when buttons are next to each other
+    > bs-button:not(:first-child) {
+      margin-top: -$btn-border-width;
+    }
+
+    // Reset rounded corners
+    > bs-button:not(:first-child) .btn,
+    > .btn-group:not(:first-child) > bs-button .btn {
+      @include border-top-radius(0);
+    }
+
+    > bs-button:not(:last-child) .btn:not(.dropdown-toggle),
+    > .btn-group:not(:last-child) > bs-button .btn {
+      @include border-bottom-radius(0);
+    }
+  }
+  /* stylelint-enable no-descending-specificity */
+}

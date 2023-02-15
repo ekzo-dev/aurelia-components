@@ -1,0 +1,76 @@
+{
+  "name" : "@ekzo/toolkit",
+  "description" : "An Aurelia plugin project.",
+  "version" : "0.1.0",
+  "repository" : {
+    "type" : "???",
+    "url" : "???"
+  },
+  "license" : "UNLICENSED",
+  "browserslist" : [
+    "defaults"
+  ],
+  "dependencies" : {
+    "date-fns" : "^2.28.0",
+    "libphonenumber-js" : "^1.9.44"
+  },
+  "devDependencies" : {
+    "@types/json-schema" : "^7.0.9"
+  },
+  "scripts" : {
+    "build-ts:ntv" : "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
+    "build-ts:es6" : "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
+    "build-ts:types" : "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-assets:ntv" : "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.scss dist/native-modules",
+    "build-assets:es6" : "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.scss dist/es2015",
+    "build" : "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\""
+  },
+  "engines" : {
+    "node" : ">=8.9.0"
+  },
+  "main" : "src/index.ts",
+  "module" : "src/index.ts",
+  "files" : [
+    "dist",
+    "src"
+  ],
+  "jest" : {
+    "moduleNameMapper" : {
+      "^aurelia-binding$" : "<rootDir>/../../node_modules/aurelia-binding",
+      "^.+\\.css$" : "<rootDir>/test/mock-css"
+    },
+    "modulePaths" : [
+      "<rootDir>/src",
+      "<rootDir>/node_modules"
+    ],
+    "moduleFileExtensions" : [
+      "ts",
+      "js",
+      "json"
+    ],
+    "transform" : {
+      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$" : "jest-transform-stub",
+      "^.+\\.ts$" : "ts-jest"
+    },
+    "testRegex" : "\\.spec\\.(ts|js)$",
+    "setupFiles" : [
+      "<rootDir>/test/jest-pretest.ts"
+    ],
+    "testEnvironment" : "node",
+    "collectCoverage" : true,
+    "collectCoverageFrom" : [
+      "src/**/*.{js,ts}",
+      "!**/*.spec.{js,ts}",
+      "!**/node_modules/**",
+      "!**/test/**"
+    ],
+    "coverageDirectory" : "<rootDir>/test/coverage-jest",
+    "coverageReporters" : [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
+  "gitHead" : "b103d307166215c6c4ce2a0f35e0ab427e45089c"
+}

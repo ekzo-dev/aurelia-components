@@ -1,0 +1,10 @@
+@import '../../utils';
+@import '~bootstrap/scss/dropdown';
+
+bs-dropdown-menu {
+  display: block;
+
+  a:not(.disabled) {
+    cursor: pointer;
+  }
+}

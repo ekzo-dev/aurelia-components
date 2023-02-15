@@ -1,0 +1,9 @@
+@import '../../utils';
+@import '~bootstrap/scss/pagination';
+
+bs-pagination {
+  .current:hover {
+    background: none;
+    color: $pagination-color;
+  }
+}

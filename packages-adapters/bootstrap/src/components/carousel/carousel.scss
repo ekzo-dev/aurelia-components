@@ -1,0 +1,17 @@
+@import '../../utils';
+@import '~bootstrap/scss/carousel';
+@import '~bootstrap/scss/placeholders';
+
+bs-carousel,
+bs-carousel-item,
+bs-carousel-caption {
+  display: block;
+
+  svg.bd-placeholder-img {
+    font-size: 3rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    text-anchor: middle;
+  }
+}

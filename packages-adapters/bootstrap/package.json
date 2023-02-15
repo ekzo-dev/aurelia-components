@@ -1,0 +1,53 @@
+{
+  "name" : "@ekzo/bootstrap",
+  "description" : "Aurelia Bootstrap adapter",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "version" : "5.2.0-alpha.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components"
+  },
+  "license" : "UNLICENSED",
+  "dependencies" : {
+    "@aurelia/dialog": "2.0.0-beta.1",
+    "@types/bootstrap" : "^5.2.1",
+    "@popperjs/core" : "^2.11.5",
+    "bootstrap" : "^5.2.0",
+    "bootstrap-icons" : "^1.9.1"
+  },
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
+    "pretest": "npm run lint",
+    "start": "webpack serve",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(ts|html)$": "@aurelia/ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
+  }
+}

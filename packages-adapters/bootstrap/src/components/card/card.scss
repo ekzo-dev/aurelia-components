@@ -1,0 +1,22 @@
+@import '../../utils';
+@import '~bootstrap/scss/card';
+
+bs-card {
+  .card-img-overlay + img {
+    border-radius: var(--bs-card-inner-border-radius);
+  }
+
+  > img:first-child,
+  > svg:first-child {
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+    width: 100%;
+  }
+
+  > img:last-child,
+  > svg:last-child {
+    border-bottom-right-radius: var(--bs-card-inner-border-radius);
+    border-bottom-left-radius: var(--bs-card-inner-border-radius);
+    width: 100%;
+  }
+}

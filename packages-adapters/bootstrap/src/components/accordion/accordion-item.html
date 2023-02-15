@@ -1,0 +1,16 @@
+<template class="accordion-item">
+  <h2 class="accordion-header">
+    <button
+      class="accordion-button ${collapsed ? 'collapsed' : ''}"
+      type="button"
+      click.trigger="() => onHeaderClick()"
+    >
+      <au-slot name="header">${header}</au-slot>
+    </button>
+  </h2>
+  <bs-collapse collapsed.bind="collapsed" class="accordion-collapse">
+    <div class="accordion-body">
+      <au-slot></au-slot>
+    </div>
+  </bs-collapse>
+</template>

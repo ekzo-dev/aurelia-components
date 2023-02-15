@@ -1,0 +1,14 @@
+<template
+  class="${placement ? 'offcanvas-' + placement : ''} ${responsive ? 'offcanvas-' + responsive : 'offcanvas'}"
+  tabindex="-1"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">
+      <au-slot name="title">${title}</au-slot>
+    </h5>
+    <bs-close-button click.trigger="hide()"></bs-close-button>
+  </div>
+  <div class="offcanvas-body">
+    <au-slot></au-slot>
+  </div>
+</template>

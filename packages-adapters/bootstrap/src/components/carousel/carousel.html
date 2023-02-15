@@ -1,0 +1,24 @@
+<template class="carousel slide ${fade ? 'carousel-fade' : ''}">
+  <div class="carousel-indicators" if.bind="indicators">
+    <button
+      type="button"
+      repeat.for="item of items"
+      click.trigger="() => to($index)"
+      class="${activeSlide === $index ? 'active': ''}"
+      data-bs-target
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <au-slot></au-slot>
+  </div>
+  <template if.bind="controls">
+    <button class="carousel-control-prev" type="button" click.trigger="() => prev()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" click.trigger="() => next()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </template>
+</template>

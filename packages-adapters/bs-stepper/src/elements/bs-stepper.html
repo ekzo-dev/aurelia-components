@@ -1,0 +1,16 @@
+<template class="bs-stepper ${vertical ? 'vertical' : ''}">
+  <div class="bs-stepper-header" role="tablist">
+    <template repeat.for="step of steps">
+      <div class="step" data-target="#${step.id}">
+        <button class="step-trigger" role="tab">
+          <span class="bs-stepper-circle">${step.number}</span>
+          <span class="bs-stepper-label">${step.label}</span>
+        </button>
+      </div>
+      <div class="line" if.bind="!$last"></div>
+    </template>
+  </div>
+  <div class="bs-stepper-content">
+    <au-slot></au-slot>
+  </div>
+</template>

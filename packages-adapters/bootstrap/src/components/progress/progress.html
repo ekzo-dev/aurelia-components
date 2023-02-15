@@ -1,0 +1,12 @@
+<template class="progress">
+  <div
+    class="progress-bar ${background ? `bg-${background}` : ''} ${striped ? 'progress-bar-striped' : ''} ${animated ? 'progress-bar-animated' : ''}"
+    role="progressbar"
+    style="width: ${value}%"
+    aria-valuenow="${value}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  >
+    <au-slot>${label}</au-slot>
+  </div>
+</template>

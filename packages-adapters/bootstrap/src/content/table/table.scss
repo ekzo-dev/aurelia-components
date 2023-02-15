@@ -1,0 +1,26 @@
+@import '../../utils';
+@import '~bootstrap/scss/tables';
+
+data-table {
+  tr.group {
+    background-color: $gray-200;
+  }
+
+  th {
+    position: relative;
+  }
+
+  .resize {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0.25rem;
+    cursor: col-resize;
+    user-select: none;
+    height: 100%;
+
+    &:hover {
+      border-right: 2px solid $danger;
+    }
+  }
+}
