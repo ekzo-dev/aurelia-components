@@ -18,11 +18,11 @@ export class BsButton implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   outline: boolean = false;
 
-  /**
-   * Disabled/enabled flag
-   */
   @bindable(coerceBoolean)
   disabled: boolean = false;
+
+  @bindable(coerceBoolean)
+  active: boolean = false;
 
   @bindable()
   size?: Sizes;
