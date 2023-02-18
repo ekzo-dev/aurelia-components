@@ -63,7 +63,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
     this.createModal();
   }
 
-  detaching() {
+  detached() {
     this.unobserveResize();
     this.destroyModal();
   }
