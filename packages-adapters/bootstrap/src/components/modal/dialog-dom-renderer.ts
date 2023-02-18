@@ -39,11 +39,14 @@ export class BsDialogDomRenderer implements EventListenerObject {
     const viewModel = container.invoke(BsModal);
     // configure modal to auto open when attached, show() returns a Promise that will wait for animation to complete
     viewModel['attached'] = (): Promise<void> => viewModel.show();
-    console.log(viewModel);
     // TODO: pass settings to viewModel through DialogService.open(...)
     Object.assign(viewModel, {});
 
-    const controller = Controller.$el<BsModal>(container, viewModel, modal, null);
+    const controller = Controller.$el<BsModal>(container, viewModel, modal, {
+      projections: {
+        default: componentController.definition,
+      },
+    });
     controller.addChild(componentController);
 
     dialogHost.append(modal);
@@ -52,7 +55,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
     this.modal = modal;
     this.controller = controller;
 
-    return controller.activate(controller, null, LifecycleFlags.fromBind);
+    return controller.activate(controller, null, LifecycleFlags.fromBind, componentController.scope);
   }
 
   async dispose(): Promise<void> {
