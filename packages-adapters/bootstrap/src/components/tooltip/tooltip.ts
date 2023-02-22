@@ -4,6 +4,8 @@ import { Tooltip } from 'bootstrap';
 import '../../transitions.scss';
 import './tooltip.scss';
 
+export type Placements = 'top' | 'right' | 'bottom' | 'left';
+
 /**
  * Tooltip Bootstrap component
  * https://getbootstrap.com/docs/5.1/components/tooltips/
@@ -24,7 +26,7 @@ export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeView
   readonly html: boolean = false;
 
   @bindable()
-  readonly placement = 'top';
+  readonly placement: Placements = 'top';
 
   @bindable()
   readonly selector: any;
