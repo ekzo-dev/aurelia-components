@@ -42,6 +42,9 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
   @bindable(coerceBoolean)
   controls: boolean = true;
 
+  @bindable(coerceBoolean)
+  dark: boolean = false;
+
   @bindable({ mode: BindingMode.twoWay })
   activeSlide: number = 0;
 
@@ -123,6 +126,7 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
       this.activeSlide = event.to;
     };
     this.element.addEventListener('slide.bs.carousel', this.slideListener);
+    this.rideChanged();
   }
 
   private destroyCarousel() {
