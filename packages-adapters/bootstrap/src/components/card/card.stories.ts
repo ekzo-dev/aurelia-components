@@ -9,10 +9,6 @@ import './card.stories.css';
 
 const variants: Array<string> = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
-const cardImage: string =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200' class='img-fluid rounded mx-auto d-block' width='300' height='200'%3E%3Crect width='300' height='200' fill='%233465a4'%3E%3C/rect%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='26px' fill='%23729fcf'%3EImage%3C/text%3E%3C/svg%3E%3C!--%3Ca download='FILENAME.png' href='data:image/png;base64,asdasd...'%3EDownload%3C/a%3E--%3E";
-//'https://upload.wikimedia.org/wikipedia/ru/thumb/f/f9/Pulpit_Friction.jpg/260px-Pulpit_Friction.jpg';
-
 const meta: Meta = {
   title: 'Bootstrap / Components / Card',
   component: BsCard,
@@ -24,21 +20,44 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
   props: {
     innerHtml: `
         <bs-card-body>
-            <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            This is some text within a card body.
         </bs-card-body>
   `,
     ...args,
   },
 });
 
-export const TitlesTextLinks: Story = (args): StoryFnAureliaReturnType => ({
+export const MultipleContentTypes: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsCardBody, BsListGroup, BsListGroupItem],
+  template: `
+    <bs-card class="story-size">
+         <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="36%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+        <bs-card-body>
+            <h5>Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </bs-card-body>
+        <bs-list-group flush.bind="true">
+            <bs-list-group-item>An item</bs-list-group-item>
+            <bs-list-group-item>A second item</bs-list-group-item>
+            <bs-list-group-item>A third item</bs-list-group-item>
+        </bs-list-group>
+        <bs-card-body>
+            <a href="#" class="card-link">Card link</a> <a href="#" class="card-link">Another link</a>
+        </bs-card-body>
+    </bs-card>
+  `,
+  props: {
+    ...args,
+  },
+});
+
+export const TitlesTextLinksExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardBody],
   template: `
     <bs-card class="story-size">
         <bs-card-body>
             <h5>Card title</h5>
-            <h6 class="mb-2 text-muted">Card subtitle</h6>
-            <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a href="#">Card link</a> <a href="#" class="ms-2">Another link</a>
         </bs-card-body>
     </bs-card>
@@ -48,159 +67,140 @@ export const TitlesTextLinks: Story = (args): StoryFnAureliaReturnType => ({
   },
 });
 
-export const ListGroups: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsListGroup, BsListGroupItem],
+export const ImagesTopExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsCardBody],
   template: `
     <bs-card class="story-size">
-        <bs-list-group items.bind="items" type="flush">
-          <bs-list-group-item
-            repeat.for="item of items"
-            label.bind="item.label"
-            disabled.bind="item.disabled"
-            badge.bind="item.badge"
-            variant.bind="item.variant"
-            active.bind="item.active"
-          ></bs-list-group-item>
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="36%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+        <bs-card-body>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </bs-card-body>
+    </bs-card>
+  `,
+  props: {
+    ...args,
+  },
+});
+
+export const ImagesBottomExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsCardBody],
+  template: `
+    <bs-card class="story-size">
+        <bs-card-body>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </bs-card-body>
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="36%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+    </bs-card>
+  `,
+  props: {
+    ...args,
+  },
+});
+
+export const ImageOverlayExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsCardOverlay],
+  template: `
+    <bs-card class="story-size">
+            <svg class="img-fluid rounded mx-auto d-block" width="100%" height="210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="36%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+        <bs-card-overlay class="story-size">
+            <h5>Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+            <p class="card-text"><small>Last updated 3 minutes ago</small></p>
+        </bs-card-overlay>
+    </bs-card>
+  `,
+  props: {
+    ...args,
+  },
+});
+
+export const ImageHorizontalExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsCardBody],
+  template: `
+    <bs-card style="width: 30rem;">
+      <div class="row g-0">
+        <div class="col-md-4">
+            <svg class="img-fluid rounded-start" width="100%" height="210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="30%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+        </div>
+        <div class="col-md-8 ps-3">
+          <bs-card-body class="p-3">
+            <h5>Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 minutes ago</small></p>
+          </bs-card-body>
+        </div>
+      </div>
+  </bs-card>`,
+  props: {
+    ...args,
+  },
+});
+
+export const ListGroupsExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsListGroup, BsListGroupItem, BsCardHeader, BsCardFooter],
+  template: `
+    <bs-card class="mb-3 story-size">
+        <bs-list-group flush.bind="true">
+          <bs-list-group-item>An item</bs-list-group-item>
+          <bs-list-group-item>A second item</bs-list-group-item>
+          <bs-list-group-item>A third item</bs-list-group-item>
         </bs-list-group>
     </bs-card>
-  `,
-  props: {
-    items: [{ label: 'An item' }, { label: 'A second item' }, { label: 'A third item' }],
-    ...args,
-  },
-});
 
-export const ListGroupsWithHeader: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardHeader, BsListGroup, BsListGroupItem],
-  template: `
-    <bs-card class="story-size">
+    <bs-card class="mb-3 story-size">
         <bs-card-header>Featured</bs-card-header>
-      <bs-list-group items.bind="items" type="flush">
-        <bs-list-group-item
-        repeat.for="item of items"
-        label.bind="item.label"
-        disabled.bind="item.disabled"
-        badge.bind="item.badge"
-        variant.bind="item.variant"
-        active.bind="item.active"
-      ></bs-list-group-item>
-    </bs-list-group>
+        <bs-list-group flush.bind="true">
+          <bs-list-group-item>An item</bs-list-group-item>
+          <bs-list-group-item>A second item</bs-list-group-item>
+          <bs-list-group-item>A third item</bs-list-group-item>
+        </bs-list-group>
     </bs-card>
-  `,
-  props: {
-    items: [{ label: 'An item' }, { label: 'A second item' }, { label: 'A third item' }],
-    ...args,
-  },
-});
 
-export const ListGroupsWithFooter: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardFooter, BsListGroup, BsListGroupItem],
-  template: `
     <bs-card class="story-size">
-        <bs-list-group items.bind="items" type="flush">
-            <bs-list-group-item
-              repeat.for="item of items"
-              label.bind="item.label"
-              disabled.bind="item.disabled"
-              badge.bind="item.badge"
-              variant.bind="item.variant"
-              active.bind="item.active"
-            ></bs-list-group-item>
+        <bs-list-group flush.bind="true">
+          <bs-list-group-item>An item</bs-list-group-item>
+          <bs-list-group-item>A second item</bs-list-group-item>
+          <bs-list-group-item>A third item</bs-list-group-item>
         </bs-list-group>
         <bs-card-footer>Featured</bs-card-footer>
     </bs-card>
   `,
   props: {
-    items: [{ label: 'An item' }, { label: 'A second item' }, { label: 'A third item' }],
     ...args,
   },
 });
 
-export const MultipleContentTypes: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody, BsListGroup, BsListGroupItem],
-  template: `
-    <bs-card class="story-size">
-        <img src="${cardImage}" alt="">
-        <bs-card-body>
-            <h5>Card title</h5>
-            <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </bs-card-body>
-        <bs-list-group items.bind="items" type="flush">
-          <bs-list-group-item
-          repeat.for="item of items"
-          label.bind="item.label"
-          disabled.bind="item.disabled"
-          badge.bind="item.badge"
-          variant.bind="item.variant"
-          active.bind="item.active"
-        ></bs-list-group-item>
-        </bs-list-group>
-        <bs-card-body>
-            <a href="#" class="card-link">Card link</a> <a href="#" class="card-link">Another link</a>
-        </bs-card-body>
-    </bs-card>
-  `,
-  props: {
-    items: [{ label: 'An item' }, { label: 'A second item' }, { label: 'A third item' }],
-    image: cardImage,
-    ...args,
-  },
-});
-
-export const Header: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody, BsCardHeader, BsButton],
-  template: `
-    <bs-card class="story-size">
-    <bs-card-header>Featured</bs-card-header>
-    <bs-card-body>
-      <h5>Special title treatment</h5>
-      <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <bs-button>Go somewhere</bs-button>
-    </bs-card-body>
-    </bs-card>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const HeaderStyling: Story = (args): StoryFnAureliaReturnType => ({
+export const HeaderExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardHeader, BsCardBody, BsButton],
   template: `
-          <bs-card class="mb-3 story-size">
+      <bs-card class="mb-3 story-size">
+        <bs-card-header>Featured</bs-card-header>
+        <bs-card-body>
+            <h5>Special title treatment</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <bs-button>Go somewhere</bs-button>
+        </bs-card-body>
+      </bs-card>
+
+      <bs-card class="mb-3 story-size">
           <h5 class="card-header">Featured</h5>
           <bs-card-body>
               <h5>Special title treatment</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               <bs-button>Go somewhere</bs-button>
           </bs-card-body>
           </bs-card>
+
           <bs-card class="story-size">
             <bs-card-header class="bg-transparent">Featured</bs-card-header>
           <bs-card-body>
               <h5>Special title treatment</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               <bs-button>Go somewhere</bs-button>
           </bs-card-body>
           </bs-card>
   `,
   props: {
-    ...args,
-  },
-});
-
-export const ContentStyling: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardHeader, BsCardBody],
-  props: {
-    innerHtml: `
-          <bs-card-header>Quote</bs-card-header>
-          <bs-card-body>
-              <blockquote class="blockquote mb-0">
-              <p>A well-known quote, contained in a blockquote element.</p>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</</footer>
-              </blockquote>
-          </bs-card-body>
-  `,
     ...args,
   },
 });
@@ -213,7 +213,7 @@ export const SizingUsingGrid: Story = (args): StoryFnAureliaReturnType => ({
           <bs-card>
             <bs-card-body>
               <h5 class="card-title">Special title treatment</h5>
-              <p>With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <bs-button>Go somewhere</bs-button>
             </bs-card-body>
           </bs-card>
@@ -222,7 +222,7 @@ export const SizingUsingGrid: Story = (args): StoryFnAureliaReturnType => ({
           <bs-card>
             <bs-card-body>
               <h5 class="card-title">Special title treatment</h5>
-              <p>With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <bs-button>Go somewhere</bs-button>
             </bs-card-body>
           </bs-card>
@@ -237,33 +237,26 @@ export const SizingUsingGrid: Story = (args): StoryFnAureliaReturnType => ({
 export const SizingUsingUtilities: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardBody, BsButton],
   template: `
-          <bs-card class="w-75">
+          <bs-card class="w-75 mb-3">
             <bs-card-body>
               <h5 class="card-title">Special title treatment</h5>
-              <p>With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <bs-button>Go somewhere</bs-button>
             </bs-card-body>
           </bs-card>
-          <bs-card class="w-50">
-            <bs-card-body>
-              <h5 class="card-title">Special title treatment</h5>
-              <p>With supporting text below as a natural lead-in to additional content.</p>
-              <bs-button>Go somewhere</bs-button>
-            </bs-card-body>
-          </bs-card>
-  `,
-  props: {
-    ...args,
-  },
-});
 
-export const SizingUsingCusomCSS: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody, BsButton],
-  template: `
-          <bs-card style="width: 18rem;">
+          <bs-card class="w-50 mb-3">
             <bs-card-body>
               <h5 class="card-title">Special title treatment</h5>
-              <p>With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <bs-button>Go somewhere</bs-button>
+            </bs-card-body>
+          </bs-card>
+
+          <bs-card class="w-25">
+            <bs-card-body>
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <bs-button>Go somewhere</bs-button>
             </bs-card-body>
           </bs-card>
@@ -276,82 +269,64 @@ export const SizingUsingCusomCSS: Story = (args): StoryFnAureliaReturnType => ({
 export const TextAlignment: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardBody, BsButton],
   template: `
-          <bs-card class="story-size mb-3 \${align ? \`text-\${align}\` : ''}" repeat.for="align of alignTypes">
+          <bs-card class="story-size mb-3">
             <bs-card-body>
               <h5 class="card-title">Special title treatment</h5>
-              <p>With supporting text below as a natural lead-in to additional content.</p>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <bs-button>Go somewhere</bs-button>
+            </bs-card-body>
+          </bs-card>
+
+          <bs-card class="story-size mb-3 text-center">
+            <bs-card-body>
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <bs-button>Go somewhere</bs-button>
+            </bs-card-body>
+          </bs-card>
+
+          <bs-card class="story-size mb-3 text-end">
+            <bs-card-body>
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <bs-button>Go somewhere</bs-button>
             </bs-card-body>
           </bs-card>
   `,
   props: {
     ...args,
-    alignTypes: ['', 'center', 'end'],
   },
 });
 
-export const CardLayoutGroups: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody],
+export const CardGroupExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsCardBody, BsCardFooter],
   template: `
     <div class="card-group">
         <bs-card>
-          <img src="${cardImage}" alt="" class="card-img-top">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
           <bs-card-body>
             <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-            <p><small class="text-muted">Last updated 3 minutes ago</small></p>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
           </bs-card-body>
+          <bs-card-footer><small class="text-muted">Last updated 3 minutes ago</small></bs-card-footer>
         </bs-card>
-        <bs-card>
-          <img src="${cardImage}" alt="" class="card-img-top">
-          <bs-card-body>
-            <h5>Card title</h5>
-            <p>This card has supporting text below as a natural lead-in to additional content.</p>
-            <p><small class="text-muted">Last updated 3 minutes ago</small></p>
-          </bs-card-body>
-        </bs-card>
-        <bs-card>
-          <img src="${cardImage}" alt="" class="card-img-top">
-          <bs-card-body>
-            <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <p><small class="text-muted">Last updated 3 minutes ago</small></p>
-          </bs-card-body>
-        </bs-card>
-    </div>
-`,
-  props: {
-    ...args,
-  },
-});
 
-export const CardLayoutGroupsWithFooters: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardFooter, BsCardBody],
-  template: `
-    <div class="card-group">
         <bs-card>
-          <img src="${cardImage}" alt="" class="card-img-top">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
           <bs-card-body>
             <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
           </bs-card-body>
-          <bs-card-footer>Last updated 3 minutes ago</bs-card-footer>
+          <bs-card-footer><small class="text-muted">Last updated 3 minutes ago</small></bs-card-footer>
         </bs-card>
+
         <bs-card>
-          <img src="${cardImage}" alt="" class="card-img-top">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
           <bs-card-body>
             <h5>Card title</h5>
-            <p>This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
           </bs-card-body>
-          <bs-card-footer>Last updated 3 minutes ago</bs-card-footer>
-        </bs-card>
-        <bs-card>
-          <img src="${cardImage}" alt="" class="card-img-top">
-          <bs-card-body>
-            <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          </bs-card-body>
-          <bs-card-footer>Last updated 3 minutes ago</bs-card-footer>
+           <bs-card-footer ><small class="text-muted">Last updated 3 minutes ago</small></bs-card-footer>
         </bs-card>
     </div>
 `,
@@ -364,39 +339,41 @@ export const GridCards2Rows: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardBody],
   template: `
   <div class="row row-cols-1 row-cols-md-2 g-4" style="width: 40rem;">
+
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
         </bs-card-body>
       </bs-card>
     </div>
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+        </bs-card-body>
+      </bs-card>
+    </div>
+
+    <div class="col">
+      <bs-card>
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+        <bs-card-body>
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a card with supporting text below as a natural lead-in to additional content.</p>
         </bs-card-body>
       </bs-card>
     </div>
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a card with supporting text below as a natural lead-in to additional content.</p>
-        </bs-card-body>
-      </bs-card>
-    </div>
-    <div class="col">
-      <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
-        <bs-card-body>
-          <h5 class="card-title">Card title</h5>
-          <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
         </bs-card-body>
       </bs-card>
     </div>
@@ -411,39 +388,43 @@ export const GridCards3rows: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardBody],
   template: `
   <div class="row row-cols-1 row-cols-md-3 g-4" style="width: 50rem;">
+
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
         </bs-card-body>
       </bs-card>
     </div>
+
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. </p>
         </bs-card-body>
       </bs-card>
     </div>
+
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a card with supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text">This is a card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
         </bs-card-body>
       </bs-card>
     </div>
+
     <div class="col">
       <bs-card>
-        <img src="${cardImage}" class="card-img-top" alt="">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
         <bs-card-body>
           <h5 class="card-title">Card title</h5>
-          <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
         </bs-card-body>
       </bs-card>
     </div>
@@ -454,123 +435,139 @@ export const GridCards3rows: Story = (args): StoryFnAureliaReturnType => ({
   },
 });
 
-export const ImagesTop: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody],
-  template: `
-    <bs-card class="story-size">
-        <img src="${cardImage}" alt="">
-        <bs-card-body>
-        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </bs-card-body>
-    </bs-card>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const ImagesBottom: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody],
-  template: `
-    <bs-card class="story-size">
-        <bs-card-body>
-        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </bs-card-body>
-        <img src="${cardImage}" alt="">
-    </bs-card>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const ImageOverlay: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardOverlay],
-  template: `
-    <bs-card class="story-size">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200' class='img-fluid rounded mx-auto d-block' width='300' height='200'%3E%3Crect width='300' height='200' fill='%23cbe0ef'%3E%3C/rect%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='26px' fill='%23ffffff'%3EImage%3C/text%3E%3C/svg%3E%3C!--%3Ca download='FILENAME.png' href='data:image/png;base64,asdasd...'%3EDownload%3C/a%3E--%3E" alt="">
-        <bs-card-overlay class="story-size">
-            <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-            <p><small>Last updated 3 minutes ago</small></p>
-        </bs-card-overlay>
-    </bs-card>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const ImageHorizontal: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardBody],
-  template: `
-    <bs-card style="width: 30rem;">
-      <div class="row g-0">
-        <div class="col-md-4">
-               <img class="img-fluid rounded-start" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 250' class='img-fluid rounded mx-auto d-block' width='150' height='250'%3E%3Crect width='150' height='250' fill='%233465a4'%3E%3C/rect%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='26px' fill='%23729fcf'%3EImage%3C/text%3E%3C/svg%3E%3C!--%3Ca download='FILENAME.png' href='data:image/png;base64,asdasd...'%3EDownload%3C/a%3E--%3E" alt="">
-        </div>
-        <div class="col-md-8">
-          <bs-card-body>
-            <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-            <p><small class="text-muted">Last updated 3 minutes ago</small></p>
-          </bs-card-body>
-        </div>
-      </div>
-  </bs-card>`,
-  props: {
-    ...args,
-  },
-});
-
-export const CardStyles: Story = (args): StoryFnAureliaReturnType => ({
+export const CardColorsExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardHeader, BsCardBody],
   template: `
-    <bs-card class="mb-3 story-size" variant.bind="variant" repeat.for="variant of variants">
+    <bs-card class="mb-3 story-size" variant="primary">
       <bs-card-header>Header</bs-card-header>
       <bs-card-body>
-        <h5>Card title</h5>
-        <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+        <h5>Primary card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="secondary">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Secondary card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="success">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Success card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="danger">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Danger card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="warning">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Warning card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="info">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Info card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="light">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Light card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size" variant="dark">
+      <bs-card-header>Header</bs-card-header>
+      <bs-card-body>
+        <h5>Dark card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
       </bs-card-body>
     </bs-card>
   `,
   props: {
     ...args,
-    variants: variants,
   },
 });
 
-export const CardBorderStyles: Story = (args): StoryFnAureliaReturnType => ({
+export const CardBorderAndTextExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardHeader, BsCardBody],
   template: `
-    <bs-card class="border-\${variant} mb-3 story-size"  repeat.for="variant of variants">
-          <bs-card-header class="border-\${variant} bg-transparent">Header</bs-card-header>
-          <bs-card-body>
-            <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-          </bs-card-body>
+ <bs-card class="mb-3 story-size border-primary">
+      <bs-card-header class="border-primary">Header</bs-card-header>
+      <bs-card-body class="text-primary">
+        <h5>Primary card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size border-secondary">
+      <bs-card-header class="border-secondary">Header</bs-card-header>
+      <bs-card-body class="text-secondary">
+        <h5>Secondary card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size border-success">
+      <bs-card-header class="border-success">Header</bs-card-header>
+      <bs-card-body class="text-success">
+        <h5>Success card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size border-danger">
+      <bs-card-header class="border-danger">Header</bs-card-header>
+      <bs-card-body class="text-danger">
+        <h5>Danger card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size border-warning">
+      <bs-card-header class="border-warning">Header</bs-card-header>
+      <bs-card-body class="text-warning">
+        <h5>Warning card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size border-info">
+      <bs-card-header class="border-info">Header</bs-card-header>
+      <bs-card-body class="text-info">
+        <h5>Info card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
+    </bs-card>
+
+    <bs-card class="mb-3 story-size border-dark">
+      <bs-card-header class="border-dark">Header</bs-card-header>
+      <bs-card-body class="text-dark">
+        <h5>Dark card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
+      </bs-card-body>
     </bs-card>
 `,
   props: {
     ...args,
-    variants: variants,
-  },
-});
-
-export const CardBorderAndTextStyles: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCardHeader, BsCardBody],
-  template: `
-    <bs-card class="border-\${variant} mb-3 story-size" repeat.for="variant of variants">
-          <bs-card-header class="text-\${variant} border-\${variant} bg-transparent">Header</bs-card-header>
-          <bs-card-body class="text-\${variant}">
-            <h5>Card title</h5>
-            <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-          </bs-card-body>
-    </bs-card>
-`,
-  props: {
-    ...args,
-    variants: variants,
   },
 });
 
