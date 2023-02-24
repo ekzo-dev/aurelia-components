@@ -15,6 +15,10 @@ const meta: Meta = {
   },
   args: {
     header: 'Toast',
+    animation: false,
+    autohide: false,
+    delay: 2000,
+    variant: '',
   },
 };
 export default meta;
@@ -26,7 +30,6 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
     <bs-toast-container class="position-fixed bottom-0 end-0 p-3">
       <bs-toast view-model.ref="toast"
         header.bind="header"
-        body.bind="body"
         animation.bind="animation"
         autohide.bind="autohide"
         delay.bind="delay"
