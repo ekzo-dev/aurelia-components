@@ -6,6 +6,7 @@ import template from './spinner.html';
 import './spinner.scss';
 
 export type SpinnerType = 'border' | 'grow';
+export type SpinnerSize = '' | 'sm';
 
 @customElement({
   name: 'bs-spinner',
@@ -19,5 +20,5 @@ export class BsSpinner {
   readonly variant?: Variants;
 
   @bindable()
-  readonly size?: Sizes;
+  readonly size?: SpinnerSize;
 }
