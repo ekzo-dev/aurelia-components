@@ -10,7 +10,7 @@ export default {
     },
   },
   args: {
-    label: 'Radio label. Вопросы: required in template, checked. control: floating-label, on-change, matcher)',
+    label: 'Radio',
   },
 } as Meta;
 

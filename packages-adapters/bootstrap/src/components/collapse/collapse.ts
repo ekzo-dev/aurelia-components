@@ -14,7 +14,7 @@ export class BsCollapse implements ICustomElementViewModel {
   readonly horizontal: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly collapsed: boolean = true;
+  readonly collapsed: boolean = false;
 
   private container?: HTMLDivElement;
 

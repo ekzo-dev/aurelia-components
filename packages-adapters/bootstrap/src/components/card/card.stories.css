@@ -1,3 +1,9 @@
 .story-size {
   width: 20rem;
 }
+
+.story-container {
+  display: block;
+  padding: 7px;
+  width: 20rem;
+}

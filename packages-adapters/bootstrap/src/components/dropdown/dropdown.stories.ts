@@ -29,7 +29,7 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
   },
 });
 
-export const Dark: Story = (args): StoryFnAureliaReturnType => ({
+export const DarkExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdownItem, BsButton, BsDropdownToggle],
   template: `
       <bs-button variant="secondary" bs-dropdown-toggle>Dropdown button</bs-button>
@@ -44,19 +44,75 @@ export const Dark: Story = (args): StoryFnAureliaReturnType => ({
   },
 });
 
-export const WithVariantButton: Story = (args): StoryFnAureliaReturnType => ({
+export const variantColorsExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdownItem, BsButton, BsDropdownToggle, BsIcon, BsButtonGroup],
   template: `
-    <bs-button-group repeat.for="variant of variants" class="me-2">
-      <bs-button variant.bind="variant" bs-dropdown-toggle>\${variant}</bs-button>
+    <bs-button-group class="me-2">
+      <bs-button variant="primary" bs-dropdown-toggle>Primary</bs-button>
       <bs-dropdown-menu>
-        <bs-dropdown-item type="header">Header</bs-dropdown-item>
         <bs-dropdown-item>Action</bs-dropdown-item>
         <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
         <bs-dropdown-item type="divider"></bs-dropdown-item>
-        <bs-dropdown-item><bs-icon name="info"></bs-icon>Action with icon</bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
       </bs-dropdown-menu>
     </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button variant="secondary" bs-dropdown-toggle>Secondary</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button variant="success" bs-dropdown-toggle>Success</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button variant="info" bs-dropdown-toggle>Info</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button variant="warning" bs-dropdown-toggle>Warning</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button variant="danger" bs-dropdown-toggle>Danger</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
   `,
   props: {
     ...args,
@@ -67,20 +123,41 @@ export const WithVariantButton: Story = (args): StoryFnAureliaReturnType => ({
 export const WithSizableButton: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdownItem, BsButton, BsDropdownToggle, BsButtonGroup],
   template: `
-    <bs-button-group repeat.for="size of sizes" class="me-2">
-      <bs-button size.bind="size" bs-dropdown-toggle>Button \${size ? size : 'default'}</bs-button>
+    <bs-button-group class="me-2">
+      <bs-button size="sm" bs-dropdown-toggle>Button sm</bs-button>
       <bs-dropdown-menu>
-        <bs-dropdown-item type="header">Header</bs-dropdown-item>
-        <bs-dropdown-item><bs-icon name="table"></bs-icon> Table</bs-dropdown-item>
-        <bs-dropdown-item><bs-icon name="pie-chart"></bs-icon> Pie-chart</bs-dropdown-item>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
         <bs-dropdown-item type="divider"></bs-dropdown-item>
-        <bs-dropdown-item><bs-icon name="info"></bs-icon> Info</bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button bs-dropdown-toggle>Button default</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
+      </bs-dropdown-menu>
+    </bs-button-group>
+
+    <bs-button-group class="me-2">
+      <bs-button size="lg" bs-dropdown-toggle>Button lg</bs-button>
+      <bs-dropdown-menu>
+        <bs-dropdown-item>Action</bs-dropdown-item>
+        <bs-dropdown-item>Another action</bs-dropdown-item>
+        <bs-dropdown-item>Something else here</bs-dropdown-item>
+        <bs-dropdown-item type="divider"></bs-dropdown-item>
+        <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
       </bs-dropdown-menu>
     </bs-button-group>
   `,
   props: {
     ...args,
-    sizes: ['sm', '', 'lg'],
   },
 });
 
@@ -98,27 +175,6 @@ export const WithSplitButton: Story = (args): StoryFnAureliaReturnType => ({
         <bs-dropdown-item>Something else here</bs-dropdown-item>
       </bs-dropdown-menu>
     </bs-button-group>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const NavBar: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsDropdownItem, BsButton, BsDropdownToggle, BsDropdown, BsButtonGroup],
-  template: `
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-  <a class="navbar-brand" href="#">Navbar</a>
-    <div bs-dropdown>
-          <bs-button variant="secondary" bs-dropdown-toggle>Dropdown button</bs-button>
-          <bs-dropdown dark="true">
-            <bs-dropdown-item>Action</bs-dropdown-item>
-            <bs-dropdown-item>Another action</bs-dropdown-item>
-            <bs-dropdown-item>Something else here</bs-dropdown-item>
-        </bs-dropdown-menu>
-    </div>
-</nav>
   `,
   props: {
     ...args,
