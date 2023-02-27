@@ -10,20 +10,18 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsBreadcrumbItem],
-  props: {
-    innerHtml: `
+  innerHtml: `
     <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
     <bs-breadcrumb-item><a href="#">Library</a></bs-breadcrumb-item>
     <bs-breadcrumb-item active>Data</bs-breadcrumb-item>
   `,
-    ...args,
-  },
+  props: args,
 });
 
-export const GraphicalDividerExample: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsBreadcrumb, BsBreadcrumbItem],
+const GraphicalDividerExample: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsBreadcrumbItem],
   template: `
     <bs-breadcrumb divider.bind="divider">
         <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
@@ -31,10 +29,11 @@ export const GraphicalDividerExample: Story = (args): StoryFnAureliaReturnType =
         <bs-breadcrumb-item active>Data</bs-breadcrumb-item>
     </bs-breadcrumb>
   `,
-  props: {
-    ...args,
-    divider: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+});
+GraphicalDividerExample.args = {
+  divider: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
               </svg>`,
-  },
-});
+};
+
+export { Default, GraphicalDividerExample };
