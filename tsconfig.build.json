@@ -1,23 +1,20 @@
 {
-  "compilerOptions" : {
-    "module" : "esnext",
-    "moduleResolution" : "node",
-    "esModuleInterop" : true,
-    "target" : "es2020",
-    "lib" : [
-      "es2019",
-      "dom"
-    ],
-    "forceConsistentCasingInFileNames" : true,
-    "experimentalDecorators" : true,
-    "emitDecoratorMetadata" : true,
-    "noEmitHelpers" : true,
-    "importHelpers" : true,
-    "skipLibCheck" : true,
-    "sourceMap" : true,
-    "resolveJsonModule" : true
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "target": "ES2020",
+    "lib": ["ESNext"],
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
-  "exclude" : [
+  "exclude": [
     ".vscode",
     "dist",
     "doc",
@@ -25,7 +22,7 @@
     "test",
     "karma.conf.ts"
   ],
-  "files" : [
+  "files": [
     "resource.d.ts"
   ]
 }

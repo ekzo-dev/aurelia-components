@@ -12,7 +12,7 @@ import './button.scss';
   template,
 })
 export class BsButton implements ICustomElementViewModel {
-  @bindable()
+  @bindable({ type: String })
   variant: Variants = 'primary';
 
   @bindable(coerceBoolean)
@@ -24,7 +24,7 @@ export class BsButton implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   active: boolean = false;
 
-  @bindable()
+  @bindable({ type: String })
   size?: Sizes;
 
   @bindable(coerceBoolean)

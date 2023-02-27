@@ -1,6 +1,5 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsAlert } from '.';
-import { BsCloseButton } from '../close-button';
 import { BsIcon } from '../../icon';
 
 const meta: Meta = {
@@ -14,26 +13,12 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Default: Story = (args): StoryFnAureliaReturnType => ({
-  props: {
-    innerHtml: 'A simple alert — check it out!',
-    ...args,
-  },
+const Default: Story = (args): StoryFnAureliaReturnType => ({
+  innerHtml: 'A simple alert — check it out!',
+  props: args,
 });
 
-export const DismissibleExample: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCloseButton],
-  template: `
-    <bs-alert dismissible.bind="true">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-    </bs-alert>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const AdditionalContentExample: Story = (args): StoryFnAureliaReturnType => ({
+const AdditionalContentExample: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsIcon],
   template: `
     <bs-alert>
@@ -52,7 +37,7 @@ export const AdditionalContentExample: Story = (args): StoryFnAureliaReturnType 
        <bs-icon name="exclamation-triangle-fill" class="me-2"></bs-icon>An example danger alert with an icon
     </bs-alert>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
+
+export { Default, AdditionalContentExample };
