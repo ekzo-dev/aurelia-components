@@ -10,9 +10,7 @@ export default meta;
 
 const Default: Story = (args): StoryFnAureliaReturnType => ({
   innerHtml: 'NEW',
-  props: {
-    ...args,
-  },
+  props: args,
 });
 
 const PositioningExample: Story = (args): StoryFnAureliaReturnType => ({
