@@ -3,10 +3,7 @@ import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.'
 import { BsIcon } from '../../icon';
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
-import { Variants } from '../../interfaces';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
-
-let variants: Array<Variants> = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Dropdown',
@@ -24,9 +21,7 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
       <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
     </bs-dropdown-menu>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
 
 export const DarkExample: Story = (args): StoryFnAureliaReturnType => ({
@@ -112,12 +107,8 @@ export const variantColorsExample: Story = (args): StoryFnAureliaReturnType => (
         <bs-dropdown-item>Separated link with icon</bs-dropdown-item>
       </bs-dropdown-menu>
     </bs-button-group>
-
   `,
-  props: {
-    ...args,
-    variants: variants,
-  },
+  props: args,
 });
 
 export const WithSizableButton: Story = (args): StoryFnAureliaReturnType => ({
@@ -176,7 +167,5 @@ export const WithSplitButton: Story = (args): StoryFnAureliaReturnType => ({
       </bs-dropdown-menu>
     </bs-button-group>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
