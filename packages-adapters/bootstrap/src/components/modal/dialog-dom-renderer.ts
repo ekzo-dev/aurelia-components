@@ -6,28 +6,32 @@ import { BsModal } from './modal';
 
 export class BsDialogDomRenderer implements EventListenerObject {
   /** @internal */
-  protected static inject = [IPlatform, IContainer];
+  protected static inject = [IPlatform, IContainer, IDialogController];
 
   private controller: ICustomElementController<BsModal>;
 
   private modal: HTMLElement;
 
-  private dialog: IDialogController;
-
-  public constructor(private readonly p: IPlatform, private readonly container: IContainer) {}
+  public constructor(
+    private readonly platform: IPlatform,
+    private readonly container: IContainer,
+    private readonly dialogController: IDialogController
+  ) {}
 
   public static register(container: IContainer) {
     Registration.transient(IDialogDomRenderer, this).register(container);
   }
 
-  public render(dialogHost: HTMLElement, dialog: IDialogController): HTMLElement | ICustomElementController {
-    const { container } = this;
-    const modal = this.p.document.createElement('bs-modal');
+  public render(componentController: ICustomElementController) {
+    const { container, platform } = this;
+    const { settings } = this.dialogController;
+    const dialogHost = settings.host ?? platform.document.body;
+    const modal = platform.document.createElement('bs-modal');
 
     container.registerResolver(
-      this.p.HTMLElement,
+      platform.HTMLElement,
       container.registerResolver(
-        this.p.Element,
+        platform.Element,
         container.registerResolver(INode, new InstanceProvider('ElementResolver', modal))
       )
     );
@@ -38,18 +42,20 @@ export class BsDialogDomRenderer implements EventListenerObject {
     // TODO: pass settings to viewModel through DialogService.open(...)
     Object.assign(viewModel, {});
 
-    const controller = Controller.$el<BsModal>(container, viewModel, modal, null);
-    // FIXME: activation should be done by DialogController if render() return instanceof Controller?
-    // controller.activate(controller, null, LifecycleFlags.fromBind);
+    const controller = Controller.$el<BsModal>(container, viewModel, modal, {
+      projections: {
+        default: componentController.definition,
+      },
+    });
+    controller.addChild(componentController);
 
-    dialogHost.append(dialogHost);
+    dialogHost.append(modal);
     modal.addEventListener('hide.bs.modal', this);
 
     this.modal = modal;
     this.controller = controller;
-    this.dialog = dialog;
 
-    return controller;
+    return controller.activate(controller, null, LifecycleFlags.fromBind, componentController.scope);
   }
 
   async dispose(): Promise<void> {
@@ -64,6 +70,6 @@ export class BsDialogDomRenderer implements EventListenerObject {
   }
 
   handleEvent(object: Event) {
-    this.dialog.cancel();
+    this.dialogController.cancel();
   }
 }

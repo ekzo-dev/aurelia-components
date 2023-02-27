@@ -1,5 +1,5 @@
 import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
-import { BsCollapse } from '@ekzo/bootstrap';
+import { BsCollapse } from '../collapse';
 import template from './accordion-item.html';
 import './accordion-item.scss';
 
