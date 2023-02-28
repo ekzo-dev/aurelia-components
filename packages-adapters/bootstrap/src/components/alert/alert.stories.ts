@@ -2,12 +2,20 @@ import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsAlert } from '.';
 import { BsIcon } from '../../icon';
 
+const variantOptions = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+
 const meta: Meta = {
   title: 'Bootstrap / Components / Alert',
   component: BsAlert,
   parameters: {
     actions: {
       handles: ['close.bs.alert', 'closed.bs.alert'],
+    },
+  },
+  argTypes: {
+    variant: {
+      options: variantOptions,
+      control: { type: 'select' },
     },
   },
 };
@@ -17,6 +25,9 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   innerHtml: 'A simple alert — check it out!',
   props: args,
 });
+Default.args = {
+  variant: 'secondary',
+};
 
 const AdditionalContent: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsIcon],
