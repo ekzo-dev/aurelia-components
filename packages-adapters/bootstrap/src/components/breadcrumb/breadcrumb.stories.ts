@@ -23,11 +23,11 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
 const GraphicalDivider: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsBreadcrumbItem],
   template: `
-    <bs-breadcrumb divider.bind="divider">
-        <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
-        <bs-breadcrumb-item><a href="#">Library</a></bs-breadcrumb-item>
-        <bs-breadcrumb-item active>Data</bs-breadcrumb-item>
-    </bs-breadcrumb>
+<bs-breadcrumb divider.bind="divider">
+    <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
+    <bs-breadcrumb-item><a href="#">Library</a></bs-breadcrumb-item>
+    <bs-breadcrumb-item active>Data</bs-breadcrumb-item>
+</bs-breadcrumb>
   `,
   props: args,
 });
