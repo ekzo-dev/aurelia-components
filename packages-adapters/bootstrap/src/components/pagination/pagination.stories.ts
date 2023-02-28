@@ -13,7 +13,5 @@ export default {
 } as Meta;
 
 export const Default: Story = (args) => ({
-  props: {
-    ...args,
-  },
+  props: args,
 });

@@ -12,89 +12,30 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = (args) => ({
-  props: {
-    ...args,
-  },
+const Default: Story = (args) => ({
+  props: args,
 });
+Default.args = {
+  size: 'sm',
+};
 
-export const typesExample: Story = (args) => ({
-  components: [BsSpinner],
-  template: `
-    <bs-spinner></bs-spinner>
-    <bs-spinner type="grow"></bs-spinner>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const colorsExample: Story = (args) => ({
-  components: [BsSpinner],
-  template: `
-    <div>
-    <bs-spinner variant="primary"></bs-spinner>
-    <bs-spinner variant="secondary"></bs-spinner>
-    <bs-spinner variant="success"></bs-spinner>
-    <bs-spinner variant="danger"></bs-spinner>
-    <bs-spinner variant="warning"></bs-spinner>
-    <bs-spinner variant="info"></bs-spinner>
-    <bs-spinner variant="light"></bs-spinner>
-    <bs-spinner variant="dark"></bs-spinner>
-    </div>
-
-    <div>
-    <bs-spinner type="grow" variant="primary"></bs-spinner>
-    <bs-spinner type="grow" variant="secondary"></bs-spinner>
-    <bs-spinner type="grow" variant="success"></bs-spinner>
-    <bs-spinner type="grow" variant="danger"></bs-spinner>
-    <bs-spinner type="grow" variant="warning"></bs-spinner>
-    <bs-spinner type="grow" variant="info"></bs-spinner>
-    <bs-spinner type="grow" variant="light"></bs-spinner>
-    <bs-spinner type="grow" variant="dark"></bs-spinner>
-    </div>
-
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const sizeExample: Story = (args) => ({
-  components: [BsSpinner],
-  template: `
-    <div>
-    <bs-spinner size="sm"></bs-spinner>
-    <bs-spinner></bs-spinner>
-    </div>
-  `,
-  props: {
-    ...args,
-  },
-});
-
-export const onButtonsExample: Story = (args) => ({
+const onButtons: Story = (args) => ({
   components: [BsSpinner, BsButton],
   template: `
-    <div>
-      <bs-button type="button" disabled>
-        <bs-spinner size="sm"></bs-spinner>
-      </bs-button>
-      <bs-button type="button" disabled>
-        <bs-spinner size="sm"></bs-spinner> Loading...
-      </bs-button>
-    <div>
-
-    <div class="mt-2">
-      <bs-button type="button" variant="secondary" disabled>
-        <bs-spinner type="grow" size="sm"></bs-spinner>
-      </bs-button>
-      <bs-button type="button" variant="secondary" disabled>
-        <bs-spinner type="grow" size="sm"></bs-spinner> Loading...
-      </bs-button>
-    <div>
+<div>
+  <bs-button type="button" variant.bind="variant" disabled>
+    <bs-spinner type.bind="type" size.bind="size"></bs-spinner>
+  </bs-button>
+  <bs-button type="button" variant.bind="variant" disabled>
+    <bs-spinner type.bind="type" size.bind="size"></bs-spinner> Loading...
+  </bs-button>
+<div>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
+onButtons.args = {
+  size: 'sm',
+  variant: 'primary',
+};
+
+export { Default, onButtons };

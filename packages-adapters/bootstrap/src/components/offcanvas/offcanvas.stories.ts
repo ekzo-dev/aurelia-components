@@ -41,7 +41,5 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
 
     </bs-offcanvas>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
