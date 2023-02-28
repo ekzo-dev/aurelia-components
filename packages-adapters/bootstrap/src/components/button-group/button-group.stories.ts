@@ -20,7 +20,7 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const ActiveExample: Story = (args): StoryFnAureliaReturnType => ({
+const Active: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   innerHtml: `
 <bs-button active.bind="true">Active link</bs-button>
@@ -30,7 +30,7 @@ const ActiveExample: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const mixedStylesExample: Story = (args): StoryFnAureliaReturnType => ({
+const mixedStyles: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   innerHtml: `
 <bs-button variant="danger">Left</bs-button>
@@ -40,7 +40,7 @@ const mixedStylesExample: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const outlinedStylesExample: Story = (args): StoryFnAureliaReturnType => ({
+const outlinedStyles: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   innerHtml: `
 <bs-button outline.bind="true">Left</bs-button>
@@ -50,7 +50,7 @@ const outlinedStylesExample: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const buttonToolbarExample: Story = (args): StoryFnAureliaReturnType => ({
+const buttonToolbar: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   template: `
 <bs-button-group class="m-2" vertical.bind="vertical" size.bind="size">
@@ -73,7 +73,7 @@ const buttonToolbarExample: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const nastingExample: Story = (args): StoryFnAureliaReturnType => ({
+const nasting: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
   template: `
 <bs-button-group vertical.bind="vertical">
@@ -98,58 +98,4 @@ const nastingExample: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const verticalExample: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
-  template: `
-<div class="story-container">
-<bs-button-group vertical.bind="vertical">
-  <bs-button variant="dark">Button</bs-button>
-  <bs-button variant="dark">Button</bs-button>
-  <bs-button variant="dark">Button</bs-button>
-  <bs-button variant="dark">Button</bs-button>
-  <bs-button variant="dark">Button</bs-button>
-  <bs-button variant="dark">Button</bs-button>
-</bs-button-group>
-</div>
-
-<div class="story-container">
-  <bs-button-group vertical.bind="vertical">
-  <bs-button>Button</bs-button>
-  <bs-button>Button</bs-button>
-  <bs-button-group>
-  <bs-button bs-dropdown-toggle>Dropdown</bs-button>
-  <bs-dropdown-menu>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-  </bs-dropdown-menu>
-  </bs-button-group>
-  <bs-button>Button</bs-button>
-  <bs-button>Button</bs-button>
-  <bs-button-group>
-  <bs-button bs-dropdown-toggle>Dropdown</bs-button>
-  <bs-dropdown-menu>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-  </bs-dropdown-menu>
-  </bs-button-group>
-  <bs-button-group>
-  <bs-button bs-dropdown-toggle>Dropdown</bs-button>
-  <bs-dropdown-menu>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-  </bs-dropdown-menu>
-  </bs-button-group>
-  <bs-button-group>
-  <bs-button bs-dropdown-toggle>Dropdown</bs-button>
-  <bs-dropdown-menu>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-    <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-  </bs-dropdown-menu>
-  </bs-button-group>
-</bs-button-group>
-</div>
-  `,
-  props: args,
-});
-
-export { Default, ActiveExample, mixedStylesExample, outlinedStylesExample, buttonToolbarExample, nastingExample };
+export { Default, Active, mixedStyles, outlinedStyles, buttonToolbar, nasting };

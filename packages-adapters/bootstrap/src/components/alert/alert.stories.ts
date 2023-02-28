@@ -18,7 +18,7 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const AdditionalContentExample: Story = (args): StoryFnAureliaReturnType => ({
+const AdditionalContent: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsIcon],
   template: `
 <bs-alert variant.bind="variant" dismissible.bind="dismissible">
@@ -29,10 +29,11 @@ const AdditionalContentExample: Story = (args): StoryFnAureliaReturnType => ({
     <p class="mb-0"><bs-icon name="exclamation-triangle-fill" class="me-2"></bs-icon>An example alert with an icon.</p>
 </bs-alert>
   `,
+  props: args,
 });
-AdditionalContentExample.args = {
+AdditionalContent.args = {
   variant: 'danger',
   dismissible: true,
 };
 
-export { Default, AdditionalContentExample };
+export { Default, AdditionalContent };

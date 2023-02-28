@@ -12,7 +12,7 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-const FullWidthExample: Story = (args): StoryFnAureliaReturnType => ({
+const FullWidth: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   template: `
 <bs-button
@@ -32,4 +32,4 @@ Accept
   props: args,
 });
 
-export { Default, FullWidthExample };
+export { Default, FullWidth };
