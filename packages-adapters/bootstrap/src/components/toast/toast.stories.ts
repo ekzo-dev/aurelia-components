@@ -37,7 +37,5 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
       >Hello, world! This is a toast message.</bs-toast>
     </bs-toast-container>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });

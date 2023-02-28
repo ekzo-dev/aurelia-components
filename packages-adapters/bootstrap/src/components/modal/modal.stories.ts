@@ -34,7 +34,5 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
       Modal body
     </bs-modal>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
