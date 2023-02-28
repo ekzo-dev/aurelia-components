@@ -1,10 +1,8 @@
 import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import { Button } from 'bootstrap';
-
 import { Variants, Sizes } from '../../interfaces';
 import { coerceBoolean } from '../../utils';
 import template from './button.html';
-
 import './button.scss';
 
 @customElement({
@@ -12,7 +10,7 @@ import './button.scss';
   template,
 })
 export class BsButton implements ICustomElementViewModel {
-  @bindable({ type: String })
+  @bindable()
   variant: Variants = 'primary';
 
   @bindable(coerceBoolean)
@@ -31,7 +29,7 @@ export class BsButton implements ICustomElementViewModel {
   toggleState: boolean = false;
 
   @bindable()
-  type: string = 'button';
+  type: 'button' | 'submit' | 'reset' = 'button';
 
   @bindable()
   form?: string;
