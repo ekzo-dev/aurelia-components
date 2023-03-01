@@ -8,7 +8,7 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCard, BsCardBody, BsButton, BsPlaceholder],
   template: `
 <div class="row col-6">
@@ -45,7 +45,7 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
 </div>
 </div>
   `,
-  props: {
-    ...args,
-  },
+  props: args,
 });
+
+// todo correct story export { Default, }

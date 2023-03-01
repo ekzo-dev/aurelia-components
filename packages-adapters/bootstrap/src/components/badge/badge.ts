@@ -13,12 +13,6 @@ export class BsBadge {
   @bindable()
   variant: Variants = 'primary';
 
-  @bindable()
-  bg?: Variants;
-
-  @bindable()
-  text?: Variants;
-
   @bindable(coerceBoolean)
   pill: boolean = false;
 }
