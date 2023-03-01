@@ -26,7 +26,8 @@ export function uniqueId(): string {
 
 // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
 export const coerceBoolean = {
-  set: (v: string | boolean) => (v === '' || v === true ? true : v === false ? false : undefined),
+  set: (v: string | boolean) =>
+    v === '' || v === true || v === 'true' ? true : v === false || v === 'false' ? false : undefined,
 };
 
 export const isMapOrObj = (items: Set<string> | Map<any, string> | Array<string> | Record<any, string>): boolean => {
