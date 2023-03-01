@@ -15,10 +15,6 @@ const meta: Meta = {
   },
   args: {
     header: 'Toast',
-    animation: false,
-    autohide: false,
-    delay: 2000,
-    variant: '',
   },
 };
 export default meta;
