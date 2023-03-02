@@ -6,12 +6,14 @@ import { BsButton } from '../button';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './card.stories.css';
-
-const variants: Array<string> = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+import { defaultVariants, selectControl } from '../../story';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Card',
   component: BsCard,
+  argTypes: {
+    variant: selectControl(defaultVariants),
+  },
 };
 export default meta;
 

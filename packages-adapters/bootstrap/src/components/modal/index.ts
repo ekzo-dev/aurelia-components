@@ -1,2 +1,2 @@
 export * from './modal';
-export * from './dialog-dom-renderer';
+//export * from './dialog-dom-renderer';
