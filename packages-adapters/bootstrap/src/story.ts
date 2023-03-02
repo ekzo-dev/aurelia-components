@@ -1,5 +1,5 @@
 /*
-  Define control values as object with pairs 'bindable value': 'control label'
+  Define control values as object with pairs 'control label': 'bindable value'
   P.S. Empty key is ok
  */
 
@@ -14,22 +14,13 @@ export const defaultVariants = {
   dark: 'dark',
 };
 
-export const defaultButtonSizes = {
-  sm: 'sm',
-  '': 'default',
-  lg: 'lg',
-};
+export const defaultButtonSizes = ['sm', 'lg'];
 
-export const defaultButtonTypes = {
-  button: 'button',
-  submit: 'submit',
-  reset: 'reset',
-};
+export const defaultButtonTypes = ['button', 'submit', 'reset'];
 
 export const selectControl = (options, type = 'select') => ({
-  options: Object.keys(options),
+  options: options,
   control: {
     type: type,
-    labels: options,
   },
 });

@@ -8,9 +8,6 @@ import { defaultButtonSizes, selectControl } from '../../story';
 const meta: Meta = {
   title: 'Bootstrap / Components / Button group',
   component: BsButtonGroup,
-  args: {
-    size: '',
-  },
   argTypes: {
     size: selectControl(defaultButtonSizes, 'inline-radio'),
   },

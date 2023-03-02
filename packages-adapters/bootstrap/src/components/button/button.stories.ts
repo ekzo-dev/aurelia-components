@@ -5,9 +5,6 @@ import { selectControl, defaultVariants, defaultButtonSizes, defaultButtonTypes 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button',
   component: BsButton,
-  args: {
-    size: '',
-  },
   argTypes: {
     variant: selectControl(defaultVariants),
     size: selectControl(defaultButtonSizes, 'inline-radio'),
