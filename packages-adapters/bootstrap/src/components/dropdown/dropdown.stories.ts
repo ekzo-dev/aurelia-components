@@ -1,34 +1,58 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes } from '@storybook/aurelia';
 import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.';
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
+import { selectControl } from '../../story';
+
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+const directionOptions = ['down', 'up', 'end', 'start'];
+const displayOptions = ['dynamic', 'static'];
+const alignOptions = ['end', 'sm-start', 'md-start', 'lg-start', 'xl-start', 'xxl-start'];
+const dropdownArgTypes = extractArgTypes(BsDropdown);
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Dropdown',
   component: BsDropdownMenu,
+  parameters: {
+    actions: {
+      handles: ['hide.bs.dropdown', 'hidden.bs.dropdown', 'show.bs.dropdown', 'shown.bs.dropdown'],
+    },
+  },
 };
 export default meta;
 
 const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdown, BsDropdownItem, BsButton, BsDropdownToggle],
   template: `
-<div bs-dropdown="direction.bind: direction; center.bind: center;">
-<bs-button variant.bind="variant" bs-dropdown-toggle>Dropdown button</bs-button>
-<bs-dropdown-menu dark.bind="dark">
-  <bs-dropdown-item>Action</bs-dropdown-item>
-  <bs-dropdown-item>Another action</bs-dropdown-item>
-  <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
-</bs-dropdown-menu>
+<div bs-dropdown="direction.bind: direction; center.bind: center">
+  <bs-button bs-dropdown-toggle>Dropdown button</bs-button>
+  <bs-dropdown-menu
+    auto-close.bind="autoClose"
+    boundary.bind="boundary"
+    display.bind="display"
+    offset.bind="offset"
+    popper-config.bind="popperConfig"
+    reference.bind="reference"
+    dark.bind="dark"
+    align.bind="align"
+  >
+    <bs-dropdown-item>Action</bs-dropdown-item>
+    <bs-dropdown-item>Another action</bs-dropdown-item>
+    <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
+  </bs-dropdown-menu>
 </div>
   `,
   props: args,
 });
-Default.args = {
-  variant: 'secondary',
-  dark: false,
-  direction: 'down',
-  center: false,
+Default.argTypes = {
+  align: selectControl(alignOptions),
+  display: selectControl(displayOptions),
+  ...dropdownArgTypes,
+  direction: {
+    ...dropdownArgTypes.direction,
+    ...selectControl(directionOptions),
+  },
 };
 
 const WithSizableButton: Story = (args): StoryFnAureliaReturnType => ({

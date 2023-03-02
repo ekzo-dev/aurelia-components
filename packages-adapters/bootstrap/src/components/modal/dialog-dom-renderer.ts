@@ -44,7 +44,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
 
     const controller = Controller.$el<BsModal>(container, viewModel, modal, {
       projections: {
-        default: componentController.definition,
+        default: componentController['_compiledDef'],
       },
     });
     controller.addChild(componentController);

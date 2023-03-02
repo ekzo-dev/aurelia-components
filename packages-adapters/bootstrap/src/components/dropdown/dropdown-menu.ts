@@ -12,7 +12,7 @@ export type BsDropdownAlign = 'end' | 'sm-start' | 'md-start' | 'lg-start' | 'xl
   name: 'bs-dropdown-menu',
   template,
 })
-export class BsDropdownMenu implements ICustomElementViewModel {
+export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options {
   @bindable()
   autoClose: boolean | 'inside' | 'outside' = true;
 
@@ -26,13 +26,10 @@ export class BsDropdownMenu implements ICustomElementViewModel {
   offset: Dropdown.Offset | string | Dropdown.OffsetFunction = [0, 2];
 
   @bindable()
-  popperConfig?: Partial<Popper.Options> | Dropdown.PopperConfigFunction | null = null;
+  popperConfig: Partial<Popper.Options> | Dropdown.PopperConfigFunction | null = null;
 
   @bindable()
   reference: 'toggle' | 'parent' | Element | Popper.Rect = 'toggle';
-
-  @bindable({ mode: BindingMode.twoWay, ...coerceBoolean })
-  shown: boolean = false;
 
   @bindable(coerceBoolean)
   dark: boolean = false;
@@ -53,13 +50,18 @@ export class BsDropdownMenu implements ICustomElementViewModel {
   }
 
   propertyChanged(name: keyof this) {
+    // TODO: correctly configure update
     switch (name) {
-      case 'shown':
-        this.toggle();
-        break;
-      default:
+      case 'autoClose':
+      case 'boundary':
+      case 'display':
+      case 'reference':
         this.destroyDropdown();
         this.createDropdown();
+        break;
+      case 'offset':
+      case 'popperConfig':
+        this.dropdown?.update();
     }
   }
 
@@ -73,10 +75,6 @@ export class BsDropdownMenu implements ICustomElementViewModel {
 
   toggle(): void {
     this.dropdown?.toggle();
-  }
-
-  update(): void {
-    this.dropdown?.update();
   }
 
   private createDropdown() {
