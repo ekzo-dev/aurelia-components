@@ -34,3 +34,4 @@ node_modules
 **/dist
 **/coverage-jest
 **/coverage-karma
+storybook-static

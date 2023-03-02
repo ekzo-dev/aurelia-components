@@ -8,13 +8,16 @@
     "packages/*",
     "packages-adapters/*"
   ],
+  "homepage": "https://ekzo-dev.github.io/aurelia-components",
   "scripts": {
     "lint": "yarn run eslint ./packages/**/src/**/*.ts",
     "lint:fix": "yarn run eslint --fix ./packages/**/src/**/*.ts",
     "test": "lerna run test --stream",
     "update:version": "lerna version --no-push",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "predeploy": "yarn run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "dependencies": {
     "aurelia": "2.0.0-beta.1",
@@ -60,6 +63,7 @@
     "eslint-plugin-sonarjs": "^0.13.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "fs-extra": "^9.1.0",
+    "gh-pages": "^5.0.0",
     "husky": "^4.3.8",
     "jest": "26.6.3",
     "jest-cli": "^26.4.2",
