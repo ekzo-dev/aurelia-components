@@ -3,10 +3,17 @@ import { BsButtonGroup } from '.';
 import { BsButton } from '../button';
 import './button-group.stories.scss';
 import { BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { defaultButtonSizes, selectControl } from '../../story';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button group',
   component: BsButtonGroup,
+  args: {
+    size: '',
+  },
+  argTypes: {
+    size: selectControl(defaultButtonSizes, 'inline-radio'),
+  },
 };
 export default meta;
 
@@ -76,17 +83,17 @@ const buttonToolbar: Story = (args): StoryFnAureliaReturnType => ({
 const nasting: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
   template: `
-<bs-button-group vertical.bind="vertical">
+<bs-button-group vertical.bind="vertical" size.bind="size">
   <bs-button>1</bs-button>
   <bs-button>2</bs-button>
-  <bs-button-group>
+  <bs-button-group size.bind="size">
   <bs-button bs-dropdown-toggle>Dropdown</bs-button>
   <bs-dropdown-menu>
     <bs-dropdown-item>Dropdown link</bs-dropdown-item>
     <bs-dropdown-item>Dropdown link</bs-dropdown-item>
   </bs-dropdown-menu>
   </bs-button-group>
-  <bs-button-group>
+  <bs-button-group size.bind="size">
   <bs-button bs-dropdown-toggle>Dropdown</bs-button>
   <bs-dropdown-menu>
     <bs-dropdown-item>Dropdown link</bs-dropdown-item>
