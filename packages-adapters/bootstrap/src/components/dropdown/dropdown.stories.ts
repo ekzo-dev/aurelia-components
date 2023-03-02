@@ -1,4 +1,4 @@
-import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes, createComponentTemplate } from '@storybook/aurelia';
 import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.';
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
@@ -25,22 +25,16 @@ export default meta;
 const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdown, BsDropdownItem, BsButton, BsDropdownToggle],
   template: `
-<div bs-dropdown="direction.bind: direction; center.bind: center">
+<div ${createComponentTemplate(BsDropdown)}>
   <bs-button bs-dropdown-toggle>Dropdown button</bs-button>
-  <bs-dropdown-menu
-    auto-close.bind="autoClose"
-    boundary.bind="boundary"
-    display.bind="display"
-    offset.bind="offset"
-    popper-config.bind="popperConfig"
-    reference.bind="reference"
-    dark.bind="dark"
-    align.bind="align"
-  >
+  ${createComponentTemplate(
+    BsDropdownMenu,
+    `
     <bs-dropdown-item>Action</bs-dropdown-item>
     <bs-dropdown-item>Another action</bs-dropdown-item>
     <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
-  </bs-dropdown-menu>
+  `
+  )}
 </div>
   `,
   props: args,
