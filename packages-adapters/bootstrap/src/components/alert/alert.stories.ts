@@ -21,9 +21,6 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   innerHtml: 'A simple alert — check it out!',
   props: args,
 });
-Default.args = {
-  variant: 'secondary',
-};
 
 const AdditionalContent: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsIcon],
@@ -39,7 +36,7 @@ const AdditionalContent: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 AdditionalContent.args = {
-  variant: 'danger',
+  variant: 'success',
   dismissible: true,
 };
 

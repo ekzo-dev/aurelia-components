@@ -1,6 +1,26 @@
-export const defaultVariants = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+/*
+  Define control values as object with pairs 'control label': 'bindable value'
+  P.S. Empty key is ok
+ */
+
+export const defaultVariants = {
+  primary: 'primary',
+  secondary: 'secondary',
+  success: 'success',
+  danger: 'danger',
+  warning: 'warning',
+  info: 'info',
+  light: 'light',
+  dark: 'dark',
+};
+
+export const defaultButtonSizes = ['sm', 'lg'];
+
+export const defaultButtonTypes = ['button', 'submit', 'reset'];
 
 export const selectControl = (options, type = 'select') => ({
-  options,
-  control: { type },
+  options: options,
+  control: {
+    type: type,
+  },
 });

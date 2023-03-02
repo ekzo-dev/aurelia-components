@@ -1,10 +1,14 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsBadge } from '.';
 import { BsButton } from '../button';
+import { defaultVariants, selectControl } from '../../story';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Badge',
   component: BsBadge,
+  argTypes: {
+    variant: selectControl(defaultVariants),
+  },
 };
 export default meta;
 
