@@ -3,6 +3,10 @@ import { BsOffcanvas } from './offcanvas';
 import { BsButton } from '../button';
 import { BsCloseButton } from '../close-button';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { selectControl } from '../../story';
+
+const reponsiveOptions = <const>['sm', 'md', 'lg', 'xl', 'xxl'];
+const placementOptions = <const>['start', 'end', 'top', 'bottom'];
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Offcanvas',
@@ -14,6 +18,10 @@ const meta: Meta = {
   },
   args: {
     title: 'Offcanvas title',
+  },
+  argTypes: {
+    responsive: selectControl(reponsiveOptions),
+    placement: selectControl(placementOptions),
   },
 };
 export default meta;

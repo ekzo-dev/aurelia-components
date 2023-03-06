@@ -1,3 +1,4 @@
+/*
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsScrollspy } from '.';
 import { BsListGroup, BsListGroupItem } from '../list-group';
@@ -14,4 +15,4 @@ export const Default: Story = (args): StoryFnAureliaReturnType => ({
   props: {
     ...args,
   },
-});
+});*/

@@ -1,5 +1,6 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsProgress } from '.';
+import { selectControl, variantsOptions } from '../../story';
 
 export default {
   title: 'Bootstrap / Components / Progress',
@@ -7,6 +8,9 @@ export default {
   args: {
     label: 'Label', // added to template to work
     value: 30,
+  },
+  argTypes: {
+    background: selectControl(variantsOptions),
   },
 } as Meta;
 

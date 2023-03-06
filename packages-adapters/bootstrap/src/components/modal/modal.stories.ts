@@ -1,6 +1,10 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsModal } from '.';
 import { BsButton } from '../button';
+import { selectControl } from '../../story';
+
+const sizeOptions = ['sm', 'lg', 'xl'];
+const fullscreenOptions = ['always', 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Modal',
@@ -12,6 +16,10 @@ const meta: Meta = {
   },
   args: {
     title: 'Modal title',
+  },
+  argTypes: {
+    size: selectControl(sizeOptions),
+    fullscreen: selectControl(fullscreenOptions),
   },
 };
 export default meta;

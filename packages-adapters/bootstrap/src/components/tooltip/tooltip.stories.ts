@@ -1,13 +1,19 @@
 import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
 import { BsTooltip } from '.';
+import { selectControl } from '../../story';
 
 import './tooltip.stories.scss';
+
+const placementOptions = <const>['top', 'right', 'bottom', 'left'];
 
 export default {
   title: 'Bootstrap / Components / Tooltip',
   component: BsTooltip,
   args: {
     title: 'Default tooltip',
+  },
+  argTypes: {
+    placement: selectControl(placementOptions),
   },
 } as Meta;
 

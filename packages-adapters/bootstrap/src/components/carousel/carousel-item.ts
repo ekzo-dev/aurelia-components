@@ -1,5 +1,6 @@
-import { customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import './carousel.scss';
+import { coerceBoolean } from '../../utils';
 
 @customElement({
   name: 'bs-carousel-item',
@@ -10,6 +11,7 @@ import './carousel.scss';
   `,
 })
 export class BsCarouselItem implements ICustomElementViewModel {
+  @bindable(coerceBoolean)
   active: boolean = false;
 }
 

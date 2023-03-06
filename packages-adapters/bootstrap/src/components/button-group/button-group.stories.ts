@@ -1,15 +1,15 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
 import { BsButtonGroup } from '.';
 import { BsButton } from '../button';
 import './button-group.stories.scss';
 import { BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { defaultButtonSizes, selectControl } from '../../story';
+import { buttonSizesOptions, selectControl } from '../../story';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button group',
   component: BsButtonGroup,
   argTypes: {
-    size: selectControl(defaultButtonSizes, 'inline-radio'),
+    size: selectControl(buttonSizesOptions, 'inline-radio'),
   },
 };
 export default meta;
@@ -70,17 +70,21 @@ const buttonToolbar: Story = (args): StoryFnAureliaReturnType => ({
   <bs-button variant="secondary">7</bs-button>
 </bs-button-group>
 
-<bs-button-group vertical.bind="vertical" size.bind="size">
+${createComponentTemplate(
+  BsButtonGroup,
+  `
   <bs-button variant="info">8</bs-button>
-</bs-button-group>
-  `,
+  `
+)}`,
   props: args,
 });
 
 const nasting: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
   template: `
-<bs-button-group vertical.bind="vertical" size.bind="size">
+${createComponentTemplate(
+  BsButtonGroup,
+  `
   <bs-button>1</bs-button>
   <bs-button>2</bs-button>
   <bs-button-group size.bind="size">
@@ -97,8 +101,8 @@ const nasting: Story = (args): StoryFnAureliaReturnType => ({
     <bs-dropdown-item>Dropdown link</bs-dropdown-item>
   </bs-dropdown-menu>
   </bs-button-group>
-</bs-button-group>
-  `,
+  `
+)}`,
   props: args,
 });
 
