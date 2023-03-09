@@ -9,9 +9,6 @@ export default {
       handles: ['change', 'input'],
     },
   },
-  args: {
-    label: `Textarea label(добавил в шаблон value.bind). Control: что такое placeholder`,
-  },
 } as Meta;
 
 export const Default: Story = (args) => ({
