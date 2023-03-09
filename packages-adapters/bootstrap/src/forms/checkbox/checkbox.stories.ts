@@ -23,7 +23,7 @@ const InlinePosition: Story = (args) => ({
   template: `
 <bs-checkbox label="1" value="1" name="checkbox1" title="1" inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
 <bs-checkbox label="2" value="2" name="checkbox2" title="2" inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
-<bs-checkbox label="3 (disabled)" value="checkbox3" name="3" title="3" disabled inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
+<bs-checkbox label="3 (disabled)" value="3" name="checkbox3" title="3" disabled inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
   `,
   props: args,
 });
