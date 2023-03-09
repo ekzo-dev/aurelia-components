@@ -3,10 +3,12 @@
   P.S. Empty key is ok
  */
 
-export const variantsOptions = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+export const variantsOptions = <const>['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
-export const buttonSizesOptions = ['sm', 'lg'];
-export const buttonTypesOptions = ['button', 'submit', 'reset'];
+export const buttonSizesOptions = <const>['sm', 'lg'];
+export const buttonTypesOptions = <const>['button', 'submit', 'reset'];
+
+export const inputSizeOptions = <const>['sm', 'lg'];
 
 export const selectControl = (options, type = 'select') => ({
   options: options,

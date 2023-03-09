@@ -1,8 +1,6 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsInput } from '.';
-import { selectControl } from '../../story';
-
-const sizeOptions = <const>['sm', 'lg'];
+import { inputSizeOptions, selectControl } from '../../story';
 
 export default {
   title: 'Bootstrap / Forms / Input',
@@ -16,7 +14,7 @@ export default {
     label: 'Label',
   },
   argTypes: {
-    size: selectControl(sizeOptions, 'inline-radio'),
+    size: selectControl(inputSizeOptions, 'inline-radio'),
   },
 } as Meta;
 
