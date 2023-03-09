@@ -1,4 +1,4 @@
-import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsBreadcrumb, BsBreadcrumbItem } from '.';
 
 const meta: Meta = {
@@ -22,15 +22,11 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
 
 const GraphicalDivider: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsBreadcrumbItem],
-  template: `
-${createComponentTemplate(
-  BsBreadcrumb,
-  `
+  innerHtml: `
     <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
     <bs-breadcrumb-item><a href="#">Library</a></bs-breadcrumb-item>
-    <bs-breadcrumb-item active.bind="true">Data</bs-breadcrumb-item>
-`
-)}`,
+    <bs-breadcrumb-item active>Data</bs-breadcrumb-item>
+`,
   props: args,
 });
 GraphicalDivider.args = {

@@ -1,5 +1,8 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsInput } from '.';
+import { selectControl } from '../../story';
+
+const sizeOptions = <const>['sm', 'lg'];
 
 export default {
   title: 'Bootstrap / Forms / Input',
@@ -10,8 +13,10 @@ export default {
     },
   },
   args: {
-    label:
-      'Input label (работает type: color, time, range, password, hidden, file, datetime-local, date. Вопросы: required in template, control: on-change, matcher.)',
+    label: 'Label',
+  },
+  argTypes: {
+    size: selectControl(sizeOptions, 'inline-radio'),
   },
 } as Meta;
 
