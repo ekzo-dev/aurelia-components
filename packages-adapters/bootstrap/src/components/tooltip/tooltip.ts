@@ -5,6 +5,15 @@ import '../../transitions.scss';
 import './tooltip.scss';
 
 export type Placements = 'top' | 'right' | 'bottom' | 'left';
+export type Triggers =
+  | 'click'
+  | 'hover'
+  | 'focus'
+  | 'manual'
+  | 'click hover'
+  | 'click focus'
+  | 'hover focus'
+  | 'click hover focus';
 
 /**
  * Tooltip Bootstrap component
@@ -14,31 +23,31 @@ export type Placements = 'top' | 'right' | 'bottom' | 'left';
 @customAttribute('bs-tooltip')
 export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeViewModel {
   @bindable()
-  readonly animation: boolean = true;
+  animation: boolean = true;
 
   @bindable()
-  readonly container?: any;
+  container?: any;
 
   @bindable()
-  readonly delay?: any;
+  delay?: any;
 
   @bindable()
-  readonly html: boolean = false;
+  html: boolean = false;
 
   @bindable()
-  readonly placement: Placements = 'top';
+  placement: Placements = 'top';
 
   @bindable()
-  readonly selector: any;
+  selector: any;
 
   @bindable()
-  readonly template: any;
+  template: any;
 
   @bindable({ primary: true })
-  readonly title: string | Element | ((this: HTMLElement) => string | Element) = '';
+  title: string | Element | ((this: HTMLElement) => string | Element) = '';
 
   @bindable()
-  readonly trigger = 'hover focus';
+  trigger: Triggers = 'hover focus';
 
   readonly $controller: ICustomAttributeController<this>;
 
@@ -81,9 +90,32 @@ export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeView
     this.tooltip?.toggle();
   }
 
+  show() {
+    this.tooltip?.show();
+  }
+
+  hide() {
+    this.tooltip?.hide();
+  }
+
+  enable() {
+    this.tooltip?.enable();
+  }
+
+  disable() {
+    this.tooltip?.disable();
+  }
+
   toggleEnabled() {
     this.tooltip?.toggleEnabled();
   }
+
+  update() {
+    this.tooltip?.update();
+  }
+
+  // todo
+  // setContent(content?: Record<string, string | Element | Tooltip.SetContentFunction | null>): void;
 
   private createTooltip() {
     this.tooltip = new Tooltip(this.element, this.options);
