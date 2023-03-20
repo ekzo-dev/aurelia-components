@@ -1,6 +1,6 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsAlert } from '.';
-import { selectControl, variantsOptions } from '../../story';
+import { selectControl, variantOptions } from '../../story';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Alert',
@@ -11,7 +11,7 @@ const meta: Meta = {
     },
   },
   argTypes: {
-    variant: selectControl(variantsOptions),
+    variant: selectControl(variantOptions),
   },
 };
 export default meta;
@@ -25,7 +25,7 @@ const AdditionalContent: Story = (args): StoryFnAureliaReturnType => ({
   innerHtml: `
     <h4 class="alert-heading">Well done!</h4>
     <p class="mb-0">A simple primary alert
-    with <a href="#" class="alert-link">an example link</a>.
+    with <a href="#" target="_self" class="alert-link">an example link</a>.
     Give it a click if you like.<br>Whenever you need to, be sure
     to use margin utilities to keep things nice and tidy.</p>
     <hr>

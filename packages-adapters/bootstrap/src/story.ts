@@ -3,7 +3,7 @@
   P.S. Empty key is ok
  */
 
-export const variantsOptions = <const>['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+export const variantOptions = <const>['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
 export const buttonSizesOptions = <const>['sm', 'lg'];
 export const buttonTypesOptions = <const>['button', 'submit', 'reset'];

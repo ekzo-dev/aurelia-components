@@ -3,7 +3,7 @@ import template from './nav.html';
 import './nav.scss';
 
 export type NavType = 'tabs' | 'pills';
-export type NavFill = 'fill' | 'justify';
+export type NavFill = 'fill' | 'justified';
 
 @customElement({
   name: 'bs-nav',
@@ -21,7 +21,7 @@ export class BsNav implements ICustomElementViewModel {
       nav: true,
       'nav-pills': this.type === 'pills',
       'nav-tabs': this.type === 'tabs',
-      'nav-justify': this.fill === 'justify',
+      'nav-justified': this.fill === 'justified',
       'nav-fill': this.fill === 'fill',
     })
       .filter((k) => k[1])

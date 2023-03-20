@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsSpinner } from '.';
 import { BsButton } from '../button';
-import { selectControl, variantsOptions } from '../../story';
+import { selectControl, variantOptions } from '../../story';
 
 const typeOptions = <const>['border', 'grow'];
 const sizeOptions = <const>['sm'];
@@ -10,7 +10,7 @@ export default {
   title: 'Bootstrap / Components / Spinner',
   component: BsSpinner,
   argTypes: {
-    variant: selectControl(variantsOptions),
+    variant: selectControl(variantOptions),
     type: selectControl(typeOptions, 'inline-radio'),
     size: selectControl(sizeOptions),
   },

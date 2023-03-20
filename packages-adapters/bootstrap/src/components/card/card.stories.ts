@@ -6,13 +6,13 @@ import { BsButton } from '../button';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './card.stories.css';
-import { variantsOptions, selectControl } from '../../story';
+import { variantOptions, selectControl } from '../../story';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Card',
   component: BsCard,
   argTypes: {
-    variant: selectControl(variantsOptions),
+    variant: selectControl(variantOptions),
   },
 };
 export default meta;
@@ -42,7 +42,7 @@ const MultipleContentTypes: Story = (args): StoryFnAureliaReturnType => ({
         <bs-list-group-item variant.bind="variant">A third item</bs-list-group-item>
     </bs-list-group>
     <bs-card-body>
-        <a href="#" class="card-link">Card link</a> <a href="#" class="card-link">Another link</a>
+        <a href="#" target="_self" class="card-link">Card link</a> <a href="#" class="card-link">Another link</a>
     </bs-card-body>
 </bs-card>
   `,
@@ -56,7 +56,7 @@ const TitlesTextLinks: Story = (args): StoryFnAureliaReturnType => ({
     <bs-card-body>
         <h5>Card title</h5>
         <p class="card-text">Some quick  text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#">Card link</a> <a href="#" class="ms-2">Another link</a>
+        <a href="#" target="_self">Card link</a> <a href="#" class="ms-2">Another link</a>
     </bs-card-body>
 </bs-card>
   `,
@@ -413,10 +413,10 @@ const NavigationTabs: Story = (args): StoryFnAureliaReturnType => ({
   <bs-card-header>
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="true" href="#">Active</a>
+        <a class="nav-link active" aria-current="true" href="#" target="_self">Active</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#" target="_self">Link</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled">Disabled</a>
@@ -440,10 +440,10 @@ const NavigationButtons: Story = (args): StoryFnAureliaReturnType => ({
   <bs-card-header>
     <ul class="nav nav-pills card-header-pills">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
+        <a class="nav-link active" href="#" target="_self">Active</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#" target="_self">Link</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled">Disabled</a>

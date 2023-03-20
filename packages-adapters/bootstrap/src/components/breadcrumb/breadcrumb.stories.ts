@@ -13,8 +13,8 @@ export default meta;
 const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsBreadcrumbItem],
   innerHtml: `
-    <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
-    <bs-breadcrumb-item><a href="#">Library</a></bs-breadcrumb-item>
+    <bs-breadcrumb-item><a href="#" target="_self">Home</a></bs-breadcrumb-item>
+    <bs-breadcrumb-item><a href="#" target="_self">Library</a></bs-breadcrumb-item>
     <bs-breadcrumb-item active.bind="true">Data</bs-breadcrumb-item>
   `,
   props: args,
@@ -23,8 +23,8 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
 const GraphicalDivider: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsBreadcrumbItem],
   innerHtml: `
-    <bs-breadcrumb-item><a href="#">Home</a></bs-breadcrumb-item>
-    <bs-breadcrumb-item><a href="#">Library</a></bs-breadcrumb-item>
+    <bs-breadcrumb-item><a href="#" target="_self">Home</a></bs-breadcrumb-item>
+    <bs-breadcrumb-item><a href="#" target="_self">Library</a></bs-breadcrumb-item>
     <bs-breadcrumb-item active>Data</bs-breadcrumb-item>
 `,
   props: args,
