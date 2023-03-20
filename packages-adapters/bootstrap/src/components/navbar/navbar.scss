@@ -1,0 +1,16 @@
+@import '../../utils';
+@import '~bootstrap/scss/navbar';
+
+.navbar-brand {
+  a {
+    color: var(--#{$prefix}navbar-brand-color);
+    text-decoration: if($link-decoration == none, null, none);
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      color: var(--#{$prefix}navbar-brand-hover-color);
+      text-decoration: if($link-hover-decoration == underline, none, null);
+    }
+  }
+}

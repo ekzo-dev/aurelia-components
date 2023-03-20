@@ -1,13 +1,12 @@
-import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
+import { Meta, Story } from '@storybook/aurelia';
 import { BsNav, BsNavItem, BsNavLink } from '.';
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { BsButton } from '../button';
+
 import { selectControl } from '../../story';
 
 import './nav.scss';
 import '../dropdown/dropdown.scss';
-
-import { InlinePosition } from '../../forms/checkbox/checkbox.stories';
-import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { BsButton } from '../button';
 
 const navTypeOptions = <const>['tabs', 'pills'];
 const navFillOptions = <const>['fill', 'justified'];

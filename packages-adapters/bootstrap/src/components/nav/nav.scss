@@ -1,7 +1,8 @@
 @import '../../utils';
 @import '~bootstrap/scss/nav';
 
-bs-nav {
+bs-nav,
+bs-navbar-nav {
   .btn {
     // scss-docs-start btn-css-vars
     --#{$prefix}btn-padding-x: 0;
@@ -17,6 +18,8 @@ bs-nav {
 
 bs-nav-link {
   a {
+    color: var(--#{$prefix}nav-link-color);
+
     &:hover,
     &:focus {
       color: var(--#{$prefix}nav-link-hover-color);
