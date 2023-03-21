@@ -1,5 +1,5 @@
-<!--todo For navbars that never collapse, add the .navbar-expand class on the navbar.
-For navbars that always collapse, don’t add any .navbar-expand class.-->
-<template class="navbar ${expand ? 'navbar-expand-' + expand : ''} ${variant ? 'bg-' + variant : ''}">
+<template
+  class="navbar ${darkBackground ? 'navbar-dark' : ''} ${expand ? 'navbar-expand-' + expand : ''} ${variant ? 'bg-' + variant : ''}"
+>
   <au-slot></au-slot>
 </template>
