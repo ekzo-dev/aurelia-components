@@ -7,3 +7,7 @@ Docs under development...
 ```
 yarn run storybook
 ```
+
+#### Versioning policy
+
+Adapter packages must have the same major and minor versions as wrapped package.
