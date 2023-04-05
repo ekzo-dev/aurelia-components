@@ -2,13 +2,14 @@
   <label for="${id}" if.bind="label && !floatingLabel" class="form-label">${label}</label>
   <select
     id="${id}"
-    class="form-select ${size ? `form-select-${size}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+    class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+    multiple.bind="multiple"
     value.bind="value"
     name.bind="name"
-    multiple.bind="multiple"
     required.bind="required"
     disabled.bind="disabled"
     title="${title}"
+    size.bind="size"
   >
     <au-slot>
       <option if.bind="!multiple && emptyLabel" model.bind="emptyValue" value="">${emptyLabel}</option>

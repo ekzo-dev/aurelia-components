@@ -15,7 +15,7 @@ export default {
     emptyLabel: 'Open this select menu',
   },
   argTypes: {
-    size: selectControl(inputSizeOptions, 'inline-radio'),
+    bsSize: selectControl(inputSizeOptions, 'inline-radio'),
   },
 } as Meta;
 

@@ -1,10 +1,7 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
-import { IterableValueConverter } from '@ekzo/toolkit';
-
+import { IterableValueConverter, coerceBoolean, coerceNumber, isMapOrObj } from '@ekzo/toolkit';
 import { BaseField } from '../base-field';
-import { coerceBoolean, isMapOrObj } from '../../utils';
 import { Sizes } from '../../interfaces';
-
 import template from './select.html';
 import './select.scss';
 
@@ -18,23 +15,26 @@ export class BsSelect extends BaseField {
   value!: any | any[];
 
   @bindable()
-  readonly options: Map<any, string> | Record<any, string> | Array<[any, string]> = [];
+  options: Map<any, string> | Record<any, string> | Array<[any, string]> = [];
 
-  // TODO: вынести в кастом атрибут?
+  // TODO: move to custom attribute?
   @bindable()
-  readonly emptyLabel?: string;
+  emptyLabel?: string;
 
   @bindable()
-  readonly emptyValue?: null | string | number;
+  emptyValue?: null | string | number;
 
   @bindable(coerceBoolean)
-  readonly multiple: boolean = false;
+  multiple: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly floatingLabel: boolean = false;
+  floatingLabel: boolean = false;
+
+  @bindable(coerceNumber)
+  size?: number;
 
   @bindable()
-  readonly size?: Sizes;
+  bsSize?: Sizes;
 
   isMapOrObj = isMapOrObj;
 }
