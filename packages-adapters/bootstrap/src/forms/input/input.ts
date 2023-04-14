@@ -52,7 +52,7 @@ export class BsInput extends BaseField {
   accept?: string;
 
   @bindable()
-  placeholder?;
+  placeholder?: string;
 
   @bindable(coerceBoolean)
   floatingLabel: boolean = false;
@@ -62,10 +62,27 @@ export class BsInput extends BaseField {
 
   input!: HTMLInputElement;
 
+  binding(): void {
+    super.binding();
+    this.ensurePlaceholder();
+  }
+
+  placeholderChanged(): void {
+    this.ensurePlaceholder();
+  }
+
   valueChanged(value: any): void {
     // TODO: binding to file does not currently work on Aurelia 2 out of the box, need to investigate
     if (this.input.type === 'file') {
       this.files = this.input.files!;
+    }
+  }
+
+  private ensurePlaceholder(): void {
+    // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
+    // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
+    if (this.floatingLabel && !this.placeholder) {
+      this.placeholder = '.';
     }
   }
 }
