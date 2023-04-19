@@ -1,8 +1,11 @@
 import { valueConverter } from 'aurelia';
 import { format, parseISO } from 'date-fns';
 
+/**
+ * TODO: move to Intl.DateTimeFormat
+ */
 @valueConverter('formatDatetime')
-export class FormatDatetimeValueConverter {
+export class FormatDatetime {
   patterns = {
     datetime: 'dd.MM.yyyy HH:mm',
     date: 'dd.MM.yyyy',

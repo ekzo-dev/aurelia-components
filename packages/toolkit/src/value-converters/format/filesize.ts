@@ -1,7 +1,7 @@
 import { valueConverter } from 'aurelia';
 
 @valueConverter('formatFilesize')
-export class FormatFilesizeValueConverter {
+export class FormatFilesize {
   toView(value) {
     if (value === undefined || value === null) return value;
 

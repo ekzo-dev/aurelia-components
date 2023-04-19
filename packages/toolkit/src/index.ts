@@ -10,6 +10,6 @@ export * from './value-converters/format/filesize';
 export * from './value-converters/format/datetime';
 export * from './value-converters/format/boolean';
 export * from './value-converters/format/phone';
-export * from './value-converters/format/scalar';
+export * from './value-converters/format/json-schema-node';
 
 export * from './helpers';
