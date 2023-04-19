@@ -7,10 +7,13 @@ const TOGGLE_SPLIT_CLASS = 'dropdown-toggle-split';
 
 @customAttribute('bs-dropdown-toggle')
 export class BsDropdownToggle implements ICustomAttributeViewModel {
-  // TODO: баг в Aurelia, значение ставится в "" если не передано
+  // TODO: Aurelia bug, set to "" when not explicitly defined (treated as primary attribute)
   // @bindable(coerceBoolean)
   @bindable()
   split: boolean = false;
+
+  @bindable()
+  arrow: boolean = true;
 
   constructor(private element: Element) {}
 
@@ -34,7 +37,7 @@ export class BsDropdownToggle implements ICustomAttributeViewModel {
 
     classList.remove(TOGGLE_CLASS, TOGGLE_SPLIT_CLASS);
     if (add) {
-      classList.add(...[TOGGLE_CLASS, this.split ? TOGGLE_SPLIT_CLASS : null].filter(Boolean));
+      classList.add(...[this.arrow ? TOGGLE_CLASS : null, this.split ? TOGGLE_SPLIT_CLASS : null].filter(Boolean));
     }
   }
 }

@@ -41,7 +41,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
 
   constructor(private element: Element) {}
 
-  attaching() {
+  attached() {
     this.createDropdown();
   }
 
@@ -78,7 +78,11 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   }
 
   private createDropdown() {
-    this.dropdown = new Dropdown(this.element, {
+    // try to find toggle element and connect to it
+    const selector = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
+    const toggle = this.element.parentElement?.querySelector(selector);
+
+    this.dropdown = new Dropdown(toggle || this.element, {
       autoClose: this.autoClose,
       boundary: this.boundary,
       display: this.display,

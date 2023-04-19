@@ -6,7 +6,8 @@ export type BsDropdownDirection = 'down' | 'up' | 'end' | 'start';
 
 @customAttribute('bs-dropdown')
 export class BsDropdown implements ICustomAttributeViewModel {
-  @bindable(coerceBoolean)
+  // TODO: Aurelia bug, set to "" when not explicitly defined (treated as primary attribute)
+  // @bindable(coerceBoolean)
   center: boolean = false;
 
   @bindable()
