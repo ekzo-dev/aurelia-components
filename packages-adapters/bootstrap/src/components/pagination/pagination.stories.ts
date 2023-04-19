@@ -1,17 +1,34 @@
 import { Meta, Story } from '@storybook/aurelia';
+import { BsPagination, BsPaginationItem } from '.';
 
-import { BsPagination } from './pagination';
-
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Components / Pagination',
   component: BsPagination,
-  args: {
-    currentPage: 1,
-    totalItems: 100,
-    pageSize: 1,
-  },
-} as Meta;
+};
+export default meta;
 
-export const Default: Story = (args) => ({
+const Overview: Story = (args) => ({
   props: args,
+  components: [BsPaginationItem],
+  innerHtml: `
+  <bs-pagination-item>Previous</bs-pagination-item>
+  <bs-pagination-item>1</bs-pagination-item>
+  <bs-pagination-item>2</bs-pagination-item>
+  <bs-pagination-item>3</bs-pagination-item>
+  <bs-pagination-item>Next</bs-pagination-item>
+  `,
 });
+
+const DisabledAndActiveStates: Story = (args) => ({
+  props: args,
+  components: [BsPaginationItem],
+  innerHtml: `
+  <bs-pagination-item disabled>Previous</bs-pagination-item>
+  <bs-pagination-item>1</bs-pagination-item>
+  <bs-pagination-item active>2</bs-pagination-item>
+  <bs-pagination-item>3</bs-pagination-item>
+  <bs-pagination-item>Next</bs-pagination-item>
+  `,
+});
+
+export { Overview, DisabledAndActiveStates };
