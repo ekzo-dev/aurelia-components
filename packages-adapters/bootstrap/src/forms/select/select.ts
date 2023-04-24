@@ -1,5 +1,5 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
-import { IterableValueConverter, coerceBoolean, coerceNumber, isMapOrObj } from '@ekzo/toolkit';
+import { Iterable, coerceBoolean, coerceNumber, isMapOrObj } from '@ekzo/toolkit';
 import { BaseField } from '../base-field';
 import { Sizes } from '../../interfaces';
 import template from './select.html';
@@ -8,7 +8,7 @@ import './select.scss';
 @customElement({
   name: 'bs-select',
   template,
-  dependencies: [IterableValueConverter],
+  dependencies: [Iterable],
 })
 export class BsSelect extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
