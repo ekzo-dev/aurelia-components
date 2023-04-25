@@ -17,13 +17,6 @@ export class BsSelect extends BaseField {
   @bindable()
   options: Map<any, string> | Record<any, string> | Array<[any, string]> = [];
 
-  // TODO: move to custom attribute?
-  @bindable()
-  emptyLabel?: string;
-
-  @bindable()
-  emptyValue?: null | string | number;
-
   @bindable(coerceBoolean)
   multiple: boolean = false;
 
@@ -36,5 +29,5 @@ export class BsSelect extends BaseField {
   @bindable()
   bsSize?: Sizes;
 
-  isMapOrObj = isMapOrObj;
+  readonly isMapOrObj = isMapOrObj;
 }

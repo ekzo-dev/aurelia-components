@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/aurelia';
+import { Meta, Story, extractArgTypes } from '@storybook/aurelia';
 import { BsSelect } from '.';
 import { inputSizeOptions, selectControl } from '../../story';
 
@@ -11,16 +11,17 @@ export default {
     },
   },
   args: {
+    label: 'Label',
     options: { '1': 'One', '2': 'Two', '3': 'Three' },
-    emptyLabel: 'Open this select menu',
   },
   argTypes: {
-    bsSize: selectControl(inputSizeOptions, 'inline-radio'),
+    bsSize: {
+      ...extractArgTypes(BsSelect).bsSize,
+      ...selectControl(inputSizeOptions),
+    },
   },
 } as Meta;
 
 export const Default: Story = (args) => ({
-  props: {
-    ...args,
-  },
+  props: args,
 });

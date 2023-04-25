@@ -12,7 +12,6 @@
     size.bind="size"
   >
     <au-slot>
-      <option if.bind="!multiple && emptyLabel" model.bind="emptyValue" value="">${emptyLabel}</option>
       <template if.bind="isMapOrObj(options)">
         <option repeat.for="[k, v] of options | iterable" model.bind="k">${v}</option>
       </template>
