@@ -1,5 +1,5 @@
 import { valueConverter } from 'aurelia';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 
 /**
  * TODO: move to Intl.DateTimeFormat
@@ -12,11 +12,10 @@ export class FormatDatetime {
     time: 'HH:mm',
   };
 
-  toView(value, pattern) {
-    if (value === undefined || value === null) return value;
-
+  toView(value, pattern, empty = null) {
+    if (!value) return empty ?? value;
     pattern = this.patterns[pattern] || pattern;
 
-    return format(parseISO(value), pattern);
+    return format(new Date(value), pattern);
   }
 }
