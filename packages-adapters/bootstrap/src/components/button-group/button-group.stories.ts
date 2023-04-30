@@ -3,7 +3,8 @@ import { BsButtonGroup } from '.';
 import { BsButton } from '../button';
 import './button-group.stories.scss';
 import { BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { buttonSizesOptions, selectControl } from '../../story';
+import { buttonSizesOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button group',

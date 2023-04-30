@@ -1,7 +1,8 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsSpinner } from '.';
 import { BsButton } from '../button';
-import { selectControl, variantOptions } from '../../story';
+import { variantOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const typeOptions = <const>['border', 'grow'];
 const sizeOptions = <const>['sm'];

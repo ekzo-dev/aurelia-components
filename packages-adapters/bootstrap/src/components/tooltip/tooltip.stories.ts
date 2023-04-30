@@ -1,8 +1,8 @@
 import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
 import { BsTooltip } from '.';
-import { selectControl } from '../../story';
 
 import './tooltip.stories.scss';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const placementOptions = <const>['top', 'right', 'bottom', 'left'];
 

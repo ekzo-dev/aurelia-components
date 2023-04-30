@@ -1,6 +1,7 @@
 import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
 import { BsListGroup, BsListGroupItem } from '.';
-import { variantOptions, selectControl } from '../../story';
+import { variantOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const horizontalOptions = ['always', 'sm', 'md', 'lg', 'xl'];
 

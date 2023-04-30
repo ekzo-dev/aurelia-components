@@ -7,4 +7,4 @@ export default {
   component: TinymceEditor,
 } as Meta;
 
-export { Default } from '../../../../.storybook/default-story';
+export { Default } from '../../../../.storybook/helpers';

@@ -1,6 +1,7 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsAlert } from '.';
-import { selectControl, variantOptions } from '../../story';
+import { variantOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Alert',

@@ -7,7 +7,8 @@ import { BsButton } from '../button';
 import { BsCollapse } from '../collapse';
 import { BsIcon } from '../../icon';
 
-import { selectControl, variantOptions } from '../../story';
+import { variantOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const expandOptions = <const>['sm', 'md', 'lg', 'xl', 'xxl'];
 

@@ -2,9 +2,7 @@ import { Meta, Story } from '@storybook/aurelia';
 import { BsNav, BsNavItem, BsNavLink } from '.';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
 import { BsButton } from '../button';
-
-import { selectControl } from '../../story';
-
+import { disableControl, selectControl } from '../../../../../.storybook/helpers';
 import './nav.scss';
 import '../dropdown/dropdown.scss';
 
@@ -100,8 +98,8 @@ const FlexStyles: Story = (args) => ({
   props: args,
 });
 FlexStyles.argTypes = {
-  fill: { table: { disable: true } },
-  type: { table: { disable: true } },
+  fill: disableControl,
+  type: disableControl,
 };
 
 export { Default, FlexStyles };

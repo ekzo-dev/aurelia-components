@@ -2,9 +2,9 @@ import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes, createComponent
 import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.';
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
-import { selectControl } from '../../story';
 
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const directionOptions = ['down', 'up', 'end', 'start'];
 const displayOptions = ['dynamic', 'static'];

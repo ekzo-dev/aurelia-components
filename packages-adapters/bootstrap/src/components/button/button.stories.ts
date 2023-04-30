@@ -1,6 +1,7 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsButton } from '.';
-import { selectControl, variantOptions, buttonSizesOptions, buttonTypesOptions } from '../../story';
+import { variantOptions, buttonSizesOptions, buttonTypesOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button',

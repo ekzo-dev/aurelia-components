@@ -2,9 +2,10 @@ import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsToast, BsToastContainer } from '.';
 import { BsButton } from '../button';
 import { BsCloseButton } from '../close-button';
-import { selectControl, variantOptions } from '../../story';
+import { variantOptions } from '../../story';
 
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Toast',

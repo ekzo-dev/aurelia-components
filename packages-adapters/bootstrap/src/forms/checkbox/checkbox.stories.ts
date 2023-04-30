@@ -1,7 +1,8 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsCheckbox } from '.';
+import { disableControl } from '../../../../../.storybook/helpers';
 
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Forms / Checkbox',
   component: BsCheckbox,
   parameters: {
@@ -12,7 +13,8 @@ export default {
   args: {
     label: 'Some label',
   },
-} as Meta;
+};
+export default meta;
 
 const Default: Story = (args) => ({
   props: args,
@@ -28,21 +30,21 @@ const InlinePosition: Story = (args) => ({
   props: args,
 });
 InlinePosition.argTypes = {
-  checked: { table: { disable: true } },
-  label: { table: { disable: true } },
-  name: { table: { disable: true } },
-  id: { table: { disable: true } },
-  title: { table: { disable: true } },
-  disabled: { table: { disable: true } },
-  required: { table: { disable: true } },
-  valid: { table: { disable: true } },
-  validFeedback: { table: { disable: true } },
-  invalidFeedback: { table: { disable: true } },
-  model: { table: { disable: true } },
-  value: { table: { disable: true } },
-  matcher: { table: { disable: true } },
-  switcher: { table: { disable: true } },
-  indeterminate: { table: { disable: true } },
+  checked: disableControl,
+  label: disableControl,
+  name: disableControl,
+  id: disableControl,
+  title: disableControl,
+  disabled: disableControl,
+  required: disableControl,
+  valid: disableControl,
+  validFeedback: disableControl,
+  invalidFeedback: disableControl,
+  model: disableControl,
+  value: disableControl,
+  matcher: disableControl,
+  switcher: disableControl,
+  indeterminate: disableControl,
 };
 InlinePosition.args = {
   inline: true,

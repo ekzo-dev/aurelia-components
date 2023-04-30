@@ -1,7 +1,8 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsModal } from '.';
 import { BsButton } from '../button';
-import { selectControl } from '../../story';
+
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const sizeOptions = ['sm', 'lg', 'xl'];
 const fullscreenOptions = ['always', 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];

@@ -3,7 +3,8 @@ import { BsCarousel } from './carousel';
 import { BsCarouselItem, BsCarouselCaption } from '.';
 
 import './carousel.stories.scss';
-import { selectControl } from '../../story';
+
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const directionOptions = ['left', 'right'];
 

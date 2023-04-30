@@ -1,11 +1,6 @@
 import { extractArgTypes, Meta, Story } from '@storybook/aurelia';
 import { BsSelectMultiple } from './select-multiple';
-
-const disable = {
-  table: {
-    disable: true,
-  },
-};
+import { selectControl, disableControl } from '../../../../.storybook/helpers';
 
 export default {
   title: 'BS Select Multiple / BS Select Multiple',
@@ -23,12 +18,9 @@ export default {
   argTypes: {
     bsSize: {
       ...extractArgTypes(BsSelectMultiple).bsSize,
-      options: ['', 'sm', 'lg'],
-      control: {
-        type: 'select',
-      },
+      ...selectControl(['', 'sm', 'lg']),
     },
-    multiple: disable,
+    multiple: disableControl,
   },
 } as Meta;
 

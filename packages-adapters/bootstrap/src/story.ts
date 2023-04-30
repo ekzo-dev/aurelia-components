@@ -9,10 +9,3 @@ export const buttonSizesOptions = <const>['sm', 'lg'];
 export const buttonTypesOptions = <const>['button', 'submit', 'reset'];
 
 export const inputSizeOptions = <const>['', 'sm', 'lg'];
-
-export const selectControl = (options, type = 'select') => ({
-  options: options,
-  control: {
-    type: type,
-  },
-});

@@ -1,6 +1,7 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsIcon } from '.';
 import { BsPagination } from '../components';
+import { disableControl } from '../../../../.storybook/helpers';
 
 const iconsList = [
   'alarm',
@@ -1400,7 +1401,7 @@ const iconsExample1: Story = (args): StoryFnAureliaReturnType => ({
   },
 });
 iconsExample1.argTypes = {
-  name: { table: { disable: true } },
+  name: disableControl,
 };
 
 const iconsListPart2 = iconsList.slice(Math.floor(iconsList.length / 2));
@@ -1417,6 +1418,6 @@ const iconsExample2: Story = (args): StoryFnAureliaReturnType => ({
   },
 });
 iconsExample2.argTypes = {
-  name: { table: { disable: true } },
+  name: disableControl,
 };
 export { Default, iconsExample1, iconsExample2 };

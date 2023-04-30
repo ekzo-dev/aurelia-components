@@ -1,6 +1,7 @@
 import { Meta, Story, extractArgTypes } from '@storybook/aurelia';
 import { BsSelect } from '.';
-import { inputSizeOptions, selectControl } from '../../story';
+import { inputSizeOptions } from '../../story';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 export default {
   title: 'Bootstrap / Forms / Select',

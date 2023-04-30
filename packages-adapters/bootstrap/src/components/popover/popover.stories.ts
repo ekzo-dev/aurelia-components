@@ -1,9 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
 import { BsPopover } from '.';
 import { BsButton } from '../button';
-import { selectControl } from '../../story';
 
 import './popover.stories.scss';
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const placementOptions = <const>['top', 'right', 'bottom', 'left'];
 

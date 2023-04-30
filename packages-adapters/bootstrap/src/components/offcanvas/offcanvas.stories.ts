@@ -3,7 +3,8 @@ import { BsOffcanvas } from './offcanvas';
 import { BsButton } from '../button';
 import { BsCloseButton } from '../close-button';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { selectControl } from '../../story';
+
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const reponsiveOptions = <const>['sm', 'md', 'lg', 'xl', 'xxl'];
 const placementOptions = <const>['start', 'end', 'top', 'bottom'];
