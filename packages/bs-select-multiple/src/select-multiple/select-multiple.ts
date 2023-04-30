@@ -10,29 +10,22 @@ const BS_SIZE_MULTIPLIER = {
 };
 
 /**
- * TODO: support required native attribute
+ * TODO: change required error message to the same as select[multiple] not filled
  */
 @customElement({
   name: 'bs-select-multiple',
   template,
   dependencies: [Iterable, BsCheckbox],
 })
-export class BsSelectMultiple extends BsSelect implements EventListenerObject, ICustomElementViewModel {
+export class BsSelectMultiple extends BsSelect implements ICustomElementViewModel {
   @bindable({ mode: BindingMode.twoWay })
   value!: any[];
 
   control!: HTMLFieldSetElement;
 
-  constructor(private element: HTMLElement) {
-    super();
-  }
-
-  created() {}
-
   attached() {
     this.setHeight(true);
     this.scrollToSelected();
-    this.setupValidation();
   }
 
   propertyChanged(name: keyof this) {
@@ -42,10 +35,6 @@ export class BsSelectMultiple extends BsSelect implements EventListenerObject, I
       case 'floatingLabel':
         setTimeout(() => this.setHeight());
     }
-  }
-
-  handleEvent(event: Event): void {
-    throw new Error('Method not implemented.');
   }
 
   private setHeight(init = false): void {
@@ -62,12 +51,10 @@ export class BsSelectMultiple extends BsSelect implements EventListenerObject, I
   }
 
   private scrollToSelected() {
-    const selected = this.element.querySelector<HTMLInputElement>('input:checked');
+    const selected = this.control.querySelector<HTMLInputElement>('input:checked');
     if (selected) {
       const { paddingTop } = getComputedStyle(this.control);
       this.control.scrollTo({ top: selected.parentElement.offsetTop - parseInt(paddingTop) });
     }
   }
-
-  private setupValidation() {}
 }
