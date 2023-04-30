@@ -30,6 +30,9 @@ export class BaseField implements ICustomElementViewModel {
   @bindable()
   invalidFeedback?: string;
 
+  @bindable()
+  form?: string;
+
   binding() {
     if (!this.id) {
       this.id = uniqueId();

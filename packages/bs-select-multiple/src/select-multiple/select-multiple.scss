@@ -7,17 +7,9 @@
 bs-select-multiple {
   display: block;
 
-  .form-control {
+  > .form-control {
     overflow: auto;
     position: relative;
-
-    &.disabled {
-      color: $input-disabled-color;
-      background-color: $input-disabled-bg;
-      border-color: $input-disabled-border-color;
-      // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
-      opacity: 1;
-    }
 
     .form-check:last-of-type {
       margin-bottom: 0;
@@ -44,12 +36,12 @@ bs-select-multiple {
       }
     }
 
-    .form-control {
+    > .form-control {
       min-height: add($form-floating-height, 0.5rem);
       padding-top: add($form-floating-input-padding-t, 0.5rem) !important;
       padding-bottom: $input-padding-y !important;
 
-      &.disabled + label {
+      &:disabled + label {
         background-color: $input-disabled-bg;
       }
     }

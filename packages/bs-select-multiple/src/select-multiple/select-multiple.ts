@@ -1,4 +1,4 @@
-import { customElement, bindable, BindingMode } from 'aurelia';
+import { customElement, bindable, BindingMode, ICustomElementViewModel } from 'aurelia';
 import { Iterable } from '@ekzo/toolkit';
 import { BsCheckbox, BsSelect } from '@ekzo/bootstrap';
 import template from './select-multiple.html';
@@ -17,19 +17,22 @@ const BS_SIZE_MULTIPLIER = {
   template,
   dependencies: [Iterable, BsCheckbox],
 })
-export class BsSelectMultiple extends BsSelect {
+export class BsSelectMultiple extends BsSelect implements EventListenerObject, ICustomElementViewModel {
   @bindable({ mode: BindingMode.twoWay })
   value!: any[];
 
-  control!: HTMLDivElement;
+  control!: HTMLFieldSetElement;
 
   constructor(private element: HTMLElement) {
     super();
   }
 
+  created() {}
+
   attached() {
     this.setHeight(true);
     this.scrollToSelected();
+    this.setupValidation();
   }
 
   propertyChanged(name: keyof this) {
@@ -39,6 +42,10 @@ export class BsSelectMultiple extends BsSelect {
       case 'floatingLabel':
         setTimeout(() => this.setHeight());
     }
+  }
+
+  handleEvent(event: Event): void {
+    throw new Error('Method not implemented.');
   }
 
   private setHeight(init = false): void {
@@ -61,4 +68,6 @@ export class BsSelectMultiple extends BsSelect {
       this.control.scrollTo({ top: selected.parentElement.offsetTop - parseInt(paddingTop) });
     }
   }
+
+  private setupValidation() {}
 }

@@ -10,6 +10,7 @@
     disabled.bind="disabled"
     title="${title}"
     size.bind="size"
+    form.bind="form & attr"
   >
     <au-slot>
       <template if.bind="isMapOrObj(options)">

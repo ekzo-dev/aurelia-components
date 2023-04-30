@@ -27,9 +27,7 @@ export default {
         type: 'select',
       },
     },
-    name: disable,
     multiple: disable,
-    required: disable,
   },
 } as Meta;
 

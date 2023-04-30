@@ -25,4 +25,7 @@ export class BsTextarea extends BaseField {
 
   @bindable()
   readonly maxlength?: number;
+
+  @bindable()
+  readonly minlength?: number;
 }
