@@ -24,7 +24,7 @@ export class BsSelectMultiple extends BsSelect implements ICustomElementViewMode
   control!: HTMLFieldSetElement;
 
   attached() {
-    this.setHeight(true);
+    this.setHeight();
     this.scrollToSelected();
   }
 
@@ -37,7 +37,7 @@ export class BsSelectMultiple extends BsSelect implements ICustomElementViewMode
     }
   }
 
-  private setHeight(init = false): void {
+  private setHeight(): void {
     const { style } = this.control;
 
     if (this.size > 0) {
