@@ -4,7 +4,7 @@ import { valueConverter } from 'aurelia';
 export class Iterable {
   toView(value: any) {
     if (value instanceof Object && value.constructor === Object) {
-      value = new Map(Object.entries(value));
+      value = Object.entries(value);
     }
     return value;
   }

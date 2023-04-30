@@ -1,6 +1,6 @@
 import { customElement, bindable, BindingMode, ICustomElementViewModel } from 'aurelia';
 import { Iterable } from '@ekzo/toolkit';
-import { BsCheckbox, BsSelect } from '@ekzo/bootstrap';
+import { BsSelect } from '@ekzo/bootstrap';
 import template from './select-multiple.html';
 import './select-multiple.scss';
 
@@ -12,7 +12,7 @@ const BS_SIZE_MULTIPLIER = {
 @customElement({
   name: 'bs-select-multiple',
   template,
-  dependencies: [Iterable, BsCheckbox],
+  dependencies: [Iterable],
 })
 export class BsSelectMultiple extends BsSelect implements ICustomElementViewModel {
   @bindable({ mode: BindingMode.twoWay })

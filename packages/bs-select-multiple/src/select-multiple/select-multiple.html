@@ -10,17 +10,12 @@
     id="${id}"
   >
     <select if.bind="required && !value?.length" multiple required></select>
-    <template if.bind="isMapOrObj(options)">
-      <bs-checkbox
-        repeat.for="[k, v] of options | iterable"
-        checked.bind="value || []"
-        model.bind="k"
-        label.bind="v"
-      ></bs-checkbox>
-    </template>
-    <template else>
-      <bs-checkbox repeat.for="v of options" checked.bind="value || []" model.bind="v[0]" label="${v[1]}"></bs-checkbox>
-    </template>
+    <au-slot>
+      <div class="form-check" repeat.for="[k, v] of options | iterable">
+        <input class="form-check-input" type="checkbox" checked.bind="value" model.bind="k" id="${id+$index}" />
+        <label class="form-check-label" for="${id+$index}">${v}</label>
+      </div>
+    </au-slot>
   </fieldset>
   <label for="${id}" if.bind="label && floatingLabel"><span>${label}</span></label>
   <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>

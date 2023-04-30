@@ -1,5 +1,5 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
-import { Iterable, coerceBoolean, coerceNumber, isMapOrObj } from '@ekzo/toolkit';
+import { Iterable, coerceBoolean, coerceNumber } from '@ekzo/toolkit';
 import { BaseField } from '../base-field';
 import { Sizes } from '../../interfaces';
 import template from './select.html';
@@ -28,6 +28,4 @@ export class BsSelect extends BaseField {
 
   @bindable()
   bsSize?: Sizes;
-
-  readonly isMapOrObj = isMapOrObj;
 }

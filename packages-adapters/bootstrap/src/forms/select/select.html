@@ -13,12 +13,7 @@
     form.bind="form & attr"
   >
     <au-slot>
-      <template if.bind="isMapOrObj(options)">
-        <option repeat.for="[k, v] of options | iterable" model.bind="k">${v}</option>
-      </template>
-      <template else>
-        <option repeat.for="v of options" model.bind="v[0]">${v[1]}</option>
-      </template>
+      <option repeat.for="[k, v] of options | iterable" model.bind="k">${v}</option>
     </au-slot>
   </select>
   <label for="${id}" if.bind="label && floatingLabel">${label}</label>
