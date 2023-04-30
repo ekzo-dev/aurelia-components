@@ -14,6 +14,15 @@ bs-select-multiple {
     .form-check:last-of-type {
       margin-bottom: 0;
     }
+
+    > select {
+      position: absolute;
+      height: 100%;
+      left: 0;
+      bottom: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   &.form-floating {

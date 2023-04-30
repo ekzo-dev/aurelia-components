@@ -9,9 +9,6 @@ const BS_SIZE_MULTIPLIER = {
   sm: 0.875,
 };
 
-/**
- * TODO: change required error message to the same as select[multiple] not filled
- */
 @customElement({
   name: 'bs-select-multiple',
   template,

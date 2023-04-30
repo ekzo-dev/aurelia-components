@@ -9,23 +9,17 @@
     ref="control"
     id="${id}"
   >
+    <select if.bind="required && !value?.length" multiple required></select>
     <template if.bind="isMapOrObj(options)">
       <bs-checkbox
         repeat.for="[k, v] of options | iterable"
         checked.bind="value || []"
         model.bind="k"
         label.bind="v"
-        required.bind="required && $index === 0 && !value?.length"
       ></bs-checkbox>
     </template>
     <template else>
-      <bs-checkbox
-        repeat.for="v of options"
-        checked.bind="value || []"
-        model.bind="v[0]"
-        label="${v[1]}"
-        required.bind="required && $index === 0 && !value?.length"
-      ></bs-checkbox>
+      <bs-checkbox repeat.for="v of options" checked.bind="value || []" model.bind="v[0]" label="${v[1]}"></bs-checkbox>
     </template>
   </fieldset>
   <label for="${id}" if.bind="label && floatingLabel"><span>${label}</span></label>
