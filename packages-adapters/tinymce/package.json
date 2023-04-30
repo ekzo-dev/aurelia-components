@@ -1,73 +1,74 @@
 {
-    "name": "@ekzo/tinymce",
-    "description": "An Aurelia plugin project.",
-    "version": "0.1.0",
-    "repository": {
-        "type": "???",
-        "url": "???"
+  "name": "@ekzo-dev/tinymce",
+  "description": "An Aurelia plugin project.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "???",
+    "url": "???"
+  },
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "tinymce": "^5.10.3"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "build": "au build-plugin",
+    "start": "au run",
+    "watch": "au build-plugin --watch",
+    "prepare": "npm run build",
+    "pretest": "au lint",
+    "preversion": "au test",
+    "test": "au test"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "jest": {
+    "moduleNameMapper": {
+      "^aurelia-binding$": "<rootDir>/../../node_modules/aurelia-binding",
+      "^.+\\.css$": "<rootDir>/test/mock-css"
     },
-    "license": "UNLICENSED",
-    "dependencies": {
-        "tinymce": "^5.10.3"
-    },
-    "browserslist": [
-        "defaults"
+    "modulePaths": [
+      "<rootDir>/src",
+      "<rootDir>/node_modules"
     ],
-    "scripts": {
-        "build": "au build-plugin",
-        "start": "au run",
-        "watch": "au build-plugin --watch",
-        "prepare": "npm run build",
-        "pretest": "au lint",
-        "preversion": "au test",
-        "test": "au test"
-    },
-    "engines": {
-        "node": ">=8.9.0"
-    },
-    "main": "src/index.ts",
-    "module": "src/index.ts",
-    "files": [
-        "dist",
-      "src"
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
     ],
-    "jest": {
-        "moduleNameMapper": {
-            "^aurelia-binding$": "<rootDir>/../../node_modules/aurelia-binding",
-            "^.+\\.css$": "<rootDir>/test/mock-css"
-        },
-        "modulePaths": [
-            "<rootDir>/src",
-            "<rootDir>/node_modules"
-        ],
-        "moduleFileExtensions": [
-            "ts",
-            "js",
-            "json"
-        ],
-        "transform": {
-            "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
-            "^.+\\.ts$": "ts-jest"
-        },
-        "testRegex": "\\.spec\\.(ts|js)$",
-        "setupFiles": [
-            "<rootDir>/test/jest-pretest.ts"
-        ],
-        "testEnvironment": "node",
-        "collectCoverage": true,
-        "collectCoverageFrom": [
-            "src/**/*.{js,ts}",
-            "!**/*.spec.{js,ts}",
-            "!**/node_modules/**",
-            "!**/test/**"
-        ],
-        "coverageDirectory": "<rootDir>/test/coverage-jest",
-        "coverageReporters": [
-            "json",
-            "lcov",
-            "text",
-            "html"
-        ]
+    "transform": {
+      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "^.+\\.ts$": "ts-jest"
     },
-    "gitHead": "b103d307166215c6c4ce2a0f35e0ab427e45089c"
+    "testRegex": "\\.spec\\.(ts|js)$",
+    "setupFiles": [
+      "<rootDir>/test/jest-pretest.ts"
+    ],
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,ts}",
+      "!**/*.spec.{js,ts}",
+      "!**/node_modules/**",
+      "!**/test/**"
+    ],
+    "coverageDirectory": "<rootDir>/test/coverage-jest",
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
+  "gitHead": "b103d307166215c6c4ce2a0f35e0ab427e45089c"
 }

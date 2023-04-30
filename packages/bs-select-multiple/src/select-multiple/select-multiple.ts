@@ -1,6 +1,6 @@
 import { customElement, bindable, BindingMode, ICustomElementViewModel } from 'aurelia';
-import { Iterable } from '@ekzo/toolkit';
-import { BsSelect } from '@ekzo/bootstrap';
+import { Iterable } from '@ekzo-dev/toolkit';
+import { BsSelect } from '@ekzo-dev/bootstrap';
 import template from './select-multiple.html';
 import './select-multiple.scss';
 

@@ -1,7 +1,6 @@
 {
-  "name": "@ekzo/aurelia-components",
-  "version": "1.0.0-alpha.1",
-  "main": "apps/dev-app/index.js",
+  "name": "@ekzo-dev/aurelia-components",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "workspaces": [
@@ -20,12 +19,12 @@
     "deploy-storybook": "gh-pages -d storybook-static"
   },
   "dependencies": {
-    "aurelia": "2.0.0-beta.1",
+    "aurelia": "2.0.0-beta.5",
     "sass-loader": "^12.4.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@aurelia/webpack-loader": "2.0.0-beta.1",
+    "@aurelia/webpack-loader": "2.0.0-beta.5",
     "@babel/core": "^7.16.12",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",

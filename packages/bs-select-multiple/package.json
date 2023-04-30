@@ -1,73 +1,50 @@
 {
-  "name" : "@ekzo/bs-select-multiple",
-  "description" : "An Aurelia plugin project.",
-  "version" : "5.2.0-alpha.1",
-  "repository" : {
-    "type" : "???",
-    "url" : "???"
+  "name": "@ekzo-dev/bs-select-multiple",
+  "description": "Aurelia Bootstrap select multiple control",
+  "version": "5.2.0-beta.1",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/bs-select-multiple",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components.git"
   },
-  "license" : "MIT",
-  "browserslist" : [
-    "defaults"
-  ],
-  "dependencies" : {
-    "@ekzo/bootstrap" : "^5.2.0-alpha.1",
-    "@ekzo/toolkit": "^0.1.0"
+  "license": "MIT",
+  "dependencies": {
+    "@ekzo-dev/bootstrap": "^5.2.0-beta.1",
+    "@ekzo-dev/toolkit": "^1.0.0"
   },
-  "scripts" : {
-    "build-ts:ntv" : "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
-    "build-ts:es6" : "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
-    "build-ts:types" : "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
-    "build-assets:ntv" : "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.scss dist/native-modules",
-    "build-assets:es6" : "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.scss dist/es2015",
-    "build" : "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\""
-  },
-  "engines" : {
-    "node" : ">=8.9.0"
-  },
-  "main" : "src/index.ts",
-  "module" : "src/index.ts",
-  "files" : [
-    "dist",
+  "main": "src/index.ts",
+  "files": [
     "src"
   ],
-  "jest" : {
-    "moduleNameMapper" : {
-      "^aurelia-binding$" : "<rootDir>/../../node_modules/aurelia-binding",
-      "^.+\\.css$" : "<rootDir>/test/mock-css"
-    },
-    "modulePaths" : [
-      "<rootDir>/src",
-      "<rootDir>/node_modules"
-    ],
-    "moduleFileExtensions" : [
-      "ts",
-      "js",
-      "json"
-    ],
-    "transform" : {
-      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$" : "jest-transform-stub",
-      "^.+\\.ts$" : "ts-jest"
-    },
-    "testRegex" : "\\.spec\\.(ts|js)$",
-    "setupFiles" : [
-      "<rootDir>/test/jest-pretest.ts"
-    ],
-    "testEnvironment" : "node",
-    "collectCoverage" : true,
-    "collectCoverageFrom" : [
-      "src/**/*.{js,ts}",
-      "!**/*.spec.{js,ts}",
-      "!**/node_modules/**",
-      "!**/test/**"
-    ],
-    "coverageDirectory" : "<rootDir>/test/coverage-jest",
-    "coverageReporters" : [
-      "json",
-      "lcov",
-      "text",
-      "html"
-    ]
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
+    "pretest": "npm run lint",
+    "start": "webpack serve",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest"
   },
-  "gitHead" : "b103d307166215c6c4ce2a0f35e0ab427e45089c"
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(ts|html)$": "@aurelia/ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
+  }
 }

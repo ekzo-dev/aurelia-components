@@ -1,5 +1,5 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
-import { Iterable, coerceBoolean, coerceNumber } from '@ekzo/toolkit';
+import { Iterable, coerceBoolean, coerceNumber } from '@ekzo-dev/toolkit';
 import { BaseField } from '../base-field';
 import { Sizes } from '../../interfaces';
 import template from './select.html';

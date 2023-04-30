@@ -1,19 +1,20 @@
 {
-  "name": "@ekzo/bs-stepper",
+  "name": "@ekzo-dev/bs-stepper",
   "description": "Aurelia Bootstrap stepper adapter",
+  "version": "1.7.0-beta.1",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/bs-stepper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bs-stepper": "^1.7.0"
+  },
   "main": "src/index.ts",
   "files": [
     "src"
   ],
-  "version": "1.7.0-alpha.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ekzo-dev/aurelia-components"
-  },
-  "license": "UNLICENSED",
-  "dependencies": {
-    "bs-stepper": "^1.7.0"
-  },
   "scripts": {
     "lint:js": "eslint src test --ext .js,.ts",
     "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
@@ -23,8 +24,7 @@
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
-    "test": "jest",
-    "prepare": "npm run build"
+    "test": "jest"
   },
   "jest": {
     "testMatch": [

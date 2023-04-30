@@ -1,77 +1,53 @@
 {
-  "name" : "@ekzo/json-editor",
-  "description" : "An Aurelia plugin project.",
-  "version" : "0.1.0",
-  "repository" : {
-    "type" : "???",
-    "url" : "???"
+  "name": "@ekzo-dev/json-editor",
+  "description": "Aurelia JSON Editor adapter",
+  "version": "0.7.0-beta.1",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/json-editor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components.git"
   },
-  "license" : "UNLICENSED",
-  "dependencies" : {
-    "vanilla-jsoneditor" : "^0.7.11",
+  "license": "MIT",
+  "dependencies": {
+    "vanilla-jsoneditor": "^0.7.11",
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
     "immutable-json-patch": "^5.1.0",
-    "@types/json-schema" : "^7.0.9"
+    "@types/json-schema": "^7.0.9"
   },
-  "browserslist" : [
-    "defaults"
-  ],
-  "scripts" : {
-    "build" : "au build-plugin",
-    "start" : "au run",
-    "watch" : "au build-plugin --watch",
-    "prepare" : "npm run build",
-    "pretest" : "au lint",
-    "preversion" : "au test",
-    "test" : "au test"
-  },
-  "engines" : {
-    "node" : ">=8.9.0"
-  },
-  "main" : "src/index.ts",
-  "module" : "src/index.ts",
-  "files" : [
-    "dist",
+  "main": "src/index.ts",
+  "files": [
     "src"
   ],
-  "jest" : {
-    "moduleNameMapper" : {
-      "^aurelia-binding$" : "<rootDir>/../../node_modules/aurelia-binding",
-      "^.+\\.css$" : "<rootDir>/test/mock-css"
-    },
-    "modulePaths" : [
-      "<rootDir>/src",
-      "<rootDir>/node_modules"
-    ],
-    "moduleFileExtensions" : [
-      "ts",
-      "js",
-      "json"
-    ],
-    "transform" : {
-      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$" : "jest-transform-stub",
-      "^.+\\.ts$" : "ts-jest"
-    },
-    "testRegex" : "\\.spec\\.(ts|js)$",
-    "setupFiles" : [
-      "<rootDir>/test/jest-pretest.ts"
-    ],
-    "testEnvironment" : "node",
-    "collectCoverage" : true,
-    "collectCoverageFrom" : [
-      "src/**/*.{js,ts}",
-      "!**/*.spec.{js,ts}",
-      "!**/node_modules/**",
-      "!**/test/**"
-    ],
-    "coverageDirectory" : "<rootDir>/test/coverage-jest",
-    "coverageReporters" : [
-      "json",
-      "lcov",
-      "text",
-      "html"
-    ]
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
+    "pretest": "npm run lint",
+    "start": "webpack serve",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest"
   },
-  "gitHead" : "b103d307166215c6c4ce2a0f35e0ab427e45089c"
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(ts|html)$": "@aurelia/ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
+  }
 }

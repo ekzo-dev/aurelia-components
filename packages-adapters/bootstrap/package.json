@@ -1,25 +1,27 @@
 {
-  "name" : "@ekzo/bootstrap",
-  "description" : "Aurelia Bootstrap adapter",
+  "name": "@ekzo-dev/bootstrap",
+  "description": "Aurelia Bootstrap adapter",
+  "version": "5.2.0-beta.1",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/bootstrap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@ekzo-dev/toolkit": "^1.0.0",
+    "@types/bootstrap": "^5.2.1",
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.2.0",
+    "bootstrap-icons": "^1.9.1"
+  },
+  "peerDependencies": {
+    "@aurelia/dialog": "2.0.0-beta.5"
+  },
   "main": "src/index.ts",
   "files": [
     "src"
   ],
-  "version" : "5.2.0-alpha.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ekzo-dev/aurelia-components"
-  },
-  "license" : "UNLICENSED",
-  "dependencies" : {
-    "@types/bootstrap" : "^5.2.1",
-    "@popperjs/core" : "^2.11.5",
-    "bootstrap" : "^5.2.0",
-    "bootstrap-icons" : "^1.9.1"
-  },
-  "peerDependencies" : {
-    "@aurelia/dialog": "2.0.0-beta.1"
-  },
   "scripts": {
     "lint:js": "eslint src test --ext .js,.ts",
     "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
@@ -29,8 +31,7 @@
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
-    "test": "jest",
-    "prepare": "npm run build"
+    "test": "jest"
   },
   "jest": {
     "testMatch": [

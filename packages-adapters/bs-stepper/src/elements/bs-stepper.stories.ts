@@ -1,5 +1,5 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsButton, BsInput } from '@ekzo/bootstrap';
+import { BsButton, BsInput } from '@ekzo-dev/bootstrap';
 
 import { BsStepper } from './bs-stepper';
 import { BsStepperStep } from './bs-stepper-step';
