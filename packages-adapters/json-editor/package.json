@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "vanilla-jsoneditor": "^0.7.11",
+    "vanilla-jsoneditor": "~0.7.11",
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
     "immutable-json-patch": "^5.1.0",

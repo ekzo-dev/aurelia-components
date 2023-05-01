@@ -10,9 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "@ekzo-dev/toolkit": "^1.0.0",
-    "@types/bootstrap": "^5.2.1",
+    "@types/bootstrap": "~5.2.1",
     "@popperjs/core": "^2.11.5",
-    "bootstrap": "^5.2.0",
+    "bootstrap": "~5.2.0",
     "bootstrap-icons": "^1.9.1"
   },
   "peerDependencies": {

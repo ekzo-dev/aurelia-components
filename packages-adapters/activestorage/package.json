@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@rails/activestorage": "^6.1.7-3",
-    "@types/rails__activestorage": "^6.0.1"
+    "@rails/activestorage": "~6.1.7-3",
+    "@types/rails__activestorage": "~6.0.1"
   },
   "main": "src/index.ts",
   "files": [

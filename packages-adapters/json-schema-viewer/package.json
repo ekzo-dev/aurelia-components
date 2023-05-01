@@ -1,13 +1,14 @@
 {
+  "private": true,
   "name": "@ekzo-dev/json-schema-viewer",
   "description": "An Aurelia plugin project.",
   "version": "0.1.0",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/json-schema-viewer",
   "repository": {
-    "type": "???",
-    "url": "???"
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components.git"
   },
-  "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "d3": "^3.5.17",
     "jquery": "^3.6.3",
@@ -19,63 +20,39 @@
     "@types/d3": "^3.5.47",
     "@types/json-schema": "^7.0.9"
   },
-  "browserslist": [
-    "defaults"
-  ],
-  "scripts": {
-    "build": "au build-plugin",
-    "start": "au run",
-    "watch": "au build-plugin --watch",
-    "prepare": "npm run build",
-    "pretest": "au lint",
-    "preversion": "au test",
-    "test": "au test"
-  },
-  "engines": {
-    "node": ">=8.9.0"
-  },
   "main": "src/index.ts",
-  "module": "src/index.ts",
   "files": [
-    "dist",
     "src"
   ],
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
+    "pretest": "npm run lint",
+    "start": "webpack serve",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest"
+  },
   "jest": {
-    "moduleNameMapper": {
-      "^aurelia-binding$": "<rootDir>/../../node_modules/aurelia-binding",
-      "^.+\\.css$": "<rootDir>/test/mock-css"
-    },
-    "modulePaths": [
-      "<rootDir>/src",
-      "<rootDir>/node_modules"
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.ts"
     ],
-    "moduleFileExtensions": [
-      "ts",
-      "js",
-      "json"
-    ],
+    "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
-      "^.+\\.ts$": "ts-jest"
+      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(ts|html)$": "@aurelia/ts-jest"
     },
-    "testRegex": "\\.spec\\.(ts|js)$",
-    "setupFiles": [
-      "<rootDir>/test/jest-pretest.ts"
-    ],
-    "testEnvironment": "node",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.{js,ts}",
-      "!**/*.spec.{js,ts}",
-      "!**/node_modules/**",
-      "!**/test/**"
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
     ],
-    "coverageDirectory": "<rootDir>/test/coverage-jest",
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "html"
-    ]
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
   }
 }
