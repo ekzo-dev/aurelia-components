@@ -1,15 +1,14 @@
 {
-    "npmClient": "yarn",
-    "packages": [
-        "packages/*",
-        "packages-adapters/*"
-    ],
-    "version": "independent",
-    "useWorkspaces": true,
-    "command": {
-        "publish": {
-            "registry": "https://gitlab.netcitylife.ru/api/v4/projects/61/packages/npm/",
-            "conventionalCommits": true
-        }
+  "npmClient": "npm",
+  "packages": [
+    "packages/*",
+    "packages-adapters/*"
+  ],
+  "version": "independent",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "conventionalCommits": true
     }
+  }
 }
