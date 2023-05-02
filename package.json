@@ -13,7 +13,7 @@
     "lint:fix": "npm run eslint --fix ./packages/**/src/**/*.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "predeploy": "yarn run build-storybook",
+    "predeploy": "npm run build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "publish": "lerna publish from-package"
   },
