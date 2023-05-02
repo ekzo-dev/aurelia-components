@@ -1,8 +1,7 @@
 {
-  "private": true,
   "name": "@ekzo-dev/json-schema-viewer",
-  "description": "An Aurelia plugin project.",
-  "version": "0.1.0",
+  "description": "Aurelia JSON Schema viewer",
+  "version": "1.0.0-beta.1",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/json-schema-viewer",
   "repository": {
     "type": "git",
