@@ -17,7 +17,7 @@ import type {
   JSONPatchDocument,
   TransformModalOptions,
 } from 'vanilla-jsoneditor';
-import { JSONSchema7 } from 'json-schema';
+import type { JSONSchema7 } from 'json-schema';
 
 import { coerceBoolean } from '../utils';
 import { createAjvValidator } from './createAvjValidator';

@@ -1,5 +1,5 @@
 import { valueConverter } from 'aurelia';
-import { JSONSchema7 } from 'json-schema';
+import type { JSONSchema7 } from 'json-schema';
 import { FormatBoolean } from './boolean';
 import { FormatDatetime } from './datetime';
 import { FormatPhone } from './phone';

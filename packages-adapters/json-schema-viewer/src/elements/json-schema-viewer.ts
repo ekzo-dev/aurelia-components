@@ -1,5 +1,5 @@
 import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
-import { JSONSchema7 } from 'json-schema';
+import type { JSONSchema7 } from 'json-schema';
 import template from './json-schema-viewer.html';
 import { JSV } from '../viewer';
 import './json-schema-viewer.scss';
