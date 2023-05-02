@@ -1,6 +1,6 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsAlert } from '.';
-import { variantOptions } from '../../story';
+import { VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
@@ -12,7 +12,7 @@ const meta: Meta = {
     },
   },
   argTypes: {
-    variant: selectControl(variantOptions),
+    variant: selectControl(VARIANTS),
   },
 };
 export default meta;

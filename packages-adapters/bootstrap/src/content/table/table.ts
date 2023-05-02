@@ -1,9 +1,8 @@
 import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import { ICustomElementController } from '@aurelia/runtime-html';
-
-import { coerceBoolean } from '../../utils';
-import { Size, Variant } from '../../types';
-
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { Variant, Breakpoint } from '../../types';
+import { VARIANTS } from '../../constants';
 import template from './table.html';
 import './table.scss';
 
@@ -13,83 +12,62 @@ import './table.scss';
 })
 export class BsTable implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  readonly bordered: boolean = false;
+  bordered: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly striped: boolean = false;
+  striped: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly stripedColumns: boolean = false;
+  stripedColumns: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly hover: boolean = false;
+  hover: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly borderless: boolean = false;
-
-  @bindable(coerceBoolean)
-  readonly dark: boolean = false;
+  borderless: boolean = false;
 
   @bindable()
-  readonly size?: Size;
+  size?: 'sm';
 
   @bindable()
-  readonly variant?: Variant;
+  variant?: Variant;
+
+  @bindable()
+  responsive?: Breakpoint;
 
   table!: HTMLTableElement;
 
   readonly $controller: ICustomElementController<this>;
 
-  constructor(private element: Element) {}
-
-  // binding() {
-  //   // заглушка, чтобы при первом присвоении значений propertyChanged хуки не срабатывали
-  // }
+  constructor(private element: HTMLElement) {}
 
   attached() {
-    this.table = this.element.querySelector('table')!;
+    this.table = this.element.querySelector(':scope > table')!;
 
-    this.toggleClass('table', true);
-    Object.values(this.$controller.definition.bindables).forEach(({ property, attribute }) => {
-      if (property === 'size') {
-        this.sizeChanged(this.size);
-      } else {
-        // @ts-ignore
-        this.toggleClass(`table-${attribute}`, this[property]);
-      }
+    this.table.classList.add('table');
+    Object.values(this.$controller.definition.bindables).forEach(({ property }) => {
+      this.propertyChanged(property as keyof this, this[property]);
     });
   }
 
-  borderedChanged(value: boolean) {
-    this.toggleClass('table-bordered', value);
+  propertyChanged(name: keyof this, value: any): void {
+    switch (name) {
+      case 'size':
+        this.toggleClass('sm', value === 'sm');
+        break;
+      case 'variant':
+        VARIANTS.forEach((variant) => {
+          this.toggleClass(variant, value === variant);
+        });
+        break;
+      case 'responsive':
+        break;
+      default:
+        this.toggleClass(name === 'stripedColumns' ? 'striped-columns' : name.toString(), value);
+    }
   }
 
-  stripedChanged(value: boolean) {
-    this.toggleClass('table-striped', value);
-  }
-
-  stripedColumnsChanged(value: boolean) {
-    this.toggleClass('table-striped-columns', value);
-  }
-
-  hoverChanged(value: boolean) {
-    this.toggleClass('table-hover', value);
-  }
-
-  borderlessChanged(value: boolean) {
-    this.toggleClass('table-borderless', value);
-  }
-
-  darkChanged(value: boolean) {
-    this.toggleClass('table-dark', value);
-  }
-
-  sizeChanged(value?: string) {
-    this.toggleClass('table-sm', value === 'sm');
-    this.toggleClass('table-lg', value === 'lg');
-  }
-
-  private toggleClass(className: string, force?: boolean): void {
-    this.table.classList.toggle(className, force);
+  private toggleClass(name: string, force?: boolean): void {
+    this.table.classList.toggle(`table-${name}`, force);
   }
 }

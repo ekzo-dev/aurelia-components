@@ -1,13 +1,13 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsButton } from '.';
-import { variantOptions, buttonSizesOptions, buttonTypesOptions } from '../../story';
+import { VARIANTS, buttonSizesOptions, buttonTypesOptions } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button',
   component: BsButton,
   argTypes: {
-    variant: selectControl(variantOptions),
+    variant: selectControl(VARIANTS),
     size: selectControl(buttonSizesOptions, 'inline-radio'),
     type: selectControl(buttonTypesOptions, 'inline-radio'),
   },

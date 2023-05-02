@@ -2,7 +2,7 @@ import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsCard, BsCardHeader, BsCardBody, BsCardFooter, BsCardOverlay } from '.';
 import { BsListGroup, BsListGroupItem } from '../list-group';
 import { BsButton } from '../button';
-import { variantOptions } from '../../story';
+import { VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
@@ -12,7 +12,7 @@ const meta: Meta = {
   title: 'Bootstrap / Components / Card',
   component: BsCard,
   argTypes: {
-    variant: selectControl(variantOptions),
+    variant: selectControl(VARIANTS),
   },
 };
 export default meta;

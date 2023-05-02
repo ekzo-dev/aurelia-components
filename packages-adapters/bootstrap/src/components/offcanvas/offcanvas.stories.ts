@@ -3,11 +3,8 @@ import { BsOffcanvas } from './offcanvas';
 import { BsButton } from '../button';
 import { BsCloseButton } from '../close-button';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-
 import { selectControl } from '../../../../../.storybook/helpers';
-
-const reponsiveOptions = <const>['sm', 'md', 'lg', 'xl', 'xxl'];
-const placementOptions = <const>['start', 'end', 'top', 'bottom'];
+import { BREAKPOINTS, PLACEMENTS } from '../../constants';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Offcanvas',
@@ -21,13 +18,13 @@ const meta: Meta = {
     title: 'Offcanvas title',
   },
   argTypes: {
-    responsive: selectControl(reponsiveOptions),
-    placement: selectControl(placementOptions),
+    responsive: selectControl(['', ...BREAKPOINTS]),
+    placement: selectControl(PLACEMENTS),
   },
 };
 export default meta;
 
-export const Default: Story = (args): StoryFnAureliaReturnType => ({
+export const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton, BsCloseButton, BsDropdown, BsDropdownToggle, BsDropdownMenu, BsDropdownItem],
   template: `
     <bs-button click.trigger="offcanvas.toggle()">Open offcanvas</bs-button>

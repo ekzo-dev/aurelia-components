@@ -2,7 +2,7 @@ import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
 import { BsInputGroup, BsInputGroupText } from '.';
 import { BsInput } from '../input';
 import { BsButton } from '../../components/button';
-import { inputSizeOptions } from '../../story';
+import { inputSizeOptions } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 export default {

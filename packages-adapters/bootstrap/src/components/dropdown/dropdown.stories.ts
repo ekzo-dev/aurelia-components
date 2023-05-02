@@ -2,9 +2,8 @@ import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes, createComponent
 import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.';
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
-
-import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import { selectControl } from '../../../../../.storybook/helpers';
+import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 
 const directionOptions = ['down', 'up', 'end', 'start'];
 const displayOptions = ['dynamic', 'static'];
@@ -26,7 +25,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdown, BsDropdownItem, BsButton, BsDropdownToggle],
   template: `
 <div ${createComponentTemplate(BsDropdown)}>
@@ -43,7 +42,7 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
-Default.argTypes = {
+Overview.argTypes = {
   ...dropdownArgTypes,
   direction: {
     ...dropdownArgTypes.direction,
@@ -74,4 +73,4 @@ const withSplitButton: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-export { Default, withSplitButton };
+export { Overview, withSplitButton };

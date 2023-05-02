@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsInput } from '.';
-import { inputSizeOptions } from '../../story';
+import { inputSizeOptions } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 export default {

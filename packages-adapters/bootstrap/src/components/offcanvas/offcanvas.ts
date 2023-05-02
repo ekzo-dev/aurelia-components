@@ -1,11 +1,11 @@
 import { customElement, bindable, ICustomElementViewModel, observable } from 'aurelia';
 import { Offcanvas } from 'bootstrap';
-import { coerceBoolean } from '../../utils';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BsCloseButton } from '../close-button';
+import { Breakpoint } from '../../types';
 import template from './offcanvas.html';
 import './offcanvas.scss';
 
-export type OffcanvasReponsive = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
 const SHOW_EVENT = 'show.bs.offcanvas';
@@ -33,7 +33,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   keyboard: boolean = true;
 
   @bindable()
-  responsive?: OffcanvasReponsive;
+  responsive?: Breakpoint;
 
   @bindable()
   placement?: OffcanvasPlacement = 'start';
@@ -43,7 +43,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
 
   private offcanvas?: Offcanvas;
 
-  constructor(private element: Element) {}
+  constructor(private element: HTMLElement) {}
 
   attaching() {
     this.createOffcanvas();

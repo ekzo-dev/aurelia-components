@@ -1,6 +1,6 @@
 import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
 import { BsListGroup, BsListGroupItem } from '.';
-import { variantOptions } from '../../story';
+import { VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const horizontalOptions = ['always', 'sm', 'md', 'lg', 'xl'];
@@ -9,7 +9,7 @@ const meta: Meta = {
   title: 'Bootstrap / Components / List group',
   component: BsListGroup,
   argTypes: {
-    variant: selectControl(variantOptions),
+    variant: selectControl(VARIANTS),
     horizontal: selectControl(horizontalOptions),
   },
   args: {

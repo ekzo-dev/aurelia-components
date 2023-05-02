@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsProgress } from '.';
-import { variantOptions } from '../../story';
+import { VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 export default {
@@ -11,7 +11,7 @@ export default {
     value: 30,
   },
   argTypes: {
-    background: selectControl(variantOptions),
+    background: selectControl(VARIANTS),
   },
 } as Meta;
 

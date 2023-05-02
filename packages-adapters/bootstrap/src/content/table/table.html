@@ -1,3 +1,5 @@
-<template class="table-responsive">
+<template
+  class="${responsive ? 'table-responsive-' + responsive : 'table-responsive'} ${variant ? 'table-' + variant : ''}"
+>
   <au-slot></au-slot>
 </template>

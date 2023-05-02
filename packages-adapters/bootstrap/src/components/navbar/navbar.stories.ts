@@ -7,7 +7,7 @@ import { BsButton } from '../button';
 import { BsCollapse } from '../collapse';
 import { BsIcon } from '../../icon';
 
-import { variantOptions } from '../../story';
+import { VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const expandOptions = <const>['sm', 'md', 'lg', 'xl', 'xxl'];
@@ -17,7 +17,7 @@ const meta: Meta = {
   component: BsNavbar,
   argTypes: {
     expand: selectControl(expandOptions),
-    variant: selectControl(variantOptions),
+    variant: selectControl(VARIANTS),
   },
   args: {
     variant: 'light',
