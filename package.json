@@ -15,7 +15,7 @@
     "build-storybook": "build-storybook",
     "predeploy": "yarn run build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "publish": "npm publish --access public --workspaces"
+    "publish": "lerna publish from-package --no-private"
   },
   "dependencies": {
     "aurelia": "2.0.0-beta.5",

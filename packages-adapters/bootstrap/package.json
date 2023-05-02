@@ -52,5 +52,8 @@
         "isolatedModules": true
       }
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
