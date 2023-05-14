@@ -16,16 +16,9 @@ export class BsNav implements ICustomElementViewModel {
   @bindable()
   fill?: NavFill;
 
-  get classes() {
-    return Object.entries({
-      nav: true,
-      'nav-pills': this.type === 'pills',
-      'nav-tabs': this.type === 'tabs',
-      'nav-justified': this.fill === 'justified',
-      'nav-fill': this.fill === 'fill',
-    })
-      .filter((k) => k[1])
-      .map((k) => k[0])
+  get classes(): string {
+    return ['nav', this.type ? `nav-${this.type}` : false, this.fill ? `nav-${this.fill}` : false]
+      .filter(Boolean)
       .join(' ');
   }
 }

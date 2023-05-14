@@ -1,105 +1,64 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsNav, BsNavItem, BsNavLink } from '.';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { BsButton } from '../button';
-import { disableControl, selectControl } from '../../../../../.storybook/helpers';
-import './nav.scss';
-import '../dropdown/dropdown.scss';
-
-const navTypeOptions = <const>['tabs', 'pills'];
-const navFillOptions = <const>['fill', 'justified'];
+import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Nav',
   component: BsNav,
   argTypes: {
-    type: selectControl(navTypeOptions, 'inline-radio'),
-    fill: selectControl(navFillOptions, 'inline-radio'),
+    type: selectControl(['', 'tabs', 'pills']),
+    fill: selectControl(['', 'fill', 'justified']),
   },
-} as Meta;
+};
 export default meta;
 
-//todo dropdown-menu => move down (offset)
-const Default: Story = (args) => ({
-  components: [BsNavItem, BsNavLink, BsButton, BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
+const BaseNav: Story = (args) => ({
+  components: [BsNavItem, BsNavLink],
   innerHtml: `
-<bs-nav-item>
-    <bs-nav-link active><a href="#" target="_self">Active</a></bs-nav-link>
-</bs-nav-item>
-<bs-nav-item><bs-nav-link>
-      <div bs-dropdown="center: false;">
-        <bs-button bs-dropdown-toggle variant="">Dropdown</bs-button>
-         <bs-dropdown-menu auto-close align="start">
-          <bs-dropdown-item>Action</bs-dropdown-item>
-          <bs-dropdown-item>Another action</bs-dropdown-item>
-          <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
-        </bs-dropdown-menu>
-      </div></bs-nav-link>
-</bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Much longer nav link</a></bs-nav-link>
-        </bs-nav-item>
-<bs-nav-item>
-    <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-</bs-nav-item>
-<bs-nav-item>
-    <bs-nav-link disabled><a href="#" target="_self">Link</a></bs-nav-link>
-</bs-nav-item>
+  <bs-nav-item>
+    <a href="#" bs-nav-link="active.bind: true">Active</a>
+  </bs-nav-item>
+  <bs-nav-item>
+    <a href="#" bs-nav-link>Link</a>
+  </bs-nav-item>
+  <bs-nav-item>
+    <a href="#" bs-nav-link>Link</a>
+  </bs-nav-item>
+  <bs-nav-item>
+    <a href="#" bs-nav-link="disabled.bind: true">Disabled</a>
+  </bs-nav-item>
 `,
   props: args,
 });
 
-const FlexStyles: Story = (args) => ({
-  components: [BsNav, BsNavItem, BsNavLink],
-  template: `
-<bs-nav type="pills"  class="mb-3">
-    <bs-nav-item>
-            <bs-nav-link active><a href="#" target="_self">Active</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Much longer nav link</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link disabled><a href="#" target="_self">Link</a></bs-nav-link>
-        </bs-nav-item>
-</bs-nav>
-<bs-nav type="pills"  class="justify-content-end mb-3">
-    <bs-nav-item>
-            <bs-nav-link active><a href="#" target="_self">Active</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Much longer nav link</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link disabled><a href="#" target="_self">Link</a></bs-nav-link>
-        </bs-nav-item>
-</bs-nav>
-<bs-nav type="pills" class="flex-column" style="width: 8em;">
-    <bs-nav-item>
-            <bs-nav-link active><a href="#" target="_self">Active</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Much longer nav link</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-            <bs-nav-link disabled><a href="#" target="_self">Link</a></bs-nav-link>
-        </bs-nav-item>
-</bs-nav>`,
-
+const UsingDropdowns: Story = (args) => ({
+  components: [BsNavItem, BsNavLink, BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
+  innerHtml: `
+  <bs-nav-item>
+    <a href="#" bs-nav-link="active.bind: true">Active</a>
+  </bs-nav-item>
+  <bs-nav-item bs-dropdown>
+    <a href="#" bs-nav-link bs-dropdown-toggle>Dropdown</a>
+    <bs-dropdown-menu>
+      <bs-dropdown-item>Action</bs-dropdown-item>
+      <bs-dropdown-item>Another action</bs-dropdown-item>
+      <bs-dropdown-item>Something else here</bs-dropdown-item>
+      <bs-dropdown-item type="divider"></bs-dropdown-item>
+      <bs-dropdown-item>Separated link</bs-dropdown-item>
+    </bs-dropdown-menu>
+  </bs-nav-item>
+  <bs-nav-item>
+    <a href="#" bs-nav-link>Link</a>
+  </bs-nav-item>
+  <bs-nav-item>
+    <a href="#" bs-nav-link="disabled.bind: true">Disabled</a>
+  </bs-nav-item>
+`,
   props: args,
 });
-FlexStyles.argTypes = {
-  fill: disableControl,
-  type: disableControl,
+UsingDropdowns.args = {
+  type: 'tabs',
 };
 
-export { Default, FlexStyles };
+export { BaseNav, UsingDropdowns };
