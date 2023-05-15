@@ -1,5 +1,5 @@
-<template
-  class="navbar ${darkBackground ? 'navbar-dark' : ''} ${expand ? 'navbar-expand-' + expand : ''} ${variant ? 'bg-' + variant : ''}"
->
-  <au-slot></au-slot>
+<template class.bind="classes">
+  <div class="container-fluid">
+    <au-slot></au-slot>
+  </div>
 </template>

@@ -1,4 +1,5 @@
 import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { Tab } from 'bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './nav.scss';
 
@@ -10,63 +11,57 @@ export class BsTabPane implements ICustomAttributeViewModel {
   @bindable()
   for!: string;
 
-  classList!: DOMTokenList;
+  private tab?: HTMLElement;
 
-  tab?: HTMLElement;
-
-  constructor(private element: HTMLElement) {
-    this.classList = element.classList;
-  }
+  constructor(private element: HTMLElement) {}
 
   attaching() {
-    this.classList.add(...['tab-pane', this.fade ? 'fade' : ''].filter(Boolean));
-    this.attributes({ id: `${this.for}-pane` });
+    this.setClass(['tab-pane', this.fade ? 'fade' : ''].filter(Boolean));
+    if (!this.element.id) {
+      this.element.setAttribute('id', `${this.for}-pane`);
+    }
   }
 
   attached() {
-    this.tab = document.getElementById(this.for);
-    this.tabAttributes(true);
+    this.createTab();
   }
 
   detaching() {
-    this.classList.remove('tab-pane', 'fade');
-    this.attributes({ id: null });
-    this.tabAttributes(false);
+    this.setClass(['tab-pane', 'fade'], false);
+    this.destroyTab();
   }
 
   fadeChanged(value: boolean) {
-    this.classList.toggle('fade', value);
+    this.setClass(['fade'], value);
   }
 
-  private attributes(attributes: Record<string, string | null>, element?: HTMLElement) {
-    const elem = element || this.element;
-
-    Object.entries(attributes).forEach(([name, value]) => {
-      if (value != null) {
-        elem.setAttribute(name, value);
-      } else {
-        elem.removeAttribute(name);
-      }
-    });
+  show() {
+    Tab.getInstance(this.tab)?.show();
   }
 
-  private tabAttributes(set: boolean) {
-    const { tab } = this;
+  private setClass(list: string[], add: boolean = true) {
+    this.element.classList[add ? 'add' : 'remove'](...list);
+  }
+
+  private createTab() {
+    const tab = document.getElementById(this.for);
 
     if (tab) {
-      this.attributes(
-        {
-          'data-bs-toggle': set ? 'tab' : null,
-          'data-bs-target': set ? `#${this.for}-pane` : null,
-        },
-        tab
-      );
+      tab.setAttribute('data-bs-toggle', 'tab');
+      tab.setAttribute('data-bs-target', `#${this.element.id}`);
 
       if (tab.classList.contains('active')) {
-        this.classList.add('show', 'active');
+        this.setClass(['show', 'active']);
       }
-    } else if (set) {
+      this.tab = tab;
+    } else {
       console.error(`Tab nav-link #${this.for} not found for tab-pane`);
     }
+  }
+
+  private destroyTab() {
+    this.tab?.removeAttribute('data-bs-toggle');
+    Tab.getInstance(this.tab)?.dispose();
+    this.tab = undefined;
   }
 }

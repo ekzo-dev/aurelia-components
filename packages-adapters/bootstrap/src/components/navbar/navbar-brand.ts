@@ -1,9 +1,15 @@
-import { customElement, ICustomElementViewModel } from 'aurelia';
-import template from './navbar-brand.html';
+import { customAttribute, ICustomAttributeViewModel } from 'aurelia';
 import './navbar.scss';
 
-@customElement({
-  name: 'bs-navbar-brand',
-  template,
-})
-export class BsNavbarBrand implements ICustomElementViewModel {}
+@customAttribute('bs-navbar-brand')
+export class BsNavbarBrand implements ICustomAttributeViewModel {
+  constructor(private element: HTMLElement) {}
+
+  attaching() {
+    this.element.classList.add('navbar-brand');
+  }
+
+  detaching() {
+    this.element.classList.remove('navbar-brand');
+  }
+}

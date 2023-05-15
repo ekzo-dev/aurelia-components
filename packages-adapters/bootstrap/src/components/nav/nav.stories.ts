@@ -6,6 +6,11 @@ import { selectControl } from '../../../../../.storybook/helpers';
 const meta: Meta = {
   title: 'Bootstrap / Components / Nav',
   component: BsNav,
+  parameters: {
+    actions: {
+      handles: ['hide.bs.tab', 'hidden.bs.tab', 'show.bs.tab', 'shown.bs.tab'],
+    },
+  },
   argTypes: {
     type: selectControl(['', 'tabs', 'pills']),
     fill: selectControl(['', 'fill', 'justified']),

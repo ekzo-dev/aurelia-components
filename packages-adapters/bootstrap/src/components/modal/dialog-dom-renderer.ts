@@ -1,4 +1,4 @@
-import { IPlatform, Controller, ICustomElementController, LifecycleFlags } from '@aurelia/runtime-html';
+import { IPlatform, Controller, ICustomElementController } from '@aurelia/runtime-html';
 import { IDialogDomRenderer, IDialogGlobalSettings, IDialogController } from '@aurelia/dialog';
 import { IContainer } from '@aurelia/kernel';
 import { INode, InstanceProvider, Registration } from 'aurelia';
@@ -55,7 +55,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
     this.modal = modal;
     this.controller = controller;
 
-    return controller.activate(controller, null, LifecycleFlags.fromBind, componentController.scope);
+    return controller.activate(controller, null, componentController.scope);
   }
 
   async dispose(): Promise<void> {
@@ -64,7 +64,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
     modal.removeEventListener('hide.bs.modal', this);
 
     await controller.viewModel.hide();
-    await controller.deactivate(controller, null, LifecycleFlags.fromBind);
+    await controller.deactivate(controller, null);
 
     modal.remove();
   }

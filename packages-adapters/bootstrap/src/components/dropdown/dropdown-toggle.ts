@@ -19,19 +19,19 @@ export class BsDropdownToggle implements ICustomAttributeViewModel {
 
   attaching() {
     this.element.setAttribute(TOGGLE_ATTRIBUTE, 'dropdown');
-    this.setClasses();
+    this.setClass();
   }
 
   detaching() {
     this.element.removeAttribute(TOGGLE_ATTRIBUTE);
-    this.setClasses(false);
+    this.setClass(false);
   }
 
   propertyChanged(): void {
-    this.setClasses();
+    this.setClass();
   }
 
-  private setClasses(add: boolean = true): void {
+  private setClass(add: boolean = true): void {
     const { element } = this;
     const { classList } = element.tagName === 'BS-BUTTON' ? element.querySelector('button') : element;
 

@@ -1,9 +1,15 @@
-import { customElement, ICustomElementViewModel } from 'aurelia';
-import template from './navbar-text.html';
+import { customAttribute, ICustomAttributeViewModel } from 'aurelia';
 import './navbar.scss';
 
-@customElement({
-  name: 'bs-navbar-text',
-  template,
-})
-export class BsNavbarText implements ICustomElementViewModel {}
+@customAttribute('bs-navbar-text')
+export class BsNavbarText implements ICustomAttributeViewModel {
+  constructor(private element: HTMLElement) {}
+
+  attaching() {
+    this.element.classList.add('navbar-text');
+  }
+
+  detaching() {
+    this.element.classList.remove('navbar-text');
+  }
+}

@@ -1,115 +1,68 @@
-import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
-import { BsNavbar, BsNavbarNav, BsNavbarBrand, BsNavbarText } from '.';
+import { Meta, Story, createComponentTemplate, StoryFnAureliaReturnType } from '@storybook/aurelia';
+import { BsNavbar, BsNavbarNav, BsNavbarBrand, BsNavbarText, BsNavbarToggler } from '.';
 import { BsNavItem, BsNavLink } from '../nav';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
 import { BsInput } from '../../forms';
 import { BsButton } from '../button';
 import { BsCollapse } from '../collapse';
-import { BsIcon } from '../../icon';
-
-import { VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
-
-const expandOptions = <const>['sm', 'md', 'lg', 'xl', 'xxl'];
+import { BREAKPOINTS } from '../../constants';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Navbar',
   component: BsNavbar,
   argTypes: {
-    expand: selectControl(expandOptions),
-    variant: selectControl(VARIANTS),
+    expand: selectControl(BREAKPOINTS),
   },
-  args: {
-    variant: 'light',
-  },
-} as Meta;
+};
 export default meta;
 
-const Default: Story = (args) => ({
-  components: [BsNavbarBrand, BsNavbarNav, BsNavbarText, BsNavItem, BsNavLink],
-  template: createComponentTemplate(
-    BsNavbar,
-    `
-    <div class="container-fluid">
-      ${createComponentTemplate(
-        BsNavbarBrand,
-        `
-        <a href="#" target="_self">Navbar</a>
-      `
-      )}
-      ${createComponentTemplate(
-        BsNavbarNav,
-        `
-          <bs-nav-item>
-              <bs-nav-link active><a href="#" target="_self">Active</a></bs-nav-link>
-          </bs-nav-item>
-          <bs-nav-item>
-              <bs-nav-link><a href="#" target="_self">Much longer nav link</a></bs-nav-link>
-          </bs-nav-item>
-          <bs-nav-item>
-              <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-          </bs-nav-item>
-          <bs-nav-item>
-              <bs-nav-link disabled><a href="#" target="_self">Link</a></bs-nav-link>
-          </bs-nav-item>
-      `
-      )}
-      ${createComponentTemplate(BsNavbarText, `Navbar text with an inline element`)}
-    </div>
-`
-  ),
+const SupportedContent: Story = (args): StoryFnAureliaReturnType => ({
+  components: [
+    BsNavbarBrand,
+    BsNavbarNav,
+    BsNavbarToggler,
+    BsNavItem,
+    BsNavLink,
+    BsInput,
+    BsButton,
+    BsCollapse,
+    BsDropdown,
+    BsDropdownToggle,
+    BsDropdownItem,
+    BsDropdownMenu,
+  ],
+  innerHtml: `
+  <a bs-navbar-brand href="#">Navbar</a>
+  <bs-navbar-toggler click.trigger="collapsed = !collapsed"></bs-navbar-toggler>
+  <bs-collapse collapsed.bind="collapsed" class="navbar-collapse">
+    <bs-navbar-nav class="me-auto mb-2 mb-lg-0">
+      <bs-nav-item>
+        <a bs-nav-link="active.bind: true" href="#">Home</a>
+      </bs-nav-item>
+      <bs-nav-item>
+        <a bs-nav-link href="#">Link</a>
+      </bs-nav-item>
+      <bs-nav-item bs-dropdown>
+        <a bs-nav-link bs-dropdown-toggle href="#">Dropdown</a>
+        <bs-dropdown-menu>
+          <bs-dropdown-item>Action</bs-dropdown-item>
+          <bs-dropdown-item>Another action</bs-dropdown-item>
+          <bs-dropdown-item type="divider"></bs-dropdown-item>
+          <bs-dropdown-item>Something else here</bs-dropdown-item>
+        </bs-dropdown-menu>
+      </bs-nav-item>
+      <bs-nav-item>
+        <a bs-nav-link disabled>Disabled</a>
+      </bs-nav-item>
+    </bs-navbar-nav>
+    <form class="d-flex" role="search">
+      <bs-input type="search" placeholder="Search" class="me-2"></bs-input>
+      <bs-button variant="outline-success" type="submit">Search</bs-button>
+    </form>
+  </bs-collapse>
+  `,
   props: args,
 });
 
-const collapsedScrolled: Story = (args) => ({
-  components: [BsNavbarBrand, BsNavbarNav, BsNavbarText, BsNavItem, BsNavLink, BsButton, BsCollapse, BsIcon],
-  template: createComponentTemplate(
-    BsNavbar,
-    `
-    <div class="container-fluid">
-      ${createComponentTemplate(
-        BsNavbarBrand,
-        `
-        <a href="#" target="_self">Navbar</a>
-      `
-      )}
-      <bs-button variant.bind="variant" class="navbar-toggler" click.trigger="collapse.collapsedChanged()">
-          <bs-icon name="list">
-      </bs-button>
-      <bs-collapse class="navbar-collapse" horizontal.bind="horizontal" collapsed.bind="collapsed" view-model.ref="collapse">
-          ${createComponentTemplate(
-            BsNavbarNav,
-            `
-              <bs-nav-item>
-                  <bs-nav-link active><a href="#" target="_self">Active</a></bs-nav-link>
-              </bs-nav-item>
-              <bs-nav-item>
-                  <bs-nav-link><a href="#" target="_self">Much longer nav link</a></bs-nav-link>
-              </bs-nav-item>
-              <bs-nav-item>
-                  <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-              </bs-nav-item>              <bs-nav-item>
-                  <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-              </bs-nav-item>              <bs-nav-item>
-                  <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-              </bs-nav-item>              <bs-nav-item>
-                  <bs-nav-link><a href="#" target="_self">Link</a></bs-nav-link>
-              </bs-nav-item>
-              <bs-nav-item>
-                  <bs-nav-link disabled><a href="#" target="_self">Link</a></bs-nav-link>
-              </bs-nav-item>
-          `
-          )}
-      </bs-collapse>
-    </div>
-`
-  ),
-  props: args,
-});
-collapsedScrolled.args = {
-  collapsed: false,
-  expand: 'xxl',
-  scroll: true,
-};
-
-export { Default, collapsedScrolled };
+export { SupportedContent };

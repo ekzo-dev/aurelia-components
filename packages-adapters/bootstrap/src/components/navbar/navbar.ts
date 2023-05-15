@@ -1,10 +1,8 @@
 import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './navbar.scss';
 import template from './navbar.html';
-import { Variants } from '../../interfaces';
-import { coerceBoolean } from '../../utils';
-
-export type Expands = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+import { Breakpoint } from '../../types';
 
 @customElement({
   name: 'bs-navbar',
@@ -12,19 +10,19 @@ export type Expands = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 })
 export class BsNavbar implements ICustomElementViewModel {
   @bindable()
-  expand?: Expands = 'lg';
-
-  @bindable()
-  variant?: Variants;
+  expand?: Breakpoint | '';
 
   @bindable(coerceBoolean)
-  darkBackground?: boolean = false;
+  dark: boolean = false;
 
-  /* todo
-  - navbar-toggler for use with our collapse plugin and other navigation toggling behaviors.
-  - Add an optional .navbar-scroll to set a max-height and scroll expanded navbar content.
-
-  For navbars that never collapse, add the .navbar-expand class on the navbar.
-  For navbars that always collapse, don’t add any .navbar-expand class.
-  */
+  get classes(): string {
+    const { expand } = this;
+    return [
+      'navbar',
+      this.dark ? 'navbar-dark' : false,
+      expand != null ? `navbar-expand${expand ? `-${expand}` : ''}` : false,
+    ]
+      .filter(Boolean)
+      .join(' ');
+  }
 }
