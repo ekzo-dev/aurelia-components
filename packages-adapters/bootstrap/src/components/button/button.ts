@@ -96,7 +96,9 @@ export class BsButton implements ICustomAttributeViewModel {
   }
 
   private createButton() {
-    this.element.setAttribute('data-bs-toggle', 'button');
+    if (this.toggleState) {
+      this.element.setAttribute('data-bs-toggle', 'button');
+    }
   }
 
   private destroyButton() {

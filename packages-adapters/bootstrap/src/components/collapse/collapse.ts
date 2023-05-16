@@ -11,40 +11,19 @@ import './collapse.scss';
 })
 export class BsCollapse implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  readonly horizontal: boolean = false;
+  horizontal: boolean = false;
 
-  @bindable(coerceBoolean)
-  readonly collapsed: boolean = false;
-
-  private container?: HTMLDivElement;
-
-  private collapse?: Collapse;
-
-  attaching() {
-    this.createCollapse();
-
-    // show element if initially expanded
-    if (!this.collapsed) {
-      this.collapsedChanged();
-    }
-  }
+  constructor(private element: HTMLElement) {}
 
   detaching() {
     this.destroyCollapse();
   }
 
-  collapsedChanged(): void {
-    this.collapse?.toggle();
-  }
-
-  private createCollapse() {
-    this.collapse = new Collapse(this.container!, {
-      toggle: false,
-    });
+  toggle() {
+    Collapse.getOrCreateInstance(this.element, { toggle: false }).toggle();
   }
 
   private destroyCollapse() {
-    this.collapse?.dispose();
-    this.collapse = undefined;
+    Collapse.getInstance(this.element)?.dispose();
   }
 }

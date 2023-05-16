@@ -1,8 +1,6 @@
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import template from './navbar-nav.html';
-
-import { coerceBoolean } from '../../utils';
-
 import './navbar.scss';
 
 @customElement({
@@ -11,5 +9,5 @@ import './navbar.scss';
 })
 export class BsNavbarNav implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  scroll?: boolean;
+  scroll: boolean = false;
 }
