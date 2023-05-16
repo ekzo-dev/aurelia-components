@@ -1,16 +1,10 @@
-import { customAttribute, ICustomAttributeViewModel } from 'aurelia';
-import 'bootstrap/js/dist/tab';
+import { customAttribute } from 'aurelia';
 import './nav.scss';
+import { BaseAttribute } from '../base-attribute';
 
 @customAttribute('bs-tab-content')
-export class BsTabContent implements ICustomAttributeViewModel {
-  constructor(private element: HTMLElement) {}
-
-  attaching() {
-    this.element.classList.add('tab-content');
-  }
-
-  detaching() {
-    this.element.classList.remove('tab-content');
+export class BsTabContent extends BaseAttribute {
+  get classes(): string[] {
+    return ['tab-content'];
   }
 }

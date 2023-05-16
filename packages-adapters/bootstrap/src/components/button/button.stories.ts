@@ -1,13 +1,13 @@
 import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsButton } from '.';
-import { BUTTON_VARIANTS, SIZES } from '../../constants';
+import { VARIANTS, SIZES } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button',
   component: BsButton,
   argTypes: {
-    variant: selectControl(BUTTON_VARIANTS),
+    variant: selectControl([...VARIANTS, 'link', ...VARIANTS.map((v) => `outline-${v}`)]),
     size: selectControl(['', ...SIZES]),
   },
 };

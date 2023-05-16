@@ -1,12 +1,10 @@
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 import './dropdown.scss';
-
-const TOGGLE_ATTRIBUTE = 'data-bs-toggle';
-const TOGGLE_CLASS = 'dropdown-toggle';
-const TOGGLE_SPLIT_CLASS = 'dropdown-toggle-split';
+import { BaseAttribute } from '../base-attribute';
+import { TOGGLE } from '../../constants';
 
 @customAttribute('bs-dropdown-toggle')
-export class BsDropdownToggle implements ICustomAttributeViewModel {
+export class BsDropdownToggle extends BaseAttribute {
   // TODO: Aurelia bug, set to "" when not explicitly defined (treated as primary attribute)
   // @bindable(coerceBoolean)
   @bindable()
@@ -15,28 +13,21 @@ export class BsDropdownToggle implements ICustomAttributeViewModel {
   @bindable()
   arrow: boolean = true;
 
-  constructor(private element: Element) {}
-
   attaching() {
-    this.element.setAttribute(TOGGLE_ATTRIBUTE, 'dropdown');
-    this.setClass();
+    super.attaching();
+    this.element.setAttribute(TOGGLE, 'dropdown');
   }
 
   detaching() {
-    this.element.removeAttribute(TOGGLE_ATTRIBUTE);
-    this.setClass(false);
+    super.detaching();
+    this.element.removeAttribute(TOGGLE);
   }
 
-  propertyChanged(): void {
-    this.setClass();
+  propertyChanged(name: keyof this, newValue: boolean): void {
+    this.setClass(`dropdown-toggle${name === 'split' ? '-split' : ''}`, newValue);
   }
 
-  private setClass(add: boolean = true): void {
-    const { classList } = this.element;
-
-    classList.remove(TOGGLE_CLASS, TOGGLE_SPLIT_CLASS);
-    if (add) {
-      classList.add(...[this.arrow ? TOGGLE_CLASS : null, this.split ? TOGGLE_SPLIT_CLASS : null].filter(Boolean));
-    }
+  get classes(): string[] {
+    return [this.arrow ? 'dropdown-toggle' : null, this.split ? 'dropdown-toggle-split' : null].filter(Boolean);
   }
 }

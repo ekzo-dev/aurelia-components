@@ -1,38 +1,33 @@
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
-import { coerceBoolean } from '../../utils';
+import { bindable, customAttribute } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './dropdown.scss';
+import { BaseAttribute } from '../base-attribute';
 
 export type BsDropdownDirection = 'down' | 'up' | 'end' | 'start';
 
 @customAttribute('bs-dropdown')
-export class BsDropdown implements ICustomAttributeViewModel {
-  // TODO: Aurelia bug, set to "" when not explicitly defined (treated as primary attribute)
-  @bindable()
-  center: boolean = false;
-
-  @bindable()
+export class BsDropdown extends BaseAttribute {
+  @bindable({ primary: true, type: String })
   direction: BsDropdownDirection = 'down';
 
-  constructor(private element: Element) {}
+  @bindable(coerceBoolean)
+  center: boolean = false;
 
-  attaching(): void {
-    this.setClasses();
+  binding() {
+    // set default variant because primary attribute has "" default value
+    if (!this.direction) this.direction = 'down';
   }
 
-  detaching(): void {
-    this.setClasses(false);
+  centerChanged(newValue: boolean) {
+    this.setClass(`drop${this.direction}-center`, newValue);
   }
 
-  propertyChanged(): void {
-    this.setClasses();
+  directionChanged(newValue: BsDropdownDirection, oldValue: BsDropdownDirection) {
+    this.setClass(`drop${oldValue}`, false);
+    this.setClass(`drop${newValue}`);
   }
 
-  private setClasses(add: boolean = true): void {
-    const { classList } = this.element;
-
-    classList.remove('dropdown', 'dropup', 'dropend', 'dropstart', 'dropdown-center', 'dropup-center');
-    if (add) {
-      classList.add(...[`drop${this.direction}`, this.center ? `drop${this.direction}-center` : null].filter(Boolean));
-    }
+  get classes(): string[] {
+    return [`drop${this.direction}`, this.center ? `drop${this.direction}-center` : ''].filter(Boolean);
   }
 }

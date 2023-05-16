@@ -39,7 +39,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
 
   private dropdown?: Dropdown;
 
-  constructor(private element: Element) {}
+  constructor(private element: HTMLElement) {}
 
   attached() {
     this.createDropdown();

@@ -1,53 +1,40 @@
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 import './placeholder.scss';
 import { Size } from '../../types';
+import { BaseAttribute } from '../base-attribute';
 
-export type PlaceholderSize = Size | 'xs';
-export type PlaceholderAnimation = 'glow' | 'wave';
+export type BsPlaceholderSize = Size | 'xs';
+export type BsPlaceholderAnimation = 'glow' | 'wave';
 
-const PLACEHOLDER = 'placeholder';
+const prefix = (name) => `placeholder-${name}`;
 
 @customAttribute('bs-placeholder')
-export class BsPlaceholder implements ICustomAttributeViewModel {
+export class BsPlaceholder extends BaseAttribute {
   @bindable({ primary: true, type: String })
-  animation?: PlaceholderAnimation;
+  animation?: BsPlaceholderAnimation;
 
   @bindable({ type: String })
-  size?: PlaceholderSize;
-
-  constructor(private element: HTMLElement) {}
-
-  attaching() {
-    this.setClass(PLACEHOLDER);
-    this.sizeChanged(this.size);
-  }
+  size?: BsPlaceholderSize;
 
   attached() {
     // set animation after attach on parent element
     this.animationChanged(this.animation);
   }
 
-  sizeChanged(value?: PlaceholderSize) {
-    this.setClass(`${PLACEHOLDER}-sm`, value === 'sm');
-    this.setClass(`${PLACEHOLDER}-lg`, value === 'lg');
-    this.setClass(`${PLACEHOLDER}-xs`, value === 'xs');
+  sizeChanged(newValue?: BsPlaceholderSize, oldValue?: BsPlaceholderSize) {
+    if (oldValue) this.setClass(prefix(oldValue), false);
+    if (newValue) this.setClass(prefix(newValue));
   }
 
-  animationChanged(value?: PlaceholderAnimation) {
+  animationChanged(newValue?: BsPlaceholderAnimation, oldValue?: BsPlaceholderAnimation) {
     const parent = this.element.parentElement;
     if (parent) {
-      this.setClass(`${PLACEHOLDER}-glow`, value === 'glow', parent);
-      this.setClass(`${PLACEHOLDER}-wave`, value === 'wave', parent);
+      if (oldValue) parent.classList.remove(prefix(oldValue));
+      if (newValue) parent.classList.add(prefix(newValue));
     }
   }
 
-  detaching() {
-    this.setClass(PLACEHOLDER);
-    this.sizeChanged();
-    // do not remove animation classes because several placeholders may use the same animation
-  }
-
-  private setClass(token: string, force?: boolean, element?: HTMLElement) {
-    (element || this.element).classList.toggle(token, force);
+  get classes(): string[] {
+    return ['placeholder', this.size ? prefix(this.size) : null].filter(Boolean);
   }
 }

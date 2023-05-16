@@ -117,8 +117,6 @@ export class BsPopover implements Partial<Popover.Options>, ICustomAttributeView
   }
 
   propertyChanged(name: keyof Popover.Options, newValue: never) {
-    console.log('propertyChanged name=' + name);
-    console.log('propertyChanged value=' + newValue);
     this.options[name] = newValue;
 
     if (name === 'title') {

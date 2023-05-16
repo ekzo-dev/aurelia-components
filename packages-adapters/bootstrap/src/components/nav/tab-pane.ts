@@ -1,22 +1,22 @@
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 import { Tab } from 'bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './nav.scss';
+import { BaseAttribute } from '../base-attribute';
+import { TOGGLE } from '../../constants';
 
 @customAttribute('bs-tab-pane')
-export class BsTabPane implements ICustomAttributeViewModel {
-  @bindable()
-  fade: boolean = true;
-
+export class BsTabPane extends BaseAttribute {
   @bindable()
   for!: string;
 
+  @bindable(coerceBoolean)
+  fade: boolean = true;
+
   private tab?: HTMLElement;
 
-  constructor(private element: HTMLElement) {}
-
   attaching() {
-    this.setClass(['tab-pane', this.fade ? 'fade' : ''].filter(Boolean));
+    super.attaching();
     if (!this.element.id) {
       this.element.setAttribute('id', `${this.for}-pane`);
     }
@@ -27,27 +27,27 @@ export class BsTabPane implements ICustomAttributeViewModel {
   }
 
   detaching() {
-    this.setClass(['tab-pane', 'fade'], false);
+    super.detaching();
     this.destroyTab();
   }
 
-  fadeChanged(value: boolean) {
-    this.setClass(['fade'], value);
+  fadeChanged(newValue: boolean) {
+    this.setClass('fade', newValue);
   }
 
   show() {
     Tab.getInstance(this.tab)?.show();
   }
 
-  private setClass(list: string[], add: boolean = true) {
-    this.element.classList[add ? 'add' : 'remove'](...list);
+  get classes(): string[] {
+    return ['tab-pane', this.fade ? 'fade' : null].filter(Boolean);
   }
 
   private createTab() {
     const tab = document.getElementById(this.for);
 
     if (tab) {
-      tab.setAttribute('data-bs-toggle', 'tab');
+      tab.setAttribute(TOGGLE, 'tab');
       tab.setAttribute('data-bs-target', `#${this.element.id}`);
 
       if (tab.classList.contains('active')) {
@@ -60,7 +60,7 @@ export class BsTabPane implements ICustomAttributeViewModel {
   }
 
   private destroyTab() {
-    this.tab?.removeAttribute('data-bs-toggle');
+    this.tab?.removeAttribute(TOGGLE);
     Tab.getInstance(this.tab)?.dispose();
     this.tab = undefined;
   }

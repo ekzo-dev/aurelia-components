@@ -1,11 +1,12 @@
-import { bindable, ICustomAttributeViewModel, customAttribute } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { Button } from 'bootstrap';
 import { Variant, Size } from '../../types';
-import { coerceBoolean } from '../../utils';
-import { BUTTON_VARIANTS } from '../../constants';
 import './button.scss';
+import { BaseAttribute } from '../base-attribute';
+import { TOGGLE } from '../../constants';
 
-export type ButtonVariant =
+export type BsButtonVariant =
   | Variant
   | 'link'
   | 'outline-primary'
@@ -17,18 +18,18 @@ export type ButtonVariant =
   | 'outline-light'
   | 'outline-dark';
 
-const BUTTON = 'btn';
+const prefix = (name) => `btn-${name}`;
 
 @customAttribute('bs-button')
-export class BsButton implements ICustomAttributeViewModel {
+export class BsButton extends BaseAttribute {
   @bindable({ type: String, primary: true })
-  variant: ButtonVariant = 'primary';
-
-  @bindable(coerceBoolean)
-  disabled?: boolean;
+  variant: BsButtonVariant = 'primary';
 
   @bindable({ type: String })
   size?: Size;
+
+  @bindable(coerceBoolean)
+  disabled?: boolean;
 
   @bindable(coerceBoolean)
   active: boolean = false;
@@ -36,77 +37,66 @@ export class BsButton implements ICustomAttributeViewModel {
   @bindable(coerceBoolean)
   toggleState: boolean = false;
 
-  constructor(private element: HTMLElement) {}
-
   binding() {
     // set default variant because primary attribute has "" default value
     if (!this.variant) this.variant = 'primary';
   }
 
   attaching() {
-    this.setClass(BUTTON);
-    this.sizeChanged(this.size);
-    this.variantChanged(this.variant);
-    this.activeChanged(this.active);
+    super.attaching();
     if (this.disabled !== undefined) {
-      this.disabledChanged(this.disabled);
+      this.propertyChanged('disabled', this.disabled);
     }
     this.createButton();
   }
 
   detaching() {
-    this.setClass(BUTTON);
-    this.sizeChanged();
-    this.variantChanged();
-    this.activeChanged();
+    super.detaching();
     this.destroyButton();
   }
 
-  variantChanged(value?: ButtonVariant) {
-    BUTTON_VARIANTS.forEach((variant) => {
-      this.setClass(`${BUTTON}-${variant}`, value === variant);
-    });
-  }
-
-  sizeChanged(value?: Size) {
-    this.setClass(`${BUTTON}-sm`, value === 'sm');
-    this.setClass(`${BUTTON}-lg`, value === 'lg');
-  }
-
-  disabledChanged(value?: boolean) {
-    const el = this.element;
-    if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
-      value ? el.setAttribute('disabled', '') : el.removeAttribute('disabled');
-    } else {
-      this.setClass('disabled', value);
+  propertyChanged(name: keyof this, newValue?: string | boolean, oldValue?: string | boolean) {
+    switch (name) {
+      case 'variant':
+      case 'size':
+        if (oldValue) this.setClass(prefix(oldValue), false);
+        if (newValue) this.setClass(prefix(newValue));
+        break;
+      case 'active':
+        this.setClass(name, newValue as boolean);
+        break;
+      case 'disabled':
+        const el = this.element;
+        if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
+          newValue ? el.setAttribute('disabled', '') : el.removeAttribute('disabled');
+        } else {
+          this.setClass(name, newValue as boolean);
+        }
+        break;
+      case 'toggleState':
+        this.destroyButton();
+        this.createButton();
     }
-  }
-
-  activeChanged(value?: boolean) {
-    this.setClass('active', value);
-  }
-
-  toggleStateChanged() {
-    this.destroyButton();
-    this.createButton();
   }
 
   toggle() {
     Button.getInstance(this.element)?.toggle();
   }
 
+  get classes(): string[] {
+    return ['btn', prefix(this.variant), this.size ? prefix(this.size) : '', this.active ? 'active' : ''].filter(
+      Boolean
+    );
+  }
+
   private createButton() {
     if (this.toggleState) {
-      this.element.setAttribute('data-bs-toggle', 'button');
+      this.element.setAttribute(TOGGLE, 'button');
     }
   }
 
   private destroyButton() {
     Button.getInstance(this.element)?.dispose();
-    this.element.removeAttribute('data-bs-toggle');
-  }
-
-  private setClass(token: string, force?: boolean) {
-    this.element.classList.toggle(token, force);
+    this.element.removeAttribute(TOGGLE);
   }
 }
