@@ -1,7 +1,6 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsModal } from '.';
 import { BsButton } from '../button';
-
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const sizeOptions = ['sm', 'lg', 'xl'];
@@ -28,7 +27,7 @@ export default meta;
 export const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   template: `
-    <bs-button click.trigger="modal.toggle()">Open modal</bs-button>
+    <button bs-button click.trigger="modal.toggle()">Open modal</button>
     <bs-modal view-model.ref="modal"
       title.bind="title"
       animation.bind="animation"

@@ -27,7 +27,7 @@ export default meta;
 export const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton, BsCloseButton, BsToastContainer],
   template: `
-    <bs-button click.trigger="toast.show()">Open toast</bs-button>
+    <button bs-button click.trigger="toast.show()">Open toast</button>
     <bs-toast-container class="position-fixed bottom-0 end-0 p-3">
       <bs-toast view-model.ref="toast"
         header.bind="header"

@@ -163,7 +163,7 @@ const Header: Story = (args): StoryFnAureliaReturnType => ({
   <bs-card-body>
     <h5>Special title treatment</h5>
     <p class="card-text">Some quick  text to build on the card title and make up the bulk of the card's content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
 <bs-card class="mb-3 story-size" variant.bind="variant">
@@ -171,7 +171,7 @@ const Header: Story = (args): StoryFnAureliaReturnType => ({
   <bs-card-body>
       <h5>Special title treatment</h5>
       <p class="card-text">Some quick  text to build on the card title and make up the bulk of the card's content.</p>
-      <bs-button>Go somewhere</bs-button>
+      <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
 <bs-card class="story-size" variant.bind="variant">
@@ -179,7 +179,7 @@ const Header: Story = (args): StoryFnAureliaReturnType => ({
     <bs-card-body>
         <h5>Special title treatment</h5>
         <p class="card-text">Some quick  text to build on the card title and make up the bulk of the card's content.</p>
-        <bs-button>Go somewhere</bs-button>
+        <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
   `,
@@ -195,7 +195,7 @@ const SizingUsingGrid: Story = (args): StoryFnAureliaReturnType => ({
       <bs-card-body>
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <bs-button>Go somewhere</bs-button>
+        <button bs-button>Go somewhere</button>
       </bs-card-body>
     </bs-card>
   </div>
@@ -204,7 +204,7 @@ const SizingUsingGrid: Story = (args): StoryFnAureliaReturnType => ({
       <bs-card-body>
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <bs-button>Go somewhere</bs-button>
+        <button bs-button>Go somewhere</button>
       </bs-card-body>
     </bs-card>
   </div>
@@ -220,21 +220,21 @@ const SizingUsingUtilities: Story = (args): StoryFnAureliaReturnType => ({
   <bs-card-body>
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
 <bs-card class="w-50 mb-3" variant.bind="variant">
   <bs-card-body>
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
 <bs-card class="w-25" variant.bind="variant">
   <bs-card-body>
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
   `,
@@ -248,21 +248,21 @@ const TextAlignment: Story = (args): StoryFnAureliaReturnType => ({
   <bs-card-body>
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
 <bs-card class="story-size mb-3 text-center" variant.bind="variant">
   <bs-card-body>
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
 <bs-card class="story-size mb-3 text-end" variant.bind="variant">
   <bs-card-body>
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <bs-button>Go somewhere</bs-button>
+    <button bs-button>Go somewhere</button>
   </bs-card-body>
 </bs-card>
   `,
@@ -426,7 +426,7 @@ const NavigationTabs: Story = (args): StoryFnAureliaReturnType => ({
       <bs-card-body class="text-\${variant}">
         <h5>Card title</h5>
         <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-        <bs-button>Go somewhere</bs-button>
+        <button bs-button>Go somewhere</button>
       </bs-card-body>
 </bs-card>
 `,
@@ -453,7 +453,7 @@ const NavigationButtons: Story = (args): StoryFnAureliaReturnType => ({
       <bs-card-body class="text-\${variant}">
         <h5>Card title</h5>
         <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a bit longer.</p>
-        <bs-button>Go somewhere</bs-button>
+        <button bs-button>Go somewhere</button>
       </bs-card-body>
 </bs-card>
 `,

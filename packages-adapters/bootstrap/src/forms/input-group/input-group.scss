@@ -18,29 +18,15 @@
     z-index: 3;
   }
 
-  // Ensure buttons are always above inputs for more visually pleasing borders.
-  // This isn't needed for `.input-group-text` since it shares the same border-color
-  // as our inputs.
-  bs-button {
-    position: relative;
-    z-index: 2;
-
-    &:focus-within {
-      z-index: 3;
-    }
-  }
-
   > bs-input:not(:last-child) > .form-control,
   > bs-textarea:not(:last-child) > .form-control,
-  > bs-select:not(:last-child) > .form-select,
-  > bs-button:not(:last-child) > .btn {
+  > bs-select:not(:last-child) > .form-select {
     @include border-end-radius(0);
   }
 
   > bs-input:not(:first-child) > .form-control,
   > bs-textarea:not(:first-child) > .form-control,
-  > bs-select:not(:first-child) > .form-select,
-  > bs-button:not(:first-child) > .btn {
+  > bs-select:not(:first-child) > .form-select {
     @include border-start-radius(0);
   }
 }

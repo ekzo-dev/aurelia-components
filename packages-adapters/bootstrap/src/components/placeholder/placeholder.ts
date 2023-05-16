@@ -1,41 +1,53 @@
 import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
 import './placeholder.scss';
-import { Sizes, Variants } from '../../interfaces';
+import { Size } from '../../types';
 
-export type PlaceholderSizes = Sizes | 'xs';
-
+export type PlaceholderSize = Size | 'xs';
 export type PlaceholderAnimation = 'glow' | 'wave';
+
+const PLACEHOLDER = 'placeholder';
 
 @customAttribute('bs-placeholder')
 export class BsPlaceholder implements ICustomAttributeViewModel {
-  // https://getbootstrap.com/docs/5.3/components/placeholders/#sizing
-  @bindable()
-  size?: PlaceholderSizes;
-
-  // https://getbootstrap.com/docs/5.3/components/placeholders/#color
-  @bindable()
-  color?: Variants;
-
-  // https://getbootstrap.com/docs/5.3/components/placeholders/#animation
-  @bindable()
+  @bindable({ primary: true, type: String })
   animation?: PlaceholderAnimation;
 
-  constructor(private element: Element) {}
+  @bindable({ type: String })
+  size?: PlaceholderSize;
+
+  constructor(private element: HTMLElement) {}
 
   attaching() {
-    const { classList } = this.element;
-    classList.add('placeholder');
-    if (this.size) this.element.classList.add(`placeholder-${this.size}`);
-    if (this.color) this.element.classList.add(`bg-${this.color}`);
+    this.setClass(PLACEHOLDER);
+    this.sizeChanged(this.size);
   }
 
   attached() {
-    if (this.animation) {
-      this.element.parentElement?.classList.add(`placeholder-${this.animation}`);
+    // set animation after attach on parent element
+    this.animationChanged(this.animation);
+  }
+
+  sizeChanged(value?: PlaceholderSize) {
+    this.setClass(`${PLACEHOLDER}-sm`, value === 'sm');
+    this.setClass(`${PLACEHOLDER}-lg`, value === 'lg');
+    this.setClass(`${PLACEHOLDER}-xs`, value === 'xs');
+  }
+
+  animationChanged(value?: PlaceholderAnimation) {
+    const parent = this.element.parentElement;
+    if (parent) {
+      this.setClass(`${PLACEHOLDER}-glow`, value === 'glow', parent);
+      this.setClass(`${PLACEHOLDER}-wave`, value === 'wave', parent);
     }
   }
 
   detaching() {
-    this.element.classList.remove('placeholder', `placeholder-${this.size}`, `bg-${this.color}`);
+    this.setClass(PLACEHOLDER);
+    this.sizeChanged();
+    // do not remove animation classes because several placeholders may use the same animation
+  }
+
+  private setClass(token: string, force?: boolean, element?: HTMLElement) {
+    (element || this.element).classList.toggle(token, force);
   }
 }

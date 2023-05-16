@@ -10,7 +10,7 @@ import './checkbox.scss';
 })
 export class BsCheckbox extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
-  checked: boolean | any[] = false;
+  checked!: boolean | any[];
 
   @bindable()
   model?: any;

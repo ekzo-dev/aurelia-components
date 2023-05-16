@@ -3,7 +3,6 @@ import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.'
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
 import { selectControl } from '../../../../../.storybook/helpers';
-import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 
 const directionOptions = ['down', 'up', 'end', 'start'];
 const displayOptions = ['dynamic', 'static'];
@@ -29,7 +28,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdown, BsDropdownItem, BsButton, BsDropdownToggle],
   template: `
 <div ${createComponentTemplate(BsDropdown)}>
-  <bs-button bs-dropdown-toggle>Dropdown button</bs-button>
+  <button bs-button bs-dropdown-toggle>Dropdown button</button>
   ${createComponentTemplate(
     BsDropdownMenu,
     `
@@ -50,15 +49,15 @@ Overview.argTypes = {
   },
 };
 
-const withSplitButton: Story = (args): StoryFnAureliaReturnType => ({
+const SplitButton: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsDropdown, BsDropdownItem, BsButton, BsDropdownToggle, BsButtonGroup],
   template: `
 <div ${createComponentTemplate(BsDropdown)}>
   <bs-button-group>
-    <bs-button>Split Button</bs-button>
-    <bs-button bs-dropdown-toggle="split.bind: true">
+    <button bs-button>Split Button</button>
+    <button bs-button bs-dropdown-toggle="split.bind: true">
       <span class="visually-hidden">Toggle Dropdown</span>
-    </bs-button>
+    </button>
   ${createComponentTemplate(
     BsDropdownMenu,
     `
@@ -73,4 +72,4 @@ const withSplitButton: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-export { Overview, withSplitButton };
+export { Overview, SplitButton };

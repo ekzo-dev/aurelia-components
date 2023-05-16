@@ -1,12 +1,9 @@
 import { customElement, bindable } from 'aurelia';
-
-import { Variants, Sizes } from '../../interfaces';
 import template from './spinner.html';
-
 import './spinner.scss';
 
 export type SpinnerType = 'border' | 'grow';
-export type SpinnerSize = '' | 'sm';
+export type SpinnerSize = 'sm';
 
 @customElement({
   name: 'bs-spinner',
@@ -14,11 +11,8 @@ export type SpinnerSize = '' | 'sm';
 })
 export class BsSpinner {
   @bindable()
-  readonly type: SpinnerType = 'border';
+  type: SpinnerType = 'border';
 
   @bindable()
-  readonly variant?: Variants;
-
-  @bindable()
-  readonly size?: SpinnerSize;
+  size?: SpinnerSize;
 }

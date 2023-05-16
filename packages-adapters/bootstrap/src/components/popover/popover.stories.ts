@@ -43,7 +43,7 @@ const Default: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   template: `
 <div class="container text-center"><br><br><br><br><br><br>
-    <bs-button ${createComponentTemplate(BsPopover)}>Open popover</bs-button>
+    <button bs-button ${createComponentTemplate(BsPopover)}>Open popover</button>
 </div>
   `,
   props: args,
@@ -53,7 +53,7 @@ const HtmlInPopover: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   template: `
 <div class="container text-center"><br><br><br><br><br><br>
-    <bs-button ${createComponentTemplate(BsPopover)}>Open popover</bs-button>
+    <button bs-button ${createComponentTemplate(BsPopover)}>Open popover</button>
 </div>
   `,
   props: args,
@@ -68,7 +68,7 @@ HtmlInPopover.args = {
   components: [BsButton,],
   template: `
 <div class="container text-center"><br><br><br><br><br><br>
-    <bs-button ${createComponentTemplate(BsPopover)}>Open popover</bs-button>
+    <button bs-button ${createComponentTemplate(BsPopover)}>Open popover</button>
 </div>
   `,
   props: args,

@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsInput } from '.';
-import { inputSizeOptions } from '../../constants';
+import { SIZES } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 export default {
@@ -15,7 +15,7 @@ export default {
     label: 'Label',
   },
   argTypes: {
-    size: selectControl(inputSizeOptions, 'inline-radio'),
+    size: selectControl(['', ...SIZES]),
   },
 } as Meta;
 

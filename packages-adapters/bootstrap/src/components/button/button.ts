@@ -1,49 +1,89 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
+import { bindable, ICustomAttributeViewModel, customAttribute } from 'aurelia';
 import { Button } from 'bootstrap';
-import { Variants, Sizes } from '../../interfaces';
+import { Variant, Size } from '../../types';
 import { coerceBoolean } from '../../utils';
-import template from './button.html';
+import { BUTTON_VARIANTS } from '../../constants';
 import './button.scss';
 
-@customElement({
-  name: 'bs-button',
-  template,
-})
-export class BsButton implements ICustomElementViewModel {
-  @bindable()
-  variant: Variants = 'primary';
+export type ButtonVariant =
+  | Variant
+  | 'link'
+  | 'outline-primary'
+  | 'outline-secondary'
+  | 'outline-success'
+  | 'outline-danger'
+  | 'outline-warning'
+  | 'outline-info'
+  | 'outline-light'
+  | 'outline-dark';
+
+const BUTTON = 'btn';
+
+@customAttribute('bs-button')
+export class BsButton implements ICustomAttributeViewModel {
+  @bindable({ type: String, primary: true })
+  variant: ButtonVariant = 'primary';
 
   @bindable(coerceBoolean)
-  outline: boolean = false;
+  disabled?: boolean;
 
-  @bindable(coerceBoolean)
-  disabled: boolean = false;
+  @bindable({ type: String })
+  size?: Size;
 
   @bindable(coerceBoolean)
   active: boolean = false;
 
-  @bindable({ type: String })
-  size?: Sizes;
-
   @bindable(coerceBoolean)
   toggleState: boolean = false;
 
-  @bindable()
-  type: 'button' | 'submit' | 'reset' = 'button';
+  constructor(private element: HTMLElement) {}
 
-  @bindable()
-  form?: string;
-
-  private button?: Button;
-
-  constructor(private element: Element) {}
+  binding() {
+    // set default variant because primary attribute has "" default value
+    if (!this.variant) this.variant = 'primary';
+  }
 
   attaching() {
+    this.setClass(BUTTON);
+    this.sizeChanged(this.size);
+    this.variantChanged(this.variant);
+    this.activeChanged(this.active);
+    if (this.disabled !== undefined) {
+      this.disabledChanged(this.disabled);
+    }
     this.createButton();
   }
 
   detaching() {
+    this.setClass(BUTTON);
+    this.sizeChanged();
+    this.variantChanged();
+    this.activeChanged();
     this.destroyButton();
+  }
+
+  variantChanged(value?: ButtonVariant) {
+    BUTTON_VARIANTS.forEach((variant) => {
+      this.setClass(`${BUTTON}-${variant}`, value === variant);
+    });
+  }
+
+  sizeChanged(value?: Size) {
+    this.setClass(`${BUTTON}-sm`, value === 'sm');
+    this.setClass(`${BUTTON}-lg`, value === 'lg');
+  }
+
+  disabledChanged(value?: boolean) {
+    const el = this.element;
+    if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
+      value ? el.setAttribute('disabled', '') : el.removeAttribute('disabled');
+    } else {
+      this.setClass('disabled', value);
+    }
+  }
+
+  activeChanged(value?: boolean) {
+    this.setClass('active', value);
   }
 
   toggleStateChanged() {
@@ -51,16 +91,20 @@ export class BsButton implements ICustomElementViewModel {
     this.createButton();
   }
 
+  toggle() {
+    Button.getInstance(this.element)?.toggle();
+  }
+
   private createButton() {
-    if (this.toggleState) {
-      this.button = new Button(this.element);
-    }
+    this.element.setAttribute('data-bs-toggle', 'button');
   }
 
   private destroyButton() {
-    if (this.button) {
-      this.button.dispose();
-      this.button = undefined;
-    }
+    Button.getInstance(this.element)?.dispose();
+    this.element.removeAttribute('data-bs-toggle');
+  }
+
+  private setClass(token: string, force?: boolean) {
+    this.element.classList.toggle(token, force);
   }
 }

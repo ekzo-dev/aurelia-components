@@ -7,6 +7,7 @@ import { BsButton } from '../button';
 import { BsCollapse } from '../collapse';
 import { selectControl } from '../../../../../.storybook/helpers';
 import { BREAKPOINTS } from '../../constants';
+import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Navbar',
@@ -17,7 +18,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const SupportedContent: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [
     BsNavbarBrand,
     BsNavbarNav,
@@ -53,16 +54,16 @@ const SupportedContent: Story = (args): StoryFnAureliaReturnType => ({
         </bs-dropdown-menu>
       </bs-nav-item>
       <bs-nav-item>
-        <a bs-nav-link disabled>Disabled</a>
+        <a bs-nav-link="disabled.bind: true">Disabled</a>
       </bs-nav-item>
     </bs-navbar-nav>
     <form class="d-flex" role="search">
       <bs-input type="search" placeholder="Search" class="me-2"></bs-input>
-      <bs-button variant="outline-success" type="submit">Search</bs-button>
+      <button bs-button="outline-success" type="button">Search</button>
     </form>
   </bs-collapse>
   `,
   props: args,
 });
 
-export { SupportedContent };
+export { Overview };

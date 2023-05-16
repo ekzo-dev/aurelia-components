@@ -1,8 +1,6 @@
 import { bindable, BindingMode, customElement } from 'aurelia';
-
 import { BaseField } from '../base-field';
 import { coerceBoolean } from '../../utils';
-
 import template from './radio.html';
 import './radio.scss';
 
@@ -12,17 +10,17 @@ import './radio.scss';
 })
 export class BsRadio extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
-  checked: boolean | any[] = false;
+  checked!: any;
 
   @bindable()
-  readonly model?: any;
+  model?: any;
 
   @bindable()
-  readonly value?: string;
+  value?: string;
 
   @bindable()
-  readonly matcher?: (a: any, b: any) => boolean;
+  matcher?: (a: any, b: any) => boolean;
 
   @bindable(coerceBoolean)
-  readonly inline: boolean = false;
+  inline: boolean = false;
 }

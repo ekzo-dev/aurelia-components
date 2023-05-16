@@ -1,6 +1,5 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
-
-import { Sizes } from '../../interfaces';
+import { customElement, bindable } from 'aurelia';
+import { Size } from '../../types';
 import { coerceBoolean } from '../../utils';
 import template from './button-group.html';
 import './button-group.scss';
@@ -9,10 +8,10 @@ import './button-group.scss';
   name: 'bs-button-group',
   template,
 })
-export class BsButtonGroup implements ICustomElementViewModel {
+export class BsButtonGroup {
   @bindable()
-  readonly size?: Sizes;
+  size?: Size;
 
   @bindable(coerceBoolean)
-  readonly vertical: boolean = false;
+  vertical: boolean = false;
 }
