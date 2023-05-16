@@ -16,7 +16,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args) => ({
+const Overview: Story = (args) => ({
   props: args,
 });
 
@@ -50,4 +50,4 @@ InlinePosition.args = {
   inline: true,
 };
 
-export { Default, InlinePosition };
+export { Overview, InlinePosition };

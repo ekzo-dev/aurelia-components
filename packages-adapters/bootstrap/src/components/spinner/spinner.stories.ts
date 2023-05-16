@@ -13,7 +13,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
@@ -33,4 +33,4 @@ Buttons.args = {
   size: 'sm',
 };
 
-export { Default, Buttons };
+export { Overview, Buttons };

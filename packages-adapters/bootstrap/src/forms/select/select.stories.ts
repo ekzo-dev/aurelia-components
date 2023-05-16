@@ -1,9 +1,9 @@
 import { Meta, Story, extractArgTypes } from '@storybook/aurelia';
 import { BsSelect } from '.';
-import { inputSizeOptions } from '../../constants';
+import { SIZES } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Forms / Select',
   component: BsSelect,
   parameters: {
@@ -18,11 +18,12 @@ export default {
   argTypes: {
     bsSize: {
       ...extractArgTypes(BsSelect).bsSize,
-      ...selectControl(inputSizeOptions),
+      ...selectControl(['', ...SIZES]),
     },
   },
-} as Meta;
+};
+export default meta;
 
-export const Default: Story = (args) => ({
+export const Overview: Story = (args) => ({
   props: args,
 });

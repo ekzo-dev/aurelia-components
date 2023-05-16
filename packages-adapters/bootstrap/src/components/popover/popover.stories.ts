@@ -39,7 +39,7 @@ export default {
   },
 } as Meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
   template: `
 <div class="container text-center"><br><br><br><br><br><br>
@@ -78,4 +78,4 @@ CustomTemplate.args = {
     `<div class='popover popover-example' style='background-color: darkred;' role='popover'><div class='popover-arrow'></div><div class='popover-inner'>Test</div></div>`,
 };*/
 
-export { Default, HtmlInPopover };
+export { Overview, HtmlInPopover };

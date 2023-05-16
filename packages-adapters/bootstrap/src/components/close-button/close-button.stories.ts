@@ -12,6 +12,6 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Default: Story = (args): StoryFnAureliaReturnType => ({
+export const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });

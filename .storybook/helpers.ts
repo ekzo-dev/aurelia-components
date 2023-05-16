@@ -1,13 +1,5 @@
-import { Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-export const Default: Story = (args): StoryFnAureliaReturnType => ({
-  props: {
-    ...args,
-  },
-});
-
 export const selectControl = (options, type = 'select') => ({
-  options: options,
+  options,
   control: {
     type: type,
   },

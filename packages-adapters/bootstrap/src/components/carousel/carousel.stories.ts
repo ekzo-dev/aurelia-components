@@ -17,7 +17,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCarouselItem, BsCarouselCaption],
   innerHtml: `
 ${createComponentTemplate(
@@ -103,4 +103,4 @@ ${createComponentTemplate(
   props: args,
 });
 
-export { Default, withCaptions };
+export { Overview, withCaptions };

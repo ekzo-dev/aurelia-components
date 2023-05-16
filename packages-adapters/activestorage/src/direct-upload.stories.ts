@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { AsDirectUpload, IEndpoint } from '.';
 
 const endpoint: IEndpoint = {
@@ -28,7 +28,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args) => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: {
     ...args,
     format: (data) =>
@@ -52,4 +52,4 @@ const Default: Story = (args) => ({
 <pre if.bind="file" style="margin-top: 1rem">Uploaded file: \${format(file)}</pre>`,
 });
 
-export { Default };
+export { Overview };

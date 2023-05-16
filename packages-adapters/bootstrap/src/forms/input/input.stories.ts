@@ -19,8 +19,6 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = (args) => ({
-  props: {
-    ...args,
-  },
+export const Overview: Story = (args) => ({
+  props: args,
 });

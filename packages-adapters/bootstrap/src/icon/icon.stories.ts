@@ -1378,12 +1378,12 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: {
     ...args,
   },
 });
-Default.args = {
+Overview.args = {
   name: 'activity',
 };
 
@@ -1420,4 +1420,4 @@ const iconsExample2: Story = (args): StoryFnAureliaReturnType => ({
 iconsExample2.argTypes = {
   name: disableControl,
 };
-export { Default, iconsExample1, iconsExample2 };
+export { Overview, iconsExample1, iconsExample2 };

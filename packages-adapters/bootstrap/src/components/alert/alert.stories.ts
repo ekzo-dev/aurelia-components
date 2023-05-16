@@ -17,7 +17,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   innerHtml: 'A simple alert — check it out!',
   props: args,
 });
@@ -42,4 +42,4 @@ AdditionalContent.args = {
   dismissible: true,
 };
 
-export { Default, AdditionalContent };
+export { Overview, AdditionalContent };

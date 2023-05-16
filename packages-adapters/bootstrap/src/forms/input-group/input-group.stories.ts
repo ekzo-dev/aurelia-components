@@ -13,7 +13,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = (args) => ({
+export const Overview: Story = (args) => ({
   components: [BsInputGroupText, BsInput, BsButton],
   innerHtml: `
       <bs-input-group-text>Text</bs-input-group-text>

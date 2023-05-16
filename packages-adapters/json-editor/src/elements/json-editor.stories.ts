@@ -6,12 +6,12 @@ const meta: Meta = {
   title: 'JsonEditor / JsonEditor',
   component: JsonEditor,
 };
+export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: {
     ...args,
   },
 });
 
-export default meta;
-export { Default };
+export { Overview };

@@ -17,7 +17,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsCardBody],
   innerHtml: `
 <bs-card-body>
@@ -461,7 +461,7 @@ const NavigationButtons: Story = (args): StoryFnAureliaReturnType => ({
 });
 
 export {
-  Default,
+  Overview,
   MultipleContentTypes,
   TitlesTextLinks,
   ImagesTop,

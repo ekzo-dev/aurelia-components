@@ -15,17 +15,17 @@ const meta: Meta = {
   args: {
     variant: '',
   },
-} as Meta;
+};
 export default meta;
 
-const Default: Story = (args) => ({
+const Overview: Story = (args) => ({
   components: [BsListGroupItem],
   innerHtml: `
-${createComponentTemplate(BsListGroupItem, `An item`)}
-${createComponentTemplate(BsListGroupItem, `A second item`)}
-${createComponentTemplate(BsListGroupItem, `A third item`)}
-${createComponentTemplate(BsListGroupItem, `A fourth item`)}
-${createComponentTemplate(BsListGroupItem, `And a fifth one`)}
+  ${createComponentTemplate(BsListGroupItem, `An item`)}
+  ${createComponentTemplate(BsListGroupItem, `A second item`)}
+  ${createComponentTemplate(BsListGroupItem, `A third item`)}
+  ${createComponentTemplate(BsListGroupItem, `A fourth item`)}
+  ${createComponentTemplate(BsListGroupItem, `And a fifth one`)}
   `,
   props: args,
 });
@@ -44,4 +44,4 @@ const activeAndDisabledItems: Story = (args) => ({
   props: args,
 });
 
-export { Default, activeAndDisabledItems };
+export { Overview, activeAndDisabledItems };

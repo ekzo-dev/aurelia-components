@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsTextarea } from '.';
 
 export default {
@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = (args) => ({
+export const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: {
     ...args,
   },

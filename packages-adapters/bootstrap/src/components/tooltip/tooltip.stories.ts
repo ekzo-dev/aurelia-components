@@ -17,7 +17,7 @@ export default {
   },
 } as Meta;
 
-const Default: Story = (args): StoryFnAureliaReturnType => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   template: `
 <div class="container text-center">
   <span>Some text without tooltip,</span><br>
@@ -55,4 +55,4 @@ CustomTooltip.args = {
     '<div class="tooltip tooltip-example" style="background-color: darkred;" role="tooltip"><div class="tooltip-inner"></div></div>',
 };
 
-export { Default, HtmlDefaultTooltip, CustomTooltip };
+export { Overview, HtmlDefaultTooltip, CustomTooltip };
