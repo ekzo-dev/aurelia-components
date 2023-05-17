@@ -37,9 +37,9 @@ const MultipleContentTypes: Story = (args): StoryFnAureliaReturnType => ({
         <p class="card-text">Some quick  text to build on the card title and make up the bulk of the card's content.</p>
     </bs-card-body>
     <bs-list-group flush.bind="true">
-        <bs-list-group-item variant.bind="variant">An item</bs-list-group-item>
-        <bs-list-group-item variant.bind="variant">A second item</bs-list-group-item>
-        <bs-list-group-item variant.bind="variant">A third item</bs-list-group-item>
+        <div bs-list-group-item.bind="variant">An item</div>
+        <div bs-list-group-item.bind="variant">A second item</div>
+        <div bs-list-group-item.bind="variant">A third item</div>
     </bs-list-group>
     <bs-card-body>
         <a href="#" target="_self" class="card-link">Card link</a> <a href="#" class="card-link">Another link</a>
@@ -130,24 +130,24 @@ const ListGroups: Story = (args): StoryFnAureliaReturnType => ({
   template: `
 <bs-card class="mb-3 story-size" variant.bind="variant">
     <bs-list-group flush.bind="true">
-      <bs-list-group-item variant.bind="variant">An item</bs-list-group-item>
-      <bs-list-group-item variant.bind="variant">A second item</bs-list-group-item>
-      <bs-list-group-item variant.bind="variant">A third item</bs-list-group-item>
+      <div bs-list-group-item.bind="variant">An item</div>
+      <div bs-list-group-item.bind="variant">A second item</div>
+      <div bs-list-group-item.bind="variant">A third item</div>
     </bs-list-group>
 </bs-card>
 <bs-card class="mb-3 story-size" variant.bind="variant">
     <bs-card-header>Featured</bs-card-header>
     <bs-list-group flush.bind="true">
-      <bs-list-group-item variant.bind="variant">An item</bs-list-group-item>
-      <bs-list-group-item variant.bind="variant">A second item</bs-list-group-item>
-      <bs-list-group-item variant.bind="variant">A third item</bs-list-group-item>
+      <div bs-list-group-item.bind="variant">An item</div>
+      <div bs-list-group-item.bind="variant">A second item</div>
+      <div bs-list-group-item.bind="variant">A third item</div>
     </bs-list-group>
 </bs-card>
 <bs-card class="story-size" variant.bind="variant">
     <bs-list-group flush.bind="true">
-      <bs-list-group-item variant.bind="variant">An item</bs-list-group-item>
-      <bs-list-group-item variant.bind="variant">A second item</bs-list-group-item>
-      <bs-list-group-item variant.bind="variant">A third item</bs-list-group-item>
+      <div bs-list-group-item.bind="variant">An item</div>
+      <div bs-list-group-item.bind="variant">A second item</div>
+      <div bs-list-group-item.bind="variant">A third item</div>
     </bs-list-group>
     <bs-card-footer>Featured</bs-card-footer>
 </bs-card>

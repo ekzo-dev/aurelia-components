@@ -11,10 +11,6 @@ export class BsNavLink extends BaseAttribute {
   @bindable()
   disabled: boolean = false;
 
-  propertyChanged(name: keyof this, newValue: boolean): void {
-    this.setClass(name.toString(), newValue);
-  }
-
   get classes(): string[] {
     return ['nav-link', this.active ? 'active' : null, this.disabled ? 'disabled' : null].filter(Boolean);
   }

@@ -1,47 +1,40 @@
-import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsListGroup, BsListGroupItem } from '.';
-import { VARIANTS } from '../../constants';
+import { BREAKPOINTS, VARIANTS } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
-
-const horizontalOptions = ['always', 'sm', 'md', 'lg', 'xl'];
 
 const meta: Meta = {
   title: 'Bootstrap / Components / List group',
   component: BsListGroup,
   argTypes: {
-    variant: selectControl(VARIANTS),
-    horizontal: selectControl(horizontalOptions),
-  },
-  args: {
-    variant: '',
+    horizontal: selectControl(['', 'always', ...BREAKPOINTS]),
+    // variant: selectControl(['', ...VARIANTS]),
   },
 };
 export default meta;
 
-const Overview: Story = (args) => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsListGroupItem],
   innerHtml: `
-  ${createComponentTemplate(BsListGroupItem, `An item`)}
-  ${createComponentTemplate(BsListGroupItem, `A second item`)}
-  ${createComponentTemplate(BsListGroupItem, `A third item`)}
-  ${createComponentTemplate(BsListGroupItem, `A fourth item`)}
-  ${createComponentTemplate(BsListGroupItem, `And a fifth one`)}
+  <div bs-list-group-item="active: true">An item</div>
+  <div bs-list-group-item>A second item</div>
+  <div bs-list-group-item>A third item</div>
+  <div bs-list-group-item>A fourth item</div>
+  <div bs-list-group-item="disabled: true">And a fifth one</div>
   `,
   props: args,
 });
 
-const activeAndDisabledItems: Story = (args) => ({
-  components: [BsListGroup, BsListGroupItem],
-  template: `
-<bs-list-group class="w-75" numbered.bind="numbered" flush.bind="flush" horizontal.bind="horizontal">
-    <bs-list-group-item active.bind="true" variant.bind="variant">An active item</bs-list-group-item>
-    ${createComponentTemplate(BsListGroupItem, `A second item`)}
-    ${createComponentTemplate(BsListGroupItem, `A third item`)}
-    ${createComponentTemplate(BsListGroupItem, `A fourth item`)}
-    <bs-list-group-item disabled.bind="true" variant.bind="variant">A disabled item</bs-list-group-item>
-</bs-list-group>
+const LinksAndButtons: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsListGroupItem],
+  innerHtml: `
+  <a bs-list-group-item="active: true; action: true" href="#">An item</a>
+  <a bs-list-group-item="action: true">A second item</a>
+  <button bs-list-group-item="action: true">A third item</button>
+  <button bs-list-group-item="action: true">A fourth item</button>
+  <button bs-list-group-item="disabled: true; action: true">And a fifth one</button>
   `,
   props: args,
 });
 
-export { Overview, activeAndDisabledItems };
+export { Overview, LinksAndButtons };

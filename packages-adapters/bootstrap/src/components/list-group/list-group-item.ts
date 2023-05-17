@@ -1,16 +1,15 @@
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-import template from './list-group-item.html';
-import { Variants } from '../../interfaces';
+import { bindable, customAttribute } from 'aurelia';
+import { Variant } from '../../types';
 import { coerceBoolean } from '../../utils';
 import './list-group.scss';
+import { BaseAttribute } from '../base-attribute';
 
-@customElement({
-  name: 'bs-list-group-item',
-  template,
-})
-export class BsListGroupItem implements ICustomElementViewModel {
-  @bindable()
-  variant?: Variants;
+const prefix = (name) => `list-group-item-${name}`;
+
+@customAttribute('bs-list-group-item')
+export class BsListGroupItem extends BaseAttribute {
+  @bindable({ primary: true, type: String })
+  variant?: Variant;
 
   @bindable(coerceBoolean)
   action: boolean = false;
@@ -21,15 +20,24 @@ export class BsListGroupItem implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   active: boolean = false;
 
-  get classes() {
+  propertyChanged(name: keyof this, newValue?: string | boolean, oldValue?: string | boolean) {
+    switch (name) {
+      case 'variant':
+        if (oldValue) this.setClass(prefix(oldValue), false);
+        if (newValue) this.setClass(prefix(newValue));
+        break;
+      case 'action':
+        this.setClass(prefix('action'), newValue as boolean);
+    }
+  }
+
+  get classes(): string[] {
     return [
       'list-group-item',
       this.disabled ? 'disabled' : null,
       this.active ? 'active' : null,
-      this.action ? 'list-group-item-action' : null,
-      this.variant ? `list-group-item-${this.variant}` : null,
-    ]
-      .filter(Boolean)
-      .join(' ');
+      this.action ? prefix('action') : null,
+      this.variant ? prefix(this.variant) : null,
+    ].filter(Boolean);
   }
 }

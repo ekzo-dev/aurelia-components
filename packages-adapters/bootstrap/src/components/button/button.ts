@@ -44,9 +44,6 @@ export class BsButton extends BaseAttribute {
 
   attaching() {
     super.attaching();
-    if (this.disabled !== undefined) {
-      this.propertyChanged('disabled', this.disabled);
-    }
     this.createButton();
   }
 
@@ -61,17 +58,6 @@ export class BsButton extends BaseAttribute {
       case 'size':
         if (oldValue) this.setClass(prefix(oldValue), false);
         if (newValue) this.setClass(prefix(newValue));
-        break;
-      case 'active':
-        this.setClass(name, newValue as boolean);
-        break;
-      case 'disabled':
-        const el = this.element;
-        if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
-          newValue ? el.setAttribute('disabled', '') : el.removeAttribute('disabled');
-        } else {
-          this.setClass(name, newValue as boolean);
-        }
         break;
       case 'toggleState':
         this.destroyButton();
