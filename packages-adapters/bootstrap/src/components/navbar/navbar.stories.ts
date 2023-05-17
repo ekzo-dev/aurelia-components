@@ -33,7 +33,7 @@ const meta: Meta = {
   title: 'Bootstrap / Components / Navbar',
   component: BsNavbar,
   argTypes: {
-    expand: selectControl(['', ...BREAKPOINTS, 'never']),
+    expand: selectControl(['', ...BREAKPOINTS, 'always']),
   },
   args: {
     expand: 'lg',

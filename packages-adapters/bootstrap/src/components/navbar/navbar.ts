@@ -4,13 +4,15 @@ import './navbar.scss';
 import template from './navbar.html';
 import { Breakpoint } from '../../types';
 
+export type BsNavbarExpand = Breakpoint | 'always';
+
 @customElement({
   name: 'bs-navbar',
   template,
 })
 export class BsNavbar implements ICustomElementViewModel {
   @bindable({ type: String })
-  expand?: Breakpoint | 'never';
+  expand?: BsNavbarExpand;
 
   @bindable(coerceBoolean)
   dark: boolean = false;
@@ -23,7 +25,7 @@ export class BsNavbar implements ICustomElementViewModel {
     return [
       'navbar',
       this.dark ? 'navbar-dark' : false,
-      expand ? `navbar-expand${expand !== 'never' ? `-${expand}` : ''}` : false,
+      expand ? `navbar-expand${expand !== 'always' ? `-${expand}` : ''}` : false,
     ]
       .filter(Boolean)
       .join(' ');
