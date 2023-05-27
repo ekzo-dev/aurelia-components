@@ -1,2 +1,2 @@
-export * from './elements/gridstack/gridstack';
-export * from './elements/gridstack-item/gridstack-item';
+export * from './elements/grid-stack/grid-stack';
+export * from './elements/grid-stack-item/grid-stack-item';
