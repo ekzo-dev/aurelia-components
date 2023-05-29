@@ -1,0 +1,12 @@
+#root > grid-stack {
+  background-color: #fafad2;
+}
+
+.grid-stack-item-content {
+  background-color: #eeeeee;
+  text-align: center;
+}
+
+.grid-stack-sub-grid > .grid-stack-item-content {
+  background-color: rgba(0, 0, 0, 0.1);
+}
