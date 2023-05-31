@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies" : {
-    "gridstack" : "^8.1.2"
+    "gridstack" : "^8.2.1"
   },
   "main": "src/index.ts",
   "files": [
