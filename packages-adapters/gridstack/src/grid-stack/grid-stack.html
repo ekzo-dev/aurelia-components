@@ -1,9 +1,0 @@
-<template class="grid-stack">
-  <au-slot>
-    <div class="grid-stack-item" repeat.for="item of items">
-      <div class="grid-stack-item-content">
-        <au-compose component.bind="item.component" model.bind="item.model" template.bind="item.content"></au-compose>
-      </div>
-    </div>
-  </au-slot>
-</template>

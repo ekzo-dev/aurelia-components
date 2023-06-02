@@ -1,36 +1,21 @@
-import { bindable, Constructable, CustomElement, customElement, INode, slotted } from 'aurelia';
-import {
-  GridStack as GridStackBase,
-  GridStackOptions,
-  GridStackWidget,
-  GridItemHTMLElement,
-  GridHTMLElement,
-} from 'gridstack';
+import { bindable, CustomElement, customElement, INode, slotted } from 'aurelia';
+import { GridStack, GridStackOptions, GridItemHTMLElement, GridHTMLElement } from 'gridstack';
 import 'gridstack/dist/gridstack.min.css';
 import 'gridstack/dist/gridstack-extra.min.css';
-import { type GridStackItem } from '..';
-import template from './grid-stack.html';
-import './grid-stack.scss';
-
-export interface GridStackDynamicWidget extends GridStackWidget {
-  component?: Constructable;
-  model?: Record<string, any>;
-}
+import { type GsItem } from './gs-item';
+import './gs-grid.css';
 
 @customElement({
-  name: 'grid-stack',
-  template,
+  name: 'gs-grid',
+  template: '<template class="grid-stack"><au-slot></au-slot></template>',
 })
-export class GridStack {
-  @bindable()
-  items: GridStackDynamicWidget[] = [];
-
+export class GsGrid {
   @bindable()
   options: GridStackOptions = {};
 
-  public grid?: GridStackBase;
+  public grid?: GridStack;
 
-  @slotted('.grid-stack-item')
+  @slotted('gs-item')
   private slottedItems: GridItemHTMLElement[];
 
   constructor(@INode public element: GridHTMLElement) {}
@@ -65,7 +50,7 @@ export class GridStack {
       options.disableOneColumnMode = true;
     }
 
-    this.grid = GridStackBase.init(options, this.element);
+    this.grid = GridStack.init(options, this.element);
     this.grid['_autoColumn'] = autoColumn;
 
     // init items
@@ -88,20 +73,15 @@ export class GridStack {
     removed.forEach((x) => grid.removeWidget(x.el, false));
 
     // add new widgets
-    const hasItems = elements?.[0].nodeName === 'GRID-STACK-ITEM';
-    elements.forEach((element, index) => {
+    elements.forEach((element) => {
       if (element.gridstackNode) return;
 
-      const options: GridStackWidget = hasItems
-        ? CustomElement.for<GridStackItem>(element).viewModel.options
-        : this.items[index];
-      delete options['model'];
-      delete options['component'];
-      grid.addWidget(element, options);
+      const item: GsItem = CustomElement.for<GsItem>(element).viewModel;
+      grid.addWidget(element, item.options);
 
       if (element.dataset.hasSubgrid) {
-        const subgrid = element.querySelector('grid-stack');
-        const component = CustomElement.for<GridStack>(subgrid).viewModel;
+        const subgrid = element.querySelector('gs-grid');
+        const component = CustomElement.for<GsGrid>(subgrid).viewModel;
         component.createGrid(element);
       }
     });
@@ -113,7 +93,7 @@ export class GridStack {
 
   private findParentItem(el: HTMLElement): GridItemHTMLElement | null {
     while (el) {
-      if (el.classList.contains('grid-stack-item')) return el;
+      if (el.nodeName === 'GS-ITEM') return el;
       el = el.parentElement;
     }
     return null;
