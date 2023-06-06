@@ -36,9 +36,6 @@ export class BsInput extends BaseField {
   @bindable()
   step?: number;
 
-  @bindable()
-  decimal?: number;
-
   @bindable(coerceBoolean)
   multiple: boolean = false;
 
