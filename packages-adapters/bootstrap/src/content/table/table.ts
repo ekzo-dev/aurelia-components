@@ -42,7 +42,7 @@ export class BsTable implements ICustomElementViewModel {
   constructor(private element: HTMLElement) {}
 
   attached() {
-    this.table = this.element.querySelector(':scope > table')!;
+    this.table = this.element.querySelector('table')!;
 
     this.table.classList.add('table');
     Object.values(this.$controller.definition.bindables).forEach(({ property }) => {
