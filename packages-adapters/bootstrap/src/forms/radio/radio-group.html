@@ -1,0 +1,16 @@
+<label if.bind="label" class="form-label">${label}</label>
+<bs-radio
+  repeat.for="[k, v] of options | iterable"
+  model.bind="k"
+  label.bind="v"
+  checked.bind="checked"
+  inline.bind="inline"
+  matcher.bind="matcher"
+  name.bind="name"
+  form.bind="form"
+  disabled.bind="disabled"
+  required.bind="required"
+  valid.bind="valid"
+></bs-radio>
+<div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
+<div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>

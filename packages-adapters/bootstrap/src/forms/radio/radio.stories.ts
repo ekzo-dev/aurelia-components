@@ -1,5 +1,5 @@
-import { Meta, Story } from '@storybook/aurelia';
-import { BsRadio } from '.';
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+import { BsRadio, BsRadioGroup } from '.';
 import { disableControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
@@ -10,44 +10,31 @@ const meta: Meta = {
       handles: ['change', 'input'],
     },
   },
-  args: {
-    label: 'Radio',
-  },
 };
 export default meta;
 
-const Overview: Story = (args) => ({
-  props: {
-    ...args,
-  },
-});
-
-const InlinePosition: Story = (args) => ({
-  components: [BsRadio],
-  template: `
-<bs-radio label="1" value="1" name="radio1" title="1" inline.bind="inline" switcher.bind="switcher"></bs-radio>
-<bs-radio label="2" value="2" name="radio2" title="2" inline.bind="inline" switcher.bind="switcher"></bs-radio>
-<bs-radio label="3 (disabled)" value="3" name="radio3" title="3" disabled inline.bind="inline" switcher.bind="switcher"></bs-radio>
-  `,
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
-InlinePosition.argTypes = {
-  checked: disableControl,
-  label: disableControl,
-  name: disableControl,
-  id: disableControl,
-  title: disableControl,
-  disabled: disableControl,
-  required: disableControl,
-  valid: disableControl,
-  validFeedback: disableControl,
-  invalidFeedback: disableControl,
-  model: disableControl,
-  value: disableControl,
-  matcher: disableControl,
-};
-InlinePosition.args = {
-  inline: true,
+Overview.args = {
+  label: 'Default radio',
 };
 
-export { Overview, InlinePosition };
+const RadioGroup: Story = (args): StoryFnAureliaReturnType => ({
+  components: [BsRadioGroup],
+  template: createComponentTemplate(BsRadioGroup),
+  props: args,
+});
+
+RadioGroup.args = {
+  options: { '0': 'Default radio', '1': 'Default checked radio' },
+  checked: '1',
+};
+RadioGroup.argTypes = {
+  id: disableControl,
+  title: disableControl,
+  model: disableControl,
+  value: disableControl,
+};
+
+export { Overview, RadioGroup };

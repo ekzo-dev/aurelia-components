@@ -1,6 +1,6 @@
 import { bindable, BindingMode, customElement } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BaseField } from '../base-field';
-import { coerceBoolean } from '../../utils';
 import template from './radio.html';
 import './radio.scss';
 
