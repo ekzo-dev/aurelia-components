@@ -3,7 +3,7 @@ import { BsSelectMultiple } from './select-multiple';
 import { selectControl, disableControl } from '../../../../.storybook/helpers';
 
 export default {
-  title: 'BS Select Multiple / BS Select Multiple',
+  title: 'Ekzo / BS Select Multiple',
   component: BsSelectMultiple,
   parameters: {
     actions: {
