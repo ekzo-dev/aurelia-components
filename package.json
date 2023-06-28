@@ -18,11 +18,11 @@
     "publish": "lerna publish from-package"
   },
   "dependencies": {
-    "aurelia": "2.0.0-beta.5",
+    "aurelia": "2.0.0-beta.7",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@aurelia/webpack-loader": "2.0.0-beta.5",
+    "@aurelia/webpack-loader": "2.0.0-beta.7",
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
     "@commitlint/config-lerna-scopes": "^17.4.2",
