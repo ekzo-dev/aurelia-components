@@ -1,7 +1,7 @@
 import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
 import { BsCollapse } from '../collapse';
 import template from './accordion-item.html';
-import './accordion-item.scss';
+import './accordion.scss';
 
 @customElement({
   name: 'bs-accordion-item',
@@ -15,7 +15,13 @@ export class BsAccordionItem implements ICustomElementViewModel {
   @bindable({ mode: BindingMode.twoWay })
   collapsed: boolean = true;
 
+  private collapse!: BsCollapse;
+
   onHeaderClick() {
     this.collapsed = !this.collapsed;
+  }
+
+  collapsedChanged() {
+    this.collapse.toggle();
   }
 }

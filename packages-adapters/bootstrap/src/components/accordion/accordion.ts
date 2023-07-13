@@ -1,6 +1,6 @@
 import { customElement, bindable, ICustomElementViewModel, children } from 'aurelia';
 import { watch } from '@aurelia/runtime-html';
-import { coerceBoolean } from '../../utils';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import template from './accordion.html';
 import type { BsAccordionItem } from '.';
 import './accordion.scss';
@@ -16,9 +16,7 @@ export class BsAccordion implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   alwaysOpen: boolean = false;
 
-  @children({
-    filter: (el: HTMLElement) => el.tagName === 'BS-ACCORDION-ITEM',
-  })
+  @children('bs-accordion-item')
   items: BsAccordionItem[];
 
   @watch((self: BsAccordion) => self.items.map((item) => item.collapsed))

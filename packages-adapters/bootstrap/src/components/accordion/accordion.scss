@@ -1,6 +1,7 @@
 @import '../../utils';
 @import '~bootstrap/scss/accordion';
 
-bs-accordion {
+bs-accordion,
+bs-accordion-item {
   display: block;
 }

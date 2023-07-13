@@ -1,6 +1,6 @@
 import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import { Collapse } from 'bootstrap';
-import { coerceBoolean } from '../../utils';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import template from './collapse.html';
 import '../../transitions.scss';
 import './collapse.scss';
