@@ -14,6 +14,6 @@
   mode.bind="mode"
   button-variant.bind="buttonVariant"
   button-size.bind="buttonSize"
+  invalid-feedback.bind="$last ? invalidFeedback : undefined"
+  valid-feedback.bind="$last ? validFeedback : undefined"
 ></bs-radio>
-<div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
-<div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
