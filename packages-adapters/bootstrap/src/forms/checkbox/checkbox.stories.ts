@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/aurelia';
 import { BsCheckbox } from '.';
-import { disableControl } from '../../../../../.storybook/helpers';
+import { VARIANTS, SIZES } from '../../constants';
+import { disableControl, selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
   title: 'Bootstrap / Forms / Checkbox',
@@ -13,6 +14,11 @@ const meta: Meta = {
   args: {
     label: 'Some label',
   },
+  argTypes: {
+    mode: selectControl(['switch', 'button']),
+    buttonVariant: selectControl([...VARIANTS, 'link', ...VARIANTS.map((v) => `outline-${v}`)]),
+    buttonSize: selectControl(['', ...SIZES]),
+  },
 };
 export default meta;
 
@@ -20,17 +26,17 @@ const Overview: Story = (args) => ({
   props: args,
 });
 
-const InlinePosition: Story = (args) => ({
-  components: [BsCheckbox],
+const BindingToArray: Story = (args) => ({
   template: `
-<bs-checkbox label="1" value="1" name="checkbox1" title="1" inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
-<bs-checkbox label="2" value="2" name="checkbox2" title="2" inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
-<bs-checkbox label="3 (disabled)" value="3" name="checkbox3" title="3" disabled inline.bind="inline" switcher.bind="switcher" indeterminate.bind="indeterminate"></bs-checkbox>
+<bs-checkbox label="One" value="1" checked.bind="checked"></bs-checkbox>
+<bs-checkbox label="Two" value="2" checked.bind="checked"></bs-checkbox>
+<bs-checkbox label="Three" value="3" checked.bind="checked"></bs-checkbox>
+<br>
+Selected: \${checked}
   `,
   props: args,
 });
-InlinePosition.argTypes = {
-  checked: disableControl,
+BindingToArray.argTypes = {
   label: disableControl,
   name: disableControl,
   id: disableControl,
@@ -43,11 +49,16 @@ InlinePosition.argTypes = {
   model: disableControl,
   value: disableControl,
   matcher: disableControl,
-  switcher: disableControl,
+  mode: disableControl,
+  buttonSize: disableControl,
+  buttonVariant: disableControl,
   indeterminate: disableControl,
+  form: disableControl,
+  inline: disableControl,
+  reverse: disableControl,
 };
-InlinePosition.args = {
-  inline: true,
+BindingToArray.args = {
+  checked: [],
 };
 
-export { Overview, InlinePosition };
+export { Overview, BindingToArray };

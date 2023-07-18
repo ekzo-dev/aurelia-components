@@ -13,7 +13,7 @@ export class BaseField implements ICustomElementViewModel {
   label?: string;
 
   @bindable()
-  title: string = '';
+  title?: string;
 
   @bindable(coerceBoolean)
   disabled: boolean = false;

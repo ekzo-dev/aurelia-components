@@ -1,18 +1,24 @@
-<template class="form-check ${inline ? 'form-check-inline' : ''}">
+<template class="${mode === 'button' ? '' : 'form-check'} ${inline ? 'form-check-inline' : ''}">
   <input
     id="${id}"
-    class="form-check-input ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+    class="${mode === 'button' ? 'btn-check' : 'form-check-input'} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
     type="radio"
-    name.bind="name"
     checked.bind="checked"
     value.bind="value"
     model.bind="model"
+    matcher.bind="matcher"
     disabled.bind="disabled"
     required.bind="required"
     form.bind="form & attr"
-    title="${title}"
+    name.bind="name & attr"
+    title.bind="title & attr"
   />
-  <label class="form-check-label" for="${id}" if.bind="label">${label}</label>
+  <label
+    class="${mode === 'button' ? `btn btn-${buttonVariant} ${buttonSize ? `btn-${buttonSize}` : ''}` : 'form-check-label'"
+    for="${id}"
+    if.bind="label"
+    >${label}</label
+  >
   <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
   <div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
 </template>

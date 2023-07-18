@@ -5,12 +5,12 @@
     class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
     multiple.bind="multiple"
     value.bind="value"
-    name.bind="name"
     required.bind="required"
     disabled.bind="disabled"
-    title="${title}"
-    size.bind="size"
+    size.bind="size & attr"
     form.bind="form & attr"
+    name.bind="name & attr"
+    title.bind="title & attr"
   >
     <au-slot>
       <option repeat.for="[k, v] of options | iterable" model.bind="k">${v}</option>

@@ -1,1 +1,0 @@
-// empty placeholder to enable JetBrains WebStorm Aurelia plugin

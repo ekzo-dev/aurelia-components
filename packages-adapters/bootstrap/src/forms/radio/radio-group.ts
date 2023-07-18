@@ -4,6 +4,7 @@ import { BaseField } from '../base-field';
 import { BsRadio } from './radio';
 import template from './radio-group.html';
 import './radio.scss';
+import { BsButtonVariant, Size } from '@ekzo-dev/bootstrap';
 
 @customElement({
   name: 'bs-radio-group',
@@ -22,6 +23,15 @@ export class BsRadioGroup extends BaseField {
 
   @bindable(coerceBoolean)
   inline: boolean = false;
+
+  @bindable({ type: String })
+  mode?: 'button';
+
+  @bindable({ type: String })
+  buttonSize?: Size;
+
+  @bindable()
+  buttonVariant: BsButtonVariant = 'primary';
 
   binding() {
     super.binding();
