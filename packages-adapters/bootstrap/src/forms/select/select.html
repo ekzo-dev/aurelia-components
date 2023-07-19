@@ -1,5 +1,5 @@
 <template class="${floatingLabel ? 'form-floating' : ''}">
-  <label for="${id}" if.bind="label && !floatingLabel" class="form-label">${label}</label>
+  <label for="${id}" if.bind="label && !floatingLabel" class="form-label ${required ? 'required' : ''}">${label}</label>
   <select
     id="${id}"
     class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
