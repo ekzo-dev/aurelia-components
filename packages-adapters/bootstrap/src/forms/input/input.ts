@@ -45,8 +45,9 @@ export class BsInput extends BaseField {
   @bindable()
   pattern?: string;
 
+  /* property is named like this to avoid collision with IActivationHooks['accept'] */
   @bindable()
-  accept?: string;
+  fileAccept?: string;
 
   @bindable()
   placeholder?: string;
