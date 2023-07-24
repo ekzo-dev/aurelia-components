@@ -45,8 +45,8 @@ export class BsTable implements ICustomElementViewModel {
     this.table = this.element.querySelector('table')!;
 
     this.table.classList.add('table');
-    Object.values(this.$controller.definition.bindables).forEach(({ property }) => {
-      this.propertyChanged(property as keyof this, this[property]);
+    Object.keys(this.$controller.definition.bindables).forEach((name) => {
+      this.propertyChanged(name as keyof this, this[name]);
     });
   }
 
