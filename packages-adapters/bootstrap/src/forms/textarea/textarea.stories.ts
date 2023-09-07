@@ -1,7 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsTextarea } from '.';
+import { selectControl } from '../../../../../.storybook/helpers';
+import { SIZES } from '../../constants';
 
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Forms / Textarea',
   component: BsTextarea,
   parameters: {
@@ -9,10 +11,17 @@ export default {
       handles: ['change', 'input'],
     },
   },
-} as Meta;
-
-export const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  props: {
-    ...args,
+  args: {
+    label: 'Label',
   },
+  argTypes: {
+    size: selectControl(['', ...SIZES]),
+  },
+};
+
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
+  props: args,
 });
+
+export default meta;
+export { Overview };

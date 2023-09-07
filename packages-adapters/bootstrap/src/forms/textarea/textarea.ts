@@ -3,6 +3,7 @@ import { BaseField } from '../base-field';
 import template from './textarea.html';
 import './textarea.scss';
 import { coerceBoolean } from '../../utils';
+import { Sizes } from '../../interfaces';
 
 @customElement({
   name: 'bs-textarea',
@@ -26,4 +27,7 @@ export class BsTextarea extends BaseField {
 
   @bindable()
   minlength?: number;
+
+  @bindable()
+  size?: Sizes;
 }

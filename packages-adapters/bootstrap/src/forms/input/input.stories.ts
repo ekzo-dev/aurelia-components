@@ -1,9 +1,9 @@
-import { Meta, Story } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsInput } from '.';
 import { SIZES } from '../../constants';
 import { selectControl } from '../../../../../.storybook/helpers';
 
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Forms / Input',
   component: BsInput,
   parameters: {
@@ -17,8 +17,11 @@ export default {
   argTypes: {
     size: selectControl(['', ...SIZES]),
   },
-} as Meta;
+};
 
-export const Overview: Story = (args) => ({
+const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
+
+export default meta;
+export { Overview };

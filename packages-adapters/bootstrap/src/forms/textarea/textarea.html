@@ -2,7 +2,7 @@
   <label for="${id}" if.bind="label && !floatingLabel" class="form-label ${required ? 'required' : ''}">${label}</label>
   <textarea
     id="${id}"
-    class="form-control ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+    class="form-control ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''} ${size ? `form-control-${size}` : ''}"
     required.bind="required"
     disabled.bind="disabled"
     value.bind="value"
