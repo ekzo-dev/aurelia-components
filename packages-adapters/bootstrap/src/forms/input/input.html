@@ -19,9 +19,13 @@
     title.bind="title & attr"
     accept.bind="fileAccept & attr"
     form.bind="form & attr"
+    list.bind="(datalist.length ? datalistId : undefined) & attr"
     ref="input"
   />
   <label for="${id}" if.bind="label && floatingLabel">${label}</label>
+  <datalist if.bind="datalist.length" id="${datalistId}">
+    <option repeat.for="val of datalist" value="${val}"></option>
+  </datalist>
   <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
   <div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
 </template>

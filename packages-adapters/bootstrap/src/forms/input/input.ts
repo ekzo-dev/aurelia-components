@@ -1,9 +1,7 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
-
 import { BaseField } from '../base-field';
-import { coerceBoolean } from '../../utils';
+import { coerceBoolean, uniqueId } from '../../utils';
 import template from './input.html';
-
 import './input.scss';
 import { Sizes } from '../../interfaces';
 
@@ -56,13 +54,20 @@ export class BsInput extends BaseField {
   floatingLabel: boolean = false;
 
   @bindable()
-  readonly size?: Sizes;
+  size?: Sizes;
+
+  @bindable()
+  datalist: string[] = [];
 
   input!: HTMLInputElement;
+
+  datalistId!: string;
 
   binding(): void {
     super.binding();
     this.ensurePlaceholder();
+
+    this.datalistId = uniqueId();
   }
 
   placeholderChanged(): void {
