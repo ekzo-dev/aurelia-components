@@ -1,0 +1,55 @@
+{
+  "name": "@ekzo-dev/json-editor",
+  "description": "Aurelia JSON Editor adapter",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/json-editor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekzo-dev/aurelia-components.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@ekzo-dev/vanilla-jsoneditor": "~0.18.0",
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
+    "@types/json-schema": "^7.0.9"
+  },
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
+    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint": "npm run lint:js && npm run lint:html && npm run lint:css",
+    "pretest": "npm run lint",
+    "start": "webpack serve",
+    "build": "rimraf dist && webpack --env production",
+    "analyze": "rimraf dist && webpack --env production --analyze",
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+      "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(ts|html)$": "@aurelia/ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
