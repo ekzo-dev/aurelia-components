@@ -20,3 +20,4 @@ export * from './scrollspy';
 export * from './spinner';
 export * from './toast';
 export * from './tooltip';
+export * from './navbar';
