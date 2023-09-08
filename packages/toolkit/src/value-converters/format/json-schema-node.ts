@@ -13,10 +13,12 @@ export class FormatJsonSchemaNode {
         return new FormatBoolean().toView(value);
       case 'string':
       case 'integer':
-        if (definition.enum && definition.description) {
+        if (
+          definition.enum &&
+          definition.oneOf?.every((item: JSONSchema7) => item.title != null && item.const != null)
+        ) {
           try {
-            const labels = JSON.parse(definition.description);
-            const label = labels[value.toString()];
+            const label = definition.oneOf.find((item: JSONSchema7) => item.const === value);
             if (label) {
               return label;
             }
