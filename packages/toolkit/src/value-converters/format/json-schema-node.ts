@@ -15,14 +15,12 @@ export class FormatJsonSchemaNode {
       case 'integer':
         if (
           definition.enum &&
-          definition.oneOf?.every((item: JSONSchema7) => item.title != null && item.const != null)
+          definition.anyOf?.every((item: JSONSchema7) => item.title != null && item.const != null)
         ) {
-          try {
-            const label = definition.oneOf.find((item: JSONSchema7) => item.const === value);
-            if (label) {
-              return label;
-            }
-          } catch (e) {}
+          const node = definition.anyOf.find((item: JSONSchema7) => item.const === value);
+          if (node) {
+            return (node as JSONSchema7).title;
+          }
         }
 
         switch (definition.format) {
