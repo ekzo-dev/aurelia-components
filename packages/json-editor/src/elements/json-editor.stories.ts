@@ -20,8 +20,16 @@ const meta: Meta = {
           type: 'string',
           format: 'email',
         },
+        number: {
+          type: 'number',
+          multipleOf: 0.0001,
+        },
       },
       required: ['enum'],
+    },
+    content: {
+      number: 1.11,
+      enum: '1',
     },
   },
 };

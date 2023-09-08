@@ -59,7 +59,8 @@ export class JsonEditor extends VanillaJsonEditor {
         schema: this.schema as any,
         schemaDefinitions: this.schemaDefinitions(this.schema),
         ajvOptions: {
-          formats: {},
+          // https://ajv.js.org/options.html#multipleofprecision
+          multipleOfPrecision: 2,
         },
         onCreateAjv: (ajv) => {
           addFormats(ajv);
