@@ -2,7 +2,7 @@ import { customElement, bindable, BindingMode } from 'aurelia';
 import { BaseField } from '../base-field';
 import template from './textarea.html';
 import './textarea.scss';
-import { coerceBoolean } from '../../utils';
+import { coerceBoolean, uniqueId } from '../../utils';
 import { Sizes } from '../../interfaces';
 
 @customElement({
@@ -17,7 +17,7 @@ export class BsTextarea extends BaseField {
   rows: number = 3;
 
   @bindable()
-  placeholder: string = '';
+  placeholder?: string;
 
   @bindable(coerceBoolean)
   floatingLabel: boolean = false;
@@ -30,4 +30,24 @@ export class BsTextarea extends BaseField {
 
   @bindable()
   size?: Sizes;
+
+  @bindable()
+  autocomplete?: string;
+
+  binding(): void {
+    super.binding();
+    this.ensurePlaceholder();
+  }
+
+  placeholderChanged(): void {
+    this.ensurePlaceholder();
+  }
+
+  private ensurePlaceholder(): void {
+    // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
+    // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
+    if (this.floatingLabel && !this.placeholder) {
+      this.placeholder = '.';
+    }
+  }
 }

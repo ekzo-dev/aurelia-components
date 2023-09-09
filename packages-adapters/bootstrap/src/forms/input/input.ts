@@ -59,6 +59,9 @@ export class BsInput extends BaseField {
   @bindable()
   datalist: string[] = [];
 
+  @bindable()
+  autocomplete?: string;
+
   input!: HTMLInputElement;
 
   datalistId!: string;

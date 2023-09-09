@@ -28,4 +28,7 @@ export class BsSelect extends BaseField {
 
   @bindable()
   bsSize?: Sizes;
+
+  @bindable()
+  autocomplete?: string;
 }

@@ -11,6 +11,7 @@
     form.bind="form & attr"
     name.bind="name & attr"
     title.bind="title & attr"
+    autocomplete.bind="autocomplete & attr"
   >
     <au-slot>
       <option repeat.for="[k, v] of options | iterable" model.bind="k">${v}</option>
