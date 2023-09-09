@@ -1,9 +1,9 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
 import { BaseField } from '../base-field';
+import { coerceBoolean } from '../../utils';
+import { Sizes } from '../../interfaces';
 import template from './textarea.html';
 import './textarea.scss';
-import { coerceBoolean, uniqueId } from '../../utils';
-import { Sizes } from '../../interfaces';
 
 @customElement({
   name: 'bs-textarea',
