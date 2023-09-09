@@ -16,7 +16,9 @@ export class BsAccordion implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   alwaysOpen: boolean = false;
 
-  @children('bs-accordion-item')
+  @children({
+    filter: (el: HTMLElement) => el.tagName === 'BS-ACCORDION-ITEM',
+  })
   items: BsAccordionItem[];
 
   @watch((self: BsAccordion) => self.items.map((item) => item.collapsed))
