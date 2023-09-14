@@ -9,8 +9,8 @@
   ],
   "homepage": "https://github.com/ekzo-dev/aurelia-components",
   "scripts": {
-    "lint": "nmp run eslint ./packages/**/src/**/*.ts",
-    "lint:fix": "npm run eslint --fix ./packages/**/src/**/*.ts",
+    "lint": "eslint --no-ignore ./packages/**/src/**/*.ts",
+    "lint:fix": "eslint --fix ./packages/**/src/**/*.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "predeploy": "npm run build-storybook",
