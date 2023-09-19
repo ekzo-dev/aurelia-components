@@ -1,11 +1,14 @@
-import { bindable, BindingMode, customElement } from 'aurelia';
-import { BaseField } from '../base-field';
-import { coerceBoolean } from '../../utils';
-import { Size } from '../../types';
-import { type BsButtonVariant } from '../../components';
-import template from './checkbox.html';
 import './checkbox.scss';
 import '../../components/button/button.scss';
+
+import { bindable, BindingMode, customElement } from 'aurelia';
+
+import { type BsButtonVariant } from '../../components';
+import { Size } from '../../types';
+import { coerceBoolean } from '../../utils';
+import { BaseField } from '../base-field';
+
+import template from './checkbox.html';
 
 @customElement({
   name: 'bs-checkbox',
@@ -25,7 +28,7 @@ export class BsCheckbox extends BaseField {
   matcher?: (a: any, b: any) => boolean;
 
   @bindable(coerceBoolean)
-  inline: boolean = false;
+  inline = false;
 
   @bindable({ type: String })
   mode?: 'switch' | 'button';
@@ -37,10 +40,10 @@ export class BsCheckbox extends BaseField {
   buttonVariant: BsButtonVariant = 'primary';
 
   @bindable(coerceBoolean)
-  indeterminate: boolean = false;
+  indeterminate = false;
 
   @bindable(coerceBoolean)
-  reverse: boolean = false;
+  reverse = false;
 
   readonly input!: HTMLInputElement;
 

@@ -28,8 +28,8 @@
 //     frameworkConfig.plugin(PLATFORM.moduleName('aurelia-inputmask'));
 // }
 
-export * from './types';
 export * from './components';
 export * from './content';
 export * from './forms';
 export * from './icon';
+export * from './types';

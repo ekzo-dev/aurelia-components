@@ -1,9 +1,12 @@
-import { customElement, bindable, BindingMode } from 'aurelia';
-import { Iterable, coerceBoolean, coerceNumber } from '@ekzo-dev/toolkit';
-import { BaseField } from '../base-field';
-import { Sizes } from '../../interfaces';
-import template from './select.html';
 import './select.scss';
+
+import { coerceBoolean, coerceNumber, Iterable } from '@ekzo-dev/toolkit';
+import { bindable, BindingMode, customElement } from 'aurelia';
+
+import { Sizes } from '../../interfaces';
+import { BaseField } from '../base-field';
+
+import template from './select.html';
 
 @customElement({
   name: 'bs-select',
@@ -18,10 +21,10 @@ export class BsSelect extends BaseField {
   options: Map<any, string> | Record<any, string> | Array<[any, string]> = [];
 
   @bindable(coerceBoolean)
-  multiple: boolean = false;
+  multiple = false;
 
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
+  floatingLabel = false;
 
   @bindable(coerceNumber)
   size?: number;

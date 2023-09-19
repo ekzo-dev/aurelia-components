@@ -1,9 +1,12 @@
-import { customElement, bindable, ICustomElementViewModel, children } from 'aurelia';
+import type { BsAccordionItem } from '.';
+
+import './accordion.scss';
+
 import { watch } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, children, customElement, ICustomElementViewModel } from 'aurelia';
+
 import template from './accordion.html';
-import type { BsAccordionItem } from '.';
-import './accordion.scss';
 
 @customElement({
   name: 'bs-accordion',
@@ -11,10 +14,10 @@ import './accordion.scss';
 })
 export class BsAccordion implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  flush: boolean = false;
+  flush = false;
 
   @bindable(coerceBoolean)
-  alwaysOpen: boolean = false;
+  alwaysOpen = false;
 
   @children({
     filter: (el: HTMLElement) => el.tagName === 'BS-ACCORDION-ITEM',
@@ -26,6 +29,7 @@ export class BsAccordion implements ICustomElementViewModel {
     if (this.alwaysOpen || oldValue.length === 0) return;
 
     const expanded = newValue.findIndex((v, i) => v === false && v !== oldValue[i]);
+
     if (expanded >= 0) {
       this.items.forEach((item, i) => {
         if (i !== expanded) item.collapsed = true;

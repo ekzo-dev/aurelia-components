@@ -1,10 +1,13 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
+import './table.scss';
+
 import { ICustomElementController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { Variant, Breakpoint } from '../../types';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+
 import { VARIANTS } from '../../constants';
+import { Breakpoint, Variant } from '../../types';
+
 import template from './table.html';
-import './table.scss';
 
 @customElement({
   name: 'bs-table',
@@ -12,19 +15,19 @@ import './table.scss';
 })
 export class BsTable implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  bordered: boolean = false;
+  bordered = false;
 
   @bindable(coerceBoolean)
-  striped: boolean = false;
+  striped = false;
 
   @bindable(coerceBoolean)
-  stripedColumns: boolean = false;
+  stripedColumns = false;
 
   @bindable(coerceBoolean)
-  hover: boolean = false;
+  hover = false;
 
   @bindable(coerceBoolean)
-  borderless: boolean = false;
+  borderless = false;
 
   @bindable()
   size?: 'sm';
@@ -55,13 +58,16 @@ export class BsTable implements ICustomElementViewModel {
       case 'size':
         this.toggleClass('sm', value === 'sm');
         break;
+
       case 'variant':
         VARIANTS.forEach((variant) => {
           this.toggleClass(variant, value === variant);
         });
         break;
+
       case 'responsive':
         break;
+
       default:
         this.toggleClass(name === 'stripedColumns' ? 'striped-columns' : name.toString(), value);
     }

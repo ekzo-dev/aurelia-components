@@ -1,9 +1,12 @@
-import { customElement, bindable } from 'aurelia';
-import { Variants } from '../../interfaces';
-import { coerceBoolean } from '../../utils';
-import template from './badge.html';
 import '../../color-bg.scss';
 import './badge.scss';
+
+import { bindable, customElement } from 'aurelia';
+
+import { Variants } from '../../interfaces';
+import { coerceBoolean } from '../../utils';
+
+import template from './badge.html';
 
 @customElement({
   name: 'bs-badge',
@@ -14,5 +17,5 @@ export class BsBadge {
   variant: Variants = 'primary';
 
   @bindable(coerceBoolean)
-  pill: boolean = false;
+  pill = false;
 }

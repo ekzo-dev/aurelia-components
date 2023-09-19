@@ -1,6 +1,8 @@
-import { bindable, customAttribute } from 'aurelia';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './dropdown.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customAttribute } from 'aurelia';
+
 import { BaseAttribute } from '../base-attribute';
 
 export type BsDropdownDirection = 'down' | 'up' | 'end' | 'start';
@@ -11,7 +13,7 @@ export class BsDropdown extends BaseAttribute {
   direction: BsDropdownDirection = 'down';
 
   @bindable(coerceBoolean)
-  center: boolean = false;
+  center = false;
 
   binding() {
     // set default variant because primary attribute has "" default value

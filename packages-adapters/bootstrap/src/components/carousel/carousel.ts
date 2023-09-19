@@ -1,10 +1,14 @@
-import { customElement, bindable, ICustomElementViewModel, BindingMode, children } from 'aurelia';
-import { ICustomElementController } from '@aurelia/runtime-html';
-import { Carousel } from 'bootstrap';
 import type { BsCarouselItem } from '.';
-import { coerceBoolean } from '../../utils';
-import template from './carousel.html';
+
 import './carousel.scss';
+
+import { ICustomElementController } from '@aurelia/runtime-html';
+import { bindable, BindingMode, children, customElement, ICustomElementViewModel } from 'aurelia';
+import { Carousel } from 'bootstrap';
+
+import { coerceBoolean } from '../../utils';
+
+import template from './carousel.html';
 
 @customElement({
   name: 'bs-carousel',
@@ -12,7 +16,7 @@ import './carousel.scss';
 })
 export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
   @bindable(coerceBoolean)
-  ride: boolean = false;
+  ride = false;
 
   @bindable(coerceBoolean)
   fade?: boolean;
@@ -21,7 +25,7 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
   interval: number | false = 3000;
 
   @bindable(coerceBoolean)
-  keyboard: boolean = false;
+  keyboard = false;
 
   @bindable()
   pause: 'hover' | false = 'hover';
@@ -30,23 +34,23 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
   direction: 'left' | 'right' = 'right';
 
   @bindable(coerceBoolean)
-  wrap: boolean = true;
+  wrap = true;
 
   //todo не тестировалось
   @bindable(coerceBoolean)
-  touch: boolean = true;
+  touch = true;
 
   @bindable(coerceBoolean)
-  indicators: boolean = true;
+  indicators = true;
 
   @bindable(coerceBoolean)
-  controls: boolean = true;
+  controls = true;
 
   @bindable(coerceBoolean)
-  dark: boolean = false;
+  dark = false;
 
   @bindable({ mode: BindingMode.twoWay })
-  activeSlide: number = 0;
+  activeSlide = 0;
 
   @children({
     options: { childList: true, subtree: true },
@@ -125,6 +129,7 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
     this.slideListener = (event: Carousel.Event) => {
       this.activeSlide = event.to;
     };
+
     this.element.addEventListener('slide.bs.carousel', this.slideListener);
     this.rideChanged();
   }

@@ -1,9 +1,11 @@
+import './nav.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customAttribute } from 'aurelia';
 import { Tab } from 'bootstrap';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import './nav.scss';
-import { BaseAttribute } from '../base-attribute';
+
 import { TOGGLE } from '../../constants';
+import { BaseAttribute } from '../base-attribute';
 
 @customAttribute('bs-tab-pane')
 export class BsTabPane extends BaseAttribute {
@@ -11,12 +13,13 @@ export class BsTabPane extends BaseAttribute {
   for!: string;
 
   @bindable(coerceBoolean)
-  fade: boolean = true;
+  fade = true;
 
   private tab?: HTMLElement;
 
   attaching() {
     super.attaching();
+
     if (!this.element.id) {
       this.element.setAttribute('id', `${this.for}-pane`);
     }
@@ -53,6 +56,7 @@ export class BsTabPane extends BaseAttribute {
       if (tab.classList.contains('active')) {
         this.setClass(['show', 'active']);
       }
+
       this.tab = tab;
     } else {
       console.error(`Tab nav-link #${this.for} not found for tab-pane`);

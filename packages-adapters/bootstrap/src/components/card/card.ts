@@ -1,8 +1,11 @@
-import { customElement, bindable } from 'aurelia';
-import { Variants } from '../../interfaces';
-import template from './card.html';
 import '../../color-bg.scss';
 import './card.scss';
+
+import { bindable, customElement } from 'aurelia';
+
+import { Variants } from '../../interfaces';
+
+import template from './card.html';
 
 @customElement({
   name: 'bs-card-group',

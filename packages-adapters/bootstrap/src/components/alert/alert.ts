@@ -1,11 +1,14 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
+import '../../transitions.scss';
+import './alert.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Alert } from 'bootstrap';
+
 import { Variants } from '../../interfaces';
 import { coerceBoolean } from '../../utils';
 import { BsCloseButton } from '../close-button';
+
 import template from './alert.html';
-import '../../transitions.scss';
-import './alert.scss';
 
 @customElement({
   name: 'bs-alert',
@@ -17,7 +20,7 @@ export class BsAlert implements ICustomElementViewModel {
   variant: Variants = 'primary';
 
   @bindable(coerceBoolean)
-  dismissible: boolean = false;
+  dismissible = false;
 
   private alert?: Alert;
 

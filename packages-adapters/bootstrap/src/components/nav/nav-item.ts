@@ -1,6 +1,8 @@
-import { customElement, ICustomElementViewModel } from 'aurelia';
-import template from './nav-item.html';
 import './nav.scss';
+
+import { customElement, ICustomElementViewModel } from 'aurelia';
+
+import template from './nav-item.html';
 
 @customElement({
   name: 'bs-nav-item',
