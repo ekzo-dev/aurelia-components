@@ -9,10 +9,7 @@ module.exports = {
         "plugin:@ekzo-dev/eslint-config/jest-recommended",
         "plugin:@ekzo-dev/eslint-config/prettier-recommended",
         "plugin:@ekzo-dev/eslint-config/rules-recommended"
-    ],
-    "parserOptions": {
-        "project": ["tsconfig.json"]
-    },
+    ]
     // Old config
     // plugins: ['unused-imports', 'simple-import-sort', 'prettier'],
     // parser: '@typescript-eslint/parser',
