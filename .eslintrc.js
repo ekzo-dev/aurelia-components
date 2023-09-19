@@ -1,6 +1,6 @@
 module.exports = {
     root: true,
-    ignorePatterns: ['**/*'],
+    ignorePatterns: ['!**/*'],
     "plugins": ["@ekzo-dev/eslint-config"],
     "extends": [
         // "plugin:@ekzo-dev/eslint-config/nx-recommended",
