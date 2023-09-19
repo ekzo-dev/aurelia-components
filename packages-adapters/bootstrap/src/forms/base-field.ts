@@ -1,6 +1,8 @@
-import { bindable, ICustomElementViewModel } from 'aurelia';
-import { coerceBoolean, uniqueId } from '../utils';
 import './common.scss';
+
+import { bindable, ICustomElementViewModel } from 'aurelia';
+
+import { coerceBoolean, uniqueId } from '../utils';
 
 export class BaseField implements ICustomElementViewModel {
   @bindable()
@@ -16,10 +18,10 @@ export class BaseField implements ICustomElementViewModel {
   title?: string;
 
   @bindable(coerceBoolean)
-  disabled: boolean = false;
+  disabled = false;
 
   @bindable(coerceBoolean)
-  required: boolean = false;
+  required = false;
 
   @bindable(coerceBoolean)
   valid?: boolean;

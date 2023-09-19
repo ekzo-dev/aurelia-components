@@ -1,12 +1,13 @@
-import { bindable, observable, customElement, ICustomElementViewModel } from 'aurelia';
-import Stepper from 'bs-stepper';
 import 'bs-stepper/dist/css/bs-stepper.min.css';
+import './bs-stepper.scss';
+
+import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import Stepper from 'bs-stepper';
 
 import { BsStepperStep } from '../index';
-import { coerceBoolean } from './utils';
 
 import template from './bs-stepper.html';
-import './bs-stepper.scss';
+import { coerceBoolean } from './utils';
 
 export interface IBsStepperEventDetail {
   to: number;
@@ -20,13 +21,13 @@ export interface IBsStepperEventDetail {
 })
 export class BsStepper implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  linear: boolean = true;
+  linear = true;
 
   @bindable(coerceBoolean)
-  animation: boolean = false;
+  animation = false;
 
   @bindable(coerceBoolean)
-  vertical: boolean = false;
+  vertical = false;
 
   @observable()
   readonly steps: BsStepperStep[] = [];
@@ -83,6 +84,7 @@ export class BsStepper implements ICustomElementViewModel {
 
     // manually remove library classes, it does not do it
     const element = this.element as HTMLElement;
+
     element.classList.remove('linear');
     element.querySelectorAll('div.step').forEach((step) => {
       step.classList.remove('active');

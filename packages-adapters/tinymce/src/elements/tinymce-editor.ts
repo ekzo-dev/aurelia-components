@@ -1,10 +1,13 @@
-import { BindingMode, customElement, bindable } from 'aurelia';
-import tinymce, { Editor, RawEditorSettings } from 'tinymce';
 // theme
 import 'tinymce/themes/silver';
 import 'tinymce/skins/ui/oxide/skin.min.css';
 // icons
 import 'tinymce/icons/default';
+import './tinymce-editor.scss';
+
+import { bindable, BindingMode, customElement } from 'aurelia';
+import tinymce, { Editor, RawEditorSettings } from 'tinymce';
+
 // all free plugins
 // import 'tinymce/plugins/advlist';
 // import 'tinymce/plugins/anchor';
@@ -50,9 +53,7 @@ import 'tinymce/icons/default';
 // import 'tinymce/plugins/visualblocks';
 // import 'tinymce/plugins/visualchars';
 // import 'tinymce/plugins/wordcount';
-
 import template from './tinymce-editor.html';
-import './tinymce-editor.scss';
 
 const delayUtil = tinymce.util.Tools.resolve('tinymce.util.Delay');
 
@@ -62,7 +63,7 @@ const delayUtil = tinymce.util.Tools.resolve('tinymce.util.Delay');
 })
 export class TinymceEditor {
   @bindable({ mode: BindingMode.twoWay })
-  value: string = '';
+  value = '';
 
   @bindable()
   readonly settings: RawEditorSettings = {};
@@ -121,7 +122,7 @@ export class TinymceEditor {
   }
 
   private destroyEditor() {
-    tinymce.remove(this.editor!);
+    tinymce.remove(this.editor);
     this.editor = undefined;
   }
 
