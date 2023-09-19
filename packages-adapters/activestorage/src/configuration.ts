@@ -1,4 +1,4 @@
-import { DI, Registration, IContainer } from 'aurelia';
+import { DI, IContainer, Registration } from 'aurelia';
 
 export interface IEndpoint {
   url: string;
@@ -22,6 +22,7 @@ export const ActiveStorage = {
     return {
       register(container: IContainer) {
         Registration.instance(ActiveStorageOptions, options).register(container);
+
         return Registration.instance(IActiveStorageOptions, options).register(container);
       },
     };
