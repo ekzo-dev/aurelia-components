@@ -1,7 +1,9 @@
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import template from './navbar-nav.html';
+
 import './navbar.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 @customElement({
   name: 'bs-navbar-nav',

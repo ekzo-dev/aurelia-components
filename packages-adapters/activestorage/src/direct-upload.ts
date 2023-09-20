@@ -1,5 +1,6 @@
-import { customAttribute, ICustomAttributeViewModel, INode, bindable } from 'aurelia';
-import { DirectUpload, DirectUploadDelegate, Blob } from '@rails/activestorage';
+import { Blob, DirectUpload, DirectUploadDelegate } from '@rails/activestorage';
+import { bindable, customAttribute, ICustomAttributeViewModel, INode } from 'aurelia';
+
 import { ActiveStorageOptions, IEndpoint } from './configuration';
 
 export interface AsBlob extends Partial<Blob> {
@@ -53,6 +54,7 @@ class DirectUploadController implements DirectUploadDelegate {
 
   uploadRequestDidProgress(event: ProgressEvent) {
     const progress = (event.loaded / event.total) * 100;
+
     if (progress) {
       this.dispatch('progress', { progress });
     }
@@ -61,11 +63,13 @@ class DirectUploadController implements DirectUploadDelegate {
   dispatch(name, detail: Record<string, any> = {}) {
     detail.file = this.file;
     detail.id = this.directUpload.id;
+
     return dispatchEvent(this.input, `direct-upload:${name}`, { detail });
   }
 
   dispatchError(error) {
     const event = this.dispatch('error', { error });
+
     if (!event.defaultPrevented) {
       alert(error);
     }
@@ -119,10 +123,12 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
 
   private save(files: FileList): void {
     const endpoint = this.endpoint || this.options?.directUploadEndpoint;
+
     if (!endpoint) {
       console.error(
         `[AsDirectUpload] Endpoint configuration missing. Register endpoint via DI or pass directly to custom attribute`
       );
+
       return;
     }
 
@@ -130,6 +136,7 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
       const file = files.item(i);
 
       const controller = new DirectUploadController(this.input, file, endpoint.url, endpoint.headers);
+
       controller.start(() => {
         this.uploading--;
 

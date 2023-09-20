@@ -1,10 +1,14 @@
-import { bindable, BindingMode, customElement } from 'aurelia';
-import { coerceBoolean, uniqueId, Iterable } from '@ekzo-dev/toolkit';
-import { BaseField } from '../base-field';
-import { BsRadio } from './radio';
 import template from './radio-group.html';
+
 import './radio.scss';
+
 import { BsButtonVariant, Size } from '@ekzo-dev/bootstrap';
+import { coerceBoolean, Iterable, uniqueId } from '@ekzo-dev/toolkit';
+import { bindable, BindingMode, customElement } from 'aurelia';
+
+import { BaseField } from '../base-field';
+
+import { BsRadio } from './radio';
 
 @customElement({
   name: 'bs-radio-group',

@@ -18,6 +18,7 @@ export abstract class BaseAttribute implements ICustomAttributeViewModel {
 
   disabledChanged(newValue: boolean) {
     const el = this.element;
+
     if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
       newValue ? el.setAttribute('disabled', '') : el.removeAttribute('disabled');
     } else {

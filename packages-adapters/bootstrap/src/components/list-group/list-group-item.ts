@@ -1,7 +1,9 @@
+import './list-group.scss';
+
 import { bindable, customAttribute } from 'aurelia';
+
 import { Variant } from '../../types';
 import { coerceBoolean } from '../../utils';
-import './list-group.scss';
 import { BaseAttribute } from '../base-attribute';
 
 const prefix = (name) => `list-group-item-${name}`;
@@ -26,6 +28,7 @@ export class BsListGroupItem extends BaseAttribute {
         if (oldValue) this.setClass(prefix(oldValue), false);
         if (newValue) this.setClass(prefix(newValue));
         break;
+
       case 'action':
         this.setClass(prefix('action'), newValue as boolean);
     }

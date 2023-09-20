@@ -1,7 +1,10 @@
-import { customElement, bindable, ICustomElementViewModel, slotted } from 'aurelia';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import './navbar.scss';
 import template from './navbar.html';
+
+import './navbar.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel, slotted } from 'aurelia';
+
 import { Breakpoint } from '../../types';
 
 export type BsNavbarExpand = Breakpoint | 'always';
@@ -22,6 +25,7 @@ export class BsNavbar implements ICustomElementViewModel {
 
   get classes(): string {
     const { expand } = this;
+
     return [
       'navbar',
       this.dark ? 'navbar-dark' : false,

@@ -11,6 +11,7 @@ module.exports = {
     // "plugin:@ekzo-dev/eslint-config/nx-recommended",
     'plugin:@ekzo-dev/eslint-config/javascript-recommended',
     'plugin:@ekzo-dev/eslint-config/typescript-recommended',
+    'plugin:@ekzo-dev/eslint-config/aurelia-recommended',
     'plugin:@ekzo-dev/eslint-config/jest-recommended',
     'plugin:@ekzo-dev/eslint-config/prettier-recommended',
     'plugin:@ekzo-dev/eslint-config/rules-recommended',
@@ -18,6 +19,12 @@ module.exports = {
   parserOptions: {
     project: path.join(thisDir, 'tsconfig.json'),
     tsconfigRootDir: thisDir,
+  },
+  rules: {
+    // TODO: fix code and remove this rule
+    '@typescript-eslint/explicit-member-accessibility': 'warn',
+    // FIXME: 'typescript-recommended' fails on this rule
+    'node/no-unsupported-features/es-syntax': 'warn',
   },
   // Old config
   // plugins: ['unused-imports', 'simple-import-sort', 'prettier'],

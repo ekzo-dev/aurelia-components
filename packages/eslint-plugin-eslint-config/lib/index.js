@@ -22,6 +22,7 @@ module.exports = {
   // import all rules in lib/rules
   configs: requireIndex(path.resolve(__dirname, 'configs'), [
     'angular-recommended',
+    'aurelia-recommended',
     'canonical',
     'javascript-recommended',
     'jest-recommended',

@@ -1,5 +1,7 @@
-import { bindable, customAttribute } from 'aurelia';
 import './placeholder.scss';
+
+import { bindable, customAttribute } from 'aurelia';
+
 import { Size } from '../../types';
 import { BaseAttribute } from '../base-attribute';
 
@@ -28,6 +30,7 @@ export class BsPlaceholder extends BaseAttribute {
 
   animationChanged(newValue?: BsPlaceholderAnimation, oldValue?: BsPlaceholderAnimation) {
     const parent = this.element.parentElement;
+
     if (parent) {
       if (oldValue) parent.classList.remove(prefix(oldValue));
       if (newValue) parent.classList.add(prefix(newValue));

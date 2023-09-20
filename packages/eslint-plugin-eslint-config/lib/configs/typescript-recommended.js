@@ -19,6 +19,10 @@ module.exports = {
         path.resolve(__dirname, 'prettier-recommended.js'),
       ],
       parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
       rules: {
         'node/no-unsupported-features/es-syntax': ['error', { ignores: ['modules'] }],
         'node/no-unpublished-import': [

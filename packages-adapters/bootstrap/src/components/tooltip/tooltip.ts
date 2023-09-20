@@ -1,8 +1,9 @@
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
-import { ICustomAttributeController } from '@aurelia/runtime-html';
-import { Tooltip } from 'bootstrap';
 import '../../transitions.scss';
 import './tooltip.scss';
+
+import { ICustomAttributeController } from '@aurelia/runtime-html';
+import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { Tooltip } from 'bootstrap';
 
 export type Placements = 'top' | 'right' | 'bottom' | 'left';
 export type Triggers =

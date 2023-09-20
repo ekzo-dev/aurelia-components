@@ -1,6 +1,7 @@
-import { bindable, customAttribute } from 'aurelia';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './nav.scss';
+
+import { bindable, customAttribute } from 'aurelia';
+
 import { BaseAttribute } from '../base-attribute';
 
 @customAttribute('bs-nav-link')

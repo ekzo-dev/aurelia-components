@@ -1,15 +1,17 @@
-import { bindable, customElement } from 'aurelia';
-import { JsonEditor as VanillaJsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
+import template from './json-editor.html';
+
 import type {
-  RenderValueProps,
-  RenderValueComponentDescription,
   AjvValidatorOptions,
-  Validator,
   JSONSchema,
   JSONSchemaDefinitions,
+  RenderValueComponentDescription,
+  RenderValueProps,
+  Validator,
 } from 'vanilla-jsoneditor';
+
+import { JsonEditor as VanillaJsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import addFormats from 'ajv-formats';
-import template from './json-editor.html';
+import { bindable, customElement } from 'aurelia';
 
 @customElement({
   name: 'json-editor',
@@ -33,6 +35,7 @@ export class JsonEditor extends VanillaJsonEditor {
     await this.editor.updateProps({
       onRenderValue: (props: RenderValueProps): RenderValueComponentDescription[] => {
         let result;
+
         if (this.onRenderValue) {
           result = this.onRenderValue(props);
         } else if (this.schema) {

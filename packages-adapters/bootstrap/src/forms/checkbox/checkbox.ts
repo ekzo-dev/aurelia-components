@@ -1,11 +1,14 @@
-import { bindable, BindingMode, customElement } from 'aurelia';
-import { BaseField } from '../base-field';
-import { coerceBoolean } from '../../utils';
-import { Size } from '../../types';
-import { type BsButtonVariant } from '../../components';
 import template from './checkbox.html';
+
 import './checkbox.scss';
 import '../../components/button/button.scss';
+
+import { bindable, BindingMode, customElement } from 'aurelia';
+
+import { type BsButtonVariant } from '../../components';
+import { Size } from '../../types';
+import { coerceBoolean } from '../../utils';
+import { BaseField } from '../base-field';
 
 @customElement({
   name: 'bs-checkbox',

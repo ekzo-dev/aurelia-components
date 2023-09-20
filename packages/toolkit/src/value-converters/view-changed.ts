@@ -4,6 +4,7 @@ import { valueConverter } from 'aurelia';
 export class ViewChangedValueConverter {
   fromView(value: any, callback: (any) => void) {
     callback(value);
+
     return value;
   }
 }

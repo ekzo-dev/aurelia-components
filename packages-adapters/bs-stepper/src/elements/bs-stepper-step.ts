@@ -1,8 +1,9 @@
-import { bindable, CustomElement, customElement } from 'aurelia';
-import { ICustomElementController } from '@aurelia/runtime-html';
-import { BsStepper } from '../index';
-
 import template from './bs-stepper-step.html';
+
+import { ICustomElementController } from '@aurelia/runtime-html';
+import { bindable, CustomElement, customElement } from 'aurelia';
+
+import { BsStepper } from '../index';
 
 @customElement({
   name: 'bs-stepper-step',
@@ -36,6 +37,7 @@ export class BsStepperStep {
 
   private registerInStepper(): void {
     const stepper = this.findStepper(this.element as HTMLElement);
+
     if (stepper) {
       this.stepper = stepper.viewModel;
       this.stepper.steps.push(this);

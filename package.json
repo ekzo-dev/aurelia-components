@@ -7,6 +7,9 @@
     "packages/*",
     "packages-adapters/*"
   ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "homepage": "https://github.com/ekzo-dev/aurelia-components",
   "scripts": {
     "lint": "eslint ./packages*/**/src",

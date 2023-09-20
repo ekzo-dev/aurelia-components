@@ -1,7 +1,8 @@
-import { customElement, bindable } from 'aurelia';
-
 import template from './icon.html';
+
 import './icon.scss';
+
+import { bindable, customElement } from 'aurelia';
 
 // TODO make icons path configurable local/remote
 const spritePath = 'bootstrap-icons.svg';

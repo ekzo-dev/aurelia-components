@@ -1,10 +1,13 @@
-import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
-import { Modal } from 'bootstrap';
-import { coerceBoolean } from '../../utils';
-import { BsCloseButton } from '../close-button';
 import template from './modal.html';
+
 import '../../transitions.scss';
 import './modal.scss';
+
+import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import { Modal } from 'bootstrap';
+
+import { coerceBoolean } from '../../utils';
+import { BsCloseButton } from '../close-button';
 
 export type ModalSize = 'sm' | 'lg' | 'xl';
 export type ModalFullscreen = 'always' | 'sm-down' | 'md-down' | 'lg-down' | 'xl-down' | 'xxl-down';
@@ -71,8 +74,11 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
   propertyChanged(name: keyof this): void {
     switch (name) {
       case 'backdrop':
+
       case 'static':
+
       case 'keyboard':
+
       case 'focus':
         this.destroyModal();
         this.createModal();
@@ -120,7 +126,8 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
       }
 
       const event = `${show ? 'shown' : 'hidden'}.bs.modal`;
-      let listener = () => {
+
+      const listener = () => {
         this.element.removeEventListener(event, listener);
         resolve();
       };

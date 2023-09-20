@@ -1,7 +1,9 @@
-import { customElement, bindable } from 'aurelia';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import template from './pagination-item.html';
+
 import './pagination.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement } from 'aurelia';
 
 @customElement({
   name: 'bs-pagination-item',

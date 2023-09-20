@@ -1,5 +1,5 @@
 import { valueConverter } from 'aurelia';
-import { parsePhoneNumberFromString, CountryCode } from 'libphonenumber-js';
+import { CountryCode, parsePhoneNumberFromString } from 'libphonenumber-js';
 
 @valueConverter('formatPhone')
 export class FormatPhone {

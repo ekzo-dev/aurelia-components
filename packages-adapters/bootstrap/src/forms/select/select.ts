@@ -1,9 +1,12 @@
-import { customElement, bindable, BindingMode } from 'aurelia';
-import { Iterable, coerceBoolean, coerceNumber } from '@ekzo-dev/toolkit';
-import { BaseField } from '../base-field';
-import { Sizes } from '../../interfaces';
 import template from './select.html';
+
 import './select.scss';
+
+import { coerceBoolean, coerceNumber, Iterable } from '@ekzo-dev/toolkit';
+import { bindable, BindingMode, customElement } from 'aurelia';
+
+import { Sizes } from '../../interfaces';
+import { BaseField } from '../base-field';
 
 @customElement({
   name: 'bs-select',

@@ -1,5 +1,7 @@
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import './carousel.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+
 import { coerceBoolean } from '../../utils';
 
 @customElement({

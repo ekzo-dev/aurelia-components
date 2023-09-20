@@ -1,9 +1,12 @@
-import { customElement, bindable, BindingMode } from 'aurelia';
-import { BaseField } from '../base-field';
-import { coerceBoolean, uniqueId } from '../../utils';
-import { Sizes } from '../../interfaces';
 import template from './input.html';
+
 import './input.scss';
+
+import { bindable, BindingMode, customElement } from 'aurelia';
+
+import { Sizes } from '../../interfaces';
+import { coerceBoolean, uniqueId } from '../../utils';
+import { BaseField } from '../base-field';
 
 @customElement({
   name: 'bs-input',

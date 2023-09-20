@@ -1,8 +1,9 @@
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
-import { ICustomAttributeController } from '@aurelia/runtime-html';
-import { Popover } from 'bootstrap';
 import './popover.scss';
+
+import { ICustomAttributeController } from '@aurelia/runtime-html';
 import * as Popper from '@popperjs/core';
+import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { Popover } from 'bootstrap';
 
 export type Placements = 'top' | 'right' | 'bottom' | 'left';
 export type Triggers =

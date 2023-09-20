@@ -1,12 +1,15 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
-import { Toast } from 'bootstrap';
-import { coerceBoolean } from '../../utils';
-import { BsCloseButton } from '../close-button';
 import template from './toast.html';
-import { Variants } from '../../interfaces';
+
 import '../../transitions.scss';
 import '../../color-bg.scss';
 import './toast.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { Toast } from 'bootstrap';
+
+import { Variants } from '../../interfaces';
+import { coerceBoolean } from '../../utils';
+import { BsCloseButton } from '../close-button';
 
 @customElement({
   name: 'bs-toast',
@@ -69,7 +72,9 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
   propertyChanged(name: keyof this): void {
     switch (name) {
       case 'animation':
+
       case 'autohide':
+
       case 'delay':
         this.destroyToast();
         this.createToast();
@@ -83,10 +88,12 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
       }
 
       const event = `${show ? 'shown' : 'hidden'}.bs.toast`;
-      let listener = () => {
+
+      const listener = () => {
         this.element.removeEventListener(event, listener);
         resolve();
       };
+
       this.element.addEventListener(event, listener);
 
       if (!this.isShown()) this.toast?.show();

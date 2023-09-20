@@ -1,10 +1,13 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
+import template from './table.html';
+
+import './table.scss';
+
 import { ICustomElementController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { Variant, Breakpoint } from '../../types';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+
 import { VARIANTS } from '../../constants';
-import template from './table.html';
-import './table.scss';
+import { Breakpoint, Variant } from '../../types';
 
 @customElement({
   name: 'bs-table',
@@ -55,13 +58,16 @@ export class BsTable implements ICustomElementViewModel {
       case 'size':
         this.toggleClass('sm', value === 'sm');
         break;
+
       case 'variant':
         VARIANTS.forEach((variant) => {
           this.toggleClass(variant, value === variant);
         });
         break;
+
       case 'responsive':
         break;
+
       default:
         this.toggleClass(name === 'stripedColumns' ? 'striped-columns' : name.toString(), value);
     }

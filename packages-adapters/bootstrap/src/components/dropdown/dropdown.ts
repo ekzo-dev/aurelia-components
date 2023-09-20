@@ -1,6 +1,8 @@
-import { bindable, customAttribute } from 'aurelia';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import './dropdown.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customAttribute } from 'aurelia';
+
 import { BaseAttribute } from '../base-attribute';
 
 export type BsDropdownDirection = 'down' | 'up' | 'end' | 'start';

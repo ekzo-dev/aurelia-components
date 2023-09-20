@@ -1,28 +1,32 @@
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
-import { ICustomElementController } from '@aurelia/runtime-html';
+import template from './json-editor.html';
+
+import './json-editor.css';
+
+import type { JSONPatchDocument, JSONPath, JSONValue } from 'immutable-json-patch';
 import type {
-  JSONEditor,
-  JSONContent,
-  TextContent,
   Content,
   ContentErrors,
-  JSONPatchResult,
-  RenderValueProps,
-  RenderValueComponentDescription,
-  MenuItem,
-  QueryLanguage,
-  TransformModalOptions,
+  JSONContent,
+  JSONEditor,
   JSONEditorSelection,
   JSONParser,
+  JSONPatchResult,
   JSONPathParser,
+  MenuItem,
   OnChangeStatus,
+  QueryLanguage,
   RenderMenuContext,
+  RenderValueComponentDescription,
+  RenderValueProps,
+  TextContent,
+  TransformModalOptions,
   Validator,
 } from 'vanilla-jsoneditor';
-import type { JSONValue, JSONPath, JSONPatchDocument } from 'immutable-json-patch';
+
+import { ICustomElementController } from '@aurelia/runtime-html';
+import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
+
 import { coerceBoolean } from '../utils';
-import template from './json-editor.html';
-import './json-editor.css';
 
 @customElement({
   name: 'json-editor',
@@ -191,10 +195,13 @@ export class JsonEditor implements ICustomElementViewModel {
             json: value ?? {},
           });
         }
+
         break;
+
       case 'theme':
         this.importTheme();
         break;
+
       default:
         this.editor?.updateProps({
           [name]: value,
@@ -208,6 +215,7 @@ export class JsonEditor implements ICustomElementViewModel {
 
     // prepare props from bindables
     const props: Record<string, any> = {};
+
     Object.keys(this.$controller.definition.bindables).forEach((name) => {
       if (this[name] !== undefined) {
         props[name] = this[name];
@@ -228,6 +236,7 @@ export class JsonEditor implements ICustomElementViewModel {
             } else {
               this.contentCache = JSON.parse((content as TextContent).text);
             }
+
             this.content = this.contentCache;
           } catch (e) {}
 

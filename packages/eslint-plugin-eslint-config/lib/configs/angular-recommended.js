@@ -12,6 +12,28 @@ module.exports = {
       extends: ['plugin:@nx/angular', 'plugin:@angular-eslint/template/process-inline-templates'],
       rules: {
         '@angular-eslint/no-empty-lifecycle-method': 'warn',
+        '@typescript-eslint/explicit-member-accessibility': [
+          'error',
+          {
+            overrides: {
+              constructors: 'no-public',
+            },
+            ignoredMethodNames: [
+              'canActivate',
+              'canActivateChild',
+              'canLoad',
+              'canMatch',
+              'ngOnInit',
+              'ngOnChanges',
+              'ngDoCheck',
+              'ngAfterContentInit',
+              'ngAfterContentChecked',
+              'ngAfterViewInit',
+              'ngAfterViewChecked',
+              'ngOnDestroy',
+            ],
+          },
+        ],
       },
     },
     {

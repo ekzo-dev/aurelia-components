@@ -1,7 +1,8 @@
-import { IPlatform, Controller, ICustomElementController } from '@aurelia/runtime-html';
-import { IDialogDomRenderer, IDialogGlobalSettings, IDialogController } from '@aurelia/dialog';
+import { IDialogController, IDialogDomRenderer } from '@aurelia/dialog';
 import { IContainer } from '@aurelia/kernel';
+import { Controller, ICustomElementController, IPlatform } from '@aurelia/runtime-html';
 import { INode, InstanceProvider, Registration } from 'aurelia';
+
 import { BsModal } from './modal';
 
 export class BsDialogDomRenderer implements EventListenerObject {
@@ -12,7 +13,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
 
   private modal: HTMLElement;
 
-  public constructor(
+  constructor(
     private readonly platform: IPlatform,
     private readonly container: IContainer,
     private readonly dialogController: IDialogController
@@ -37,6 +38,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
     );
 
     const viewModel = container.invoke(BsModal);
+
     // configure modal to auto open when attached, show() returns a Promise that will wait for animation to complete
     viewModel['attached'] = (): Promise<void> => viewModel.show();
     // TODO: pass settings to viewModel through DialogService.open(...)
@@ -47,6 +49,7 @@ export class BsDialogDomRenderer implements EventListenerObject {
         default: componentController['_compiledDef'],
       },
     });
+
     controller.addChild(componentController);
 
     dialogHost.append(modal);

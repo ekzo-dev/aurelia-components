@@ -1,6 +1,9 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import template from './close-button.html';
+
 import './close-button.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+
 import { coerceBoolean } from '../../utils';
 
 @customElement({

@@ -1,7 +1,9 @@
-import { bindable, customAttribute } from 'aurelia';
 import './dropdown.scss';
-import { BaseAttribute } from '../base-attribute';
+
+import { bindable, customAttribute } from 'aurelia';
+
 import { TOGGLE } from '../../constants';
+import { BaseAttribute } from '../base-attribute';
 
 @customAttribute('bs-dropdown-toggle')
 export class BsDropdownToggle extends BaseAttribute {

@@ -1,7 +1,10 @@
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
-import { BsCollapse } from '../collapse';
 import template from './accordion-item.html';
+
 import './accordion.scss';
+
+import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
+
+import { BsCollapse } from '../collapse';
 
 @customElement({
   name: 'bs-accordion-item',

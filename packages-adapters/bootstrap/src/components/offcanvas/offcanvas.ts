@@ -1,10 +1,13 @@
-import { customElement, bindable, ICustomElementViewModel, observable } from 'aurelia';
-import { Offcanvas } from 'bootstrap';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { BsCloseButton } from '../close-button';
-import { Breakpoint } from '../../types';
 import template from './offcanvas.html';
+
 import './offcanvas.scss';
+
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import { Offcanvas } from 'bootstrap';
+
+import { Breakpoint } from '../../types';
+import { BsCloseButton } from '../close-button';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
@@ -56,8 +59,11 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   propertyChanged(name: keyof this): void {
     switch (name) {
       case 'backdrop':
+
       case 'static':
+
       case 'keyboard':
+
       case 'scroll':
         this.destroyOffcanvas();
         this.createOffcanvas();
@@ -83,7 +89,8 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
       }
 
       const event = `${show ? 'shown' : 'hidden'}.bs.offcanvas`;
-      let listener = () => {
+
+      const listener = () => {
         this.element.removeEventListener(event, listener);
         resolve();
       };

@@ -1,6 +1,9 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import template from './navbar-toggler.html';
+
 import './navbar.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+
 import { TOGGLE } from '../../constants';
 
 @customElement({
@@ -18,8 +21,10 @@ export class BsNavbarToggler implements ICustomElementViewModel {
   attached() {
     if (this.target) {
       const target = this.element.parentElement.querySelector(this.target);
+
       if (target) {
         const toggle = target.tagName.replace('BS-', '').toLowerCase();
+
         this.button.setAttribute(TOGGLE, toggle);
       }
     }

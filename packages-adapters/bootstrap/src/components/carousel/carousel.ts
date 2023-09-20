@@ -1,10 +1,14 @@
-import { customElement, bindable, ICustomElementViewModel, BindingMode, children } from 'aurelia';
-import { ICustomElementController } from '@aurelia/runtime-html';
-import { Carousel } from 'bootstrap';
-import type { BsCarouselItem } from '.';
-import { coerceBoolean } from '../../utils';
 import template from './carousel.html';
+
 import './carousel.scss';
+
+import type { BsCarouselItem } from '.';
+
+import { ICustomElementController } from '@aurelia/runtime-html';
+import { bindable, BindingMode, children, customElement, ICustomElementViewModel } from 'aurelia';
+import { Carousel } from 'bootstrap';
+
+import { coerceBoolean } from '../../utils';
 
 @customElement({
   name: 'bs-carousel',
@@ -125,6 +129,7 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
     this.slideListener = (event: Carousel.Event) => {
       this.activeSlide = event.to;
     };
+
     this.element.addEventListener('slide.bs.carousel', this.slideListener);
     this.rideChanged();
   }

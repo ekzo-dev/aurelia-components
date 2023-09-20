@@ -1,7 +1,10 @@
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-import { coerceBoolean } from '../../utils';
 import template from './breadcrumb-item.html';
+
 import './breadcrumb.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+
+import { coerceBoolean } from '../../utils';
 
 @customElement({
   name: 'bs-breadcrumb-item',

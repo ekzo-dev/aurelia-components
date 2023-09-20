@@ -1,6 +1,8 @@
-import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import template from './nav.html';
+
 import './nav.scss';
+
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 export type NavType = 'tabs' | 'pills';
 export type NavFill = 'fill' | 'justified';

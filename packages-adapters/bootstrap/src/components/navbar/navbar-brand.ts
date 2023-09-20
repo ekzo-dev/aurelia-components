@@ -1,5 +1,7 @@
-import { customAttribute } from 'aurelia';
 import './navbar.scss';
+
+import { customAttribute } from 'aurelia';
+
 import { BaseAttribute } from '../base-attribute';
 
 @customAttribute('bs-navbar-brand')

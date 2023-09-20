@@ -7,9 +7,11 @@ module.exports = {
   env: {
     node: true,
     browser: true,
+    es6: true,
   },
   parserOptions: {
     ecmaVersion: 'latest',
+    sourceType: 'module',
     ecmaFeatures: {
       impliedStrict: true,
     },

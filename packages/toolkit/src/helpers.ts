@@ -8,6 +8,7 @@ export function dig(target: Record<string, any>, ...keys: (string | Function)[])
     if (typeof digged === 'undefined' || digged === null) {
       return undefined;
     }
+
     if (typeof key === 'function') {
       digged = key(digged);
     } else {

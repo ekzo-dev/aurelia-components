@@ -2,7 +2,7 @@
 
 module.exports = {
   '@typescript-eslint/naming-convention': [
-    'error',
+    'warn', // 'error',
     {
       selector: 'memberLike',
       modifiers: ['private'],
