@@ -8,6 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
+const path = require('path');
 const requireIndex = require('requireindex');
 
 //------------------------------------------------------------------------------
@@ -16,10 +17,10 @@ const requireIndex = require('requireindex');
 
 module.exports = {
   // import all rules in lib/rules
-  rules: requireIndex(__dirname + '/rules'),
+  rules: requireIndex(path.resolve(__dirname, 'rules')),
 
   // import all rules in lib/rules
-  configs: requireIndex(__dirname + '/configs', [
+  configs: requireIndex(path.resolve(__dirname, 'configs'), [
     'angular-recommended',
     'canonical',
     'javascript-recommended',

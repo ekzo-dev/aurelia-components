@@ -1,9 +1,11 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   root: true,
   ignorePatterns: ['!**/*'],
-  extends: [__dirname + '/base.js', __dirname + '/prettier-recommended.js'],
+  extends: [path.resolve(__dirname, 'base.js'), path.resolve(__dirname, 'prettier-recommended.js')],
   overrides: [
     {
       extends: ['canonical/typescript', 'canonical/prettier'],

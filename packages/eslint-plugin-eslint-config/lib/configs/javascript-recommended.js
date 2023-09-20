@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   root: true,
   ignorePatterns: ['!**/*'],
@@ -7,11 +9,11 @@ module.exports = {
     {
       files: ['*.js', '*.jsx'],
       extends: [
-        __dirname + '/base.js',
+        path.resolve(__dirname, 'base.js'),
         'eslint:recommended',
         'plugin:eslint-plugin/recommended',
         'plugin:node/recommended',
-        __dirname + '/prettier-recommended.js',
+        path.resolve(__dirname, 'prettier-recommended.js'),
       ],
     },
   ],

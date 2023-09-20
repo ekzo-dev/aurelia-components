@@ -1,9 +1,18 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   root: true,
   env: {
     node: true,
+    browser: true,
+  },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    ecmaFeatures: {
+      impliedStrict: true,
+    },
   },
   settings: {
     node: {
@@ -11,5 +20,5 @@ module.exports = {
       tryExtensions: ['.js', '.jsx', '.json', '.node', '.ts', '.tsx', '.d.ts'],
     },
   },
-  extends: [__dirname + '/_imports.js', __dirname + '/_html.js'],
+  extends: [path.resolve(__dirname, '_imports.js'), path.resolve(__dirname, '_html.js')],
 };

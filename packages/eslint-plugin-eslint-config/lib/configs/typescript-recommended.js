@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   root: true,
   ignorePatterns: ['!**/*'],
@@ -8,13 +10,13 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       plugins: ['@typescript-eslint'],
       extends: [
-        __dirname + '/base.js',
+        path.resolve(__dirname, 'base.js'),
         'eslint:recommended',
         'plugin:eslint-plugin/recommended',
         'plugin:node/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        __dirname + '/prettier-recommended.js',
+        path.resolve(__dirname, 'prettier-recommended.js'),
       ],
       parser: '@typescript-eslint/parser',
       rules: {

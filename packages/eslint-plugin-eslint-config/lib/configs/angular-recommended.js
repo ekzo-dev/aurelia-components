@@ -1,14 +1,18 @@
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   root: true,
   ignorePatterns: ['!**/*'],
-  extends: [__dirname + '/typescript-recommended.js'],
+  extends: [path.resolve(__dirname, 'typescript-recommended.js')],
   overrides: [
     {
-      files: ['*.ts'],
+      files: ['*.ts', '*.tsx'],
       extends: ['plugin:@nx/angular', 'plugin:@angular-eslint/template/process-inline-templates'],
-      rules: {},
+      rules: {
+        '@angular-eslint/no-empty-lifecycle-method': 'warn',
+      },
     },
     {
       files: ['*.html'],
