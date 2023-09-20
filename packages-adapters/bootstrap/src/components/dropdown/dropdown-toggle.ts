@@ -1,19 +1,17 @@
-import './dropdown.scss';
-
 import { bindable, customAttribute } from 'aurelia';
-
-import { TOGGLE } from '../../constants';
+import './dropdown.scss';
 import { BaseAttribute } from '../base-attribute';
+import { TOGGLE } from '../../constants';
 
 @customAttribute('bs-dropdown-toggle')
 export class BsDropdownToggle extends BaseAttribute {
   // TODO: Aurelia bug, set to "" when not explicitly defined (treated as primary attribute)
   // @bindable(coerceBoolean)
   @bindable()
-  split = false;
+  split: boolean = false;
 
   @bindable()
-  arrow = true;
+  arrow: boolean = true;
 
   attaching() {
     super.attaching();

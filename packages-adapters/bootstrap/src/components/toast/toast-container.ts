@@ -1,8 +1,6 @@
-import './toast.scss';
-
 import { customElement, ICustomElementViewModel } from 'aurelia';
-
 import template from './toast-container.html';
+import './toast.scss';
 
 @customElement({
   name: 'bs-toast-container',

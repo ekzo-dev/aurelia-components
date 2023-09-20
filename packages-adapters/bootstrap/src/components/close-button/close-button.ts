@@ -1,10 +1,7 @@
-import './close-button.scss';
-
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-
-import { coerceBoolean } from '../../utils';
-
+import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import template from './close-button.html';
+import './close-button.scss';
+import { coerceBoolean } from '../../utils';
 
 @customElement({
   name: 'bs-close-button',
@@ -12,5 +9,5 @@ import template from './close-button.html';
 })
 export class BsCloseButton implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  disabled = false;
+  disabled: boolean = false;
 }

@@ -1,4 +1,5 @@
-import { bindable, customAttribute } from 'aurelia';
+import { customAttribute, bindable } from 'aurelia';
+
 import { AsYouType, CountryCode } from 'libphonenumber-js';
 
 /**

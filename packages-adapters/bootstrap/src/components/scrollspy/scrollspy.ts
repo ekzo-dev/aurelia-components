@@ -1,5 +1,4 @@
 import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
-
 import { coerceBoolean } from '../../utils';
 
 @customAttribute('bs-scrollspy')

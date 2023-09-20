@@ -1,11 +1,10 @@
-import './progress.scss';
-
-import { bindable, customElement } from 'aurelia';
+import { customElement, bindable } from 'aurelia';
 
 import { BgColors } from '../../interfaces';
 import { coerceBoolean } from '../../utils';
-
 import template from './progress.html';
+
+import './progress.scss';
 
 @customElement({
   name: 'bs-progress',

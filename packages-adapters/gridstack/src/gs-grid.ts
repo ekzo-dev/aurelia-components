@@ -1,11 +1,9 @@
+import { bindable, CustomElement, customElement, INode, slotted } from 'aurelia';
+import { GridStack, GridStackOptions, GridItemHTMLElement, GridHTMLElement } from 'gridstack';
 import 'gridstack/dist/gridstack.min.css';
 import 'gridstack/dist/gridstack-extra.min.css';
-import './gs-grid.css';
-
-import { bindable, CustomElement, customElement, INode, slotted } from 'aurelia';
-import { GridHTMLElement, GridItemHTMLElement, GridStack, GridStackOptions } from 'gridstack';
-
 import { type GsItem } from './gs-item';
+import './gs-grid.css';
 
 @customElement({
   name: 'gs-grid',
@@ -46,7 +44,6 @@ export class GsGrid {
 
     // support for column: auto in nested grids
     let autoColumn: boolean;
-
     if (options.column === 'auto' && parentItem) {
       autoColumn = true;
       options.column = parentItem.gridstackNode.w || 1;
@@ -66,7 +63,6 @@ export class GsGrid {
 
   private slottedItemsChanged(elements: GridItemHTMLElement[]) {
     const { grid } = this;
-
     if (!grid || !elements) return;
 
     // start update transaction
@@ -74,7 +70,6 @@ export class GsGrid {
 
     // remove missing widgets
     const removed = grid.engine.nodes.filter((x) => !elements.find((el) => el === x.el));
-
     removed.forEach((x) => grid.removeWidget(x.el, false));
 
     // add new widgets
@@ -82,13 +77,11 @@ export class GsGrid {
       if (element.gridstackNode) return;
 
       const item: GsItem = CustomElement.for<GsItem>(element).viewModel;
-
       grid.addWidget(element, item.options);
 
       if (element.dataset.hasSubgrid) {
         const subgrid = element.querySelector('gs-grid');
         const component = CustomElement.for<GsGrid>(subgrid).viewModel;
-
         component.createGrid(element);
       }
     });
@@ -103,7 +96,6 @@ export class GsGrid {
       if (el.nodeName === 'GS-ITEM') return el;
       el = el.parentElement;
     }
-
     return null;
   }
 }

@@ -1,11 +1,9 @@
+import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
+import { Collapse } from 'bootstrap';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import template from './collapse.html';
 import '../../transitions.scss';
 import './collapse.scss';
-
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-import { Collapse } from 'bootstrap';
-
-import template from './collapse.html';
 
 @customElement({
   name: 'bs-collapse',
@@ -13,7 +11,7 @@ import template from './collapse.html';
 })
 export class BsCollapse implements ICustomElementViewModel {
   @bindable(coerceBoolean)
-  horizontal = false;
+  horizontal: boolean = false;
 
   constructor(private element: HTMLElement) {}
 

@@ -1,12 +1,10 @@
-import './button.scss';
-
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customAttribute } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { Button } from 'bootstrap';
-
-import { TOGGLE } from '../../constants';
-import { Size, Variant } from '../../types';
+import { Variant, Size } from '../../types';
+import './button.scss';
 import { BaseAttribute } from '../base-attribute';
+import { TOGGLE } from '../../constants';
 
 export type BsButtonVariant =
   | Variant
@@ -34,10 +32,10 @@ export class BsButton extends BaseAttribute {
   disabled?: boolean;
 
   @bindable(coerceBoolean)
-  active = false;
+  active: boolean = false;
 
   @bindable(coerceBoolean)
-  toggleState = false;
+  toggleState: boolean = false;
 
   binding() {
     // set default variant because primary attribute has "" default value
@@ -57,12 +55,10 @@ export class BsButton extends BaseAttribute {
   propertyChanged(name: keyof this, newValue?: string | boolean, oldValue?: string | boolean) {
     switch (name) {
       case 'variant':
-
       case 'size':
         if (oldValue) this.setClass(prefix(oldValue), false);
         if (newValue) this.setClass(prefix(newValue));
         break;
-
       case 'toggleState':
         this.destroyButton();
         this.createButton();

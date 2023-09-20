@@ -1,12 +1,9 @@
-import './textarea.scss';
-
-import { bindable, BindingMode, customElement } from 'aurelia';
-
-import { Sizes } from '../../interfaces';
-import { coerceBoolean } from '../../utils';
+import { customElement, bindable, BindingMode } from 'aurelia';
 import { BaseField } from '../base-field';
-
+import { coerceBoolean } from '../../utils';
+import { Sizes } from '../../interfaces';
 import template from './textarea.html';
+import './textarea.scss';
 
 @customElement({
   name: 'bs-textarea',
@@ -17,13 +14,13 @@ export class BsTextarea extends BaseField {
   value!: string;
 
   @bindable()
-  rows = 3;
+  rows: number = 3;
 
   @bindable()
   placeholder?: string;
 
   @bindable(coerceBoolean)
-  floatingLabel = false;
+  floatingLabel: boolean = false;
 
   @bindable()
   maxlength?: number;

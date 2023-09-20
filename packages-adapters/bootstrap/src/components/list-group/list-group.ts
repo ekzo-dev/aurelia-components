@@ -1,11 +1,8 @@
-import './list-group.scss';
-
-import { Breakpoint } from '@ekzo-dev/bootstrap';
-import { bindable, customElement } from 'aurelia';
-
+import { customElement, bindable } from 'aurelia';
 import { coerceBoolean } from '../../utils';
-
 import template from './list-group.html';
+import './list-group.scss';
+import { Breakpoint } from '@ekzo-dev/bootstrap';
 
 export type BsListGroupHorizontal = Breakpoint | 'always';
 
@@ -22,10 +19,10 @@ export class BsListGroup {
   horizontal?: BsListGroupHorizontal;
 
   @bindable(coerceBoolean)
-  flush = false;
+  flush: boolean = false;
 
   @bindable(coerceBoolean)
-  numbered = false;
+  numbered: boolean = false;
 
   get classes() {
     return [

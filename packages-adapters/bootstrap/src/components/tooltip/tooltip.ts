@@ -1,9 +1,8 @@
+import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { ICustomAttributeController } from '@aurelia/runtime-html';
+import { Tooltip } from 'bootstrap';
 import '../../transitions.scss';
 import './tooltip.scss';
-
-import { ICustomAttributeController } from '@aurelia/runtime-html';
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
-import { Tooltip } from 'bootstrap';
 
 export type Placements = 'top' | 'right' | 'bottom' | 'left';
 export type Triggers =
@@ -24,7 +23,7 @@ export type Triggers =
 @customAttribute('bs-tooltip')
 export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeViewModel {
   @bindable()
-  animation = true;
+  animation: boolean = true;
 
   @bindable()
   container?: any;
@@ -33,7 +32,7 @@ export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeView
   delay?: any;
 
   @bindable()
-  html = false;
+  html: boolean = false;
 
   @bindable()
   placement: Placements = 'top';

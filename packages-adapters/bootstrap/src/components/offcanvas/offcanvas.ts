@@ -1,13 +1,10 @@
-import './offcanvas.scss';
-
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import { customElement, bindable, ICustomElementViewModel, observable } from 'aurelia';
 import { Offcanvas } from 'bootstrap';
-
-import { Breakpoint } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BsCloseButton } from '../close-button';
-
+import { Breakpoint } from '../../types';
 import template from './offcanvas.html';
+import './offcanvas.scss';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
 
@@ -24,16 +21,16 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   title?: string;
 
   @bindable(coerceBoolean)
-  scroll = false;
+  scroll: boolean = false;
 
   @bindable(coerceBoolean)
-  backdrop = true;
+  backdrop: boolean = true;
 
   @bindable(coerceBoolean)
-  static = false;
+  static: boolean = false;
 
   @bindable(coerceBoolean)
-  keyboard = true;
+  keyboard: boolean = true;
 
   @bindable()
   responsive?: Breakpoint;
@@ -42,7 +39,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   placement?: OffcanvasPlacement = 'start';
 
   @observable()
-  private opened = false;
+  private opened: boolean = false;
 
   private offcanvas?: Offcanvas;
 
@@ -59,11 +56,8 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   propertyChanged(name: keyof this): void {
     switch (name) {
       case 'backdrop':
-
       case 'static':
-
       case 'keyboard':
-
       case 'scroll':
         this.destroyOffcanvas();
         this.createOffcanvas();
@@ -89,8 +83,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
       }
 
       const event = `${show ? 'shown' : 'hidden'}.bs.offcanvas`;
-
-      const listener = () => {
+      let listener = () => {
         this.element.removeEventListener(event, listener);
         resolve();
       };

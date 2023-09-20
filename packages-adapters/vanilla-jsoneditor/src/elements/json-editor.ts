@@ -1,32 +1,28 @@
-import type { JSONPatchDocument, JSONPath, JSONValue } from 'immutable-json-patch';
+import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
+import { ICustomElementController } from '@aurelia/runtime-html';
 import type {
+  JSONEditor,
+  JSONContent,
+  TextContent,
   Content,
   ContentErrors,
-  JSONContent,
-  JSONEditor,
+  JSONPatchResult,
+  RenderValueProps,
+  RenderValueComponentDescription,
+  MenuItem,
+  QueryLanguage,
+  TransformModalOptions,
   JSONEditorSelection,
   JSONParser,
-  JSONPatchResult,
   JSONPathParser,
-  MenuItem,
   OnChangeStatus,
-  QueryLanguage,
   RenderMenuContext,
-  RenderValueComponentDescription,
-  RenderValueProps,
-  TextContent,
-  TransformModalOptions,
   Validator,
 } from 'vanilla-jsoneditor';
-
-import './json-editor.css';
-
-import { ICustomElementController } from '@aurelia/runtime-html';
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
-
+import type { JSONValue, JSONPath, JSONPatchDocument } from 'immutable-json-patch';
 import { coerceBoolean } from '../utils';
-
 import template from './json-editor.html';
+import './json-editor.css';
 
 @customElement({
   name: 'json-editor',
@@ -43,34 +39,34 @@ export class JsonEditor implements ICustomElementViewModel {
   mode: 'text' | 'tree' | 'table' = 'tree';
 
   @bindable(coerceBoolean)
-  mainMenuBar = true;
+  mainMenuBar: boolean = true;
 
   @bindable(coerceBoolean)
-  navigationBar = true;
+  navigationBar: boolean = true;
 
   @bindable(coerceBoolean)
-  statusBar = true;
+  statusBar: boolean = true;
 
   @bindable(coerceBoolean)
-  askToFormat = true;
+  askToFormat: boolean = true;
 
   @bindable(coerceBoolean)
-  readOnly = false;
+  readOnly: boolean = false;
 
   @bindable()
   indentation: number | string = '\t';
 
   @bindable()
-  tabSize = 4;
+  tabSize: number = 4;
 
   @bindable(coerceBoolean)
-  escapeControlCharacters = false;
+  escapeControlCharacters: boolean = false;
 
   @bindable(coerceBoolean)
-  escapeUnicodeCharacters = false;
+  escapeUnicodeCharacters: boolean = false;
 
   @bindable()
-  flattenColumns = true;
+  flattenColumns: boolean = true;
 
   @bindable()
   validator?: Validator;
@@ -195,13 +191,10 @@ export class JsonEditor implements ICustomElementViewModel {
             json: value ?? {},
           });
         }
-
         break;
-
       case 'theme':
         this.importTheme();
         break;
-
       default:
         this.editor?.updateProps({
           [name]: value,
@@ -215,7 +208,6 @@ export class JsonEditor implements ICustomElementViewModel {
 
     // prepare props from bindables
     const props: Record<string, any> = {};
-
     Object.keys(this.$controller.definition.bindables).forEach((name) => {
       if (this[name] !== undefined) {
         props[name] = this[name];
@@ -236,7 +228,6 @@ export class JsonEditor implements ICustomElementViewModel {
             } else {
               this.contentCache = JSON.parse((content as TextContent).text);
             }
-
             this.content = this.contentCache;
           } catch (e) {}
 

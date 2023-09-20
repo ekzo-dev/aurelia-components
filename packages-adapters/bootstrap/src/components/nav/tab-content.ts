@@ -1,7 +1,5 @@
-import './nav.scss';
-
 import { customAttribute } from 'aurelia';
-
+import './nav.scss';
 import { BaseAttribute } from '../base-attribute';
 
 @customAttribute('bs-tab-content')

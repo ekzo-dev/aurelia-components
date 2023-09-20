@@ -1,12 +1,10 @@
-import './dropdown.scss';
-
-import * as Popper from '@popperjs/core';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { customElement, bindable, ICustomElementViewModel, BindingMode } from 'aurelia';
 import { Dropdown } from 'bootstrap';
+import * as Popper from '@popperjs/core';
 
 import { coerceBoolean } from '../../utils';
-
 import template from './dropdown-menu.html';
+import './dropdown.scss';
 
 export type BsDropdownAlign = 'end' | 'sm-start' | 'md-start' | 'lg-start' | 'xl-start' | 'xxl-start';
 
@@ -34,7 +32,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   reference: 'toggle' | 'parent' | Element | Popper.Rect = 'toggle';
 
   @bindable(coerceBoolean)
-  dark = false;
+  dark: boolean = false;
 
   @bindable()
   align?: BsDropdownAlign;
@@ -55,18 +53,13 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
     // TODO: correctly configure update
     switch (name) {
       case 'autoClose':
-
       case 'boundary':
-
       case 'display':
-
       case 'reference':
         this.destroyDropdown();
         this.createDropdown();
         break;
-
       case 'offset':
-
       case 'popperConfig':
         this.dropdown?.update();
     }

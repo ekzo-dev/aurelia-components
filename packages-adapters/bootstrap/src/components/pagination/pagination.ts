@@ -1,8 +1,6 @@
-import './pagination.scss';
-
-import { bindable, customElement } from 'aurelia';
-
+import { customElement, bindable } from 'aurelia';
 import template from './pagination.html';
+import './pagination.scss';
 
 @customElement({
   name: 'bs-pagination',

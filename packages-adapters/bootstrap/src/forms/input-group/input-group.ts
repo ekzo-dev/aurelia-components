@@ -1,10 +1,9 @@
-import './input-group.scss';
-
-import { bindable, customElement } from 'aurelia';
+import { customElement, bindable } from 'aurelia';
 
 import { Sizes } from '../../interfaces';
-
 import template from './input-group.html';
+
+import './input-group.scss';
 
 @customElement({
   name: 'bs-input-group-text',

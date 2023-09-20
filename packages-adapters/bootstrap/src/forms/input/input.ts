@@ -1,12 +1,9 @@
-import './input.scss';
-
-import { bindable, BindingMode, customElement } from 'aurelia';
-
-import { Sizes } from '../../interfaces';
-import { coerceBoolean, uniqueId } from '../../utils';
+import { customElement, bindable, BindingMode } from 'aurelia';
 import { BaseField } from '../base-field';
-
+import { coerceBoolean, uniqueId } from '../../utils';
+import { Sizes } from '../../interfaces';
 import template from './input.html';
+import './input.scss';
 
 @customElement({
   name: 'bs-input',
@@ -14,7 +11,7 @@ import template from './input.html';
 })
 export class BsInput extends BaseField {
   @bindable()
-  type = 'text';
+  type: string = 'text';
 
   @bindable({ mode: BindingMode.twoWay })
   value!: string;
@@ -38,10 +35,10 @@ export class BsInput extends BaseField {
   step?: number;
 
   @bindable(coerceBoolean)
-  multiple = false;
+  multiple: boolean = false;
 
   @bindable(coerceBoolean)
-  disabled = false;
+  disabled: boolean = false;
 
   @bindable()
   pattern?: string;
@@ -54,7 +51,7 @@ export class BsInput extends BaseField {
   placeholder?: string;
 
   @bindable(coerceBoolean)
-  floatingLabel = false;
+  floatingLabel: boolean = false;
 
   @bindable()
   size?: Sizes;

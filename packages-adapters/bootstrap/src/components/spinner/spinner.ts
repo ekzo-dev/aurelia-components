@@ -1,8 +1,6 @@
-import './spinner.scss';
-
-import { bindable, customElement } from 'aurelia';
-
+import { customElement, bindable } from 'aurelia';
 import template from './spinner.html';
+import './spinner.scss';
 
 export type SpinnerType = 'border' | 'grow';
 export type SpinnerSize = 'sm';

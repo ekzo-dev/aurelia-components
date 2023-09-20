@@ -1,12 +1,8 @@
+import { customElement, bindable, ICustomElementViewModel } from 'aurelia';
 import type { JSONSchema7 } from 'json-schema';
-
-import './json-schema-viewer.scss';
-
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-
-import { JSV } from '../viewer';
-
 import template from './json-schema-viewer.html';
+import { JSV } from '../viewer';
+import './json-schema-viewer.scss';
 
 @customElement({
   name: 'json-schema-viewer',
@@ -34,7 +30,7 @@ export class JsonSchemaViewer implements ICustomElementViewModel {
         //it will not adjust to window resize, needs a listener to support that
         JSV.resetViewer();
 
-        this.loader.style.display = 'none';
+        this.loader!.style.display = 'none';
       }
     );
   }

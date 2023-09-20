@@ -6,7 +6,6 @@ export class Iterable {
     if (value instanceof Object && value.constructor === Object) {
       value = Object.entries(value);
     }
-
     return value;
   }
 }

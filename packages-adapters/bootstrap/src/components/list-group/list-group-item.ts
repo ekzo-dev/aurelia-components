@@ -1,9 +1,7 @@
-import './list-group.scss';
-
 import { bindable, customAttribute } from 'aurelia';
-
 import { Variant } from '../../types';
 import { coerceBoolean } from '../../utils';
+import './list-group.scss';
 import { BaseAttribute } from '../base-attribute';
 
 const prefix = (name) => `list-group-item-${name}`;
@@ -14,13 +12,13 @@ export class BsListGroupItem extends BaseAttribute {
   variant?: Variant;
 
   @bindable(coerceBoolean)
-  action = false;
+  action: boolean = false;
 
   @bindable(coerceBoolean)
-  disabled = false;
+  disabled: boolean = false;
 
   @bindable(coerceBoolean)
-  active = false;
+  active: boolean = false;
 
   propertyChanged(name: keyof this, newValue?: string | boolean, oldValue?: string | boolean) {
     switch (name) {
@@ -28,7 +26,6 @@ export class BsListGroupItem extends BaseAttribute {
         if (oldValue) this.setClass(prefix(oldValue), false);
         if (newValue) this.setClass(prefix(newValue));
         break;
-
       case 'action':
         this.setClass(prefix('action'), newValue as boolean);
     }

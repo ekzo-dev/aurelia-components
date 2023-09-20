@@ -1,10 +1,8 @@
-import './select-multiple.scss';
-
-import { BsSelect } from '@ekzo-dev/bootstrap';
+import { customElement, bindable, BindingMode, ICustomElementViewModel } from 'aurelia';
 import { Iterable } from '@ekzo-dev/toolkit';
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
-
+import { BsSelect } from '@ekzo-dev/bootstrap';
 import template from './select-multiple.html';
+import './select-multiple.scss';
 
 const BS_SIZE_MULTIPLIER = {
   lg: 1.125,
@@ -30,9 +28,7 @@ export class BsSelectMultiple extends BsSelect implements ICustomElementViewMode
   propertyChanged(name: keyof this) {
     switch (name) {
       case 'size':
-
       case 'bsSize':
-
       case 'floatingLabel':
         setTimeout(() => this.setHeight());
     }
@@ -43,7 +39,6 @@ export class BsSelectMultiple extends BsSelect implements ICustomElementViewMode
 
     if (this.size > 0) {
       const { borderTopWidth, borderBottomWidth, paddingTop, paddingBottom } = getComputedStyle(this.control);
-
       style.height = `calc(${
         this.size * 1.625 * (this.bsSize ? BS_SIZE_MULTIPLIER[this.bsSize] : 1)
       }rem + ${borderTopWidth} + ${borderBottomWidth} + ${paddingTop} + ${paddingBottom} - 2px)`;
@@ -54,10 +49,8 @@ export class BsSelectMultiple extends BsSelect implements ICustomElementViewMode
 
   private scrollToSelected() {
     const selected = this.control.querySelector<HTMLInputElement>('input:checked');
-
     if (selected) {
       const { paddingTop } = getComputedStyle(this.control);
-
       this.control.scrollTo({ top: selected.parentElement.offsetTop - parseInt(paddingTop) });
     }
   }

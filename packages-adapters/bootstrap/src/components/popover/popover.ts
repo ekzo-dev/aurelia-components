@@ -1,9 +1,8 @@
-import './popover.scss';
-
-import { ICustomAttributeController } from '@aurelia/runtime-html';
-import * as Popper from '@popperjs/core';
 import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { ICustomAttributeController } from '@aurelia/runtime-html';
 import { Popover } from 'bootstrap';
+import './popover.scss';
+import * as Popper from '@popperjs/core';
 
 export type Placements = 'top' | 'right' | 'bottom' | 'left';
 export type Triggers =
@@ -19,7 +18,7 @@ export type Triggers =
 @customAttribute('bs-popover')
 export class BsPopover implements Partial<Popover.Options>, ICustomAttributeViewModel {
   @bindable()
-  animation = true;
+  animation: boolean = true;
 
   @bindable()
   allowList?: Record<keyof HTMLElementTagNameMap | '*', Array<string | RegExp>>;
@@ -43,7 +42,7 @@ export class BsPopover implements Partial<Popover.Options>, ICustomAttributeView
   fallbackPlacements?: string[];
 
   @bindable()
-  html = false;
+  html: boolean = false;
 
   @bindable() // todo check validity
   offset: any = [0, 0];
@@ -55,7 +54,7 @@ export class BsPopover implements Partial<Popover.Options>, ICustomAttributeView
   popperConfig: Partial<Popover.Options> | Popover.PopperConfigFunction | null;
 
   @bindable()
-  sanitize = true;
+  sanitize: boolean = true;
 
   @bindable()
   sanitizeFn: () => void | null = null;

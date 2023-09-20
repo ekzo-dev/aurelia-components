@@ -1,12 +1,9 @@
-import './radio.scss';
-
-import { BsButtonVariant, Size } from '@ekzo-dev/bootstrap';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
-
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BaseField } from '../base-field';
-
 import template from './radio.html';
+import './radio.scss';
+import { BsButtonVariant, Size } from '@ekzo-dev/bootstrap';
 
 @customElement({
   name: 'bs-radio',
@@ -26,7 +23,7 @@ export class BsRadio extends BaseField {
   matcher?: (a: any, b: any) => boolean;
 
   @bindable(coerceBoolean)
-  inline = false;
+  inline: boolean = false;
 
   @bindable({ type: String })
   mode?: 'button';

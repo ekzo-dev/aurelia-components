@@ -171,7 +171,6 @@ export class DragNDropCustomAttribute {
     // }
 
     const elementDragging: HTMLElement = document.querySelector('[moving]');
-
     if (elementDragging !== this.element) {
       if (elementDragging.getAttribute('hidden') === null && this.hide) {
         elementDragging.setAttribute('hidden', '');
@@ -181,7 +180,6 @@ export class DragNDropCustomAttribute {
       // TODO: зачем dragCounter?
       this.dragCounter++;
       this.element.classList.add('over');
-
       if (this.canDrop && this.addClass) {
         this.element.classList.add(this.addClass);
       }
@@ -204,13 +202,10 @@ export class DragNDropCustomAttribute {
 
   dragleave(event) {
     const elementDragging: HTMLElement = document.querySelector('[moving]');
-
     if (elementDragging !== this.element) {
       this.dragCounter--;
-
       if (this.dragCounter === 0) {
         this.element.classList.remove('over');
-
         if (this.canDrop && this.addClass) {
           this.element.classList.remove(this.addClass);
         }
@@ -229,11 +224,9 @@ export class DragNDropCustomAttribute {
       }
 
       const dragPayload = event.dataTransfer.getData('input/plain');
-
       if (JSON.stringify(this.payload) !== dragPayload) {
         if (this.dropHandler) {
           const event = { drop: this.payload, drag: JSON.parse(dragPayload) };
-
           this.dropHandler(event);
         }
         // this.dragging = false;

@@ -18,7 +18,6 @@ export abstract class BaseAttribute implements ICustomAttributeViewModel {
 
   disabledChanged(newValue: boolean) {
     const el = this.element;
-
     if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
       newValue ? el.setAttribute('disabled', '') : el.removeAttribute('disabled');
     } else {
@@ -32,7 +31,7 @@ export abstract class BaseAttribute implements ICustomAttributeViewModel {
 
   protected abstract get classes(): string[];
 
-  protected setClass(tokens: string | string[], add = true) {
+  protected setClass(tokens: string | string[], add: boolean = true) {
     this.element.classList[add ? 'add' : 'remove'](...(Array.isArray(tokens) ? tokens : [tokens]));
   }
 }
