@@ -20,7 +20,7 @@ export type BsButtonVariant =
   | 'outline-light'
   | 'outline-dark';
 
-const prefix = (name) => `btn-${name}`;
+const prefix = (name: string) => `btn-${name}`;
 
 @customAttribute('bs-button')
 export class BsButton extends BaseAttribute {
@@ -59,8 +59,8 @@ export class BsButton extends BaseAttribute {
       case 'variant':
 
       case 'size':
-        if (oldValue) this.setClass(prefix(oldValue), false);
-        if (newValue) this.setClass(prefix(newValue));
+        if (oldValue) this.setClass(prefix(oldValue as string), false);
+        if (newValue) this.setClass(prefix(newValue as string));
         break;
 
       case 'toggleState':

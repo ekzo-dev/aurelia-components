@@ -31,6 +31,7 @@ module.exports = {
               'unbound',
               'toView',
               'fromView',
+              'propertyChanged',
             ],
           },
         ],

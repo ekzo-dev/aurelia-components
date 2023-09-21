@@ -71,8 +71,8 @@ ${createComponentTemplate(
   <bs-button-group size.bind="size" bs-dropdown>
     <button bs-button bs-dropdown-toggle>Dropdown</button>
     <bs-dropdown-menu>
-      <bs-dropdown-item>Dropdown link</bs-dropdown-item>
-      <bs-dropdown-item>Dropdown link</bs-dropdown-item>
+      <a bs-dropdown-item>Dropdown link</a>
+      <a bs-dropdown-item>Dropdown link</a>
     </bs-dropdown-menu>
   </bs-button-group>
   `

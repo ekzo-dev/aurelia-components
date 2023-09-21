@@ -1,28 +1,20 @@
-import template from './dropdown-item.html';
-
 import './dropdown.scss';
 
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 
-import { coerceBoolean } from '../../utils';
+import { BaseAttribute } from '../base-attribute';
 
-export interface IBsDropdownItem {
-  type?: 'header' | 'divider' | 'text' | 'link';
-  disabled?: boolean;
-  active?: boolean;
-}
+// import { coerceBoolean } from '../../utils';
 
-@customElement({
-  name: 'bs-dropdown-item',
-  template,
-})
-export class BsDropdownItem implements IBsDropdownItem, ICustomElementViewModel {
+@customAttribute('bs-dropdown-item')
+export class BsDropdownItem extends BaseAttribute {
   @bindable()
-  type: IBsDropdownItem['type'] = 'link';
+  disabled: boolean = false;
 
-  @bindable(coerceBoolean)
-  disabled: IBsDropdownItem['disabled'] = false;
+  @bindable()
+  active: boolean = false;
 
-  @bindable(coerceBoolean)
-  active: IBsDropdownItem['active'] = false;
+  get classes(): string[] {
+    return ['dropdown-item', this.active ? 'active' : '', this.disabled ? 'disabled' : ''].filter(Boolean);
+  }
 }

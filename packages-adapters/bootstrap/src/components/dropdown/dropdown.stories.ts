@@ -32,9 +32,9 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   ${createComponentTemplate(
     BsDropdownMenu,
     `
-    <bs-dropdown-item>Action</bs-dropdown-item>
-    <bs-dropdown-item>Another action</bs-dropdown-item>
-    <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
+    <a bs-dropdown-item>Action</a>
+    <a bs-dropdown-item>Another action</a>
+    <a bs-dropdown-item="disabled.bind: true">Disabled action</a>
   `
   )}
 </div>
@@ -61,9 +61,9 @@ const SplitButton: Story = (args): StoryFnAureliaReturnType => ({
   ${createComponentTemplate(
     BsDropdownMenu,
     `
-      <bs-dropdown-item>Action</bs-dropdown-item>
-      <bs-dropdown-item>Another action</bs-dropdown-item>
-      <bs-dropdown-item>Something else here</bs-dropdown-item>
+      <a bs-dropdown-item>Action</a>
+      <a bs-dropdown-item>Another action</a>
+      <a bs-dropdown-item>Something else here</a>
     `
   )}
   </bs-button-group>

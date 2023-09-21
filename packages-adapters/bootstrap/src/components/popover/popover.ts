@@ -78,10 +78,7 @@ export class BsPopover implements Partial<Popover.Options>, ICustomAttributeView
 
   private popover?: Popover;
 
-  constructor(private element: Element) {
-    console.log('constructor');
-    //this.processTrigger();
-  }
+  constructor(private element: Element) {}
 
   /*  private addEventListener() {
     this.element.addEventListener('click', () => {

@@ -41,8 +41,8 @@ export const Overview: Story = (args): StoryFnAureliaReturnType => ({
         <p>Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.</p>
           <button bs-button="secondary" bs-dropdown-toggle>Hide this way</button>
           <bs-dropdown-menu dark>
-            <bs-dropdown-item click.trigger="offcanvas.toggle()">Hide</bs-dropdown-item>
-            <bs-dropdown-item disabled>Disabled action</bs-dropdown-item>
+            <a bs-dropdown-item click.trigger="offcanvas.toggle()">Hide</a>
+            <a bs-dropdown-item="disabled.bind: true">Disabled action</a>
         </bs-dropdown-menu>
 
     </bs-offcanvas>
