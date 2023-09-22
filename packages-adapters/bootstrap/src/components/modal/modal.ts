@@ -3,10 +3,10 @@ import template from './modal.html';
 import '../../transitions.scss';
 import './modal.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
 import { Modal } from 'bootstrap';
 
-import { coerceBoolean } from '../../utils';
 import { BsCloseButton } from '../close-button';
 
 export type ModalSize = 'sm' | 'lg' | 'xl';
@@ -33,17 +33,16 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
   @bindable(coerceBoolean)
   scrollable: boolean = false;
 
-  @bindable(coerceBoolean)
-  static: boolean = false;
-
   @bindable()
   size?: ModalSize;
 
   @bindable()
   fullscreen?: ModalFullscreen;
 
-  @bindable(coerceBoolean)
-  backdrop: boolean = true;
+  @bindable({
+    set: (value: string | boolean) => (value === 'static' ? 'static' : coerceBoolean.set(value)),
+  })
+  backdrop: boolean | 'static' = true;
 
   @bindable(coerceBoolean)
   keyboard: boolean = true;
@@ -119,6 +118,10 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
       .join(' ');
   }
 
+  handleEvent(event: Event): void {
+    this.opened = event.type === SHOW_EVENT;
+  }
+
   private waitAnimation(show: boolean): Promise<void> {
     return new Promise<void>((resolve) => {
       if (show === this.opened) {
@@ -141,7 +144,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
     const { element } = this;
 
     this.modal = new Modal(element, {
-      backdrop: this.backdrop && this.static ? 'static' : this.backdrop,
+      backdrop: this.backdrop,
       focus: this.focus,
       keyboard: this.keyboard,
     });
@@ -168,9 +171,5 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
   private unobserveResize(): void {
     this.observer?.unobserve(this.dialog);
     this.observer = undefined;
-  }
-
-  handleEvent(event: Event): void {
-    this.opened = event.type === SHOW_EVENT;
   }
 }

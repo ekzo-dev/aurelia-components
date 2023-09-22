@@ -1,7 +1,7 @@
 import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes } from '@storybook/aurelia';
 import { BsNavbar, BsNavbarNav, BsNavbarBrand, BsNavbarText, BsNavbarToggler } from '.';
 import { BsNavItem, BsNavLink } from '../nav';
-import { BsDropdown, BsDropdownDivider, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
 import { BsInput } from '../../forms';
 import { BsButton } from '../button';
 import { BsCollapse } from '../collapse';
@@ -23,7 +23,7 @@ const dropdown = () => `
         <bs-dropdown-menu>
           <a bs-dropdown-item>Action</a>
           <a bs-dropdown-item>Another action</a>
-          <hr bs-dropdown-divider>
+          <hr bs-dropdown-item="divider">
           <a bs-dropdown-item>Something else here</a>
         </bs-dropdown-menu>
       </bs-nav-item>
@@ -55,7 +55,6 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
     BsDropdownToggle,
     BsDropdownItem,
     BsDropdownMenu,
-    BsDropdownDivider,
   ],
   template: `
 <bs-navbar expand.bind="expand" dark.bind="dark" class="bg-light">
@@ -135,7 +134,6 @@ const Offcanvas: Story = (args): StoryFnAureliaReturnType => ({
     BsDropdownToggle,
     BsDropdownItem,
     BsDropdownMenu,
-    BsDropdownDivider,
   ],
   template: `
 <bs-navbar dark.bind="dark" class="bg-light fixed-top">

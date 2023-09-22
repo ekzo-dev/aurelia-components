@@ -1,6 +1,6 @@
 import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsNav, BsNavItem, BsNavLink, BsTabContent, BsTabPane } from '.';
-import { BsDropdown, BsDropdownDivider, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
 import { selectControl } from '../../../../../.storybook/helpers';
 
 const meta: Meta = {
@@ -38,7 +38,7 @@ const BaseNav: Story = (args): StoryFnAureliaReturnType => ({
 });
 
 const UsingDropdowns: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsNavItem, BsNavLink, BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, BsDropdownDivider],
+  components: [BsNavItem, BsNavLink, BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
   innerHtml: `
   <bs-nav-item>
     <a href="#" bs-nav-link="active.bind: true">Active</a>
@@ -49,7 +49,7 @@ const UsingDropdowns: Story = (args): StoryFnAureliaReturnType => ({
       <a bs-dropdown-item>Action</a>
       <a bs-dropdown-item>Another action</a>
       <a bs-dropdown-item>Something else here</a>
-      <hr bs-dropdown-divider>
+      <hr bs-dropdown-item="divider">
       <a bs-dropdown-item>Separated link</a>
     </bs-dropdown-menu>
   </bs-nav-item>

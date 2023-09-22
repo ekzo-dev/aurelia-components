@@ -37,6 +37,7 @@ const Navbar: Story = (args): StoryFnAureliaReturnType => ({
       <bs-dropdown-menu>
         <a bs-dropdown-item href="#scrollspyHeading3">Third</a>
         <a bs-dropdown-item href="#scrollspyHeading4">Fourth</a>
+        <hr bs-dropdown-item="divider">
         <a bs-dropdown-item href="#scrollspyHeading5">Fifth</a>
       </bs-dropdown-menu>
     </bs-nav-item>

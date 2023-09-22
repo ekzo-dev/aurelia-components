@@ -6,7 +6,7 @@ import { Variant } from '../../types';
 import { coerceBoolean } from '../../utils';
 import { BaseAttribute } from '../base-attribute';
 
-const prefix = (name) => `list-group-item-${name}`;
+const prefix = (name: string) => `list-group-item-${name}`;
 
 @customAttribute('bs-list-group-item')
 export class BsListGroupItem extends BaseAttribute {
@@ -25,8 +25,8 @@ export class BsListGroupItem extends BaseAttribute {
   propertyChanged(name: keyof this, newValue?: string | boolean, oldValue?: string | boolean) {
     switch (name) {
       case 'variant':
-        if (oldValue) this.setClass(prefix(oldValue), false);
-        if (newValue) this.setClass(prefix(newValue));
+        if (oldValue) this.setClass(prefix(oldValue as string), false);
+        if (newValue) this.setClass(prefix(newValue as string));
         break;
 
       case 'action':

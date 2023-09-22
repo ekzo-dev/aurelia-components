@@ -20,6 +20,7 @@ const meta: Meta = {
   argTypes: {
     size: selectControl(sizeOptions),
     fullscreen: selectControl(fullscreenOptions),
+    backdrop: selectControl([true, false, 'static']),
   },
 };
 export default meta;
@@ -33,11 +34,11 @@ export const Overview: Story = (args): StoryFnAureliaReturnType => ({
       animation.bind="animation"
       centered.bind="centered"
       scrollable.bind="scrollable"
-      static.bind="static"
       size.bind="size"
-      backdrop.bind="backdrop"
       fullscreen.bind="fullscreen"
-      opened.bind="opened"
+      backdrop.bind="backdrop"
+      keyboard.bind="keyboard"
+      focus.bind="focus"
     >
       Modal body
     </bs-modal>
