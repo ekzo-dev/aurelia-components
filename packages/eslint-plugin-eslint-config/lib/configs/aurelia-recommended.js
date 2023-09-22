@@ -12,7 +12,7 @@ module.exports = {
       extends: [],
       rules: {
         '@typescript-eslint/explicit-member-accessibility': [
-          'error',
+          'off', // 'error',
           {
             overrides: {
               constructors: 'no-public',

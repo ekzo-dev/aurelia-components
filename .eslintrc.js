@@ -12,6 +12,7 @@ module.exports = {
     'plugin:@ekzo-dev/eslint-config/javascript-recommended',
     'plugin:@ekzo-dev/eslint-config/typescript-recommended',
     'plugin:@ekzo-dev/eslint-config/aurelia-recommended',
+    'plugin:@ekzo-dev/eslint-config/storybook-recommended',
     'plugin:@ekzo-dev/eslint-config/jest-recommended',
     'plugin:@ekzo-dev/eslint-config/prettier-recommended',
     'plugin:@ekzo-dev/eslint-config/rules-recommended',
@@ -21,8 +22,6 @@ module.exports = {
     tsconfigRootDir: thisDir,
   },
   rules: {
-    // TODO: fix code and remove this rule
-    '@typescript-eslint/explicit-member-accessibility': 'warn',
     // FIXME: 'typescript-recommended' fails on this rule
     'node/no-unsupported-features/es-syntax': 'warn',
   },

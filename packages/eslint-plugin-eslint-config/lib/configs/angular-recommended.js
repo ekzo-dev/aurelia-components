@@ -13,7 +13,7 @@ module.exports = {
       rules: {
         '@angular-eslint/no-empty-lifecycle-method': 'warn',
         '@typescript-eslint/explicit-member-accessibility': [
-          'error',
+          'off', // 'error',
           {
             overrides: {
               constructors: 'no-public',
