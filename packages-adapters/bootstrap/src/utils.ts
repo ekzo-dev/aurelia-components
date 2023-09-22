@@ -13,3 +13,7 @@ export const coerceBoolean = {
   set: (v: string | boolean) =>
     v === '' || v === true || v === 'true' ? true : v === false || v === 'false' ? false : undefined,
 };
+
+export const coerceBooleanOrString = (str: string) => ({
+  set: (value: string | boolean) => (value === str ? str : coerceBoolean.set(value)),
+});

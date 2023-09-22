@@ -7,6 +7,7 @@ import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
 import { Modal } from 'bootstrap';
 
+import { coerceBooleanOrString } from '../../utils';
 import { BsCloseButton } from '../close-button';
 
 export type ModalSize = 'sm' | 'lg' | 'xl';
@@ -39,9 +40,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
   @bindable()
   fullscreen?: ModalFullscreen;
 
-  @bindable({
-    set: (value: string | boolean) => (value === 'static' ? 'static' : coerceBoolean.set(value)),
-  })
+  @bindable(coerceBooleanOrString('static'))
   backdrop: boolean | 'static' = true;
 
   @bindable(coerceBoolean)

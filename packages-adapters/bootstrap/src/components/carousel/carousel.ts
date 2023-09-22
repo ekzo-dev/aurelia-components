@@ -5,119 +5,112 @@ import './carousel.scss';
 import type { BsCarouselItem } from '.';
 
 import { ICustomElementController } from '@aurelia/runtime-html';
-import { bindable, BindingMode, children, customElement, ICustomElementViewModel } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, slotted, customElement, ICustomElementViewModel } from 'aurelia';
 import { Carousel } from 'bootstrap';
 
-import { coerceBoolean } from '../../utils';
+import { coerceBooleanOrString } from '../../utils';
 
 @customElement({
   name: 'bs-carousel',
   template,
 })
-export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
-  @bindable(coerceBoolean)
-  ride: boolean = false;
+export class BsCarousel implements ICustomElementViewModel, Carousel.Options, EventListenerObject {
+  @bindable(coerceBooleanOrString('carousel'))
+  ride: boolean | 'carousel' = false;
 
   @bindable(coerceBoolean)
-  fade?: boolean;
+  fade: boolean = false;
 
   @bindable()
-  interval: number | false = 3000;
+  interval: number = 5000;
 
   @bindable(coerceBoolean)
-  keyboard: boolean = false;
+  keyboard: boolean = true;
 
-  @bindable()
-  pause: 'hover' | false = 'hover';
-
-  @bindable()
-  direction: 'left' | 'right' = 'right';
+  @bindable(coerceBooleanOrString('hover'))
+  pause: false | 'hover' = 'hover';
 
   @bindable(coerceBoolean)
   wrap: boolean = true;
 
-  //todo не тестировалось
   @bindable(coerceBoolean)
   touch: boolean = true;
 
   @bindable(coerceBoolean)
-  indicators: boolean = true;
+  indicators: boolean = false;
 
   @bindable(coerceBoolean)
-  controls: boolean = true;
+  controls: boolean = false;
 
   @bindable(coerceBoolean)
   dark: boolean = false;
 
-  @bindable({ mode: BindingMode.twoWay })
+  @slotted('.carousel-item')
+  items: HTMLElement[];
+
   activeSlide: number = 0;
 
-  @children({
-    options: { childList: true, subtree: true },
-    query: (controller: ICustomElementController) =>
-      controller.host.querySelector('div.carousel-inner')?.childNodes || [],
-    filter: (el: HTMLElement) => el.tagName === 'BS-CAROUSEL-ITEM',
-  })
-  items: BsCarouselItem[];
+  #carousel?: Carousel;
 
-  private carousel?: Carousel;
+  constructor(protected element: HTMLElement) {}
 
-  private slideListener?: (event: Carousel.Event) => void;
-
-  private itemsInit = false;
-
-  constructor(private element: Element) {}
-
-  attaching() {
-    this.createCarousel();
+  attached() {
+    this.#createCarousel();
   }
 
   detaching() {
-    this.destroyCarousel();
+    this.#destroyCarousel();
   }
 
-  itemsChanged() {
-    if (this.items[this.activeSlide] && !this.itemsInit) {
-      this.itemsInit = true;
-      this.items[this.activeSlide].active = true;
+  itemsChanged(items: HTMLElement[]) {
+    if (this.activeSlide >= items.length) {
+      this.to(0);
+      this.activeSlide = 0;
+    }
+
+    items[this.activeSlide].classList.add('active');
+  }
+
+  propertyChanged(key: keyof Carousel.Options) {
+    const options: Array<keyof Carousel.Options> = ['interval', 'keyboard', 'pause', 'ride', 'touch', 'wrap'];
+
+    if (options.includes(key)) {
+      this.#destroyCarousel();
+      this.#createCarousel();
     }
   }
 
-  activeSlideChanged(value: number) {
-    this.to(value);
-  }
-
-  rideChanged() {
-    if (this.ride) this.cycle();
-    else this.pauseCycle();
-  }
-
   prev(): void {
-    return this.carousel?.prev();
+    return this.#carousel?.prev();
   }
 
   next(): void {
-    return this.carousel?.next();
+    return this.#carousel?.next();
   }
 
   nextWhenVisible(): void {
-    return this.carousel?.nextWhenVisible();
+    return this.#carousel?.nextWhenVisible();
   }
 
   to(index: number): void {
-    return this.carousel?.to(index);
+    return this.#carousel?.to(index);
   }
 
   cycle(): void {
-    return this.carousel?.cycle();
+    return this.#carousel?.cycle();
   }
 
   pauseCycle(): void {
-    return this.carousel?.pause();
+    return this.#carousel?.pause();
   }
 
-  private createCarousel() {
-    this.carousel = new Carousel(this.element, {
+  handleEvent(event: Event) {
+    this.activeSlide = (event as unknown as Carousel.Event).to;
+  }
+
+  #createCarousel() {
+    this.#carousel = new Carousel(this.element, {
       interval: this.interval,
       keyboard: this.keyboard,
       wrap: this.wrap,
@@ -126,20 +119,13 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options {
       ride: this.ride,
     });
 
-    this.slideListener = (event: Carousel.Event) => {
-      this.activeSlide = event.to;
-    };
-
-    this.element.addEventListener('slide.bs.carousel', this.slideListener);
-    this.rideChanged();
+    this.element.addEventListener('slide.bs.carousel', this);
   }
 
-  private destroyCarousel() {
-    this.carousel?.dispose();
-    this.carousel = undefined;
+  #destroyCarousel() {
+    this.#carousel?.dispose();
+    this.#carousel = undefined;
 
-    if (this.slideListener) {
-      this.element.removeEventListener('slide.bs.carousel', this.slideListener as unknown as EventListener);
-    }
+    this.element.removeEventListener('slide.bs.carousel', this);
   }
 }
