@@ -59,5 +59,6 @@
     "prettier": "^3.0.3",
     "requireindex": "^1.2.0"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "private": true
 }
