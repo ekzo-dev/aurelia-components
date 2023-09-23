@@ -2,14 +2,14 @@ import template from './list-group.html';
 
 import './list-group.scss';
 
-import { Breakpoint } from '@ekzo-dev/bootstrap';
 import { bindable, customElement } from 'aurelia';
 
+import { BsBreakpoint } from '../../types';
 import { coerceBoolean } from '../../utils';
 
-export type BsListGroupHorizontal = Breakpoint | 'always';
+export type BsListGroupHorizontal = BsBreakpoint | 'always';
 
-const prefix = (name) => `list-group-${name}`;
+const prefix = (name: string) => `list-group-${name}`;
 
 // TODO: add stories for badges / checkboxes / custom content / contextual classes
 // TODO: add support for tabs usage (Javascript behavior)

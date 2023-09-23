@@ -5,9 +5,9 @@ import './navbar.scss';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel, slotted } from 'aurelia';
 
-import { Breakpoint } from '../../types';
+import { BsBreakpoint } from '../../types';
 
-export type BsNavbarExpand = Breakpoint | 'always';
+export type BsNavbarExpand = BsBreakpoint | 'always';
 
 @customElement({
   name: 'bs-navbar',

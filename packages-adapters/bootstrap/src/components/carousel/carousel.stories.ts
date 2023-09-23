@@ -1,4 +1,4 @@
-import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsCarousel } from './carousel';
 import { BsCarouselItem, BsCarouselCaption } from '.';
 

@@ -6,7 +6,7 @@ import './alert.scss';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Alert } from 'bootstrap';
 
-import { Variants } from '../../interfaces';
+import { BsVariant } from '../../types';
 import { coerceBoolean } from '../../utils';
 import { BsCloseButton } from '../close-button';
 
@@ -17,42 +17,42 @@ import { BsCloseButton } from '../close-button';
 })
 export class BsAlert implements ICustomElementViewModel {
   @bindable()
-  variant: Variants = 'primary';
+  variant: BsVariant = 'primary';
 
   @bindable(coerceBoolean)
   dismissible: boolean = false;
 
-  private alert?: Alert;
+  #alert?: Alert;
 
-  constructor(private element: Element) {}
+  constructor(protected element: Element) {}
 
   attaching() {
-    this.createAlert();
+    this.#createAlert();
   }
 
   detaching() {
-    this.destroyAlert();
+    this.#destroyAlert();
   }
 
   dismissibleChanged() {
-    this.destroyAlert();
-    this.createAlert();
+    this.#destroyAlert();
+    this.#createAlert();
   }
 
   close(): void {
-    return this.alert.close();
+    return this.#alert.close();
   }
 
-  private createAlert() {
+  #createAlert() {
     if (this.dismissible) {
-      this.alert = new Alert(this.element);
+      this.#alert = new Alert(this.element);
     }
   }
 
-  private destroyAlert() {
-    if (this.alert) {
-      this.alert.dispose();
-      this.alert = undefined;
+  #destroyAlert() {
+    if (this.#alert) {
+      this.#alert.dispose();
+      this.#alert = undefined;
     }
   }
 }

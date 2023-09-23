@@ -4,7 +4,7 @@ import './input.scss';
 
 import { bindable, BindingMode, customElement } from 'aurelia';
 
-import { Sizes } from '../../interfaces';
+import { BsSize } from '../../types';
 import { coerceBoolean, uniqueId } from '../../utils';
 import { BaseField } from '../base-field';
 
@@ -57,7 +57,7 @@ export class BsInput extends BaseField {
   floatingLabel: boolean = false;
 
   @bindable()
-  size?: Sizes;
+  size?: BsSize;
 
   @bindable()
   datalist: string[] = [];

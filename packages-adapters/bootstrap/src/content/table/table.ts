@@ -7,7 +7,7 @@ import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 import { VARIANTS } from '../../constants';
-import { Breakpoint, Variant } from '../../types';
+import { BsBreakpoint, BsVariant } from '../../types';
 
 @customElement({
   name: 'bs-table',
@@ -33,10 +33,10 @@ export class BsTable implements ICustomElementViewModel {
   size?: 'sm';
 
   @bindable()
-  variant?: Variant;
+  variant?: BsVariant;
 
   @bindable()
-  responsive?: Breakpoint;
+  responsive?: BsBreakpoint;
 
   table!: HTMLTableElement;
 

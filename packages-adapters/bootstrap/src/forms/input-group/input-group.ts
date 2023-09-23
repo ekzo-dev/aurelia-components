@@ -4,7 +4,7 @@ import './input-group.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { Sizes } from '../../interfaces';
+import { BsSize } from '../../types';
 
 @customElement({
   name: 'bs-input-group-text',
@@ -19,5 +19,5 @@ export class BsInputGroupText {}
 })
 export class BsInputGroup {
   @bindable()
-  readonly size?: Sizes;
+  readonly size?: BsSize;
 }

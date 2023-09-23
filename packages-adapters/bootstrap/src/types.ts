@@ -1,5 +1,7 @@
-export type Variant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+export type BsVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
 
-export type Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type BsBackground = BsVariant | 'white' | 'transparent';
 
-export type Size = 'sm' | 'lg';
+export type BsBreakpoint = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
+export type BsSize = 'sm' | 'lg';

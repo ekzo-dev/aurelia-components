@@ -6,7 +6,7 @@ import '../../components/button/button.scss';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { type BsButtonVariant } from '../../components';
-import { Size } from '../../types';
+import { BsSize } from '../../types';
 import { coerceBoolean } from '../../utils';
 import { BaseField } from '../base-field';
 
@@ -34,7 +34,7 @@ export class BsCheckbox extends BaseField {
   mode?: 'switch' | 'button';
 
   @bindable({ type: String })
-  buttonSize?: Size;
+  buttonSize?: BsSize;
 
   @bindable()
   buttonVariant: BsButtonVariant = 'primary';

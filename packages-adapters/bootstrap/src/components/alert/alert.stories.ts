@@ -8,6 +8,7 @@ const meta: Meta = {
   component: BsAlert,
   parameters: {
     actions: {
+      // closed.bs.alert is dispatched on removed element by Bootstrap, so event doesn't bubble
       handles: ['close.bs.alert', 'closed.bs.alert'],
     },
   },

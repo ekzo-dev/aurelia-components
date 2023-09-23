@@ -2,10 +2,10 @@ import template from './progress.html';
 
 import './progress.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement } from 'aurelia';
 
-import { BgColors } from '../../interfaces';
-import { coerceBoolean } from '../../utils';
+import { BsBackground } from '../../types';
 
 @customElement({
   name: 'bs-progress',
@@ -13,17 +13,17 @@ import { coerceBoolean } from '../../utils';
 })
 export class BsProgress {
   @bindable()
-  readonly value: number = 0;
+  value: number = 0;
 
   @bindable()
-  readonly label: string = '';
+  label: string = '';
 
   @bindable()
-  readonly background?: BgColors;
+  background?: BsBackground;
 
   @bindable(coerceBoolean)
-  readonly striped: boolean = false;
+  striped: boolean = false;
 
   @bindable(coerceBoolean)
-  readonly animated: boolean = false;
+  animated: boolean = false;
 }

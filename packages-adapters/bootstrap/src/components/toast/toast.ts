@@ -7,7 +7,7 @@ import './toast.scss';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Toast } from 'bootstrap';
 
-import { Variants } from '../../interfaces';
+import { BsVariant } from '../../types';
 import { coerceBoolean } from '../../utils';
 import { BsCloseButton } from '../close-button';
 
@@ -24,7 +24,7 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
   animation: boolean = false;
 
   @bindable()
-  variant?: Variants;
+  variant?: BsVariant;
 
   @bindable(coerceBoolean)
   autohide: boolean = false;
@@ -56,6 +56,18 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
     return this.toast?.isShown();
   }
 
+  propertyChanged(name: keyof this): void {
+    switch (name) {
+      case 'animation':
+
+      case 'autohide':
+
+      case 'delay':
+        this.destroyToast();
+        this.createToast();
+    }
+  }
+
   private createToast(): void {
     this.toast = new Toast(this.element, {
       animation: this.animation,
@@ -67,18 +79,6 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
   private destroyToast(): void {
     this.toast?.dispose();
     this.toast = undefined;
-  }
-
-  propertyChanged(name: keyof this): void {
-    switch (name) {
-      case 'animation':
-
-      case 'autohide':
-
-      case 'delay':
-        this.destroyToast();
-        this.createToast();
-    }
   }
 
   private waitAnimation(show: boolean): Promise<void> {

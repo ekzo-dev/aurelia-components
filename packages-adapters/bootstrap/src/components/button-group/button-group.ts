@@ -4,7 +4,7 @@ import './button-group.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { Size } from '../../types';
+import { BsSize } from '../../types';
 import { coerceBoolean } from '../../utils';
 
 @customElement({
@@ -13,7 +13,7 @@ import { coerceBoolean } from '../../utils';
 })
 export class BsButtonGroup {
   @bindable()
-  size?: Size;
+  size?: BsSize;
 
   @bindable(coerceBoolean)
   vertical: boolean = false;

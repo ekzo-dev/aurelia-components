@@ -5,11 +5,11 @@ import { bindable, customAttribute } from 'aurelia';
 import { Button } from 'bootstrap';
 
 import { TOGGLE } from '../../constants';
-import { Size, Variant } from '../../types';
+import { BsSize, BsVariant } from '../../types';
 import { BaseAttribute } from '../base-attribute';
 
 export type BsButtonVariant =
-  | Variant
+  | BsVariant
   | 'link'
   | 'outline-primary'
   | 'outline-secondary'
@@ -28,7 +28,7 @@ export class BsButton extends BaseAttribute {
   variant: BsButtonVariant = 'primary';
 
   @bindable({ type: String })
-  size?: Size;
+  size?: BsSize;
 
   @bindable(coerceBoolean)
   disabled?: boolean;

@@ -5,7 +5,7 @@ import './badge.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { Variants } from '../../interfaces';
+import { BsVariant } from '../../types';
 import { coerceBoolean } from '../../utils';
 
 @customElement({
@@ -14,7 +14,7 @@ import { coerceBoolean } from '../../utils';
 })
 export class BsBadge {
   @bindable()
-  variant: Variants = 'primary';
+  variant: BsVariant = 'primary';
 
   @bindable(coerceBoolean)
   pill: boolean = false;

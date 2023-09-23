@@ -2,10 +2,11 @@ import template from './radio.html';
 
 import './radio.scss';
 
-import { BsButtonVariant, Size } from '@ekzo-dev/bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
+import { BsButtonVariant } from '../../components';
+import { BsSize } from '../../types';
 import { BaseField } from '../base-field';
 
 @customElement({
@@ -32,7 +33,7 @@ export class BsRadio extends BaseField {
   mode?: 'button';
 
   @bindable({ type: String })
-  buttonSize?: Size;
+  buttonSize?: BsSize;
 
   @bindable()
   buttonVariant: BsButtonVariant = 'primary';
