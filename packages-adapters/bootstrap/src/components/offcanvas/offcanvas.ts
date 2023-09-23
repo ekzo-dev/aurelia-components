@@ -6,7 +6,7 @@ import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
 import { Offcanvas } from 'bootstrap';
 
-import { BsBreakpoint } from '../../types';
+import { Breakpoint } from '../../types';
 import { BsCloseButton } from '../close-button';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
@@ -36,7 +36,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   keyboard: boolean = true;
 
   @bindable()
-  responsive?: BsBreakpoint;
+  responsive?: Breakpoint;
 
   @bindable()
   placement?: OffcanvasPlacement = 'start';

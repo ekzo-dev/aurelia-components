@@ -4,8 +4,8 @@ import './textarea.scss';
 
 import { bindable, BindingMode, customElement } from 'aurelia';
 
-import { BsSize } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Size } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BaseField } from '../base-field';
 
 @customElement({
@@ -32,7 +32,7 @@ export class BsTextarea extends BaseField {
   minlength?: number;
 
   @bindable()
-  size?: BsSize;
+  size?: Size;
 
   @bindable()
   autocomplete?: string;

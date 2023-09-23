@@ -2,10 +2,10 @@ import './placeholder.scss';
 
 import { bindable, customAttribute } from 'aurelia';
 
-import { BsSize } from '../../types';
+import { Size } from '../../types';
 import { BaseAttribute } from '../base-attribute';
 
-export type BsPlaceholderSize = BsSize | 'xs';
+export type BsPlaceholderSize = Size | 'xs';
 export type BsPlaceholderAnimation = 'glow' | 'wave';
 
 const prefix = (name) => `placeholder-${name}`;

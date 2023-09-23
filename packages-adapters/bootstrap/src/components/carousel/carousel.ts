@@ -2,11 +2,8 @@ import template from './carousel.html';
 
 import './carousel.scss';
 
-import type { BsCarouselItem } from '.';
-
-import { ICustomElementController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, slotted, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, slotted } from 'aurelia';
 import { Carousel } from 'bootstrap';
 
 import { coerceBooleanOrString } from '../../utils';

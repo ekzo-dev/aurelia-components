@@ -5,7 +5,7 @@ import './select.scss';
 import { coerceBoolean, coerceNumber, Iterable } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
-import { BsSize } from '../../types';
+import { Size } from '../../types';
 import { BaseField } from '../base-field';
 
 @customElement({
@@ -30,7 +30,7 @@ export class BsSelect extends BaseField {
   size?: number;
 
   @bindable()
-  bsSize?: BsSize;
+  bsSize?: Size;
 
   @bindable()
   autocomplete?: string;

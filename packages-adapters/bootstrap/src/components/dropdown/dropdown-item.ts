@@ -4,7 +4,7 @@ import { bindable, customAttribute } from 'aurelia';
 
 import { BaseAttribute } from '../base-attribute';
 
-// import { coerceBoolean } from '../../utils';
+// import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 export type BsDropdownItemType = 'item' | 'divider' | 'text' | 'header';
 

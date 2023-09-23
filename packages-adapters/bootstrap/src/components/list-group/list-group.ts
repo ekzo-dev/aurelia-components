@@ -4,10 +4,10 @@ import './list-group.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { BsBreakpoint } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Breakpoint } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 
-export type BsListGroupHorizontal = BsBreakpoint | 'always';
+export type BsListGroupHorizontal = Breakpoint | 'always';
 
 const prefix = (name: string) => `list-group-${name}`;
 

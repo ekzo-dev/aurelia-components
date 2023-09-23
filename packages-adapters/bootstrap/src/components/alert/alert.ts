@@ -6,8 +6,8 @@ import './alert.scss';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Alert } from 'bootstrap';
 
-import { BsVariant } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Variant } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BsCloseButton } from '../close-button';
 
 @customElement({
@@ -17,7 +17,7 @@ import { BsCloseButton } from '../close-button';
 })
 export class BsAlert implements ICustomElementViewModel {
   @bindable()
-  variant: BsVariant = 'primary';
+  variant: Variant = 'primary';
 
   @bindable(coerceBoolean)
   dismissible: boolean = false;

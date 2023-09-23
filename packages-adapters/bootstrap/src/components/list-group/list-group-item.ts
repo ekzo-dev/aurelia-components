@@ -2,8 +2,8 @@ import './list-group.scss';
 
 import { bindable, customAttribute } from 'aurelia';
 
-import { BsVariant } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Variant } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BaseAttribute } from '../base-attribute';
 
 const prefix = (name: string) => `list-group-item-${name}`;
@@ -11,7 +11,7 @@ const prefix = (name: string) => `list-group-item-${name}`;
 @customAttribute('bs-list-group-item')
 export class BsListGroupItem extends BaseAttribute {
   @bindable({ primary: true, type: String })
-  variant?: BsVariant;
+  variant?: Variant;
 
   @bindable(coerceBoolean)
   action: boolean = false;

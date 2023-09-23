@@ -4,11 +4,11 @@ import '../../transitions.scss';
 import '../../color-bg.scss';
 import './toast.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Toast } from 'bootstrap';
 
-import { BsVariant } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Variant } from '../../types';
 import { BsCloseButton } from '../close-button';
 
 @customElement({
@@ -24,7 +24,7 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
   animation: boolean = false;
 
   @bindable()
-  variant?: BsVariant;
+  variant?: Variant;
 
   @bindable(coerceBoolean)
   autohide: boolean = false;

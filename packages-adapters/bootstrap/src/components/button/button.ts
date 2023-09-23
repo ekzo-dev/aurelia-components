@@ -5,11 +5,11 @@ import { bindable, customAttribute } from 'aurelia';
 import { Button } from 'bootstrap';
 
 import { TOGGLE } from '../../constants';
-import { BsSize, BsVariant } from '../../types';
+import { Size, Variant } from '../../types';
 import { BaseAttribute } from '../base-attribute';
 
-export type BsButtonVariant =
-  | BsVariant
+export type ButtonVariant =
+  | Variant
   | 'link'
   | 'outline-primary'
   | 'outline-secondary'
@@ -25,10 +25,10 @@ const prefix = (name: string) => `btn-${name}`;
 @customAttribute('bs-button')
 export class BsButton extends BaseAttribute {
   @bindable({ type: String, primary: true })
-  variant: BsButtonVariant = 'primary';
+  variant: ButtonVariant = 'primary';
 
   @bindable({ type: String })
-  size?: BsSize;
+  size?: Size;
 
   @bindable(coerceBoolean)
   disabled?: boolean;

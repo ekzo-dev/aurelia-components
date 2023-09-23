@@ -3,11 +3,11 @@ import template from './checkbox.html';
 import './checkbox.scss';
 import '../../components/button/button.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
-import { type BsButtonVariant } from '../../components';
-import { BsSize } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { type ButtonVariant } from '../../components';
+import { Size } from '../../types';
 import { BaseField } from '../base-field';
 
 @customElement({
@@ -34,10 +34,10 @@ export class BsCheckbox extends BaseField {
   mode?: 'switch' | 'button';
 
   @bindable({ type: String })
-  buttonSize?: BsSize;
+  buttonSize?: Size;
 
   @bindable()
-  buttonVariant: BsButtonVariant = 'primary';
+  buttonVariant: ButtonVariant = 'primary';
 
   @bindable(coerceBoolean)
   indeterminate: boolean = false;

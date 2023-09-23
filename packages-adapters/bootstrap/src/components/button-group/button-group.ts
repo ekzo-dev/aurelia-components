@@ -4,8 +4,8 @@ import './button-group.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { BsSize } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Size } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 @customElement({
   name: 'bs-button-group',
@@ -13,7 +13,7 @@ import { coerceBoolean } from '../../utils';
 })
 export class BsButtonGroup {
   @bindable()
-  size?: BsSize;
+  size?: Size;
 
   @bindable(coerceBoolean)
   vertical: boolean = false;

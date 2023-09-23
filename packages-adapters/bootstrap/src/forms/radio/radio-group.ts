@@ -5,8 +5,8 @@ import './radio.scss';
 import { coerceBoolean, Iterable, uniqueId } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
-import { BsButtonVariant } from '../../components';
-import { BsSize } from '../../types';
+import { ButtonVariant } from '../../components';
+import { Size } from '../../types';
 import { BaseField } from '../base-field';
 
 import { BsRadio } from './radio';
@@ -33,10 +33,10 @@ export class BsRadioGroup extends BaseField {
   mode?: 'button';
 
   @bindable({ type: String })
-  buttonSize?: BsSize;
+  buttonSize?: Size;
 
   @bindable()
-  buttonVariant: BsButtonVariant = 'primary';
+  buttonVariant: ButtonVariant = 'primary';
 
   binding() {
     super.binding();

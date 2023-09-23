@@ -4,7 +4,7 @@ import './breadcrumb.scss';
 
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
-import { coerceBoolean } from '../../utils';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 @customElement({
   name: 'bs-breadcrumb-item',

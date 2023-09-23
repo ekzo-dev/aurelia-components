@@ -5,7 +5,7 @@ import './progress.scss';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement } from 'aurelia';
 
-import { BsBackground } from '../../types';
+import { Background } from '../../types';
 
 @customElement({
   name: 'bs-progress',
@@ -19,7 +19,7 @@ export class BsProgress {
   label: string = '';
 
   @bindable()
-  background?: BsBackground;
+  background?: Background;
 
   @bindable(coerceBoolean)
   striped: boolean = false;

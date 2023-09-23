@@ -5,7 +5,7 @@ import './card.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { BsVariant } from '../../types';
+import { Variant } from '../../types';
 
 @customElement({
   name: 'bs-card-group',
@@ -43,5 +43,5 @@ export class BsCardOverlay {}
 })
 export class BsCard {
   @bindable()
-  variant?: BsVariant;
+  variant?: Variant;
 }

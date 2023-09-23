@@ -5,8 +5,8 @@ import './badge.scss';
 
 import { bindable, customElement } from 'aurelia';
 
-import { BsVariant } from '../../types';
-import { coerceBoolean } from '../../utils';
+import { Variant } from '../../types';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 @customElement({
   name: 'bs-badge',
@@ -14,7 +14,7 @@ import { coerceBoolean } from '../../utils';
 })
 export class BsBadge {
   @bindable()
-  variant: BsVariant = 'primary';
+  variant: Variant = 'primary';
 
   @bindable(coerceBoolean)
   pill: boolean = false;
