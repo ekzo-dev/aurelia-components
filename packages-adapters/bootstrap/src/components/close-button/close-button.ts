@@ -2,9 +2,8 @@ import template from './close-button.html';
 
 import './close-button.scss';
 
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-
 import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 @customElement({
   name: 'bs-close-button',

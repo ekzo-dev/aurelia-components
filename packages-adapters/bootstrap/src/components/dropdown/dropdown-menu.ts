@@ -2,13 +2,12 @@ import template from './dropdown-menu.html';
 
 import './dropdown.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import * as Popper from '@popperjs/core';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Dropdown } from 'bootstrap';
 
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-
-export type BsDropdownAlign = 'end' | 'sm-start' | 'md-start' | 'lg-start' | 'xl-start' | 'xxl-start';
+export type DropdownAlign = 'end' | 'sm-start' | 'md-start' | 'lg-start' | 'xl-start' | 'xxl-start';
 
 @customElement({
   name: 'bs-dropdown-menu',
@@ -37,7 +36,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   dark: boolean = false;
 
   @bindable()
-  align?: BsDropdownAlign;
+  align?: DropdownAlign;
 
   private dropdown?: Dropdown;
 

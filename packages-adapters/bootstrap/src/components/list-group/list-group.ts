@@ -2,10 +2,10 @@ import template from './list-group.html';
 
 import './list-group.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement } from 'aurelia';
 
 import { Breakpoint } from '../../types';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 export type BsListGroupHorizontal = Breakpoint | 'always';
 

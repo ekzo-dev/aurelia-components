@@ -2,10 +2,10 @@ import template from './textarea.html';
 
 import './textarea.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { Size } from '../../types';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BaseField } from '../base-field';
 
 @customElement({

@@ -7,7 +7,7 @@ import { bindable, customElement, ICustomElementViewModel, slotted } from 'aurel
 
 import { Breakpoint } from '../../types';
 
-export type BsNavbarExpand = Breakpoint | 'always';
+export type NavbarExpand = Breakpoint | 'always';
 
 @customElement({
   name: 'bs-navbar',
@@ -15,7 +15,7 @@ export type BsNavbarExpand = Breakpoint | 'always';
 })
 export class BsNavbar implements ICustomElementViewModel {
   @bindable({ type: String })
-  expand?: BsNavbarExpand;
+  expand?: NavbarExpand;
 
   @bindable(coerceBoolean)
   dark: boolean = false;

@@ -1,9 +1,9 @@
 import './list-group.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customAttribute } from 'aurelia';
 
 import { Variant } from '../../types';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BaseAttribute } from '../base-attribute';
 
 const prefix = (name: string) => `list-group-item-${name}`;

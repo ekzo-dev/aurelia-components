@@ -1,7 +1,6 @@
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
 import { ScrollSpy } from 'bootstrap';
-
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 @customAttribute('bs-scrollspy')
 export class BsScrollspy implements ScrollSpy.Options, ICustomAttributeViewModel {

@@ -3,10 +3,10 @@ import template from './badge.html';
 import '../../color-bg.scss';
 import './badge.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement } from 'aurelia';
 
 import { Variant } from '../../types';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 
 @customElement({
   name: 'bs-badge',

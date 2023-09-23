@@ -2,9 +2,8 @@ import template from './breadcrumb-item.html';
 
 import './breadcrumb.scss';
 
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-
 import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 @customElement({
   name: 'bs-breadcrumb-item',

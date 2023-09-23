@@ -3,11 +3,11 @@ import template from './alert.html';
 import '../../transitions.scss';
 import './alert.scss';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 import { Alert } from 'bootstrap';
 
 import { Variant } from '../../types';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { BsCloseButton } from '../close-button';
 
 @customElement({
