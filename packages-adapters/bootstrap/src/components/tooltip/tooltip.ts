@@ -1,12 +1,14 @@
 import '../../transitions.scss';
 import './tooltip.scss';
 
+import type * as Popper from '@popperjs/core';
+
 import { ICustomAttributeController } from '@aurelia/runtime-html';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
 import { Tooltip } from 'bootstrap';
 
-export type Placements = 'top' | 'right' | 'bottom' | 'left';
-export type Triggers =
+export type TooltipTrigger =
   | 'click'
   | 'hover'
   | 'focus'
@@ -17,41 +19,68 @@ export type Triggers =
   | 'click hover focus';
 
 @customAttribute('bs-tooltip')
-export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeViewModel {
-  @bindable()
+export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
+  @bindable(coerceBoolean)
   animation: boolean = true;
 
   @bindable()
-  container?: any;
+  allowList: Record<keyof HTMLElementTagNameMap | '*', Array<string | RegExp>> | undefined;
 
   @bindable()
-  delay?: any;
+  boundary: Popper.Boundary = 'clippingParents';
 
   @bindable()
+  container: string | Element | false = false;
+
+  @bindable()
+  customClass?: string | (() => string) | undefined;
+
+  @bindable()
+  delay: number | { show: number; hide: number } = 0;
+
+  @bindable()
+  fallbackPlacements: string[] = ['top', 'right', 'bottom', 'left'];
+
+  @bindable(coerceBoolean)
   html: boolean = false;
 
   @bindable()
-  placement: Placements = 'top';
+  offset: Tooltip.Offset | string | Tooltip.OffsetFunction = [0, 6];
 
   @bindable()
-  selector: any;
+  placement: Tooltip.PopoverPlacement | (() => Tooltip.PopoverPlacement) = 'top';
 
   @bindable()
-  template: any;
+  popperConfig: Partial<Popper.Options> | Tooltip.PopperConfigFunction | null = null;
+
+  @bindable(coerceBoolean)
+  sanitize: boolean = true;
+
+  @bindable()
+  sanitizeFn: () => void | null = null;
+
+  @bindable()
+  selector: string | false = false;
+
+  @bindable()
+  template: string = `<div class="tooltip" role="tooltip">
+    <div class="tooltip-arrow"></div>
+    <div class="tooltip-inner"></div>
+  </div>`;
 
   @bindable({ primary: true })
   title: string | Element | ((this: HTMLElement) => string | Element) = '';
 
   @bindable()
-  trigger: Triggers = 'hover focus';
+  trigger: TooltipTrigger = 'hover focus';
 
   readonly $controller: ICustomAttributeController<this>;
 
-  private options: Partial<Tooltip.Options> = {};
+  protected tooltip?: Tooltip;
 
-  private tooltip?: Tooltip;
+  protected options: Partial<Tooltip.Options> = {};
 
-  constructor(private element: Element) {}
+  constructor(protected element: HTMLElement) {}
 
   bound() {
     Object.keys(this.$controller.definition.bindables).forEach((name) => {
@@ -110,14 +139,15 @@ export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeView
     this.tooltip?.update();
   }
 
-  // todo
-  // setContent(content?: Record<string, string | Element | Tooltip.SetContentFunction | null>): void;
+  setContent(content?: Record<string, string | Element | Tooltip.SetContentFunction | null>) {
+    return this.tooltip.setContent(content);
+  }
 
-  private createTooltip() {
+  createTooltip() {
     this.tooltip = new Tooltip(this.element, this.options);
   }
 
-  private destroyTooltip() {
+  destroyTooltip() {
     this.tooltip?.dispose();
     this.tooltip = undefined;
   }

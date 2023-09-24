@@ -1,69 +1,20 @@
 import './popover.scss';
 
-import { ICustomAttributeController } from '@aurelia/runtime-html';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import * as Popper from '@popperjs/core';
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 import { type Tooltip, Popover } from 'bootstrap';
 
-export type PopoverPlacement = 'top' | 'right' | 'bottom' | 'left';
-export type PopoverTrigger =
-  | 'click'
-  | 'hover'
-  | 'focus'
-  | 'manual'
-  | 'click hover'
-  | 'click focus'
-  | 'hover focus'
-  | 'click hover focus';
-export type PopoverOffset = [number, number];
+import { BsTooltip, TooltipTrigger } from '../tooltip';
 
 @customAttribute('bs-popover')
-export class BsPopover implements Popover.Options, ICustomAttributeViewModel {
-  @bindable(coerceBoolean)
-  animation: boolean = true;
-
-  @bindable()
-  allowList: Record<keyof HTMLElementTagNameMap | '*', Array<string | RegExp>> | undefined;
-
-  @bindable()
-  boundary: Popper.Boundary = 'clippingParents';
-
-  @bindable()
-  container: string | Element | false = false;
-
+export class BsPopover extends BsTooltip implements Popover.Options {
   @bindable()
   content: string | Element | ((this: HTMLElement) => string | Element) = '';
 
   @bindable()
-  customClass?: string | (() => string) | undefined;
+  offset: Tooltip.Offset | string | Tooltip.OffsetFunction = [0, 8];
 
   @bindable()
-  delay: number | { show: number; hide: number } = 0;
-
-  @bindable()
-  fallbackPlacements: string[] = ['top', 'right', 'bottom', 'left'];
-
-  @bindable(coerceBoolean)
-  html: boolean = false;
-
-  @bindable()
-  offset: PopoverOffset | string | (() => PopoverOffset) = [0, 8];
-
-  @bindable()
-  placement: PopoverPlacement | (() => PopoverPlacement) = 'right';
-
-  @bindable()
-  popperConfig: Partial<Popover.Options> | Popover.PopperConfigFunction | null = null;
-
-  @bindable(coerceBoolean)
-  sanitize: boolean = true;
-
-  @bindable()
-  sanitizeFn: () => void | null = null;
-
-  @bindable()
-  selector: string | false = false;
+  placement: Tooltip.PopoverPlacement | (() => Tooltip.PopoverPlacement) = 'right';
 
   @bindable()
   template: string = `<div class="popover" role="tooltip">
@@ -72,91 +23,17 @@ export class BsPopover implements Popover.Options, ICustomAttributeViewModel {
     <div class="popover-body"></div>
   </div>`;
 
-  @bindable({ primary: true })
-  title: string | Element | ((this: HTMLElement) => string | Element) = '';
+  @bindable()
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  popperConfig: Partial<Popover.Options> | Tooltip.PopperConfigFunction | null = null;
 
   @bindable()
-  trigger: PopoverTrigger = 'click';
+  trigger: TooltipTrigger = 'click';
 
-  readonly $controller: ICustomAttributeController<this>;
+  protected tooltip?: Popover;
 
-  #options: Partial<Popover.Options> = {};
-
-  #popover?: Popover;
-
-  constructor(protected element: Element) {}
-
-  bound() {
-    Object.keys(this.$controller.definition.bindables).forEach((name) => {
-      if (this[name] !== undefined) {
-        this.#options[name] = this[name];
-      }
-    });
-  }
-
-  attaching() {
-    this.#createPopover();
-  }
-
-  detaching() {
-    this.#destroyPopover();
-  }
-
-  propertyChanged(name: keyof Popover.Options, newValue: never) {
-    this.#options[name] = newValue;
-
-    if (name === 'title') {
-      this.#popover?.setContent({
-        '.popover-header': newValue,
-      });
-    } else if (name === 'content') {
-      this.#popover?.setContent({
-        '.popover-body': newValue,
-      });
-    } else {
-      this.#destroyPopover();
-      this.#createPopover();
-    }
-  }
-
-  show() {
-    return this.#popover?.show();
-  }
-
-  hide() {
-    return this.#popover?.hide();
-  }
-
-  toggle() {
-    return this.#popover?.toggle();
-  }
-
-  enable() {
-    return this.#popover?.enable();
-  }
-
-  disable() {
-    return this.#popover?.disable();
-  }
-
-  toggleEnabled() {
-    return this.#popover?.toggleEnabled();
-  }
-
-  update() {
-    return this.#popover?.update();
-  }
-
-  setContent(content?: Record<string, string | Element | Tooltip.SetContentFunction | null>) {
-    return this.#popover.setContent(content);
-  }
-
-  #createPopover() {
-    this.#popover = new Popover(this.element, this.#options);
-  }
-
-  #destroyPopover() {
-    this.#popover?.dispose();
-    this.#popover = undefined;
+  createTooltip() {
+    this.tooltip = new Popover(this.element, this.options as Popover.Options);
   }
 }

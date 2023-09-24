@@ -3,19 +3,25 @@ import { BsTooltip } from '.';
 
 import './tooltip.stories.scss';
 import { selectControl } from '../../../../../.storybook/helpers';
+import { TOOLTIP_PLACEMENTS, TOOLTIP_TRIGGERS } from '../../constants';
 
-const placementOptions = <const>['top', 'right', 'bottom', 'left'];
-
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Components / Tooltip',
   component: BsTooltip,
+  parameters: {
+    actions: {
+      handles: ['show.bs.tooltip', 'shown.bs.tooltip', 'hide.bs.tooltip', 'hidden.bs.tooltip', 'inserted.bs.tooltip'],
+    },
+  },
   args: {
     title: 'Default tooltip',
   },
   argTypes: {
-    placement: selectControl(placementOptions),
+    placement: selectControl(TOOLTIP_PLACEMENTS),
+    trigger: selectControl(TOOLTIP_TRIGGERS),
   },
-} as Meta;
+};
+export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
   template: `

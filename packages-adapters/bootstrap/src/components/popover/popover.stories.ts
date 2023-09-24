@@ -4,21 +4,9 @@ import { BsButton } from '../button';
 
 import './popover.stories.scss';
 import { selectControl } from '../../../../../.storybook/helpers';
+import { TOOLTIP_PLACEMENTS, TOOLTIP_TRIGGERS } from '../../constants';
 
-const placementOptions = <const>['top', 'right', 'bottom', 'left'];
-
-const triggerOptions = <const>[
-  'click',
-  'hover',
-  'focus',
-  'manual',
-  'click hover',
-  'click focus',
-  'hover focus',
-  'click hover focus',
-];
-
-export default {
+const meta: Meta = {
   title: 'Bootstrap / Components / Popover',
   component: BsPopover,
   parameters: {
@@ -31,10 +19,11 @@ export default {
     content: "And here's some amazing content. It's very engaging. Right?",
   },
   argTypes: {
-    placement: selectControl(placementOptions),
-    trigger: selectControl(triggerOptions),
+    placement: selectControl(TOOLTIP_PLACEMENTS),
+    trigger: selectControl(TOOLTIP_TRIGGERS),
   },
-} as Meta;
+};
+export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsButton],
