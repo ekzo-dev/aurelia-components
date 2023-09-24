@@ -2,10 +2,10 @@ import template from './input.html';
 
 import './input.scss';
 
+import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { Size } from '../../types';
-import { coerceBoolean, uniqueId } from '../../utils';
 import { BaseField } from '../base-field';
 
 @customElement({
@@ -71,27 +71,31 @@ export class BsInput extends BaseField {
 
   binding(): void {
     super.binding();
-    this.ensurePlaceholder();
+    this.#ensurePlaceholder();
 
     this.datalistId = uniqueId();
   }
 
   placeholderChanged(): void {
-    this.ensurePlaceholder();
+    this.#ensurePlaceholder();
   }
 
-  valueChanged(value: any): void {
+  floatingLabelChanged(): void {
+    this.#ensurePlaceholder();
+  }
+
+  valueChanged(): void {
     // TODO: binding to file does not currently work on Aurelia 2 out of the box, need to investigate
     if (this.input.type === 'file') {
       this.files = this.input.files!;
     }
   }
 
-  private ensurePlaceholder(): void {
+  #ensurePlaceholder(): void {
     // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
     // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
     if (this.floatingLabel && !this.placeholder) {
-      this.placeholder = '.';
+      this.placeholder = ' ';
     }
   }
 }

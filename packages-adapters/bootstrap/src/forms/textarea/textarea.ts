@@ -39,18 +39,22 @@ export class BsTextarea extends BaseField {
 
   binding(): void {
     super.binding();
-    this.ensurePlaceholder();
+    this.#ensurePlaceholder();
   }
 
   placeholderChanged(): void {
-    this.ensurePlaceholder();
+    this.#ensurePlaceholder();
   }
 
-  private ensurePlaceholder(): void {
+  floatingLabelChanged(): void {
+    this.#ensurePlaceholder();
+  }
+
+  #ensurePlaceholder(): void {
     // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
     // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
     if (this.floatingLabel && !this.placeholder) {
-      this.placeholder = '.';
+      this.placeholder = ' ';
     }
   }
 }
