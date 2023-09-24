@@ -1,8 +1,7 @@
 import './common.scss';
 
+import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
 import { bindable, ICustomElementViewModel } from 'aurelia';
-
-import { coerceBoolean, uniqueId } from '../utils';
 
 export class BaseField implements ICustomElementViewModel {
   @bindable()

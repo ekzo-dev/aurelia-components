@@ -29,9 +29,6 @@ export default {
   args: {
     title: 'Popover title',
     content: "And here's some amazing content. It's very engaging. Right?",
-    animation: false,
-    html: false,
-    trigger: 'click',
   },
   argTypes: {
     placement: selectControl(placementOptions),

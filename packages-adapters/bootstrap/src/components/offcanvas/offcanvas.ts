@@ -82,6 +82,10 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
     return this.waitAnimation(!this.opened);
   }
 
+  handleEvent(event: Event): void {
+    this.opened = event.type === SHOW_EVENT;
+  }
+
   private waitAnimation(show: boolean): Promise<void> {
     return new Promise<void>((resolve) => {
       if (show === this.opened) {
@@ -119,9 +123,5 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
 
     this.element.removeEventListener(SHOW_EVENT, this);
     this.element.removeEventListener(HIDE_EVENT, this);
-  }
-
-  handleEvent(event: Event): void {
-    this.opened = event.type === SHOW_EVENT;
   }
 }

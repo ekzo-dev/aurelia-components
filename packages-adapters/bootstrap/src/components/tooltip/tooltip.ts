@@ -16,11 +16,6 @@ export type Triggers =
   | 'hover focus'
   | 'click hover focus';
 
-/**
- * Tooltip Bootstrap component
- * https://getbootstrap.com/docs/5.1/components/tooltips/
- * TODO: доработать опции
- */
 @customAttribute('bs-tooltip')
 export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeViewModel {
   @bindable()
