@@ -33,7 +33,21 @@ export class BsPopover extends BsTooltip implements Popover.Options {
 
   protected tooltip?: Popover;
 
-  createTooltip() {
-    this.tooltip = new Popover(this.element, this.options as Popover.Options);
+  propertyChanged(name: keyof this, value: never) {
+    if (name === 'title') {
+      this.tooltip?.setContent({
+        '.popover-header': value,
+      });
+    } else if (name === 'content') {
+      this.tooltip?.setContent({
+        '.popover-body': value,
+      });
+    } else {
+      super.propertyChanged(name, value);
+    }
+  }
+
+  protected createTooltip() {
+    this.tooltip = new Popover(this.element, this.getOptions() as Popover.Options);
   }
 }

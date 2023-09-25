@@ -78,17 +78,7 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
 
   protected tooltip?: Tooltip;
 
-  protected options: Partial<Tooltip.Options> = {};
-
   constructor(protected element: HTMLElement) {}
-
-  bound() {
-    Object.keys(this.$controller.definition.bindables).forEach((name) => {
-      if (this[name] !== undefined) {
-        this.options[name] = this[name];
-      }
-    });
-  }
 
   attaching() {
     this.createTooltip();
@@ -98,9 +88,7 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
     this.destroyTooltip();
   }
 
-  propertyChanged(name: keyof Tooltip.Options, value: never) {
-    this.options[name] = value;
-
+  propertyChanged(name: keyof this, value: never) {
     if (name === 'title') {
       this.tooltip?.setContent({
         '.tooltip-inner': value,
@@ -112,43 +100,55 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
   }
 
   toggle() {
-    this.tooltip?.toggle();
+    return this.tooltip?.toggle();
   }
 
   show() {
-    this.tooltip?.show();
+    return this.tooltip?.show();
   }
 
   hide() {
-    this.tooltip?.hide();
+    return this.tooltip?.hide();
   }
 
   enable() {
-    this.tooltip?.enable();
+    return this.tooltip?.enable();
   }
 
   disable() {
-    this.tooltip?.disable();
+    return this.tooltip?.disable();
   }
 
   toggleEnabled() {
-    this.tooltip?.toggleEnabled();
+    return this.tooltip?.toggleEnabled();
   }
 
   update() {
-    this.tooltip?.update();
+    return this.tooltip?.update();
   }
 
   setContent(content?: Record<string, string | Element | Tooltip.SetContentFunction | null>) {
-    return this.tooltip.setContent(content);
+    return this.tooltip?.setContent(content);
   }
 
-  createTooltip() {
-    this.tooltip = new Tooltip(this.element, this.options);
+  protected createTooltip() {
+    this.tooltip = new Tooltip(this.element, this.getOptions());
   }
 
-  destroyTooltip() {
+  protected destroyTooltip() {
     this.tooltip?.dispose();
     this.tooltip = undefined;
+  }
+
+  protected getOptions(): Partial<Tooltip.Options> {
+    const options: Partial<Tooltip.Options> = {};
+
+    Object.keys(this.$controller.definition.bindables).forEach((name) => {
+      if (this[name] !== undefined) {
+        options[name] = this[name] as never;
+      }
+    });
+
+    return options;
   }
 }
