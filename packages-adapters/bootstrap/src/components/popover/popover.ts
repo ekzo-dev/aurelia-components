@@ -1,3 +1,4 @@
+import '../../transitions.scss';
 import './popover.scss';
 
 import { bindable, customAttribute } from 'aurelia';
