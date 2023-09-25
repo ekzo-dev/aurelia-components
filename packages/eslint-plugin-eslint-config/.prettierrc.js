@@ -3,12 +3,14 @@ const config = {
   arrowParens: 'always',
   bracketSpacing: true,
   jsxBracketSameLine: false,
-  printWidth: 100,
+  printWidth: 120,
+  proseWrap: 'preserve',
   quoteProps: 'as-needed',
   semi: true,
   singleQuote: true,
   tabWidth: 2,
-  trailingComma: 'all',
+  trailingComma: 'es5',
+  useTabs: false,
 };
 
 module.exports = config;
