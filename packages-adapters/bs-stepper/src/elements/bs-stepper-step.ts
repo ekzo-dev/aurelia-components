@@ -3,7 +3,7 @@ import template from './bs-stepper-step.html';
 import { ICustomElementController } from '@aurelia/runtime-html';
 import { bindable, CustomElement, customElement } from 'aurelia';
 
-import { BsStepper } from '../index';
+import { type BsStepper } from '../index';
 
 @customElement({
   name: 'bs-stepper-step',

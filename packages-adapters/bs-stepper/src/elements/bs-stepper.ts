@@ -6,7 +6,7 @@ import './bs-stepper.scss';
 import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
 import Stepper from 'bs-stepper';
 
-import { BsStepperStep } from '../index';
+import { type BsStepperStep } from '../index';
 
 import { coerceBoolean } from './utils';
 

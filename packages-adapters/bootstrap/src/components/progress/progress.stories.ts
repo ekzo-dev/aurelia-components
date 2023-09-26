@@ -1,7 +1,9 @@
 import { Meta, Story } from '@storybook/aurelia';
-import { BsProgress } from '.';
-import { VARIANTS } from '../../constants';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { VARIANTS } from '../../constants';
+
+import { BsProgress } from '.';
 
 export default {
   title: 'Bootstrap / Components / Progress',

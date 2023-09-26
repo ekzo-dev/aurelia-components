@@ -1,7 +1,9 @@
 import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsButton } from '.';
-import { VARIANTS, SIZES } from '../../constants';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { SIZES, VARIANTS } from '../../constants';
+
+import { BsButton } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button',
@@ -11,6 +13,7 @@ const meta: Meta = {
     size: selectControl(['', ...SIZES]),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({

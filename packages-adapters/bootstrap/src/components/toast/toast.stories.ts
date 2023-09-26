@@ -1,11 +1,13 @@
+import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsToast, BsToastContainer } from '.';
+
+import { selectControl } from '../../../../../.storybook/helpers';
+import { VARIANTS } from '../../constants';
 import { BsButton } from '../button';
 import { BsCloseButton } from '../close-button';
-import { VARIANTS } from '../../constants';
 
-import 'bootstrap/dist/css/bootstrap-utilities.min.css';
-import { selectControl } from '../../../../../.storybook/helpers';
+import { BsToast, BsToastContainer } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Toast',
@@ -22,6 +24,7 @@ const meta: Meta = {
     variant: selectControl(VARIANTS),
   },
 };
+
 export default meta;
 
 export const Overview: Story = (args): StoryFnAureliaReturnType => ({

@@ -1,6 +1,8 @@
 import { extractArgTypes, Meta, Story } from '@storybook/aurelia';
+
+import { disableControl, selectControl } from '../../../../.storybook/helpers';
+
 import { BsSelectMultiple } from './select-multiple';
-import { selectControl, disableControl } from '../../../../.storybook/helpers';
 
 export default {
   title: 'Ekzo / BS Select Multiple',

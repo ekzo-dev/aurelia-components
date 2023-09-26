@@ -1,7 +1,10 @@
 /**
  * Аналог ф-ии dig в Ruby для поиска ключей в многомерных объектах
  */
-export function dig(target: Record<string, any>, ...keys: (string | Function)[]): any {
+export function dig(
+  target: Record<string, any>,
+  ...keys: (string | ((param: Record<string, any>) => Record<string, any>))[]
+): any {
   let digged = target;
 
   for (const key of keys) {

@@ -1,10 +1,12 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsOffcanvas } from './offcanvas';
+
+import { selectControl } from '../../../../../.storybook/helpers';
+import { BREAKPOINTS, PLACEMENTS } from '../../constants';
 import { BsButton } from '../button';
 import { BsCloseButton } from '../close-button';
 import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { selectControl } from '../../../../../.storybook/helpers';
-import { BREAKPOINTS, PLACEMENTS } from '../../constants';
+
+import { BsOffcanvas } from './offcanvas';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Offcanvas',
@@ -22,6 +24,7 @@ const meta: Meta = {
     placement: selectControl(PLACEMENTS),
   },
 };
+
 export default meta;
 
 export const Overview: Story = (args): StoryFnAureliaReturnType => ({

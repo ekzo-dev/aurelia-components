@@ -1,6 +1,8 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { JsonEditor } from './json-editor';
+
 import { selectControl } from '../../../../.storybook/helpers';
+
+import { JsonEditor } from './json-editor';
 
 const meta: Meta = {
   title: 'VanillaJsoneditor / JsonEditor',

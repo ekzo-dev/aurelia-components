@@ -1,10 +1,13 @@
-import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
-import { BsButtonGroup } from '.';
-import { BsButton } from '../button';
 import './button-group.stories.scss';
-import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { SIZES } from '../../constants';
+
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { SIZES } from '../../constants';
+import { BsButton } from '../button';
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+
+import { BsButtonGroup } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Button group',
@@ -13,6 +16,7 @@ const meta: Meta = {
     size: selectControl(['', ...SIZES]),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -80,4 +84,4 @@ ${createComponentTemplate(
   props: args,
 });
 
-export { Overview, MixedStyles, ButtonToolbar, Nesting };
+export { ButtonToolbar, MixedStyles, Nesting, Overview };

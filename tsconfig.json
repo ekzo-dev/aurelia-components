@@ -12,8 +12,5 @@
   "include": [
     "packages",
     "packages-adapters",
-  ],
-  "exclude": [
-    "**/*.stories.ts"
   ]
 }

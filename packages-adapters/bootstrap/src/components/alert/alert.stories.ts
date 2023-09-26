@@ -1,7 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsAlert } from '.';
-import { VARIANTS } from '../../constants';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { VARIANTS } from '../../constants';
+
+import { BsAlert } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Alert',
@@ -16,6 +18,7 @@ const meta: Meta = {
     variant: selectControl(VARIANTS),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -38,9 +41,10 @@ const AdditionalContent: Story = (args): StoryFnAureliaReturnType => ({
 `,
   props: args,
 });
+
 AdditionalContent.args = {
   variant: 'success',
   dismissible: true,
 };
 
-export { Overview, AdditionalContent };
+export { AdditionalContent, Overview };

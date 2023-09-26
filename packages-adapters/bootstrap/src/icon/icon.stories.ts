@@ -1,7 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsIcon } from '.';
-import { BsPagination } from '../components';
+
 import { disableControl } from '../../../../.storybook/helpers';
+import { BsPagination } from '../components';
+
+import { BsIcon } from '.';
 
 const iconsList = [
   'alarm',
@@ -1376,6 +1378,7 @@ const meta: Meta = {
   title: 'Bootstrap / Icons',
   component: BsIcon,
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -1383,6 +1386,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
     ...args,
   },
 });
+
 Overview.args = {
   name: 'activity',
 };
@@ -1400,6 +1404,7 @@ const iconsExample1: Story = (args): StoryFnAureliaReturnType => ({
     iconsListPart1,
   },
 });
+
 iconsExample1.argTypes = {
   name: disableControl,
 };
@@ -1417,7 +1422,8 @@ const iconsExample2: Story = (args): StoryFnAureliaReturnType => ({
     iconsListPart2,
   },
 });
+
 iconsExample2.argTypes = {
   name: disableControl,
 };
-export { Overview, iconsExample1, iconsExample2 };
+export { iconsExample1, iconsExample2, Overview };

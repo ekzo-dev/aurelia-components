@@ -1,4 +1,5 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
 import { BsCloseButton } from '.';
 
 const meta: Meta = {
@@ -10,6 +11,7 @@ const meta: Meta = {
     },
   },
 };
+
 export default meta;
 
 export const Overview: Story = (args): StoryFnAureliaReturnType => ({

@@ -60,7 +60,7 @@ class DirectUploadController implements DirectUploadDelegate {
     }
   }
 
-  dispatch(name, detail: Record<string, any> = {}) {
+  dispatch(name: string, detail: Record<string, any> = {}) {
     detail.file = this.file;
     detail.id = this.directUpload.id;
 

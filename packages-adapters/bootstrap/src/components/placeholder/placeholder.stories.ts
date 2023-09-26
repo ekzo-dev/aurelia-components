@@ -1,10 +1,13 @@
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsCard, BsCardBody } from '../card';
-import { BsButton } from '../button';
-import { BsPlaceholder } from '.';
-import { selectControl } from '../../../../../.storybook/helpers';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
+
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { selectControl } from '../../../../../.storybook/helpers';
+import { BsButton } from '../button';
+import { BsCard, BsCardBody } from '../card';
+
+import { BsPlaceholder } from '.';
 
 const meta: Meta = {
   component: BsPlaceholder,
@@ -14,6 +17,7 @@ const meta: Meta = {
     animation: selectControl(['', 'glow', 'wave']),
   },
 };
+
 export default meta;
 
 const Example: Story = (args): StoryFnAureliaReturnType => ({
@@ -54,6 +58,7 @@ const Example: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Example.args = {
   animation: 'glow',
 };
@@ -73,4 +78,4 @@ const Color: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-export { Example, Color };
+export { Color, Example };

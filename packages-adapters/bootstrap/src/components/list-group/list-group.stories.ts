@@ -1,7 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsListGroup, BsListGroupItem } from '.';
-import { BREAKPOINTS, VARIANTS } from '../../constants';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { BREAKPOINTS } from '../../constants';
+
+import { BsListGroup, BsListGroupItem } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / List group',
@@ -11,6 +13,7 @@ const meta: Meta = {
     // variant: selectControl(['', ...VARIANTS]),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -37,4 +40,4 @@ const LinksAndButtons: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
 
-export { Overview, LinksAndButtons };
+export { LinksAndButtons, Overview };

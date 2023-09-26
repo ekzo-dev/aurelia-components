@@ -1,7 +1,9 @@
 import { Meta, Story } from '@storybook/aurelia';
-import { BsCheckbox } from '.';
-import { VARIANTS, SIZES } from '../../constants';
+
 import { disableControl, selectControl } from '../../../../../.storybook/helpers';
+import { SIZES, VARIANTS } from '../../constants';
+
+import { BsCheckbox } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Forms / Checkbox',
@@ -20,6 +22,7 @@ const meta: Meta = {
     buttonSize: selectControl(['', ...SIZES]),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args) => ({
@@ -36,6 +39,7 @@ Selected: \${checked}
   `,
   props: args,
 });
+
 BindingToArray.argTypes = {
   label: disableControl,
   name: disableControl,
@@ -61,4 +65,4 @@ BindingToArray.args = {
   checked: [],
 };
 
-export { Overview, BindingToArray };
+export { BindingToArray, Overview };

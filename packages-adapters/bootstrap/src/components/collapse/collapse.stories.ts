@@ -1,8 +1,11 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsCollapse } from './collapse';
-import { BsCardBody, BsCard } from '../card';
-import { BsButton } from '../button';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { BsButton } from '../button';
+import { BsCard, BsCardBody } from '../card';
+
+import { BsCollapse } from './collapse';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Collapse',
@@ -13,6 +16,7 @@ const meta: Meta = {
     },
   },
 };
+
 export default meta;
 
 export const Overview: Story = (args): StoryFnAureliaReturnType => ({

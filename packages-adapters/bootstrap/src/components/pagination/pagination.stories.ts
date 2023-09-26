@@ -1,10 +1,12 @@
 import { Meta, Story } from '@storybook/aurelia';
+
 import { BsPagination, BsPaginationItem } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Pagination',
   component: BsPagination,
 };
+
 export default meta;
 
 const Overview: Story = (args) => ({
@@ -31,4 +33,4 @@ const DisabledAndActiveStates: Story = (args) => ({
   `,
 });
 
-export { Overview, DisabledAndActiveStates };
+export { DisabledAndActiveStates, Overview };

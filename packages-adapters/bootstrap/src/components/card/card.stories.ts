@@ -1,12 +1,15 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsCard, BsCardHeader, BsCardBody, BsCardFooter, BsCardOverlay } from '.';
-import { BsListGroup, BsListGroupItem } from '../list-group';
-import { BsButton } from '../button';
-import { VARIANTS } from '../../constants';
-import { selectControl } from '../../../../../.storybook/helpers';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './card.stories.css';
+
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { selectControl } from '../../../../../.storybook/helpers';
+import { VARIANTS } from '../../constants';
+import { BsButton } from '../button';
+import { BsListGroup, BsListGroupItem } from '../list-group';
+
+import { BsCard, BsCardBody, BsCardFooter, BsCardHeader, BsCardOverlay } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Card',
@@ -15,6 +18,7 @@ const meta: Meta = {
     variant: selectControl(VARIANTS),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -461,22 +465,22 @@ const NavigationButtons: Story = (args): StoryFnAureliaReturnType => ({
 });
 
 export {
-  Overview,
-  MultipleContentTypes,
-  TitlesTextLinks,
-  ImagesTop,
-  ImagesBottom,
-  ImageOverlay,
-  ImageHorizontal,
-  ListGroups,
-  Header,
-  SizingUsingGrid,
-  SizingUsingUtilities,
-  TextAlignment,
+  CardBorderAndText,
   CardGroup,
   GridCards2Rows,
   GridCards3rows,
-  CardBorderAndText,
+  Header,
+  ImageHorizontal,
+  ImageOverlay,
+  ImagesBottom,
+  ImagesTop,
+  ListGroups,
+  MultipleContentTypes,
+  Overview,
+  SizingUsingGrid,
+  SizingUsingUtilities,
+  TextAlignment,
+  TitlesTextLinks,
   // NavigationTabs,
   // NavigationButtons,
 };

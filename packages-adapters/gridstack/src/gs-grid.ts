@@ -15,10 +15,10 @@ export class GsGrid {
   @bindable()
   options: GridStackOptions = {};
 
-  public grid?: GridStack;
-
   @slotted('gs-item')
   private slottedItems: GridItemHTMLElement[];
+
+  grid?: GridStack;
 
   constructor(@INode public element: GridHTMLElement) {}
 
@@ -38,7 +38,7 @@ export class GsGrid {
     this.destroyGrid();
   }
 
-  public createGrid(parentItem?: GridItemHTMLElement) {
+  createGrid(parentItem?: GridItemHTMLElement) {
     const options = {
       ...this.options,
       auto: false,

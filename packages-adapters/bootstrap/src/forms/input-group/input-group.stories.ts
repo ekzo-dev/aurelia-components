@@ -1,9 +1,11 @@
-import { Meta, Story, createComponentTemplate } from '@storybook/aurelia';
-import { BsInputGroup, BsInputGroupText } from '.';
-import { BsInput } from '../input';
+import { createComponentTemplate, Meta, Story } from '@storybook/aurelia';
+
+import { selectControl } from '../../../../../.storybook/helpers';
 import { BsButton } from '../../components/button';
 import { SIZES } from '../../constants';
-import { selectControl } from '../../../../../.storybook/helpers';
+import { BsInput } from '../input';
+
+import { BsInputGroup, BsInputGroupText } from '.';
 
 export default {
   title: 'Bootstrap / Forms / Input group',

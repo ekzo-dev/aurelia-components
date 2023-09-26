@@ -11,30 +11,30 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       extends: [],
       rules: {
-        '@typescript-eslint/explicit-member-accessibility': [
-          'off', // 'error',
-          {
-            overrides: {
-              constructors: 'no-public',
-            },
-            ignoredMethodNames: [
-              'define',
-              'hydrating',
-              'hydrated',
-              'created',
-              'binding',
-              'bound',
-              'attaching',
-              'attached',
-              'detaching',
-              'unbinding',
-              'unbound',
-              'toView',
-              'fromView',
-              'propertyChanged',
-            ],
-          },
-        ],
+        // '@typescript-eslint/explicit-member-accessibility': [
+        //   'off', // 'error',
+        //   {
+        //     overrides: {
+        //       constructors: 'no-public',
+        //     },
+        //     ignoredMethodNames: [
+        //       'define',
+        //       'hydrating',
+        //       'hydrated',
+        //       'created',
+        //       'binding',
+        //       'bound',
+        //       'attaching',
+        //       'attached',
+        //       'detaching',
+        //       'unbinding',
+        //       'unbound',
+        //       'toView',
+        //       'fromView',
+        //       'propertyChanged',
+        //     ],
+        //   },
+        // ],
       },
     },
     {

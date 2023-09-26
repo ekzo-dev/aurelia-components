@@ -1,5 +1,5 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 import { BsButton, BsInput } from '@ekzo-dev/bootstrap';
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 
 import { BsStepper } from './bs-stepper';
 import { BsStepperStep } from './bs-stepper-step';
@@ -14,6 +14,7 @@ const meta: Meta = {
     },
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({

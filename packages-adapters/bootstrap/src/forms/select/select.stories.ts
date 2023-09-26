@@ -1,7 +1,9 @@
-import { Meta, Story, extractArgTypes } from '@storybook/aurelia';
-import { BsSelect } from '.';
-import { SIZES } from '../../constants';
+import { extractArgTypes, Meta, Story } from '@storybook/aurelia';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { SIZES } from '../../constants';
+
+import { BsSelect } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Forms / Select',
@@ -22,6 +24,7 @@ const meta: Meta = {
     },
   },
 };
+
 export default meta;
 
 export const Overview: Story = (args) => ({

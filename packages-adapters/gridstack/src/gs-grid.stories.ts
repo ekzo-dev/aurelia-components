@@ -1,6 +1,8 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { GsGrid, GsItem } from '.';
 import './gs-grid.stories.css';
+
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { GsGrid, GsItem } from '.';
 
 const meta: Meta = {
   title: 'gridstack.js / Grid',
@@ -24,6 +26,7 @@ const meta: Meta = {
     },
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -43,6 +46,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Overview.args = {
   options: {
     cellHeight: 70,
@@ -72,6 +76,7 @@ const Nested: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Nested.args = {
   options: {
     cellHeight: 50,
@@ -88,4 +93,4 @@ Nested.args = {
   },
 };
 
-export { Overview, Nested };
+export { Nested, Overview };

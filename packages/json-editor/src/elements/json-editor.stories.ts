@@ -1,4 +1,5 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
 import { JsonEditor } from './json-editor';
 
 const meta: Meta = {
@@ -33,6 +34,7 @@ const meta: Meta = {
     },
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({

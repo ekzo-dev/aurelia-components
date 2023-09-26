@@ -1,9 +1,12 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsBadge } from '.';
-import { BsButton } from '../button';
-import { VARIANTS } from '../../constants';
-import { selectControl } from '../../../../../.storybook/helpers';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { selectControl } from '../../../../../.storybook/helpers';
+import { VARIANTS } from '../../constants';
+import { BsButton } from '../button';
+
+import { BsBadge } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Badge',
@@ -12,6 +15,7 @@ const meta: Meta = {
     variant: selectControl(VARIANTS),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -29,6 +33,7 @@ const Positioned: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Positioned.args = {
   variant: 'danger',
   pill: false,

@@ -1,8 +1,10 @@
-import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes, createComponentTemplate } from '@storybook/aurelia';
-import { BsDropdown, BsDropdownMenu, BsDropdownItem, BsDropdownToggle } from '.';
+import { createComponentTemplate, extractArgTypes, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { selectControl } from '../../../../../.storybook/helpers';
 import { BsButton } from '../button';
 import { BsButtonGroup } from '../button-group';
-import { selectControl } from '../../../../../.storybook/helpers';
+
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '.';
 
 const directionOptions = ['down', 'up', 'end', 'start'];
 const displayOptions = ['dynamic', 'static'];
@@ -22,6 +24,7 @@ const meta: Meta = {
     display: selectControl(displayOptions),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -41,6 +44,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Overview.argTypes = {
   ...dropdownArgTypes,
   direction: {

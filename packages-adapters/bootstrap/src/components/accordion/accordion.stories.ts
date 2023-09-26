@@ -1,10 +1,12 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
 import { BsAccordion, BsAccordionItem } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Accordion',
   component: BsAccordion,
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({

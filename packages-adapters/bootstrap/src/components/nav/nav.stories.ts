@@ -1,7 +1,9 @@
 import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsNav, BsNavItem, BsNavLink, BsTabContent, BsTabPane } from '.';
-import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+
+import { BsNav, BsNavItem, BsNavLink, BsTabContent, BsTabPane } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Nav',
@@ -16,6 +18,7 @@ const meta: Meta = {
     fill: selectControl(['', 'fill', 'justified']),
   },
 };
+
 export default meta;
 
 const BaseNav: Story = (args): StoryFnAureliaReturnType => ({
@@ -62,6 +65,7 @@ const UsingDropdowns: Story = (args): StoryFnAureliaReturnType => ({
 `,
   props: args,
 });
+
 UsingDropdowns.args = {
   type: 'tabs',
 };
@@ -93,8 +97,9 @@ const TabsWithContent: Story = (args): StoryFnAureliaReturnType => ({
 </div>`,
   props: args,
 });
+
 TabsWithContent.args = {
   type: 'tabs',
 };
 
-export { BaseNav, UsingDropdowns, TabsWithContent };
+export { BaseNav, TabsWithContent, UsingDropdowns };

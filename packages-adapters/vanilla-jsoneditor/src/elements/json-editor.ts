@@ -238,7 +238,9 @@ export class JsonEditor implements ICustomElementViewModel {
             }
 
             this.content = this.contentCache;
-          } catch (e) {}
+          } catch (e) {
+            // ignore partially invalid JSON output
+          }
 
           this.onChange && this.onChange(content, previousContent, changeStatus);
         },

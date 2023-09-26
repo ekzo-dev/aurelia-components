@@ -1,7 +1,9 @@
 import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsSpinner } from '.';
-import { BsButton } from '../button';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { BsButton } from '../button';
+
+import { BsSpinner } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Spinner',
@@ -11,6 +13,7 @@ const meta: Meta = {
     size: selectControl(['', 'sm']),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -29,8 +32,9 @@ const Buttons: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Buttons.args = {
   size: 'sm',
 };
 
-export { Overview, Buttons };
+export { Buttons, Overview };

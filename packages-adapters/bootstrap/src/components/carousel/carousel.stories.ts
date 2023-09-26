@@ -1,10 +1,11 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsCarousel } from './carousel';
-import { BsCarouselItem, BsCarouselCaption } from '.';
-
 import './carousel.stories.scss';
 
+import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+
+import { BsCarouselCaption, BsCarouselItem } from '.';
+import { BsCarousel } from './carousel';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Carousel',
@@ -23,6 +24,7 @@ const meta: Meta = {
     indicators: true,
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({

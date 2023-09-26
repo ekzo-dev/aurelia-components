@@ -1,7 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsInput } from '.';
-import { SIZES } from '../../constants';
+
 import { selectControl } from '../../../../../.storybook/helpers';
+import { SIZES } from '../../constants';
+
+import { BsInput } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Forms / Input',

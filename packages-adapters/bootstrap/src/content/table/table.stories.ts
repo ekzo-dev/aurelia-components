@@ -1,7 +1,9 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsTable } from '.';
+
 import { selectControl } from '../../../../../.storybook/helpers';
-import { VARIANTS, BREAKPOINTS } from '../../constants';
+import { BREAKPOINTS, VARIANTS } from '../../constants';
+
+import { BsTable } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Content / Table',
@@ -12,6 +14,7 @@ const meta: Meta = {
     size: selectControl(['', 'sm']),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -48,4 +51,5 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 export { Overview };

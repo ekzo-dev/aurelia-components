@@ -1,6 +1,8 @@
 import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-import { BsRadio, BsRadioGroup } from '.';
+
 import { disableControl, selectControl } from '../../../../../.storybook/helpers';
+
+import { BsRadio, BsRadioGroup } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Forms / Radio',
@@ -14,11 +16,13 @@ const meta: Meta = {
     mode: selectControl(['', 'button']),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
 });
+
 Overview.args = {
   label: 'Default radio',
 };

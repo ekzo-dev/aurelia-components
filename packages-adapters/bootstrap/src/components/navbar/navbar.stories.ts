@@ -1,14 +1,17 @@
-import { Meta, Story, StoryFnAureliaReturnType, extractArgTypes } from '@storybook/aurelia';
-import { BsNavbar, BsNavbarNav, BsNavbarBrand, BsNavbarText, BsNavbarToggler } from '.';
-import { BsNavItem, BsNavLink } from '../nav';
-import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+import { extractArgTypes, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { disableControl, selectControl } from '../../../../../.storybook/helpers';
+import { BREAKPOINTS, VARIANTS } from '../../constants';
 import { BsInput } from '../../forms';
 import { BsButton } from '../button';
 import { BsCollapse } from '../collapse';
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { BsNavItem, BsNavLink } from '../nav';
 import { BsOffcanvas } from '../offcanvas';
-import { disableControl, selectControl } from '../../../../../.storybook/helpers';
-import { BREAKPOINTS, VARIANTS } from '../../constants';
-import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+import { BsNavbar, BsNavbarBrand, BsNavbarNav, BsNavbarText, BsNavbarToggler } from '.';
 
 const form = (variant = 'success') => `
   <form class="d-flex" role="search">
@@ -39,6 +42,7 @@ const meta: Meta = {
     expand: 'lg',
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -79,6 +83,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Overview.argTypes = extractArgTypes(BsNavbarNav);
 
 const ColorSchemes: Story = (args): StoryFnAureliaReturnType => ({
@@ -97,6 +102,7 @@ const ColorSchemes: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 ColorSchemes.args = {
   background: 'dark',
   dark: true,
@@ -155,8 +161,9 @@ const Offcanvas: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 Offcanvas.argTypes = {
   expand: disableControl,
 };
 
-export { Overview, ColorSchemes, Text, Offcanvas };
+export { ColorSchemes, Offcanvas, Overview, Text };

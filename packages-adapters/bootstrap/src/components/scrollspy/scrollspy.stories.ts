@@ -1,9 +1,12 @@
-import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
-import { BsScrollspy } from '.';
-import { BsNavbar, BsNavbarBrand } from '../navbar';
-import { BsNav, BsNavItem, BsNavLink } from '../nav';
-import { BsDropdownToggle, BsDropdown, BsDropdownItem, BsDropdownMenu } from '../dropdown';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
+import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
+import { BsNav, BsNavItem, BsNavLink } from '../nav';
+import { BsNavbar, BsNavbarBrand } from '../navbar';
+
+import { BsScrollspy } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / ScrollSpy',
@@ -12,6 +15,7 @@ const meta: Meta = {
     target: 'navbar-example2',
   },
 };
+
 export default meta;
 
 const Navbar: Story = (args): StoryFnAureliaReturnType => ({

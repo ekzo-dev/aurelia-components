@@ -1,3 +1,4 @@
+/* eslint-disable */
 import d3 from 'd3';
 import hljs from 'highlight.js';
 import $ from 'jquery';

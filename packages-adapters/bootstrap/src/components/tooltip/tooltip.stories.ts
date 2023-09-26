@@ -1,9 +1,11 @@
-import { Meta, Story, StoryFnAureliaReturnType, createComponentTemplate } from '@storybook/aurelia';
-import { BsTooltip } from '.';
-
 import './tooltip.stories.scss';
+
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+
 import { selectControl } from '../../../../../.storybook/helpers';
 import { TOOLTIP_PLACEMENTS, TOOLTIP_TRIGGERS } from '../../constants';
+
+import { BsTooltip } from '.';
 
 const meta: Meta = {
   title: 'Bootstrap / Components / Tooltip',
@@ -21,6 +23,7 @@ const meta: Meta = {
     trigger: selectControl(TOOLTIP_TRIGGERS),
   },
 };
+
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
@@ -42,6 +45,7 @@ const HtmlDefaultTooltip: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 HtmlDefaultTooltip.args = {
   title: 'Allow <em><u>HTML</u> <strong>in the</span> tooltip</strong></em>',
   html: true,
@@ -56,9 +60,10 @@ const CustomTooltip: Story = (args): StoryFnAureliaReturnType => ({
   `,
   props: args,
 });
+
 CustomTooltip.args = {
   template:
     '<div class="tooltip tooltip-example" style="background-color: darkred;" role="tooltip"><div class="tooltip-inner"></div></div>',
 };
 
-export { Overview, HtmlDefaultTooltip, CustomTooltip };
+export { CustomTooltip, HtmlDefaultTooltip, Overview };

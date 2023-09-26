@@ -8,7 +8,7 @@ import { BaseAttribute } from '../base-attribute';
 export type BsPlaceholderSize = Size | 'xs';
 export type BsPlaceholderAnimation = 'glow' | 'wave';
 
-const prefix = (name) => `placeholder-${name}`;
+const prefix = (name: string) => `placeholder-${name}`;
 
 @customAttribute('bs-placeholder')
 export class BsPlaceholder extends BaseAttribute {
