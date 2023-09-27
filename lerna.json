@@ -6,6 +6,7 @@
   ],
   "version": "independent",
   "useWorkspaces": true,
+  "useNx": true,
   "command": {
     "publish": {
       "conventionalCommits": true
