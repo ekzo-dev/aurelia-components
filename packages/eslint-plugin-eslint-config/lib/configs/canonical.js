@@ -12,12 +12,7 @@ module.exports = {
       files: '*.ts',
     },
     {
-      extends: [
-        'canonical/react',
-        'canonical/jsx-a11y',
-        'canonical/typescript',
-        'canonical/prettier',
-      ],
+      extends: ['canonical/react', 'canonical/jsx-a11y', 'canonical/typescript', 'canonical/prettier'],
       files: '*.tsx',
     },
     {
