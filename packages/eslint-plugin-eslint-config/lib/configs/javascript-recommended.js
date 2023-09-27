@@ -15,6 +15,12 @@ module.exports = {
         'plugin:node/recommended',
         path.resolve(__dirname, 'prettier-recommended.js'),
       ],
+      rules: {},
+    },
+    {
+      files: ['*.js', '*.jsx'],
+      extends: ['plugin:sonarjs/recommended', 'plugin:optimize-regex/recommended'],
+      rules: {},
     },
   ],
 };

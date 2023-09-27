@@ -2,7 +2,7 @@ import '../../transitions.scss';
 import './popover.scss';
 
 import { bindable, customAttribute } from 'aurelia';
-import { type Tooltip, Popover } from 'bootstrap';
+import { Popover, type Tooltip } from 'bootstrap';
 
 import { BsTooltip, TooltipTrigger } from '../tooltip';
 

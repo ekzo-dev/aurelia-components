@@ -1,5 +1,8 @@
 'use strict';
 
+/** @type {import("prettier").Config} */
+const prettierConfig = require('./prettierrc');
+
 module.exports = {
   ignorePatterns: ['!**/*'],
   overrides: [
@@ -8,22 +11,7 @@ module.exports = {
       plugins: ['prettier'],
       extends: ['plugin:prettier/recommended'],
       rules: {
-        'prettier/prettier': [
-          'error',
-          {
-            arrowParens: 'always',
-            bracketSpacing: true,
-            jsxBracketSameLine: false,
-            printWidth: 120,
-            proseWrap: 'preserve',
-            quoteProps: 'as-needed',
-            semi: true,
-            singleQuote: true,
-            tabWidth: 2,
-            trailingComma: 'es5',
-            useTabs: false,
-          },
-        ],
+        'prettier/prettier': ['error', prettierConfig],
       },
     },
   ],

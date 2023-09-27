@@ -34,7 +34,12 @@ function dispatchEvent(element, type, eventInit: CustomEventInit = {}) {
 class DirectUploadController implements DirectUploadDelegate {
   directUpload: DirectUpload;
 
-  constructor(private input, private file, private url, private headers: Record<string, string>) {
+  constructor(
+    private input,
+    private file,
+    private url,
+    private headers: Record<string, string>
+  ) {
     this.directUpload = new DirectUpload(this.file, this.url, this);
     this.dispatch('initialize');
   }
@@ -105,7 +110,10 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
 
   private uploading: number = 0;
 
-  constructor(@INode private input: HTMLInputElement, private options: ActiveStorageOptions) {}
+  constructor(
+    @INode private input: HTMLInputElement,
+    private options: ActiveStorageOptions
+  ) {}
 
   attaching() {
     this.input.addEventListener('change', this);

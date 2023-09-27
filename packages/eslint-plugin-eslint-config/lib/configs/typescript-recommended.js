@@ -23,17 +23,12 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
-      rules: {
-        'node/no-unsupported-features/es-syntax': ['error', { ignores: ['modules'] }],
-        'node/no-unpublished-import': [
-          'off',
-          {
-            allowModules: [],
-            tryExtensions: ['.js', '.jsx', '.json', '.node', '.ts', '.tsx', '.d.ts'],
-          },
-        ],
-        'node/no-extraneous-import': 'off',
-      },
+      rules: {},
+    },
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:sonarjs/recommended', 'plugin:optimize-regex/recommended'],
+      rules: {},
     },
   ],
 };

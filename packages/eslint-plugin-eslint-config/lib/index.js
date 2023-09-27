@@ -28,6 +28,7 @@ module.exports = {
     'jest-recommended',
     'nx-recommended',
     'prettier-recommended',
+    'prettierrc',
     'rules-recommended',
     'storybook-recommended',
     'typescript-recommended',
