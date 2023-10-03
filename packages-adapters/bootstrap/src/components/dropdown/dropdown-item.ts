@@ -21,7 +21,7 @@ export class BsDropdownItem extends BaseAttribute {
 
   binding() {
     // attributes by nature have a default '' value, so component defaults are ignored
-    if ((this.type as BsDropdownItemType | '') === '') {
+    if (!this.type) {
       this.type = 'item';
     }
   }
