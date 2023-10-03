@@ -234,7 +234,7 @@ export class JsonEditor implements ICustomElementViewModel {
             if ((content as JSONContent).json) {
               this.contentCache = (content as JSONContent).json;
             } else {
-              this.contentCache = JSON.parse((content as TextContent).text);
+              this.contentCache = JSON.parse((content as TextContent).text) as JSONValue;
             }
 
             this.content = this.contentCache;
