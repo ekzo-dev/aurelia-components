@@ -1,50 +1,58 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "extends": "nx/presets/npm.json",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": [
+          "lint:js",
+          "lint:css",
+          "lint:html",
+          "lint:all",
+          "start",
           "build",
-          "lint",
-          "test",
-          "e2e",
-          "build-storybook"
+          "test"
         ]
       }
     }
   },
   "targetDefaults": {
-    "lint": {
+    "lint:js": {
       "dependsOn": [
-        "^lint"
-      ],
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.js",
-        "{workspaceRoot}/.eslintignore"
+        "^lint:js"
       ]
     },
-    "test": {
+    "lint:css": {
       "dependsOn": [
-        "^test"
+        "^lint:css"
+      ]
+    },
+    "lint:html": {
+      "dependsOn": [
+        "^lint:html"
+      ]
+    },
+    "lint:all": {
+      "dependsOn": [
+        "^lint:all"
+      ]
+    },
+    "start": {
+      "dependsOn": [
+        "^start"
       ]
     },
     "build": {
       "dependsOn": [
         "^build"
       ]
+    },
+    "test": {
+      "dependsOn": [
+        "^test"
+      ]
     }
   },
   "affected": {
     "defaultBase": "develop"
-  },
-  "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": []
   }
 }

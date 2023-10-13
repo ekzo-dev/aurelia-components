@@ -19,10 +19,9 @@
   ],
   "scripts": {
     "lint:js": "eslint src --ext .js,.ts",
-    "lint:css": "sass-lint -c .sass-lint.yml \"src/**/*.scss\"",
-    "lint:html": "htmlhint -c .htmlhintrc src",
+    "lint:css": "stylelint \"**/*.*css\" --allow-empty-input",
+    "lint:html": "prettier \"**/*.html\" --no-error-on-unmatched-pattern",
     "lint:all": "npm run lint:js && npm run lint:html && npm run lint:css",
-    "lint": "eslint src --ext .js,.ts",
     "pretest": "npm run lint",
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
