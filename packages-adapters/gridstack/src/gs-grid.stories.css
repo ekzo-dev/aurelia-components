@@ -3,10 +3,10 @@
 }
 
 .grid-stack-item-content {
-  background-color: #eeeeee;
+  background-color: #eee;
   text-align: center;
 }
 
 .grid-stack-sub-grid > .grid-stack-item-content {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgb(0 0 0 / 10%);
 }

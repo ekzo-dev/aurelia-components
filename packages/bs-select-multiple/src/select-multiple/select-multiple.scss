@@ -39,6 +39,7 @@ bs-select-multiple {
       padding-bottom: 5px;
       opacity: 1 !important;
       background-color: $input-bg;
+
       @include border-radius($input-border-radius, 0);
 
       span {
