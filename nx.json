@@ -51,8 +51,11 @@
         "^test"
       ]
     }
+<<<<<<< HEAD
   },
   "affected": {
     "defaultBase": "develop"
+=======
+>>>>>>> develop
   }
 }
