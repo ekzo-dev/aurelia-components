@@ -47,7 +47,6 @@
 import template from './tinymce-editor.html';
 
 import 'tinymce/skins/ui/oxide/skin.min.css';
-import './tinymce-editor.scss';
 
 import 'tinymce/themes/silver';
 // icons
