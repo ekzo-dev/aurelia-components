@@ -14,12 +14,9 @@
     "noEmitOnError" : true,
   },
   "exclude": [
-    ".vscode",
     "dist",
-    "doc",
     "node_modules",
-    "test",
-    "karma.conf.ts"
+    "test"
   ],
   "files": [
     "resource.d.ts"
