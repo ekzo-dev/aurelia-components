@@ -29,6 +29,7 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
+    "@aurelia/ts-jest": "^2.0.0-beta.8",
     "@aurelia/webpack-loader": "^2.0.0-beta.8",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
@@ -53,6 +54,7 @@
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "jest-transform-stub": "^2.0.0",
     "lerna": "^6.6.2",
     "lint-staged": "^15.0.2",
