@@ -22,7 +22,7 @@
     "publish": "lerna publish from-package",
     "prepare": "husky install",
     "update:nx": "nx migrate latest",
-    "update:deps": "ncu -ws --root --dep=dev,prod,optional,peer --peer --format=group -i"
+    "update:deps": "ncu -ws --root --dep=dev,prod,optional,peer --peer --format=group --reject=nx -i"
   },
   "dependencies": {
     "aurelia": "^2.0.0-beta.8",
