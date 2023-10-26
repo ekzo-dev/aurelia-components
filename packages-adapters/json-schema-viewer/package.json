@@ -28,7 +28,6 @@
     "lint:css": "stylelint \"**/*.*css\" --allow-empty-input",
     "lint:html": "prettier \"**/*.html\" --no-error-on-unmatched-pattern",
     "lint:all": "npm run lint:js && npm run lint:html && npm run lint:css",
-    "pretest": "npm run lint",
     "start": "webpack serve",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
