@@ -33,6 +33,7 @@
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@commitlint/config-lerna-scopes": "^18.1.0",
+    "@commitlint/config-nx-scopes": "^18.3.0",
     "@compodoc/compodoc": "^1.1.22",
     "@storybook/addon-a11y": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
@@ -80,19 +81,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional",
-      "@commitlint/config-lerna-scopes"
-    ],
-    "rules": {
-      "header-max-length": [
-        2,
-        "always",
-        80
-      ]
     }
   }
 }
