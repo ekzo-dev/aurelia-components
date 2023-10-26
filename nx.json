@@ -3,53 +3,28 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "lint:js",
-          "lint:css",
-          "lint:html",
-          "lint:all",
-          "start",
-          "build",
-          "test"
-        ]
+        "cacheableOperations": ["lint:js", "lint:css", "lint:html", "start", "build", "test"]
       }
     }
   },
   "targetDefaults": {
     "lint:js": {
-      "dependsOn": [
-        "^lint:js"
-      ]
+      "dependsOn": ["^lint:js"]
     },
     "lint:css": {
-      "dependsOn": [
-        "^lint:css"
-      ]
+      "dependsOn": ["^lint:css"]
     },
     "lint:html": {
-      "dependsOn": [
-        "^lint:html"
-      ]
-    },
-    "lint:all": {
-      "dependsOn": [
-        "^lint:all"
-      ]
+      "dependsOn": ["^lint:html"]
     },
     "start": {
-      "dependsOn": [
-        "^start"
-      ]
+      "dependsOn": ["^start"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     },
     "test": {
-      "dependsOn": [
-        "^test"
-      ]
+      "dependsOn": ["^test"]
     }
   }
 }

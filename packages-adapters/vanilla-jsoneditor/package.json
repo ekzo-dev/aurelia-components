@@ -10,8 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "vanilla-jsoneditor": "~0.18.3",
-    "immutable-json-patch": "^5.1.0",
-    "@types/json-schema": "^7.0.9"
+    "immutable-json-patch": "^5.1.3",
+    "@types/json-schema": "^7.0.14"
   },
   "main": "src/index.ts",
   "files": [

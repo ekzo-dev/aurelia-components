@@ -3,14 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@ekzo-dev/*": [
-        "packages/*/src",
-        "packages-adapters/*/src",
-      ]
+      "@ekzo-dev/*": ["packages/*/src", "packages-adapters/*/src"]
     }
   },
-  "include": [
-    "packages",
-    "packages-adapters",
-  ]
+  "include": ["packages", "packages-adapters"]
 }
