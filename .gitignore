@@ -33,6 +33,7 @@ node_modules
 **/src/environment.js
 **/src/environment.ts
 **/dist
+**/coverage
 **/coverage-jest
 **/coverage-karma
 storybook-static
