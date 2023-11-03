@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "date-fns": "^2.30.0",
-    "libphonenumber-js": "^1.10.48"
+    "libphonenumber-js": "^1.10.49"
   },
   "devDependencies": {
     "@types/json-schema": "^7.0.14"
