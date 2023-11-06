@@ -1,15 +1,19 @@
 {
   "npmClient": "npm",
-  "packages": [
-    "packages/*",
-    "packages-adapters/*"
-  ],
+  "packages": ["packages/*", "packages-adapters/*"],
   "version": "independent",
   "useWorkspaces": true,
   "useNx": true,
   "command": {
     "publish": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "ignoreChanges": ["**/stories/**", "**/tests/**", "**/*.md"],
+      "allowBranch": "master"
+    },
+    "version": {
+      "ignoreChanges": ["**/stories/**", "**/tests/**", "**/*.md"],
+      "allowBranch": ["master", "release/*", "develop"]
     }
   }
 }
