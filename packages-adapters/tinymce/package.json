@@ -2,7 +2,7 @@
   "private": true,
   "name": "@ekzo-dev/tinymce",
   "description": "An Aurelia plugin project.",
-  "version": "0.1.0",
+  "version": "0.2.0-rc.0",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/tinymce",
   "repository": {
     "type": "git",
