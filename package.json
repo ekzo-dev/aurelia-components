@@ -29,8 +29,12 @@
     "update:deps": "ncu -ws --root --dep=dev,prod,optional,peer --peer --format=group --reject=nx -i",
     "version:release": "lerna version --conventional-commits --conventional-graduate",
     "version:pre-release": "lerna version --conventional-commits --conventional-prerelease --preid=rc",
+    "version:pre-release:alpha": "lerna version --conventional-commits --conventional-prerelease --preid=alpha",
+    "version:pre-release:beta": "lerna version --conventional-commits --conventional-prerelease --preid=beta",
     "publish:release": "lerna publish from-package --npm-tag latest",
-    "publish:pre-release": "lerna publish from-package --npm-tag next"
+    "publish:pre-release": "lerna publish from-package --npm-tag next",
+    "publish:pre-release:alpha": "lerna publish from-package --npm-tag alpha",
+    "publish:pre-release:beta": "lerna publish from-package --npm-tag beta"
   },
   "dependencies": {
     "aurelia": "^2.0.0-beta.8",
