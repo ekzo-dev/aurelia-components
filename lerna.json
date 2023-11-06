@@ -13,7 +13,8 @@
     },
     "version": {
       "ignoreChanges": ["**/stories/**", "**/tests/**", "**/*.md"],
-      "allowBranch": ["master", "release/*", "develop"]
+      "allowBranch": ["master", "release/*", "develop"],
+      "message": "chore(release): publish new version %v"
     }
   }
 }
