@@ -37,3 +37,4 @@ node_modules
 **/coverage-jest
 **/coverage-karma
 storybook-static
+lerna-debug.log
