@@ -4,7 +4,7 @@ name: Create Release CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   version:
