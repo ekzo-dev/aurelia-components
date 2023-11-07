@@ -1,10 +1,10 @@
-# This workflow is triggered when a pull request is opened against the master branch.
+# This workflow is triggered when a pull request is opened against the main branch.
 
 name: Update package versions CI
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
     types: [opened]
 
 jobs:
