@@ -12,7 +12,6 @@
   },
   "homepage": "https://github.com/ekzo-dev/aurelia-components",
   "scripts": {
-    "prestart": "npm run bootstrap",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "clean": "lerna clean --yes && rimraf node_modules",
     "lint": "nx affected -t lint:js && nx affected -t lint:css && nx affected -t lint:html --check",
