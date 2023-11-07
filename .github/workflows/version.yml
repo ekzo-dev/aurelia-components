@@ -27,6 +27,6 @@ jobs:
           npm ci
           npx lerna bootstrap
       - run: git config --global user.name ${{github.actor}}
-      - run: npm run version:release -y
+      - run: npm run version:release -- -y
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

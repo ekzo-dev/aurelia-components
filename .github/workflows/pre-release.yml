@@ -20,4 +20,4 @@ jobs:
           npm ci
           npx lerna bootstrap
       - run: git config --global user.name ${{github.actor}}
-      - run: npx lerna exec npm run version:pre-release -y
+      - run: npm run version:pre-release -- -y
