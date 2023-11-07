@@ -1,3 +1,5 @@
+# This workflow will close PR's to master branch except release/* and hotfix/* branches
+
 name: Close Pull Request
 
 on:
@@ -12,6 +14,6 @@ jobs:
     steps:
       - uses: superbrothers/close-pull-request@v3
         with:
-          comment: "We accept PR's to master only from release/* branches"
+          comment: "We accept PR's to master only from release/* and hotfix/* branches"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,4 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# This workflow will publish a package to NPM when a release is created
 
 name: Create Release CI
 
@@ -21,10 +20,11 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: npm run prestart
-      #- run: npm run build
-      - run: npm run test
-      - run: npm run publish:release -y
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx lerna bootstrap
+      - run: npx lerna exec npm run publish:release -y
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   deploy-storybook:
@@ -37,8 +37,11 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: npm run prestart
-      - run: npm run build-storybook
-      - run: npm run deploy-storybook --ci
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx lerna bootstrap
+      - run: npx lerna exec npm run build-storybook
+      - run: npx lerna exec npm run deploy-storybook --ci
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
