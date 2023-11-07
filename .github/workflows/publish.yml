@@ -24,7 +24,7 @@ jobs:
         run: |
           npm ci
           npx lerna bootstrap
-      - run: npm run publish:release -y
+      - run: npm run publish:release -- -y
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   deploy-storybook:
@@ -42,6 +42,6 @@ jobs:
           npm ci
           npx lerna bootstrap
       - run: npm run build-storybook
-      - run: npm run deploy-storybook --ci
+      - run: npm run deploy-storybook -- --ci
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}

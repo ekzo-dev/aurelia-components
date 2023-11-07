@@ -28,4 +28,4 @@ jobs:
           npx lerna bootstrap
 
       - name: Run tests # Run tests of all packages
-        run: npx nx run-many -t test --passWithNoTests
+        run: npm run test
