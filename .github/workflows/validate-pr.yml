@@ -20,10 +20,6 @@ jobs:
           node-version: '18'
           registry-url: https://registry.npmjs.org/
           cache: npm
-      #      - name: "Setup npm"
-      #        run: |
-      #          npm set @xcanchal:registry=https://npm.pkg.github.com/xcanchal
-      #          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
 
       - name: Install dependencies
         run: |
