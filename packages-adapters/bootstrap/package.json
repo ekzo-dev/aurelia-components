@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bootstrap",
   "description": "Aurelia Bootstrap adapter",
-  "version": "5.2.0-rc.0",
+  "version": "5.2.0",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/bootstrap",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/toolkit": "^1.1.0-rc.0",
+    "@ekzo-dev/toolkit": "^1.1.0",
     "@popperjs/core": "^2.11.8",
     "@types/bootstrap": "~5.2.8",
     "bootstrap": "~5.2.3",
