@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.2.0](https://github.com/ekzo-dev/aurelia-components/compare/@ekzo-dev/gridstack@8.2.0-rc.0...@ekzo-dev/gridstack@8.2.0) (2023-11-08)
+
+**Note:** Version bump only for package @ekzo-dev/gridstack
+
+
+
+
+
 # 8.2.0-rc.0 (2023-11-06)
 
 
