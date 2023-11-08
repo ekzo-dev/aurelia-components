@@ -7,13 +7,13 @@
   "command": {
     "publish": {
       "conventionalCommits": true,
-      "message": "chore(release): publish",
+      "message": "chore(release): publish release",
       "ignoreChanges": ["**/stories/**", "**/tests/**", "**/*.md"],
-      "allowBranch": "master"
+      "allowBranch": "main"
     },
     "version": {
       "ignoreChanges": ["**/stories/**", "**/tests/**", "**/*.md"],
-      "allowBranch": ["master", "release/*", "develop"]
+      "allowBranch": ["main", "release/*", "develop"]
     }
   }
 }
