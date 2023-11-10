@@ -31,4 +31,4 @@ jobs:
         run: npm run test
 
       - run: git config --global user.name ${{github.actor}}
-      - run: npm run version:pre-release -- --yes --amend
+      - run: npm run version:pre-release -- --yes
