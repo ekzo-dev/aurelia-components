@@ -93,7 +93,7 @@
 **Release**
 1. git flow release start \<name\> # создание ветки release/\<name\>
 2. git flow release publish \<name\> # публикация ветки release/\<name\>
-3. gh create pr --fill # создание PR ветки release/\<name\> в main
+3. gh pr create --fill # создание PR ветки release/\<name\> в main
 4. # close PR
 5. git fetch origin main:main # получение изменений из main
 6. git checkout develop # переключение на ветку develop
@@ -107,7 +107,7 @@
 2. # make changes
 3. git commit -a -m "release(\<scope\>): \<message\>" # коммит изменений
 4. git push --set-upstream origin hotfix/\<name\> # публикация ветки hotfix/\<name\>
-5. gh create pr --fill # создание PR ветки hotfix/\<name\> в main
+5. gh pr create --fill # создание PR ветки hotfix/\<name\> в main
 6. # close PR
 7. git fetch origin main:main # получение изменений из main
 8. git checkout develop # переключение на ветку develop
