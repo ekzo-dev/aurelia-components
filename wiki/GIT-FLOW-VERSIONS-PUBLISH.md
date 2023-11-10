@@ -87,3 +87,31 @@
 - _publish:pre-release_: публикация rc-версии.
 - _publish:pre-release:alpha_: публикация alpha-версии.
 - _publish:pre-release:beta_: публикация beta-версии.
+
+### Пошаговая инструкция
+
+**Release**
+1. git flow release start \<name\> # создание ветки release/\<name\>
+2. git flow release publish \<name\> # публикация ветки release/\<name\>
+3. gh create --fill # создание PR ветки release/\<name\> в main
+4. # close PR
+5. git fetch origin main:main # получение изменений из main
+6. git checkout develop # переключение на ветку develop
+7. get merge main # слияние изменений из master в ветку develop
+8. git push # публикация изменений в ветку develop
+9. git origin --delete release/\<name\> # удаление ветки release/\<name\>
+10. git branch --delete release/\<name\> # удаление ветки release/\<name\>
+
+**Hotfix**
+1. git flow hotfix start \<name\> # создание ветки hotfix/\<name\>
+2. # make changes
+3. git commit -a -m "release(\<scope\>): \<message\>" # коммит изменений
+4. git push --set-upstream origin hotfix/\<name\> # публикация ветки hotfix/\<name\>
+5. gh create --fill # создание PR ветки hotfix/\<name\> в main
+6. # close PR
+7. git fetch origin main:main # получение изменений из main
+8. git checkout develop # переключение на ветку develop
+9. get merge main # слияние изменений из master в ветку develop
+10. git push # публикация изменений в ветку develop
+11. git origin --delete hotfix/\<name\> # удаление ветки hotfix/\<name\>
+12. git branch --delete hotfix/\<name\> # удаление ветки hotfix/\<name\>

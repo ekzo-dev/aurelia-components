@@ -1,12 +1,9 @@
 # This workflow will do a clean install of node dependencies, cache/restore them between runs, and run tests across different versions of node
 
-name: Test changes CI
+name: NPM Install and Test
 
 on:
-  push:
-    branches: [develop]
-  pull_request:
-    branches: [develop]
+  workflow_call:
 
 jobs:
   test:
