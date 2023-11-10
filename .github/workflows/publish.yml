@@ -32,7 +32,7 @@ jobs:
       - name: Run tests # Run tests of all packages
         run: npm run test
 
-      - run: npm run publish:release -- -y
+      - run: npx lerna publish from-package --npm-tag latest --yes --amend
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 

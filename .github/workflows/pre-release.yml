@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{github.head_ref}}
+          fetch-depth: 0
+
+      - run: git fetch --prune
 
       - name: Use Node 18.x
         uses: actions/setup-node@v3
@@ -29,4 +34,4 @@ jobs:
         run: npm run test
 
       - run: git config --global user.name ${{github.actor}}
-      - run: npm run version:pre-release -- -y
+      - run: lerna version --conventional-commits --conventional-prerelease --preid=rc --yes --amend

@@ -36,6 +36,16 @@ jobs:
         run: npm run test
 
       - run: git config --global user.name ${{github.actor}}
-      - run: npm run version:release -- -y
+
+      - name: Bump Prod version (graduate)
+        id: versionGraduate
+        run: npx lerna version --conventional-commits --conventional-graduate --yes --amend
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Bump Prod version (fallback)
+        if: ${{ failure() && steps.versionGraduate.conclusion == 'failure'  }}
+        run: |
+          echo Falling back to non-graduate release
+          git stash
+          npx lerna version --conventional-commits --yes --amend
