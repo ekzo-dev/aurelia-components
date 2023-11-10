@@ -36,6 +36,6 @@ jobs:
         run: npm run test
 
       - run: git config --global user.name ${{github.actor}}
-      - run: npm run version:release -- --yes --amend
+      - run: npm run version:release -- -y --amend
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
