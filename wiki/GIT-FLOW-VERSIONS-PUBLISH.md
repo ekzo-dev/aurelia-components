@@ -99,7 +99,8 @@
 6. git checkout develop # переключение на ветку develop
 7. get merge main # слияние изменений из master в ветку develop
 8. git push # публикация изменений в ветку develop
-9. git branch origin --delete release/\<name\> # удаление ветки release/\<name\>
+9. git push origin --delete release/\<name\> # удаление ветки release/\<name\>
+10. git branch --delete release/\<name\> # удаление ветки release/\<name\>
 
 **Hotfix**
 1. git flow hotfix start \<name\> # создание ветки hotfix/\<name\>
@@ -112,4 +113,5 @@
 8. git checkout develop # переключение на ветку develop
 9. get merge main # слияние изменений из master в ветку develop
 10. git push # публикация изменений в ветку develop
-11. git branch origin --delete hotfix/\<name\> # удаление ветки hotfix/\<name\>
+11. git push origin --delete hotfix/\<name\> # удаление ветки hotfix/\<name\>
+12. git branch --delete hotfix/\<name\> # удаление ветки hotfix/\<name\>
