@@ -38,13 +38,14 @@ jobs:
       - run: git config --global user.name ${{github.actor}}
 
       - name: Bump Prod version (graduate)
+        continue-on-error: true
         id: versionGraduate
         run: npx lerna version --conventional-commits --conventional-graduate --yes --amend
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Bump Prod version (fallback)
-        if: ${{ failure() && steps.versionGraduate.conclusion == 'failure'  }}
+        if: ${{ always() && steps.versionGraduate.conclusion == 'failure'  }}
         run: |
           echo Falling back to non-graduate release
           git stash
