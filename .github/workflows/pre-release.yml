@@ -12,13 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Use Node 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
           registry-url: https://registry.npmjs.org/
           cache: npm
 
@@ -31,4 +29,4 @@ jobs:
         run: npm run test
 
       - run: git config --global user.name ${{github.actor}}
-      - run: npm run version:pre-release -- --yes
+      - run: npm run version:pre-release -- --yes --amend
