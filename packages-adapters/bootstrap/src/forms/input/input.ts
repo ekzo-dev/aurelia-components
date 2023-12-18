@@ -8,11 +8,13 @@ import { bindable, BindingMode, customElement } from 'aurelia';
 import { Size } from '../../types';
 import { BaseField } from '../base-field';
 
+type HTMLInputBase = Partial<Omit<HTMLInputElement, 'form'> & { form: string }>;
+
 @customElement({
   name: 'bs-input',
   template,
 })
-export class BsInput extends BaseField {
+export class BsInput extends BaseField implements HTMLInputBase {
   @bindable()
   type: string = 'text';
 
@@ -29,13 +31,13 @@ export class BsInput extends BaseField {
   maxlength?: number;
 
   @bindable()
-  min?: number;
+  min?: string;
 
   @bindable()
-  max?: number;
+  max?: string;
 
   @bindable()
-  step?: number;
+  step?: string;
 
   @bindable(coerceBoolean)
   multiple: boolean = false;
@@ -56,8 +58,14 @@ export class BsInput extends BaseField {
   @bindable(coerceBoolean)
   floatingLabel: boolean = false;
 
+  @bindable(coerceBoolean)
+  readonly: boolean = false;
+
   @bindable()
-  size?: Size;
+  size?: number;
+
+  @bindable()
+  bsSize?: Size;
 
   @bindable()
   datalist: string[] = [];
@@ -89,6 +97,17 @@ export class BsInput extends BaseField {
     if (this.input.type === 'file') {
       this.files = this.input.files!;
     }
+  }
+
+  get classes(): string {
+    return [
+      this.type === 'range' ? 'form-range' : `form-control${this.readonly ? '-plaintext' : ''}`,
+      this.bsSize ? `form-control-${this.bsSize}` : null,
+      this.valid === true ? 'is-valid' : null,
+      this.valid === false ? 'is-invalid' : null,
+    ]
+      .filter(Boolean)
+      .join(' ');
   }
 
   #ensurePlaceholder(): void {
