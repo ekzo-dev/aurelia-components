@@ -64,7 +64,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
 <bs-navbar expand.bind="expand" dark.bind="dark" class="bg-light">
   <a bs-navbar-brand href="#">Navbar</a>
   <bs-navbar-toggler target="#navbarTogglerDemo01"></bs-navbar-toggler>
-  <bs-collapse id="navbarTogglerDemo01">
+  <div bs-collapse id="navbarTogglerDemo01">
     <bs-navbar-nav class="me-auto mb-2 mb-lg-0" scroll.bind="scroll">
       <bs-nav-item>
         <a bs-nav-link="active: true" href="#">Home</a>
@@ -78,7 +78,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
       </bs-nav-item>
     </bs-navbar-nav>
     ${form('success')}
-  </bs-collapse>
+  </divbs-collapse>
 </bs-navbar>
   `,
   props: args,
