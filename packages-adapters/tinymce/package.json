@@ -12,6 +12,9 @@
   "dependencies": {
     "tinymce": "^5.10.3"
   },
+  "peerDependencies": {
+    "aurelia": "^2.0.0-beta.8"
+  },
   "main": "src/index.ts",
   "files": [
     "src"

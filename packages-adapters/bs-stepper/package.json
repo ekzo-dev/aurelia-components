@@ -11,6 +11,9 @@
   "dependencies": {
     "bs-stepper": "~1.7.0"
   },
+  "peerDependencies": {
+    "aurelia": "^2.0.0-beta.8"
+  },
   "main": "src/index.ts",
   "files": [
     "src"
