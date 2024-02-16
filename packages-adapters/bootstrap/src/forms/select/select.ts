@@ -34,4 +34,11 @@ export class BsSelect extends BaseField {
 
   @bindable()
   autocomplete?: string;
+
+  @bindable()
+  matcher?: (a: unknown, b: unknown) => boolean;
+
+  getValue(key: unknown): string {
+    return key === null || key === undefined || key === '' ? '' : undefined;
+  }
 }

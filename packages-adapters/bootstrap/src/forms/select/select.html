@@ -12,9 +12,10 @@
     name.bind="name & attr"
     title.bind="title & attr"
     autocomplete.bind="autocomplete & attr"
+    matcher.bind="matcher"
   >
     <au-slot>
-      <option repeat.for="[k, v] of options | iterable" model.bind="k">${v}</option>
+      <option repeat.for="[k, v] of options | iterable" model.bind="k" value.bind="getValue(k) & attr">${v}</option>
     </au-slot>
   </select>
   <label for="${id}" if.bind="label && floatingLabel">${label}</label>
