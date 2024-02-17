@@ -1,4 +1,4 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 
 import { selectControl } from '../../../../../.storybook/helpers';
 import { BREAKPOINTS } from '../../constants';
@@ -10,7 +10,6 @@ const meta: Meta = {
   component: BsListGroup,
   argTypes: {
     horizontal: selectControl(['', 'always', ...BREAKPOINTS]),
-    // variant: selectControl(['', ...VARIANTS]),
   },
 };
 
@@ -18,26 +17,29 @@ export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsListGroupItem],
-  innerHtml: `
-  <div bs-list-group-item="active: true">An item</div>
-  <div bs-list-group-item>A second item</div>
-  <div bs-list-group-item>A third item</div>
-  <div bs-list-group-item>A fourth item</div>
-  <div bs-list-group-item="disabled: true">And a fifth one</div>
+  template: `<ul ${createComponentTemplate(BsListGroup)}>
+  <li bs-list-group-item="active: true">An item</li>
+  <li bs-list-group-item>A second item</li>
+  <li bs-list-group-item>A third item</li>
+  <li bs-list-group-item>A fourth item</li>
+  <li bs-list-group-item="disabled: true">And a fifth one</li>
+</ul>
   `,
   props: args,
 });
 
 const LinksAndButtons: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsListGroupItem],
-  innerHtml: `
-  <a bs-list-group-item="active: true; action: true" href="#">An item</a>
-  <a bs-list-group-item="action: true">A second item</a>
+  template: `<div ${createComponentTemplate(BsListGroup)}>
+  <a bs-list-group-item="active: true; action: true" href="javascript: void(0)">An item</a>
+  <a bs-list-group-item="action: true" href="javascript: void(0)">A second item</a>
   <button bs-list-group-item="action: true">A third item</button>
   <button bs-list-group-item="action: true">A fourth item</button>
   <button bs-list-group-item="disabled: true; action: true">And a fifth one</button>
+</div>
   `,
   props: args,
 });
 
-export { LinksAndButtons, Overview };
+// eslint-disable-next-line simple-import-sort/exports
+export { Overview, LinksAndButtons };
