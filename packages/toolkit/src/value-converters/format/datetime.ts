@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 @valueConverter('formatDatetime')
 export class FormatDatetime {
   patterns = {
-    datetime: 'dd.MM.yyyy HH:mm',
+    'date-time': 'dd.MM.yyyy HH:mm',
     date: 'dd.MM.yyyy',
     time: 'HH:mm',
   };
