@@ -29,7 +29,7 @@ export class FormatJsonSchemaNode {
         }
 
         switch (definition.format) {
-          case 'datetime':
+          case 'date-time':
 
           case 'date':
 
