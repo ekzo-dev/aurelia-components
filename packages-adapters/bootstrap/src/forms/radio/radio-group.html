@@ -1,4 +1,4 @@
-<label if.bind="label" class="form-label ${required ? 'required' : ''}">${label}</label>
+<label if.bind="label" class="form-label">${label}</label>
 <bs-radio
   repeat.for="[k, v] of options | iterable"
   model.bind="k"
