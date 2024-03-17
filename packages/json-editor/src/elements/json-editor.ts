@@ -31,7 +31,7 @@ export class JsonEditor extends VanillaJsonEditor {
   module: any;
 
   schemaChanged() {
-    void this.editor.updateProps({
+    void this.editor?.updateProps({
       validator: this.#getValidator(),
     });
   }
