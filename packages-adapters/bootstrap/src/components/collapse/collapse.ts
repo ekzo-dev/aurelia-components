@@ -22,11 +22,17 @@ export class BsCollapse extends BaseAttribute implements Collapse.Options {
 
   attaching() {
     super.attaching();
+
+    // add initial open class
+    if (!this.collapsed) {
+      this.element.classList.add('show');
+    }
+
     this.#createCollapse();
   }
 
   attached() {
-    if (this.element.parentElement.parentElement.nodeName === 'BS-NAVBAR') {
+    if (this.element.parentElement?.parentElement?.nodeName === 'BS-NAVBAR') {
       this.element.classList.add('navbar-collapse');
     }
   }
