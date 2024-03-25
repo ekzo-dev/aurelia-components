@@ -2,12 +2,13 @@ import template from './json-editor.html';
 
 import './json-editor.css';
 
-import type { JSONPatchDocument, JSONPath, JSONValue } from 'immutable-json-patch';
+import type { JSONPatchDocument, JSONPath } from 'immutable-json-patch';
 import type {
   Content,
   ContentErrors,
   JSONContent,
   JSONEditor,
+  JSONEditorPropsOptional,
   JSONEditorSelection,
   JSONParser,
   JSONPatchResult,
@@ -32,9 +33,9 @@ import { coerceBoolean } from '../utils';
   name: 'json-editor',
   template,
 })
-export class JsonEditor implements ICustomElementViewModel {
+export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorPropsOptional, 'mode'> {
   @bindable({ mode: BindingMode.twoWay })
-  content: JSONValue = {};
+  json: unknown = {};
 
   @bindable()
   selection: JSONEditorSelection | null = null;
@@ -58,7 +59,7 @@ export class JsonEditor implements ICustomElementViewModel {
   readOnly: boolean = false;
 
   @bindable()
-  indentation: number | string = '\t';
+  indentation: number | string = 2;
 
   @bindable()
   tabSize: number = 4;
@@ -103,7 +104,7 @@ export class JsonEditor implements ICustomElementViewModel {
   onChangeMode?: (mode: 'tree' | 'text' | 'table') => void;
 
   @bindable()
-  onClassName?: (path: JSONPath, value: JSONValue) => string | undefined;
+  onClassName?: (path: JSONPath, value: unknown) => string | undefined;
 
   @bindable()
   onRenderValue?: (props: RenderValueProps) => RenderValueComponentDescription[];
@@ -127,7 +128,7 @@ export class JsonEditor implements ICustomElementViewModel {
 
   readonly $controller: ICustomElementController<this>;
 
-  private contentCache?: JSONValue;
+  #contentCache?: unknown;
 
   constructor(private host: HTMLElement) {}
 
@@ -190,7 +191,7 @@ export class JsonEditor implements ICustomElementViewModel {
   propertyChanged(name: keyof this, value: any): void {
     switch (name) {
       case 'content':
-        if (value !== this.contentCache) {
+        if (value !== this.#contentCache) {
           this.editor?.update({
             json: value ?? {},
           });
@@ -227,17 +228,17 @@ export class JsonEditor implements ICustomElementViewModel {
       props: {
         ...props,
         content: {
-          json: this.content ?? {},
+          json: this.json ?? {},
         },
         onChange: (content: Content, previousContent: Content, changeStatus: OnChangeStatus) => {
           try {
             if ((content as JSONContent).json) {
-              this.contentCache = (content as JSONContent).json;
+              this.#contentCache = (content as JSONContent).json;
             } else {
-              this.contentCache = JSON.parse((content as TextContent).text) as JSONValue;
+              this.#contentCache = this.parser.parse((content as TextContent).text);
             }
 
-            this.content = this.contentCache;
+            this.json = this.#contentCache;
           } catch (e) {
             // ignore partially invalid JSON output
           }
