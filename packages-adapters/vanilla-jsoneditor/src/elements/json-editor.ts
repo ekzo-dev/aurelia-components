@@ -189,29 +189,20 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   }
 
   propertyChanged(name: keyof this, value: any): void {
-    switch (name) {
-      case 'content':
-        if (value !== this.#contentCache) {
-          this.editor?.update({
-            json: value ?? {},
-          });
-        }
-
-        break;
-
-      case 'theme':
-        this.importTheme();
-        break;
-
-      default:
-        this.editor?.updateProps({
-          [name]: value,
+    if (name === 'json') {
+      if (value !== this.#contentCache) {
+        void this.editor?.update({
+          json: value ?? {},
         });
+      }
+    } else {
+      void this.editor?.updateProps({
+        [name]: value,
+      });
     }
   }
 
   protected async createEditor(): Promise<any> {
-    await this.importTheme();
     const module = await import('vanilla-jsoneditor');
 
     // prepare props from bindables
@@ -254,11 +245,5 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   private destroyEditor(): void {
     this.editor?.destroy();
     this.editor = undefined;
-  }
-
-  private importTheme(): Promise<void> {
-    if (this.theme === 'dark') {
-      return import('vanilla-jsoneditor/themes/jse-theme-dark.css');
-    }
   }
 }
