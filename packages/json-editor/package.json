@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/vanilla-jsoneditor": "^0.23.0",
+    "@ekzo-dev/vanilla-jsoneditor": "^0.23.1",
     "@types/json-schema": "^7.0.14",
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
