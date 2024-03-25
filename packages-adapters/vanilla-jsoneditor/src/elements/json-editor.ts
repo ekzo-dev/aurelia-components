@@ -259,8 +259,6 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   private importTheme(): Promise<void> {
     if (this.theme === 'dark') {
       return import('vanilla-jsoneditor/themes/jse-theme-dark.css');
-    } else {
-      return import('vanilla-jsoneditor/themes/jse-theme-default.css');
     }
   }
 }
