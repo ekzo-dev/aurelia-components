@@ -1,6 +1,7 @@
 export * from './attributes/drag-n-drop';
 export * from './attributes/phone-input/phone-input';
 export * from './helpers';
+export * from './value-converters/date-time-input';
 export * from './value-converters/false-as-null';
 export * from './value-converters/format/boolean';
 export * from './value-converters/format/datetime';
