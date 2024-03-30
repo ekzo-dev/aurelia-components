@@ -10,12 +10,17 @@
     id="${id}"
   >
     <select if.bind="required && !value?.length" multiple required></select>
-    <au-slot>
-      <div class="form-check" repeat.for="[k, v] of options | iterable">
-        <input class="form-check-input" type="checkbox" checked.bind="value" model.bind="k" id="${id+$index}" />
-        <label class="form-check-label" for="${id+$index}">${v}</label>
-      </div>
-    </au-slot>
+    <div class="form-check" repeat.for="option of ungroupedOptions">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        checked.bind="value"
+        model.bind="option.value"
+        disabled.bind="option.disabled"
+        id="${id+$index}"
+      />
+      <label class="form-check-label" for="${id+$index}">${option.text}</label>
+    </div>
   </fieldset>
   <label for="${id}" if.bind="label && floatingLabel"><span>${label}</span></label>
   <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>

@@ -18,7 +18,7 @@ const BS_SIZE_MULTIPLIER = {
 })
 export class BsSelectMultiple extends BsSelect implements ICustomElementViewModel {
   @bindable({ mode: BindingMode.twoWay })
-  value!: any[];
+  value!: unknown[];
 
   control!: HTMLFieldSetElement;
 
