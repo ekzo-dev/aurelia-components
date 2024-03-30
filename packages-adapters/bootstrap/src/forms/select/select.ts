@@ -25,7 +25,7 @@ export class BsSelect extends BaseField {
   value!: unknown | unknown[];
 
   @bindable()
-  options: Array<ISelectOption> | Array<readonly [unknown, string]> = [];
+  options: Array<ISelectOption> | Array<readonly [unknown, string]> | Record<string, string> = [];
 
   @bindable(coerceBoolean)
   multiple: boolean = false;
@@ -51,12 +51,14 @@ export class BsSelect extends BaseField {
 
   get groupedOptions() {
     const result = new Map<string, ISelectOption[]>();
+    const { options } = this;
 
-    if (Array.isArray(this.options[0])) {
+    // check object/entries
+    if ((options instanceof Object && options.constructor === Object) || Array.isArray(options[0])) {
       return result;
     }
 
-    (this.options as ISelectOption[]).forEach((option) => {
+    (options as ISelectOption[]).forEach((option) => {
       const { group } = option;
 
       if (group) {
@@ -74,8 +76,14 @@ export class BsSelect extends BaseField {
   }
 
   get ungroupedOptions(): ISelectOption[] {
-    const { options } = this;
+    let { options } = this;
 
+    // check object
+    if (options instanceof Object && options.constructor === Object) {
+      options = Object.entries(options);
+    }
+
+    // check entries
     if (Array.isArray(options[0])) {
       return (options as Array<readonly [unknown, string]>).map(([k, v]) => ({
         value: k,
