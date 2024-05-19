@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bootstrap",
   "description": "Aurelia Bootstrap adapter",
-  "version": "5.2.8",
+  "version": "5.2.9",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/bootstrap",
   "repository": {
     "type": "git",
