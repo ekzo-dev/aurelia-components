@@ -8,7 +8,7 @@ import { bindable, BindingMode, customElement } from 'aurelia';
 import { Size } from '../../types';
 import { BaseField } from '../base-field';
 
-type HTMLInputBase = Partial<Omit<HTMLInputElement, 'form'> & { form: string }>;
+type HTMLInputBase = Partial<Omit<HTMLInputElement, 'form' | 'autocomplete'> & { form: string; autocomplete: string }>;
 
 @customElement({
   name: 'bs-input',
