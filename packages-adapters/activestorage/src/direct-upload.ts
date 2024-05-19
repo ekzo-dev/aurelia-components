@@ -1,5 +1,5 @@
 import { Blob, DirectUpload, DirectUploadDelegate } from '@rails/activestorage';
-import { bindable, customAttribute, ICustomAttributeViewModel, INode } from 'aurelia';
+import { bindable, customAttribute, ICustomAttributeViewModel, resolve } from 'aurelia';
 
 import { ActiveStorageOptions, IEndpoint } from './configuration';
 
@@ -110,10 +110,9 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
 
   private uploading: number = 0;
 
-  constructor(
-    @INode private input: HTMLInputElement,
-    private options: ActiveStorageOptions
-  ) {}
+  private input = resolve(HTMLElement) as HTMLInputElement;
+
+  constructor(private options: ActiveStorageOptions) {}
 
   attaching() {
     this.input.addEventListener('change', this);
