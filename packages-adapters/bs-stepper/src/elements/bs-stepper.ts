@@ -3,7 +3,7 @@ import template from './bs-stepper.html';
 import 'bs-stepper/dist/css/bs-stepper.min.css';
 import './bs-stepper.scss';
 
-import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, observable, resolve } from 'aurelia';
 import Stepper from 'bs-stepper';
 
 import { type BsStepperStep } from '../index';
@@ -35,7 +35,7 @@ export class BsStepper implements ICustomElementViewModel {
 
   private stepper?: Stepper;
 
-  constructor(public element: Element) {}
+  constructor(public readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     this.createStepper();
@@ -84,7 +84,7 @@ export class BsStepper implements ICustomElementViewModel {
     this.stepper = undefined;
 
     // manually remove library classes, it does not do it
-    const element = this.element as HTMLElement;
+    const element = this.element;
 
     element.classList.remove('linear');
     element.querySelectorAll('div.step').forEach((step) => {

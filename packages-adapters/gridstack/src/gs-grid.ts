@@ -2,7 +2,7 @@ import 'gridstack/dist/gridstack.min.css';
 import 'gridstack/dist/gridstack-extra.min.css';
 import './gs-grid.css';
 
-import { bindable, CustomElement, customElement, INode, slotted } from 'aurelia';
+import { bindable, CustomElement, customElement, resolve, slotted } from 'aurelia';
 import { GridHTMLElement, GridItemHTMLElement, GridStack, GridStackOptions } from 'gridstack';
 
 import { type GsItem } from './gs-item';
@@ -20,7 +20,7 @@ export class GsGrid {
 
   grid?: GridStack;
 
-  constructor(@INode public element: GridHTMLElement) {}
+  constructor(public readonly element: GridHTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     const parentItem = this.findParentItem(this.element);

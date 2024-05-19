@@ -25,7 +25,7 @@ import type {
 } from 'vanilla-jsoneditor';
 
 import { ICustomElementController } from '@aurelia/runtime-html';
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { coerceBoolean } from '../utils';
 
@@ -130,7 +130,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
 
   #contentCache?: unknown;
 
-  constructor(private host: HTMLElement) {}
+  constructor(private readonly host: HTMLElement = resolve(HTMLElement)) {}
 
   get(): Content {
     return this.editor?.get();

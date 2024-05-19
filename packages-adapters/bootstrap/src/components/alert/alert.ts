@@ -4,7 +4,7 @@ import '../../transitions.scss';
 import './alert.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 import { Alert } from 'bootstrap';
 
 import { Variant } from '../../types';
@@ -24,7 +24,7 @@ export class BsAlert implements ICustomElementViewModel {
 
   #alert?: Alert;
 
-  constructor(protected element: Element) {}
+  constructor(protected readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.#createAlert();

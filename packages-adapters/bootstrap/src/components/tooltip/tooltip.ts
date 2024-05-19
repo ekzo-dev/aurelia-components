@@ -5,7 +5,7 @@ import type * as Popper from '@popperjs/core';
 
 import { ICustomAttributeController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { bindable, customAttribute, ICustomAttributeViewModel, resolve } from 'aurelia';
 import { Tooltip } from 'bootstrap';
 
 export type TooltipTrigger =
@@ -78,7 +78,7 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
 
   protected tooltip?: Tooltip;
 
-  constructor(protected element: HTMLElement) {}
+  constructor(protected readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.createTooltip();

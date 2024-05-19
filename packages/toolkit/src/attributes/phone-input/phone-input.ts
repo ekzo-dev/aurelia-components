@@ -1,4 +1,4 @@
-import { bindable, customAttribute } from 'aurelia';
+import { bindable, customAttribute, resolve } from 'aurelia';
 import { AsYouType, CountryCode } from 'libphonenumber-js';
 
 /**
@@ -11,7 +11,7 @@ export class PhoneInputCustomAttribute {
 
   input: HTMLInputElement;
 
-  constructor(private element: Element) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.input =

@@ -4,7 +4,7 @@ import '../../transitions.scss';
 import './modal.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, observable, resolve } from 'aurelia';
 import { Modal } from 'bootstrap';
 
 import { coerceBooleanOrString } from '../../utils';
@@ -58,7 +58,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
 
   private dialog!: HTMLDivElement;
 
-  constructor(private element: Element) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.createModal();
