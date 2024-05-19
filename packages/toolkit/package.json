@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/toolkit",
   "description": "Aurelia toolkit",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/toolkit",
   "repository": {
     "type": "git",
