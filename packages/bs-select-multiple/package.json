@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bs-select-multiple",
   "description": "Aurelia Bootstrap select multiple control",
-  "version": "5.2.0",
+  "version": "5.2.4",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/bs-select-multiple",
   "repository": {
     "type": "git",
@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/bootstrap": "^5.2.0",
-    "@ekzo-dev/toolkit": "^1.1.0"
+    "@ekzo-dev/bootstrap": "^5.2.11",
+    "@ekzo-dev/toolkit": "^1.2.3"
   },
   "main": "src/index.ts",
   "files": [

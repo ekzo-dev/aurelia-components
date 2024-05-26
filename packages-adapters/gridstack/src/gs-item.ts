@@ -1,4 +1,4 @@
-import { bindable, customElement, ICustomElementViewModel, INode } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 import { GridItemHTMLElement, GridStackWidget } from 'gridstack';
 
 @customElement({
@@ -10,7 +10,7 @@ export class GsItem implements ICustomElementViewModel {
   @bindable()
   options: GridStackWidget = {};
 
-  constructor(@INode public readonly element: GridItemHTMLElement) {}
+  constructor(public readonly element: GridItemHTMLElement = resolve(HTMLElement)) {}
 
   optionsChanged() {
     this.element.gridstackNode?.grid.update(this.element, this.options);

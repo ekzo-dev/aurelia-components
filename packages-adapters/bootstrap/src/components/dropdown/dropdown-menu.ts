@@ -4,8 +4,8 @@ import './dropdown.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import * as Popper from '@popperjs/core';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
-import { Dropdown } from 'bootstrap';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
+import { Dropdown, type Tooltip } from 'bootstrap';
 
 export type DropdownAlign = 'end' | 'sm-start' | 'md-start' | 'lg-start' | 'xl-start' | 'xxl-start';
 
@@ -27,7 +27,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   offset: Dropdown.Offset | string | Dropdown.OffsetFunction = [0, 2];
 
   @bindable()
-  popperConfig: Partial<Popper.Options> | Dropdown.PopperConfigFunction | null = null;
+  popperConfig: Partial<Popper.Options> | Tooltip.PopperConfigFunction | null = null;
 
   @bindable()
   reference: 'toggle' | 'parent' | Element | Popper.Rect = 'toggle';
@@ -40,7 +40,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
 
   private dropdown?: Dropdown;
 
-  constructor(private element: HTMLElement) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     this.createDropdown();

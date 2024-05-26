@@ -4,7 +4,7 @@ import './json-schema-viewer.scss';
 
 import type { JSONSchema7 } from 'json-schema';
 
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { JSV } from '../viewer';
 
@@ -18,7 +18,7 @@ export class JsonSchemaViewer implements ICustomElementViewModel {
 
   loader?: HTMLDivElement;
 
-  constructor(private element: Element) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     JSV.init(
@@ -26,7 +26,7 @@ export class JsonSchemaViewer implements ICustomElementViewModel {
         schema: this.schema,
         plain: true, //don't use JQM
         viewerHeight: 600, //set initial dimensions of SVG
-        viewerWidth: (this.element as HTMLElement).getBoundingClientRect().width,
+        viewerWidth: this.element.getBoundingClientRect().width,
       },
       () => {
         document.getElementById('jsv-tree').style.width = '100%';

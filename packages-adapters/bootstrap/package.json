@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bootstrap",
   "description": "Aurelia Bootstrap adapter",
-  "version": "5.2.0",
+  "version": "5.2.11",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/bootstrap",
   "repository": {
     "type": "git",
@@ -11,11 +11,12 @@
   "dependencies": {
     "@ekzo-dev/toolkit": "^1.1.0",
     "@popperjs/core": "^2.11.8",
-    "@types/bootstrap": "~5.2.8",
+    "@types/bootstrap": "~5.2.10",
     "bootstrap": "~5.2.3",
     "bootstrap-icons": "^1.11.1"
   },
   "peerDependencies": {
+    "aurelia": "^2.0.0-beta.8",
     "@aurelia/dialog": "^2.0.0-beta.8"
   },
   "main": "src/index.ts",

@@ -2,12 +2,13 @@ import template from './json-editor.html';
 
 import './json-editor.css';
 
-import type { JSONPatchDocument, JSONPath, JSONValue } from 'immutable-json-patch';
+import type { JSONPatchDocument, JSONPath } from 'immutable-json-patch';
 import type {
   Content,
   ContentErrors,
   JSONContent,
   JSONEditor,
+  JSONEditorPropsOptional,
   JSONEditorSelection,
   JSONParser,
   JSONPatchResult,
@@ -24,7 +25,7 @@ import type {
 } from 'vanilla-jsoneditor';
 
 import { ICustomElementController } from '@aurelia/runtime-html';
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { coerceBoolean } from '../utils';
 
@@ -32,9 +33,9 @@ import { coerceBoolean } from '../utils';
   name: 'json-editor',
   template,
 })
-export class JsonEditor implements ICustomElementViewModel {
+export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorPropsOptional, 'mode'> {
   @bindable({ mode: BindingMode.twoWay })
-  content: JSONValue = {};
+  json: unknown = {};
 
   @bindable()
   selection: JSONEditorSelection | null = null;
@@ -58,7 +59,7 @@ export class JsonEditor implements ICustomElementViewModel {
   readOnly: boolean = false;
 
   @bindable()
-  indentation: number | string = '\t';
+  indentation: number | string = 2;
 
   @bindable()
   tabSize: number = 4;
@@ -103,7 +104,7 @@ export class JsonEditor implements ICustomElementViewModel {
   onChangeMode?: (mode: 'tree' | 'text' | 'table') => void;
 
   @bindable()
-  onClassName?: (path: JSONPath, value: JSONValue) => string | undefined;
+  onClassName?: (path: JSONPath, value: unknown) => string | undefined;
 
   @bindable()
   onRenderValue?: (props: RenderValueProps) => RenderValueComponentDescription[];
@@ -127,9 +128,9 @@ export class JsonEditor implements ICustomElementViewModel {
 
   readonly $controller: ICustomElementController<this>;
 
-  private contentCache?: JSONValue;
+  #contentCache?: unknown;
 
-  constructor(private host: HTMLElement) {}
+  constructor(private readonly host: HTMLElement = resolve(HTMLElement)) {}
 
   get(): Content {
     return this.editor?.get();
@@ -188,29 +189,20 @@ export class JsonEditor implements ICustomElementViewModel {
   }
 
   propertyChanged(name: keyof this, value: any): void {
-    switch (name) {
-      case 'content':
-        if (value !== this.contentCache) {
-          this.editor?.update({
-            json: value ?? {},
-          });
-        }
-
-        break;
-
-      case 'theme':
-        this.importTheme();
-        break;
-
-      default:
-        this.editor?.updateProps({
-          [name]: value,
+    if (name === 'json') {
+      if (value !== this.#contentCache) {
+        void this.editor?.update({
+          json: value ?? {},
         });
+      }
+    } else {
+      void this.editor?.updateProps({
+        [name]: value,
+      });
     }
   }
 
   protected async createEditor(): Promise<any> {
-    await this.importTheme();
     const module = await import('vanilla-jsoneditor');
 
     // prepare props from bindables
@@ -227,17 +219,17 @@ export class JsonEditor implements ICustomElementViewModel {
       props: {
         ...props,
         content: {
-          json: this.content ?? {},
+          json: this.json ?? {},
         },
         onChange: (content: Content, previousContent: Content, changeStatus: OnChangeStatus) => {
           try {
             if ((content as JSONContent).json) {
-              this.contentCache = (content as JSONContent).json;
+              this.#contentCache = (content as JSONContent).json;
             } else {
-              this.contentCache = JSON.parse((content as TextContent).text) as JSONValue;
+              this.#contentCache = this.parser.parse((content as TextContent).text);
             }
 
-            this.content = this.contentCache;
+            this.json = this.#contentCache;
           } catch (e) {
             // ignore partially invalid JSON output
           }
@@ -253,13 +245,5 @@ export class JsonEditor implements ICustomElementViewModel {
   private destroyEditor(): void {
     this.editor?.destroy();
     this.editor = undefined;
-  }
-
-  private importTheme(): Promise<void> {
-    if (this.theme === 'dark') {
-      return import('vanilla-jsoneditor/themes/jse-theme-dark.css');
-    } else {
-      return import('vanilla-jsoneditor/themes/jse-theme-default.css');
-    }
   }
 }

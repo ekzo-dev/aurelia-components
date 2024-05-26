@@ -1,7 +1,7 @@
 import template from './bs-stepper-step.html';
 
 import { ICustomElementController } from '@aurelia/runtime-html';
-import { bindable, CustomElement, customElement } from 'aurelia';
+import { bindable, CustomElement, customElement, resolve } from 'aurelia';
 
 import { type BsStepper } from '../index';
 
@@ -20,7 +20,7 @@ export class BsStepperStep {
 
   private stepper?: BsStepper;
 
-  constructor(private element: Element) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.id = `id${Math.random().toString(36).substring(2, 9)}`;
@@ -36,7 +36,7 @@ export class BsStepperStep {
   }
 
   private registerInStepper(): void {
-    const stepper = this.findStepper(this.element as HTMLElement);
+    const stepper = this.findStepper(this.element);
 
     if (stepper) {
       this.stepper = stepper.viewModel;

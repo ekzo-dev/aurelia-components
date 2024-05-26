@@ -1,31 +1,68 @@
-import template from './collapse.html';
-
 import '../../transitions.scss';
-import './collapse.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 import { Collapse } from 'bootstrap';
 
-@customElement({
-  name: 'bs-collapse',
-  template,
-})
-export class BsCollapse implements ICustomElementViewModel {
+import { BaseAttribute } from '../base-attribute';
+
+@customAttribute('bs-collapse')
+export class BsCollapse extends BaseAttribute implements Collapse.Options {
+  @bindable({ primary: true })
+  collapsed: boolean = true;
+
   @bindable(coerceBoolean)
   horizontal: boolean = false;
 
-  constructor(private element: HTMLElement) {}
+  @bindable()
+  parent: string | Element = undefined;
+
+  @bindable()
+  toggle: boolean = false;
+
+  attaching() {
+    super.attaching();
+
+    // add initial open class
+    if (!this.collapsed) {
+      this.element.classList.add('show');
+    }
+
+    this.#createCollapse();
+  }
+
+  attached() {
+    if (this.element.parentElement?.parentElement?.nodeName === 'BS-NAVBAR') {
+      this.element.classList.add('navbar-collapse');
+    }
+  }
 
   detaching() {
-    this.destroyCollapse();
+    super.detaching();
+    this.#destroyCollapse();
   }
 
-  toggle() {
-    Collapse.getOrCreateInstance(this.element, { toggle: false }).toggle();
+  collapsedChanged() {
+    this.#createCollapse().toggle();
   }
 
-  private destroyCollapse() {
+  parentChanged() {
+    this.#destroyCollapse();
+    this.#createCollapse();
+  }
+
+  #createCollapse() {
+    return Collapse.getOrCreateInstance(this.element, {
+      parent: this.parent,
+      toggle: this.toggle,
+    });
+  }
+
+  #destroyCollapse() {
     Collapse.getInstance(this.element)?.dispose();
+  }
+
+  protected get classes(): string[] {
+    return ['collapse', this.horizontal ? 'collapse-horizontal' : null].filter(Boolean);
   }
 }

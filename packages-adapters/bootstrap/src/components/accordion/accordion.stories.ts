@@ -18,7 +18,7 @@ const Overview: Story = (args): StoryFnAureliaReturnType => ({
   <bs-accordion-item header="Accordion Item #2">
     This is the second item's accordion body.
   </bs-accordion-item>
-  <bs-accordion-item header="Accordion Item #3">
+  <bs-accordion-item header="Accordion Item #3" collapsed.bind="false">
     This is the third item's accordion body.
   </bs-accordion-item>
   `,

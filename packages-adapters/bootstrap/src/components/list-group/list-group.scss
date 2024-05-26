@@ -1,8 +1,2 @@
 @import '../../utils';
 @import '~bootstrap/scss/list-group';
-
-bs-list-group {
-  .list-group-item-action:not(.disabled) {
-    cursor: pointer;
-  }
-}

@@ -1,4 +1,4 @@
-import { customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { customAttribute, ICustomAttributeViewModel, resolve } from 'aurelia';
 
 @customAttribute('auto-resize')
 export class AutoResizeCustomAttribute implements ICustomAttributeViewModel {
@@ -6,7 +6,7 @@ export class AutoResizeCustomAttribute implements ICustomAttributeViewModel {
 
   private textarea: HTMLTextAreaElement;
 
-  constructor(private element: Element) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.textarea = this.element instanceof HTMLTextAreaElement ? this.element : this.element.querySelector('textarea');

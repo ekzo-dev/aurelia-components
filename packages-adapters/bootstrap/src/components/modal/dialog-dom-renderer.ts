@@ -1,7 +1,7 @@
 import { IDialogController, IDialogDomRenderer } from '@aurelia/dialog';
 import { IContainer } from '@aurelia/kernel';
 import { Controller, ICustomElementController, IPlatform } from '@aurelia/runtime-html';
-import { INode, InstanceProvider, Registration } from 'aurelia';
+import { INode, InstanceProvider, Registration, resolve } from 'aurelia';
 
 import { BsModal } from './modal';
 
@@ -14,9 +14,9 @@ export class BsDialogDomRenderer implements EventListenerObject {
   private modal: HTMLElement;
 
   constructor(
-    private readonly platform: IPlatform,
-    private readonly container: IContainer,
-    private readonly dialogController: IDialogController
+    private readonly platform: IPlatform = resolve(IPlatform),
+    private readonly container: IContainer = resolve(IContainer),
+    private readonly dialogController: IDialogController = resolve(IDialogController)
   ) {}
 
   public static register(container: IContainer) {

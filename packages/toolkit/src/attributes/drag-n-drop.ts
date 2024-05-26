@@ -1,4 +1,4 @@
-import { bindable, BindingMode, customAttribute } from 'aurelia';
+import { bindable, BindingMode, customAttribute, resolve } from 'aurelia';
 
 export interface IDragNDropConfig {
   role: 'source' | 'target' | 'all';
@@ -76,7 +76,7 @@ export class DragNDropCustomAttribute {
   private sourceEvents: string[] = ['dragstart', 'dragend'];
   private targetEvents: string[] = ['dragenter', 'dragover', 'dragleave', 'drop'];
 
-  constructor(private element: Element) {
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {
     // window.addEventListener('dragend', (event) => this.dragend(event));
   }
 
@@ -134,7 +134,7 @@ export class DragNDropCustomAttribute {
     this.dragCounter = 0;
     event.dataTransfer.effectAllowed = this.dropEffect;
     event.dataTransfer.setData('input/plain', JSON.stringify(this.payload));
-    (this.element as HTMLElement).style.opacity = '0.5';
+    this.element.style.opacity = '0.5';
     // (this.element as HTMLElement).style.transform = 'scale(0.9, 0.9)';
     this.element.setAttribute('moving', '');
     // this.dragging = true;
@@ -145,7 +145,7 @@ export class DragNDropCustomAttribute {
   dragend(event) {
     // TODO: over / under - зачем?
     this.element.classList.remove('over');
-    (this.element as HTMLElement).style.opacity = '';
+    this.element.style.opacity = '';
     // (this.element as HTMLElement).style.transform = '';
     this.element.removeAttribute('moving');
     this.element.removeAttribute('under');

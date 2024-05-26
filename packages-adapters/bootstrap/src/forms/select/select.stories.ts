@@ -15,7 +15,11 @@ const meta: Meta = {
   },
   args: {
     label: 'Label',
-    options: { '1': 'One', '2': 'Two', '3': 'Three' },
+    options: [
+      { value: '1', text: 'One' },
+      { value: '2', text: 'Two' },
+      { value: '3', text: 'Three' },
+    ],
   },
   argTypes: {
     bsSize: {

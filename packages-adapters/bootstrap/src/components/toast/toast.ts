@@ -5,7 +5,7 @@ import '../../color-bg.scss';
 import './toast.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 import { Toast } from 'bootstrap';
 
 import { Variant } from '../../types';
@@ -34,7 +34,7 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
 
   private toast?: Toast;
 
-  constructor(private element: Element) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.createToast();

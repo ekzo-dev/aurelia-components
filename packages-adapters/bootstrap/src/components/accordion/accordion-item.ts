@@ -18,13 +18,7 @@ export class BsAccordionItem implements ICustomElementViewModel {
   @bindable({ mode: BindingMode.twoWay })
   collapsed: boolean = true;
 
-  private collapse!: BsCollapse;
-
   onHeaderClick() {
     this.collapsed = !this.collapsed;
-  }
-
-  collapsedChanged() {
-    this.collapse.toggle();
   }
 }

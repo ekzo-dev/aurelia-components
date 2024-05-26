@@ -3,7 +3,7 @@ import template from './navbar.html';
 import './navbar.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel, slotted } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 import { Breakpoint } from '../../types';
 
@@ -20,9 +20,6 @@ export class BsNavbar implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   dark: boolean = false;
 
-  @slotted('bs-collapse')
-  collapses: HTMLElement[] = [];
-
   get classes(): string {
     const { expand } = this;
 
@@ -33,13 +30,5 @@ export class BsNavbar implements ICustomElementViewModel {
     ]
       .filter(Boolean)
       .join(' ');
-  }
-
-  collapsesChanged(elements: HTMLElement[]) {
-    elements.forEach((e) => e.classList.add('navbar-collapse'));
-  }
-
-  detaching() {
-    this.collapses.forEach((e) => e.classList.remove('navbar-collapse'));
   }
 }

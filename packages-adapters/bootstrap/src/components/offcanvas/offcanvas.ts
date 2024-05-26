@@ -3,7 +3,7 @@ import template from './offcanvas.html';
 import './offcanvas.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel, observable } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, observable, resolve } from 'aurelia';
 import { Offcanvas } from 'bootstrap';
 
 import { Breakpoint } from '../../types';
@@ -46,7 +46,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
 
   private offcanvas?: Offcanvas;
 
-  constructor(private element: HTMLElement) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attaching() {
     this.createOffcanvas();

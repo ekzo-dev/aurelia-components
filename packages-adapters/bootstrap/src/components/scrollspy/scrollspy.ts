@@ -1,5 +1,5 @@
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customAttribute, ICustomAttributeViewModel } from 'aurelia';
+import { bindable, customAttribute, ICustomAttributeViewModel, resolve } from 'aurelia';
 import { ScrollSpy } from 'bootstrap';
 
 @customAttribute('bs-scrollspy')
@@ -30,7 +30,7 @@ export class BsScrollspy implements ScrollSpy.Options, ICustomAttributeViewModel
 
   #scrollspy?: ScrollSpy;
 
-  constructor(protected element: HTMLElement) {}
+  constructor(protected readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     this.#createScrollSpy();

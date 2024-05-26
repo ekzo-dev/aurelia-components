@@ -4,7 +4,7 @@ import './table.scss';
 
 import { ICustomElementController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { VARIANTS } from '../../constants';
 import { Breakpoint, Variant } from '../../types';
@@ -42,7 +42,7 @@ export class BsTable implements ICustomElementViewModel {
 
   readonly $controller: ICustomElementController<this>;
 
-  constructor(private element: HTMLElement) {}
+  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     this.table = this.element.querySelector('table')!;

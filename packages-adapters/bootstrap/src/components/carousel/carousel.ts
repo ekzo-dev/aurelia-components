@@ -3,7 +3,7 @@ import template from './carousel.html';
 import './carousel.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel, slotted } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve, slotted } from 'aurelia';
 import { Carousel } from 'bootstrap';
 
 import { coerceBooleanOrString } from '../../utils';
@@ -50,7 +50,7 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options, Ev
 
   #carousel?: Carousel;
 
-  constructor(protected element: HTMLElement) {}
+  constructor(protected readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
     this.#createCarousel();
