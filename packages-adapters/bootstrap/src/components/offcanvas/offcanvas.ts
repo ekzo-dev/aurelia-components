@@ -100,7 +100,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
       };
 
       this.element.addEventListener(event, listener);
-      this.offcanvas.toggle();
+      this.offcanvas[show ? 'show' : 'hide']();
     });
   }
 
