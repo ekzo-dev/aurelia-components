@@ -1,7 +1,7 @@
 <label if.bind="label" class="form-label">${label}</label>
 <bs-radio
   repeat.for="[k, v] of options | iterable"
-  model.bind="k"
+  value.bind="k"
   label.bind="v"
   checked.bind="checked"
   inline.bind="inline"
