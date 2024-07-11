@@ -1,4 +1,4 @@
-import type { JSONSchema7 } from 'json-schema';
+import type { JSONSchema7, JSONSchema7Type } from 'json-schema';
 
 import { valueConverter } from 'aurelia';
 
@@ -9,19 +9,16 @@ import { FormatPhone } from './phone';
 
 @valueConverter('formatJsonSchemaNode')
 export class FormatJsonSchemaNode {
-  toView(value: any, definition: JSONSchema7) {
+  toView(value: JSONSchema7Type, definition: JSONSchema7) {
     switch (definition.type) {
       case 'boolean':
-        return new FormatBoolean().toView(value);
+        return new FormatBoolean().toView(value as boolean);
 
       case 'string':
 
       case 'integer':
-        if (
-          definition.enum &&
-          definition.anyOf?.every((item: JSONSchema7) => item.title != null && item.const != null)
-        ) {
-          const node = definition.anyOf.find((item: JSONSchema7) => item.const === value);
+        if (definition.enum && definition.anyOf) {
+          const node = definition.anyOf[definition.enum.indexOf(value)];
 
           if (node) {
             return (node as JSONSchema7).title;
@@ -37,10 +34,10 @@ export class FormatJsonSchemaNode {
             return new FormatDatetime().toView(value, definition.format);
 
           case 'tel':
-            return new FormatPhone().toView(value);
+            return new FormatPhone().toView(value as string);
 
           case 'filesize':
-            return new FormatFilesize().toView(value);
+            return new FormatFilesize().toView(value as number);
         }
     }
 

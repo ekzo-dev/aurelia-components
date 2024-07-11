@@ -12,7 +12,7 @@ export class FormatDatetime {
     time: 'HH:mm',
   };
 
-  toView(value, pattern, empty = null) {
+  toView(value, pattern, empty = null): string {
     if (!value) return empty ?? value;
     pattern = this.patterns[pattern] || pattern;
 
