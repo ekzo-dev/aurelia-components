@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/vanilla-jsoneditor",
   "description": "Aurelia JSON Editor adapter",
-  "version": "0.23.2",
+  "version": "0.23.3",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/vanilla-json-editor",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@types/json-schema": "^7.0.14",
     "immutable-json-patch": "^5.1.3",
-    "vanilla-jsoneditor": "~0.23.0"
+    "vanilla-jsoneditor": "~0.23.8"
   },
   "peerDependencies": {
     "aurelia": "^2.0.0-beta.8"
