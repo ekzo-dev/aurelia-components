@@ -130,7 +130,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
 
   #contentCache?: unknown;
 
-  constructor(private readonly host: HTMLElement = resolve(HTMLElement)) {}
+  constructor(protected readonly host: HTMLElement = resolve(HTMLElement)) {}
 
   get(): Content {
     return this.editor?.get();

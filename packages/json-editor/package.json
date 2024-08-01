@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/json-editor",
   "description": "Aurelia JSON Editor adapter",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/json-editor",
   "repository": {
     "type": "git",
@@ -9,7 +9,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/vanilla-jsoneditor": "^0.23.2",
+    "@ekzo-dev/vanilla-jsoneditor": "^0.23.3",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@types/json-schema": "^7.0.14",
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",

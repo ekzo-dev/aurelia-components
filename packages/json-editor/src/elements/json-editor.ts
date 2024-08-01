@@ -3,6 +3,8 @@ import template from './json-editor.html';
 import type {
   JSONSchema,
   JSONSchemaDefinitions,
+  MenuItem,
+  RenderMenuContext,
   RenderValueComponentDescription,
   RenderValueProps,
   ValidationError,
@@ -10,6 +12,7 @@ import type {
 } from 'vanilla-jsoneditor';
 
 import { JsonEditor as VanillaJsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
+import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
 import Ajv, { Options } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
@@ -54,6 +57,30 @@ export class JsonEditor extends VanillaJsonEditor {
         return result || module.renderValue(props);
       },
       validator: this.#getValidator(),
+      onRenderMenu: (items: MenuItem[], context: RenderMenuContext): MenuItem[] | undefined => {
+        if (this.onRenderMenu) {
+          return this.onRenderMenu(items, context);
+        }
+
+        return [
+          ...items,
+          {
+            type: 'space',
+          },
+          {
+            type: 'button',
+            onClick: () => {
+              if (document.fullscreenElement) {
+                document.exitFullscreen();
+              } else {
+                this.host.requestFullscreen();
+              }
+            },
+            icon: faUpRightAndDownLeftFromCenter,
+            title: 'Toggle full screen',
+          },
+        ];
+      },
     });
 
     return module;
