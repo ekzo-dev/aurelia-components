@@ -1,14 +1,14 @@
 <label if.bind="label" class="form-label">${label}</label>
 <bs-radio
-  repeat.for="[k, v] of options | iterable"
-  value.bind="k"
-  label.bind="v"
+  repeat.for="option of radioOptions"
+  value.bind="option.value"
+  label.bind="option.text"
   checked.bind="checked"
   inline.bind="inline"
   matcher.bind="matcher"
   name.bind="name"
   form.bind="form"
-  disabled.bind="disabled"
+  disabled.bind="disabled || option.disabled"
   required.bind="required"
   valid.bind="valid"
   mode.bind="mode"
