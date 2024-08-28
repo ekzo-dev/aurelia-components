@@ -12,7 +12,7 @@ export default meta;
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
   components: [BsAccordionItem],
   innerHtml: `
-  <bs-accordion-item header="Accordion Item #1">
+  <bs-accordion-item header="Accordion Item #1" lazy>
     This is the first item's accordion body.
   </bs-accordion-item>
   <bs-accordion-item header="Accordion Item #2">
