@@ -28,7 +28,7 @@ const meta: Meta = {
       },
       required: ['enum'],
     },
-    content: {
+    json: {
       number: 1.11,
       enum: '1',
     },

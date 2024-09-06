@@ -13,7 +13,7 @@ import type {
 
 import { JsonEditor as VanillaJsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
-import Ajv, { Options } from 'ajv';
+import Ajv, { ErrorObject, Options } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
@@ -33,10 +33,20 @@ export class JsonEditor extends VanillaJsonEditor {
 
   module: any;
 
+  #schemaVersion?: string;
+
   schemaChanged() {
     void this.editor?.updateProps({
       validator: this.#getValidator(),
     });
+  }
+
+  jsonChanged(value: unknown) {
+    const version: string = value === Object(value) ? (value['$schema'] as string) : undefined;
+
+    if (this.#schemaVersion !== version) {
+      this.schemaChanged();
+    }
   }
 
   protected async createEditor(): Promise<any> {
@@ -87,29 +97,14 @@ export class JsonEditor extends VanillaJsonEditor {
   }
 
   #getValidator(): Validator | undefined {
-    const { schema } = this;
-    let validator = this.validator;
+    if (this.validator) return this.validator;
 
-    if (!validator && schema) {
-      const options: Options = {
-        strict: false,
-        multipleOfPrecision: 2,
-        ...this.ajvOptions,
-      };
-      let ajv: Ajv;
+    const { schema, json } = this;
 
-      switch (schema.$schema) {
-        case 'https://json-schema.org/draft/2019-09/schema':
-          ajv = new Ajv2019(options);
-          break;
+    this.#schemaVersion = undefined;
 
-        case 'https://json-schema.org/draft/2020-12/schema':
-          ajv = new Ajv2020(options);
-          break;
-
-        default:
-          ajv = new Ajv(options);
-      }
+    if (schema) {
+      const ajv = this.#initValidator(schema.$schema as string);
 
       addFormats(ajv);
       const validate = ajv.compile(schema);
@@ -118,21 +113,57 @@ export class JsonEditor extends VanillaJsonEditor {
         throw validate.errors[0];
       }
 
-      validator = (json: JSONValue): ValidationError[] => {
+      return (json: unknown): ValidationError[] => {
         validate(json);
 
-        return (validate.errors || []).map((error) => ({
-          path: parsePath(json, error.instancePath),
-          message: error.message || 'Unknown error',
-          severity: this.module.ValidationSeverity.warning,
-        }));
+        return this.#formatErrors(validate.errors, json);
+      };
+    } else if (json === Object(json) && typeof json['$schema'] === 'string') {
+      const ajv = this.#initValidator(json['$schema']);
+
+      this.#schemaVersion = json['$schema'];
+
+      return (json: unknown): ValidationError[] => {
+        void ajv.validateSchema(json);
+
+        return this.#formatErrors(ajv.errors, json);
       };
     }
-
-    return validator;
   }
 
   #schemaDefinitions(schema: JSONSchema): JSONSchemaDefinitions {
     return (schema.$defs ?? schema.definitions) as JSONSchemaDefinitions;
+  }
+
+  #initValidator($schema: string): Ajv {
+    const options: Options = {
+      strict: false,
+      multipleOfPrecision: 2,
+      ...this.ajvOptions,
+    };
+    let ajv: Ajv;
+
+    switch ($schema) {
+      case 'https://json-schema.org/draft/2019-09/schema':
+        ajv = new Ajv2019(options);
+        break;
+
+      case 'https://json-schema.org/draft/2020-12/schema':
+        ajv = new Ajv2020(options);
+        break;
+
+      default:
+        ajv = new Ajv(options);
+    }
+
+    return ajv;
+  }
+
+  #formatErrors(errors: ErrorObject[], json: unknown): ValidationError[] {
+    return (errors || []).map((error) => ({
+      path: parsePath(json as JSONValue, error.instancePath),
+      message: error.message || 'Unknown error',
+      severity: this.module.ValidationSeverity.warning,
+    }));
   }
 }

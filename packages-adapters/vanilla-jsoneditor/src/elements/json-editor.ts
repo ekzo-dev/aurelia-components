@@ -226,12 +226,15 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
             if ((content as JSONContent).json) {
               this.#contentCache = (content as JSONContent).json;
             } else {
-              this.#contentCache = this.parser.parse((content as TextContent).text);
+              this.#contentCache = (this.parser ?? JSON).parse((content as TextContent).text);
             }
 
             this.json = this.#contentCache;
           } catch (e) {
             // ignore partially invalid JSON output
+            if (!(e instanceof SyntaxError)) {
+              throw e;
+            }
           }
 
           this.onChange && this.onChange(content, previousContent, changeStatus);
