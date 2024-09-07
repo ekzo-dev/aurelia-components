@@ -11,6 +11,7 @@ import type {
   Validator,
 } from 'vanilla-jsoneditor';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { JsonEditor as VanillaJsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
 import Ajv, { ErrorObject, Options } from 'ajv';
@@ -31,6 +32,9 @@ export class JsonEditor extends VanillaJsonEditor {
   @bindable()
   ajvOptions: Options = {};
 
+  @bindable(coerceBoolean)
+  validateAsSchema: boolean = false;
+
   module: any;
 
   #schemaVersion?: string;
@@ -41,10 +45,17 @@ export class JsonEditor extends VanillaJsonEditor {
     this.#updateValidator();
   }
 
+  validateAsSchemaChanged() {
+    this.#updateValidator();
+  }
+
   jsonChanged(value: unknown) {
-    const version: string = value === Object(value) ? (value['$schema'] as string) : undefined;
+    if (!this.validateAsSchema) return;
+
+    const version = this.#getSchemaVersion(value);
 
     if (this.#schemaVersion !== version) {
+      this.#schemaVersion = version;
       this.#updateValidator();
     }
   }
@@ -101,8 +112,6 @@ export class JsonEditor extends VanillaJsonEditor {
 
     const { schema, json } = this;
 
-    this.#schemaVersion = undefined;
-
     if (schema) {
       const ajv = this.#initValidator(schema.$schema as string);
 
@@ -118,10 +127,8 @@ export class JsonEditor extends VanillaJsonEditor {
 
         return this.#processErrors(validate.errors, json);
       };
-    } else if (json === Object(json) && typeof json['$schema'] === 'string') {
-      const ajv = this.#initValidator(json['$schema']);
-
-      this.#schemaVersion = json['$schema'];
+    } else if (this.validateAsSchema) {
+      const ajv = this.#initValidator(this.#getSchemaVersion(json));
 
       return (json: unknown): ValidationError[] => {
         void ajv.validateSchema(json);
@@ -180,5 +187,9 @@ export class JsonEditor extends VanillaJsonEditor {
     void this.editor?.updateProps({
       validator: this.#getValidator(),
     });
+  }
+
+  #getSchemaVersion(json: unknown): string {
+    return json === Object(json) && json['$schema'] ? (json['$schema'] as string) : '';
   }
 }
