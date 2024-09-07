@@ -5,6 +5,11 @@ import { JsonEditor } from './json-editor';
 const meta: Meta = {
   title: 'Ekzo / JsonEditor',
   component: JsonEditor,
+  parameters: {
+    actions: {
+      handles: ['validation-change'],
+    },
+  },
   args: {
     schema: {
       $schema: 'http://json-schema.org/draft-07/schema#',

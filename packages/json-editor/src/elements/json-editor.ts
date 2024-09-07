@@ -35,17 +35,17 @@ export class JsonEditor extends VanillaJsonEditor {
 
   #schemaVersion?: string;
 
+  #jsonValid?: boolean;
+
   schemaChanged() {
-    void this.editor?.updateProps({
-      validator: this.#getValidator(),
-    });
+    this.#updateValidator();
   }
 
   jsonChanged(value: unknown) {
     const version: string = value === Object(value) ? (value['$schema'] as string) : undefined;
 
     if (this.#schemaVersion !== version) {
-      this.schemaChanged();
+      this.#updateValidator();
     }
   }
 
@@ -116,7 +116,7 @@ export class JsonEditor extends VanillaJsonEditor {
       return (json: unknown): ValidationError[] => {
         validate(json);
 
-        return this.#formatErrors(validate.errors, json);
+        return this.#processErrors(validate.errors, json);
       };
     } else if (json === Object(json) && typeof json['$schema'] === 'string') {
       const ajv = this.#initValidator(json['$schema']);
@@ -126,7 +126,7 @@ export class JsonEditor extends VanillaJsonEditor {
       return (json: unknown): ValidationError[] => {
         void ajv.validateSchema(json);
 
-        return this.#formatErrors(ajv.errors, json);
+        return this.#processErrors(ajv.errors, json);
       };
     }
   }
@@ -159,11 +159,26 @@ export class JsonEditor extends VanillaJsonEditor {
     return ajv;
   }
 
-  #formatErrors(errors: ErrorObject[], json: unknown): ValidationError[] {
+  #processErrors(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
+    const valid = !errors?.length;
+
+    if (this.#jsonValid !== valid) {
+      const event = new CustomEvent('validation-change', { bubbles: true, detail: { errors, valid } });
+
+      this.#jsonValid = valid;
+      this.host.dispatchEvent(event);
+    }
+
     return (errors || []).map((error) => ({
       path: parsePath(json as JSONValue, error.instancePath),
       message: error.message || 'Unknown error',
       severity: this.module.ValidationSeverity.warning,
     }));
+  }
+
+  #updateValidator() {
+    void this.editor?.updateProps({
+      validator: this.#getValidator(),
+    });
   }
 }
