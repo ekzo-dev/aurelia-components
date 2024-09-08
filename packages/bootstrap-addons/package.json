@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@ekzo-dev/bootstrap": "^5.2.11",
-    "@ekzo-dev/vanilla-jsoneditor": "^0.23.4",
+    "@ekzo-dev/vanilla-jsoneditor": "^0.23.6",
     "@ekzo-dev/toolkit": "^1.2.4",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@types/json-schema": "^7.0.14",

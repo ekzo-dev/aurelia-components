@@ -17,6 +17,7 @@ Note aurelia-cli doesn't provide a plugin skeleton with Webpack setup (not yet),
 For a full length tutorial, visit [Aurelia plugin guide](https://aurelia.io/docs/plugins/write-new-plugin).
 
 Here is some basics. You can create new custom element, custom attribute, value converter or binding behavior manually, or use command `au generate` to help.
+
 ```shell
 au generate element some-name
 au generate attribute some-name
@@ -25,6 +26,7 @@ au generate binding-behavior some-name
 ```
 
 By default, the cli generates command generates files in following folders:
+
 ```
 src/elements
 src/attributes
@@ -35,12 +37,13 @@ src/binding-behaviors
 Note the folder structure is only to help you organising the files, it's not a requirement of Aurelia. You can manually create new element (or other thing) anywhere in `src/`.
 
 After you added some new file, you need to register it in `src/index.ts`. Like this:
+
 ```js
 config.globalResources([
   // ...
-  PLATFORM.moduleName('./path/to/new-file-without-ext')
+  PLATFORM.moduleName('./path/to/new-file-without-ext'),
 ]);
-````
+```
 
 The usage of `PLATFORM.moduleName` wrapper is mandatory. It's needed for your plugin to be consumed by any app using webpack, CLI built-in bundler, or jspm.
 
@@ -66,6 +69,7 @@ By default, this plugin has no "dependencies" in package.json. Theoretically thi
 Ideally you need to carefully add those `aurelia-pal` (`aurelia-binding`...) to "dependencies" in package.json. But in practice you don't have to. Because every app that consumes this plugin will have full Aurelia core packages installed.
 
 Furthermore, there are two benefits by leaving those dependencies out of plugin's package.json.
+
 1. ensure this plugin doesn't bring in a duplicated Aurelia core package to consumers' app. This is mainly for app built with webpack. We had been hit with `aurelia-binding` v1 and v2 conflicts due to 3rd party plugin asks for `aurelia-binding` v1.
 2. reduce the burden for npm/yarn when installing this plugin.
 
@@ -86,6 +90,7 @@ Note all other files in `dev-app/` folder are for the dev app, they would not ap
 By default, the `dist/` folder is not committed to git. (We have `/dist` in `.gitignore`). But that would not prevent you from consuming this plugin through direct git reference.
 
 You can consume this plugin directly by:
+
 ```shell
 npm i github:your_github_username/ui-utils
 # or if you use bitbucket
@@ -97,6 +102,7 @@ npm i https:/github.com/your_github_username/ui-utils.git
 ```
 
 Then load the plugin in app's `main.ts` like this.
+
 ```js
 aurelia.use.plugin('ui-utils');
 // for webpack user, use PLATFORM.moduleName wrapper
@@ -115,14 +121,19 @@ To publish the plugin to npm for public consumption:
 
 1. Remove `"private": true,` from package.json.
 2. Pump up project version. This will run through `au test` (in "preversion" in package.json) first.
+
 ```shell
 npm version patch # or minor or major
 ```
+
 3. Push up changes to your git server
+
 ```shell
 git push && git push --tags
 ```
+
 4. Then publish to npm, you need to have your npm account logged in.
+
 ```shell
 npm publish
 ```
@@ -132,9 +143,13 @@ npm publish
 You can enable `npm version patch # or minor or major` to automatically update changelog, push commits and version tag to the git server, and publish to npm.
 
 Here is one simple setup.
+
 1. `npm i -D standard-changelog`. We use [`standard-changelog`](https://github.com/conventional-changelog/conventional-changelog) as a minimum example to support conventional changelog.
-  * Alternatively you can use high level [standard-version](https://github.com/conventional-changelog/standard-version).
+
+- Alternatively you can use high level [standard-version](https://github.com/conventional-changelog/standard-version).
+
 2. Add two commands to `"scripts"` section of package.json.
+
 ```
 "scripts": {
   // ...
@@ -142,6 +157,7 @@ Here is one simple setup.
   "postversion": "git push && git push --tags && npm publish"
 },
 ```
+
 3. you can remove `&& npm publish` if your project is private
 
 For more information, go to https://aurelia.io/docs/cli/cli-bundler
@@ -156,9 +172,7 @@ To change dev server port, do `au run --port 8888`.
 
 To change dev server host, do `au run --host 127.0.0.1`
 
-
 **PS:** You could mix all the flags as well, `au run --host 127.0.0.1 --port 7070 --open`
-
 
 ## Unit tests
 
