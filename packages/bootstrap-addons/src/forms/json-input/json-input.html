@@ -1,0 +1,12 @@
+<template>
+  <input ref="input" required.bind="inputRequired" />
+  <json-editor
+    ref="editor"
+    json.bind="value"
+    validator.bind="validator"
+    read-only.bind="disabled"
+    on-render-value.one-time="onRenderValue"
+    on-render-menu.one-time="onRenderMenu"
+    ...$bindables="jsonEditorOptions"
+  ></json-editor>
+</template>

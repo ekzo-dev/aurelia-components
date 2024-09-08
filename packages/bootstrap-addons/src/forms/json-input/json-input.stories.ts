@@ -1,28 +1,20 @@
 import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 
-import { JsonEditor } from './json-editor';
+import { BsJsonInput } from '.';
 
 const meta: Meta = {
-  title: 'Ekzo / JsonEditor',
-  component: JsonEditor,
-  parameters: {
-    actions: {
-      handles: ['validation-change'],
-    },
-  },
+  title: 'Ekzo / Bootstrap Addons / Forms / Json input',
+  component: BsJsonInput,
 };
 
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  props: {
-    ...args,
-    onRenderValue: undefined, // must be reset here, otherwise editor breaks because callback required a return value
-  },
+  props: args,
 });
 
 Overview.args = {
-  schema: {
+  jsonSchema: {
     $schema: 'http://json-schema.org/draft-07/schema#',
     type: 'object',
     properties: {
@@ -44,22 +36,19 @@ Overview.args = {
     },
     required: ['enum'],
   },
-  json: {
+  value: {
     number: 1.11,
     enum: '1',
   },
 };
 
 const JsonSchemaEditor: Story = (args): StoryFnAureliaReturnType => ({
-  props: {
-    ...args,
-    onRenderValue: undefined, // must be reset here, otherwise editor breaks because callback required a return value
-  },
+  props: args,
 });
 
 JsonSchemaEditor.args = {
-  validateAsSchema: true,
-  json: {
+  jsonSchema: true,
+  value: {
     $schema: 'http://json-schema.org/draft-07/schema#',
     type: 'object',
     properties: {},

@@ -180,15 +180,15 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.focus();
   }
 
-  attaching() {
-    this.createEditor();
+  async attaching() {
+    return this.#createEditor();
   }
 
-  detaching() {
-    this.destroyEditor();
+  async detaching() {
+    return this.#destroyEditor();
   }
 
-  propertyChanged(name: keyof this, value: any): void {
+  propertyChanged(name: keyof this, value: unknown): void {
     if (name === 'json') {
       if (value !== this.#contentCache) {
         void this.editor?.update({
@@ -202,11 +202,11 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     }
   }
 
-  protected async createEditor(): Promise<any> {
-    const module = await import('vanilla-jsoneditor');
+  async #createEditor() {
+    const module: typeof import('vanilla-jsoneditor') = await import('vanilla-jsoneditor');
 
     // prepare props from bindables
-    const props: Record<string, any> = {};
+    const props: Record<string, unknown> = {};
 
     Object.keys(this.$controller.definition.bindables).forEach((name) => {
       if (this[name] !== undefined) {
@@ -222,8 +222,10 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
           json: this.json ?? {},
         },
         onChange: (content: Content, previousContent: Content, changeStatus: OnChangeStatus) => {
+          console.log('content', content);
+
           try {
-            if ((content as JSONContent).json) {
+            if ((content as JSONContent).json !== undefined) {
               this.#contentCache = (content as JSONContent).json;
             } else {
               this.#contentCache = (this.parser ?? JSON).parse((content as TextContent).text);
@@ -241,12 +243,10 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
         },
       },
     });
-
-    return module;
   }
 
-  private destroyEditor(): void {
-    this.editor?.destroy();
+  async #destroyEditor() {
+    await this.editor?.destroy();
     this.editor = undefined;
   }
 }
