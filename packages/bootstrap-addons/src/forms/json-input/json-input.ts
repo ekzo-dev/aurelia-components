@@ -38,7 +38,7 @@ export class BsJsonInput {
   @bindable(coerceBoolean)
   disabled: boolean = false;
 
-  @bindable()
+  @bindable({ set: (v) => (v === '' || v === true || v === 'true' ? true : v) })
   jsonSchema?: JSONSchema | boolean;
 
   @bindable()

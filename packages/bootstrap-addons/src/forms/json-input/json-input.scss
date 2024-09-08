@@ -10,4 +10,8 @@ bs-json-input {
     height: 100%;
     z-index: -1;
   }
+
+  > json-editor {
+    height: 100%;
+  }
 }
