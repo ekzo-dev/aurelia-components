@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bootstrap-addons",
   "description": "Aurelia Bootstrap additional component",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/bootstrap-addons",
   "repository": {
     "type": "git",
