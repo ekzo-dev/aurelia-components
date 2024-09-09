@@ -9,7 +9,7 @@ import Ajv, { ErrorObject, Options } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
-import { bindable, customElement } from 'aurelia';
+import { bindable, BindingMode, customElement } from 'aurelia';
 import { JSONValue, parsePath } from 'immutable-json-patch';
 import {
   JSONEditorPropsOptional,
@@ -29,7 +29,7 @@ import {
   dependencies: [JsonEditor],
 })
 export class BsJsonInput {
-  @bindable()
+  @bindable({ mode: BindingMode.twoWay })
   value: unknown;
 
   @bindable(coerceBoolean)
