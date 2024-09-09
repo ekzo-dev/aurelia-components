@@ -101,7 +101,7 @@ export class BsJsonInput {
   };
 
   get inputRequired(): boolean {
-    return this.required && this.value != null && this.value !== '';
+    return this.required && (this.value == null || this.value === '');
   }
 
   get validator(): Validator | undefined {
@@ -167,7 +167,9 @@ export class BsJsonInput {
   }
 
   #processErrors(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
-    this.input.setCustomValidity(errors?.length ? "JSON doesn't match schema" : '');
+    const message = this.jsonSchema === true ? 'JSON is not a valid JSONSchema' : 'JSON does not match schema';
+
+    this.input.setCustomValidity(errors?.length ? message : '');
 
     return (errors || []).map((error) => ({
       path: parsePath(json as JSONValue, error.instancePath),
