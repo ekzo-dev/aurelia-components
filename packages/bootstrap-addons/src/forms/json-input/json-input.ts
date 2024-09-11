@@ -105,8 +105,11 @@ export class BsJsonInput {
   }
 
   get validator(): Validator | undefined {
-    const { jsonSchema, schemaVersion, disabled } = this;
+    const { schemaVersion, disabled } = this;
+    // use raw object because proxies don't work with private properties
     const rawThis = this['__raw__'] as BsJsonInput;
+    // use jsonSchema from raw object to pass original (non-proxied) object to AJV
+    const { jsonSchema } = rawThis;
 
     if (jsonSchema && typeof jsonSchema === 'object' && !disabled) {
       const ajv = rawThis.#initAjv(jsonSchema.$schema as string);
