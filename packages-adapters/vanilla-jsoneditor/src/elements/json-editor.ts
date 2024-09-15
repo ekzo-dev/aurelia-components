@@ -6,7 +6,6 @@ import type { JSONPatchDocument, JSONPath } from 'immutable-json-patch';
 import type {
   Content,
   ContentErrors,
-  JSONContent,
   JSONEditor,
   JSONEditorPropsOptional,
   JSONEditorSelection,
@@ -19,7 +18,6 @@ import type {
   RenderMenuContext,
   RenderValueComponentDescription,
   RenderValueProps,
-  TextContent,
   TransformModalOptions,
   Validator,
 } from 'vanilla-jsoneditor';
@@ -35,7 +33,7 @@ import { coerceBoolean } from '../utils';
 })
 export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorPropsOptional, 'mode'> {
   @bindable({ mode: BindingMode.twoWay })
-  json: unknown = {};
+  content: Content = { text: '' };
 
   @bindable()
   selection: JSONEditorSelection | null = null;
@@ -126,9 +124,11 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
 
   editor?: JSONEditor;
 
+  editorModule?: typeof import('vanilla-jsoneditor');
+
   readonly $controller: ICustomElementController<this>;
 
-  #contentCache?: unknown;
+  #contentCache?: Content;
 
   constructor(protected readonly host: HTMLElement = resolve(HTMLElement)) {}
 
@@ -189,11 +189,9 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   }
 
   propertyChanged(name: keyof this, value: unknown): void {
-    if (name === 'json') {
+    if (name === 'content') {
       if (value !== this.#contentCache) {
-        void this.editor?.update({
-          json: value ?? {},
-        });
+        void this.editor?.update(value as Content);
       }
     } else {
       void this.editor?.updateProps({
@@ -203,7 +201,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   }
 
   async #createEditor() {
-    const module: typeof import('vanilla-jsoneditor') = await import('vanilla-jsoneditor');
+    this.editorModule = await import('vanilla-jsoneditor');
 
     // prepare props from bindables
     const props: Record<string, unknown> = {};
@@ -214,30 +212,13 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
       }
     });
 
-    this.editor = new module.JSONEditor({
+    this.editor = new this.editorModule.JSONEditor({
       target: this.host,
       props: {
         ...props,
-        content: {
-          json: this.json ?? {},
-        },
         onChange: (content: Content, previousContent: Content, changeStatus: OnChangeStatus) => {
-          console.log('content', content);
-
-          try {
-            if ((content as JSONContent).json !== undefined) {
-              this.#contentCache = (content as JSONContent).json;
-            } else {
-              this.#contentCache = (this.parser ?? JSON).parse((content as TextContent).text);
-            }
-
-            this.json = this.#contentCache;
-          } catch (e) {
-            // ignore partially invalid JSON output
-            if (!(e instanceof SyntaxError)) {
-              throw e;
-            }
-          }
+          this.#contentCache = content;
+          this.content = this.#contentCache;
 
           this.onChange && this.onChange(content, previousContent, changeStatus);
         },
