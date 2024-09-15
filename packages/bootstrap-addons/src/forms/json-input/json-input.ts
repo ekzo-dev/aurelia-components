@@ -2,6 +2,21 @@ import template from './json-input.html';
 
 import './json-input.scss';
 
+import type {
+  Content,
+  JSONContent,
+  JSONEditorPropsOptional,
+  JSONSchema,
+  JSONSchemaDefinitions,
+  MenuItem,
+  RenderValueComponentDescription,
+  RenderValueProps,
+  TextContent,
+  ValidationError,
+  ValidationSeverity,
+  Validator,
+} from 'vanilla-jsoneditor';
+
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { JsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
@@ -11,17 +26,6 @@ import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
 import { bindable, BindingMode, customElement } from 'aurelia';
 import { JSONValue, parsePath } from 'immutable-json-patch';
-import {
-  JSONEditorPropsOptional,
-  JSONSchema,
-  JSONSchemaDefinitions,
-  MenuItem,
-  RenderValueComponentDescription,
-  RenderValueProps,
-  ValidationError,
-  ValidationSeverity,
-  Validator,
-} from 'vanilla-jsoneditor';
 
 @customElement({
   name: 'bs-json-input',
@@ -47,36 +51,34 @@ export class BsJsonInput {
   @bindable()
   jsonEditorOptions: JSONEditorPropsOptional = {};
 
-  editorModule?: typeof import('vanilla-jsoneditor');
+  valueCache?: unknown;
 
-  schemaVersion?: string;
+  content?: JSONContent;
 
   readonly input!: HTMLInputElement;
 
-  readonly editor!: HTMLElement;
+  readonly editorElement!: HTMLElement;
 
-  async binding() {
-    this.schemaVersion = this.#getSchemaVersion(this.value);
-    this.editorModule = await import('vanilla-jsoneditor');
+  readonly editorComponent!: JsonEditor;
+
+  binding() {
+    this.#setContent(this.value);
   }
 
   valueChanged(value: unknown) {
-    this.schemaVersion = this.jsonSchema === true ? this.#getSchemaVersion(value) : undefined;
-
-    if (value == null || value === '') {
-      this.input.setCustomValidity('');
-    }
+    this.#setContent(value);
   }
 
   onRenderValue = (props: RenderValueProps): RenderValueComponentDescription[] => {
     let result: RenderValueComponentDescription[] | null;
     const { jsonSchema } = this;
+    const { editorModule } = this.editorComponent;
 
     if (jsonSchema && typeof jsonSchema === 'object') {
-      result = this.editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
+      result = editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
     }
 
-    return result ?? this.editorModule.renderValue(props);
+    return result ?? editorModule.renderValue(props);
   };
 
   onRenderMenu = (items: MenuItem[]): MenuItem[] | undefined => {
@@ -91,7 +93,7 @@ export class BsJsonInput {
           if (document.fullscreenElement) {
             void document.exitFullscreen();
           } else {
-            void this.editor.requestFullscreen();
+            void this.editorElement.requestFullscreen();
           }
         },
         icon: faUpRightAndDownLeftFromCenter,
@@ -100,19 +102,53 @@ export class BsJsonInput {
     ];
   };
 
+  onChange = (content: Content): void => {
+    const { json, text } = content as JSONContent & TextContent;
+
+    if (json !== undefined) {
+      this.valueCache = json;
+    } else {
+      const message = 'Please enter a valid JSON string';
+
+      try {
+        this.valueCache = text === '' ? '' : (this.jsonEditorOptions?.parser ?? JSON).parse(text);
+
+        if (this.input.validationMessage === message || text === '') {
+          this.input.setCustomValidity('');
+        }
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          this.input.setCustomValidity(message);
+        } else {
+          throw e;
+        }
+      }
+    }
+
+    this.value = this.valueCache;
+  };
+
   get inputRequired(): boolean {
     return this.required && (this.value == null || this.value === '');
   }
 
+  get schemaVersion(): string {
+    if (this.jsonSchema !== true) return undefined;
+
+    const { value } = this;
+
+    return value == null || value['$schema'] == null ? '' : (value['$schema'] as string);
+  }
+
   get validator(): Validator | undefined {
-    const { schemaVersion, disabled } = this;
+    const { schemaVersion, disabled, ajvOptions } = this;
     // use raw object because proxies don't work with private properties
     const rawThis = this['__raw__'] as BsJsonInput;
     // use jsonSchema from raw object to pass original (non-proxied) object to AJV
     const { jsonSchema } = rawThis;
 
     if (jsonSchema && typeof jsonSchema === 'object' && !disabled) {
-      const ajv = rawThis.#initAjv(jsonSchema.$schema as string);
+      const ajv = rawThis.#initAjv(jsonSchema.$schema as string, ajvOptions);
 
       addFormats(ajv);
       const validate = ajv.compile(jsonSchema);
@@ -122,14 +158,20 @@ export class BsJsonInput {
       }
 
       return (json: unknown): ValidationError[] => {
+        // do not validate empty documents
+        if (json === undefined) return [];
+
         validate(json);
 
         return rawThis.#processErrors(validate.errors, json);
       };
     } else if (schemaVersion != null && !disabled) {
-      const ajv = rawThis.#initAjv(schemaVersion);
+      const ajv = rawThis.#initAjv(schemaVersion, ajvOptions);
 
       return (json: unknown): ValidationError[] => {
+        // do not validate empty documents
+        if (json === undefined) return [];
+
         void ajv.validateSchema(json);
 
         return rawThis.#processErrors(ajv.errors, json);
@@ -137,11 +179,21 @@ export class BsJsonInput {
     }
   }
 
-  #initAjv($schema: string): Ajv {
+  #setContent(value: unknown): void {
+    if (value !== this.valueCache) {
+      // reset validation state before assigning new content
+      this.input?.setCustomValidity('');
+
+      this.content = { json: value };
+      this.valueCache = value;
+    }
+  }
+
+  #initAjv($schema: string, ajvOptions: Options): Ajv {
     const options: Options = {
       strict: false,
       multipleOfPrecision: 2,
-      ...this.ajvOptions,
+      ...ajvOptions,
     };
     let ajv: Ajv;
 
@@ -163,10 +215,6 @@ export class BsJsonInput {
 
   #getSchemaDefinitions(schema: JSONSchema): JSONSchemaDefinitions {
     return (schema.$defs ?? schema.definitions) as JSONSchemaDefinitions;
-  }
-
-  #getSchemaVersion(value: unknown): string {
-    return value === Object(value) && value['$schema'] ? (value['$schema'] as string) : '';
   }
 
   #processErrors(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
