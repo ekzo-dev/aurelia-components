@@ -184,8 +184,8 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.#createEditor();
   }
 
-  async detaching() {
-    return this.#destroyEditor();
+  detaching() {
+    this.#destroyEditor();
   }
 
   propertyChanged(name: keyof this, value: unknown): void {
@@ -226,8 +226,8 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     });
   }
 
-  async #destroyEditor() {
-    await this.editor?.destroy();
+  #destroyEditor() {
+    void this.editor?.destroy();
     this.editor = undefined;
   }
 }
