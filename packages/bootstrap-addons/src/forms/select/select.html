@@ -24,8 +24,18 @@
     </div>
   </fieldset>
   <div else bs-dropdown>
-    <button class="form-control" type="button" bs-dropdown-toggle>${selectedOption.text}</button>
+    <button
+      class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+      type="button"
+      bs-dropdown-toggle="arrow.bind: false"
+      disabled.bind="disabled"
+    >
+      ${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? '&nbsp;'}
+    </button>
     <bs-dropdown-menu>
+      <div class="search">
+        <input class="form-control" placeholder="Search options" />
+      </div>
       <button
         type="button"
         repeat.for="option of ungroupedOptions"
@@ -34,6 +44,18 @@
       >
         ${option.text}
       </button>
+      <template repeat.for="[k, v] of groupedOptions">
+        <h6 bs-dropdown-item="header">${k}</h6>
+        <button
+          class="ps-4"
+          type="button"
+          repeat.for="option of v"
+          bs-dropdown-item="active.bind: option === selectedOption; disabled.bind: option.disabled"
+          click.trigger="selectOption(option)"
+        >
+          ${option.text}
+        </button>
+      </template>
     </bs-dropdown-menu>
   </div>
   <label for="${id}" if.bind="label && floatingLabel"><span>${label}</span></label>

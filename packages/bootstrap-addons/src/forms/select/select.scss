@@ -2,14 +2,22 @@
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/forms/form-control';
+@import '~bootstrap/scss/forms/form-select';
 @import '~bootstrap/scss/forms/form-check';
 
 bs-select {
   display: block;
 
-  > bs-dropdown-menu {
+  .form-select {
+    text-align: left;
+  }
+
+  bs-dropdown-menu {
     width: 100%;
+  }
+
+  .search {
+    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
   }
 
   > .form-control {

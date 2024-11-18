@@ -10,7 +10,8 @@ import {
   BsSelect as BaseBsSelect,
   ISelectOption,
 } from '@ekzo-dev/bootstrap';
-import { customElement, ICustomElementViewModel } from 'aurelia';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 const BS_SIZE_MULTIPLIER = {
   lg: 1.125,
@@ -23,9 +24,10 @@ const BS_SIZE_MULTIPLIER = {
   dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
 })
 export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
-  control!: HTMLFieldSetElement;
+  @bindable(coerceBoolean)
+  resetUnknownValue: boolean = true;
 
-  selectedOption?: ISelectOption;
+  control!: HTMLFieldSetElement;
 
   attached() {
     if (this.multiple) {
@@ -49,7 +51,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
   selectOption(option: ISelectOption) {
     this.value = option.value;
-    this.selectedOption = option;
   }
 
   #setHeight(): void {
@@ -74,5 +75,27 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
       this.control.scrollTo({ top: selected.parentElement.offsetTop - parseInt(paddingTop) });
     }
+  }
+
+  get selectedOption(): ISelectOption | undefined {
+    const { matcher, value } = this;
+    let { options } = this;
+
+    if (options instanceof Object && options.constructor === Object) {
+      options = Object.entries(options);
+    }
+
+    const option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
+      const val: unknown = Array.isArray(option) ? option[0] : (option as ISelectOption).value;
+
+      return matcher ? matcher(value, val) : value === val;
+    });
+
+    // reset value next tick if needed
+    if (option === undefined && value !== undefined && this.resetUnknownValue) {
+      Promise.resolve().then(() => (this.value = undefined));
+    }
+
+    return Array.isArray(option) ? { value: option[0], text: option[1] } : (option as ISelectOption);
   }
 }

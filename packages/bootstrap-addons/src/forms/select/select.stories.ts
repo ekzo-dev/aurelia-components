@@ -5,7 +5,7 @@ import { selectControl } from '../../../../../.storybook/helpers';
 import { BsSelect } from '.';
 
 export default {
-  title: 'Ekzo / BS Select',
+  title: 'Ekzo / Bootstrap Addons / Forms / Select',
   component: BsSelect,
   parameters: {
     actions: {
@@ -15,10 +15,11 @@ export default {
   args: {
     label: 'Label',
     options: [
-      { value: '1', text: 'One' },
+      { value: '1', text: 'One', disabled: true },
       { value: '2', text: 'Two' },
-      { value: '3', text: 'Three' },
+      { value: '3', text: 'Three', group: 'Group' },
     ],
+    value: '2',
   },
   argTypes: {
     bsSize: {
