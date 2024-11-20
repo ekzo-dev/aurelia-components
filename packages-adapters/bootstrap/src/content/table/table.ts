@@ -36,7 +36,7 @@ export class BsTable implements ICustomElementViewModel {
   variant?: Variant;
 
   @bindable()
-  responsive?: Breakpoint;
+  responsive?: Breakpoint | 'always';
 
   table!: HTMLTableElement;
 
@@ -71,6 +71,14 @@ export class BsTable implements ICustomElementViewModel {
       default:
         this.toggleClass(name === 'stripedColumns' ? 'striped-columns' : name.toString(), value);
     }
+  }
+
+  get classes(): string {
+    const { responsive } = this;
+
+    return [responsive ? (responsive === 'always' ? 'table-responsive' : `table-responsive-${responsive}`) : undefined]
+      .filter(Boolean)
+      .join(' ');
   }
 
   private toggleClass(name: string, force?: boolean): void {
