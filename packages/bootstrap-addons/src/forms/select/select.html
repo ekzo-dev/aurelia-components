@@ -25,11 +25,16 @@
   </fieldset>
   <template else>
     <input
+      id.bind="id"
       class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
       bs-dropdown-toggle="arrow.bind: false"
       value="${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? ''}"
       disabled.bind="disabled"
       required.bind="required"
+      form.bind="form & attr"
+      name.bind="name & attr"
+      title.bind="title & attr"
+      autocomplete.bind="autocomplete & attr"
       keydown.trigger="$event.preventDefault()"
     />
     <bs-dropdown-menu>

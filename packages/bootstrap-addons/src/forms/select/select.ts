@@ -10,8 +10,7 @@ import {
   BsSelect as BaseBsSelect,
   ISelectOption,
 } from '@ekzo-dev/bootstrap';
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { customElement, ICustomElementViewModel } from 'aurelia';
 
 import { Filter } from './filter';
 
@@ -26,9 +25,6 @@ const BS_SIZE_MULTIPLIER = {
   dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter],
 })
 export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
-  @bindable(coerceBoolean)
-  resetUnknownValue: boolean = true;
-
   control!: HTMLFieldSetElement;
 
   filter: string = '';
@@ -94,18 +90,22 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.optionsCount = (options as []).length;
 
     const isEntries = Array.isArray(options[0]);
-    const option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
-      const val: unknown = isEntries ? option[0] : (option as ISelectOption).value;
+    let option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
+      const currentValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
-      return matcher ? matcher(value, val) : value === val;
+      return matcher ? matcher(value, currentValue) : value === currentValue;
     });
 
-    // reset value next tick if needed
-    if (option === undefined && value !== undefined && this.resetUnknownValue) {
-      console.info('[bootstrap-addons] resetting <bs-select> unknown value');
-      void Promise.resolve().then(() => (this.value = undefined));
+    option = isEntries && option !== undefined ? { value: option[0], text: option[1] } : (option as ISelectOption);
+
+    // update value next tick if it differs from current
+    const foundValue = option?.value;
+
+    if (foundValue !== value) {
+      console.info(`[bootstrap-addons] updating <bs-select> [id=${this.id}] value to`, foundValue);
+      void Promise.resolve().then(() => (this.value = foundValue));
     }
 
-    return isEntries ? { value: option[0], text: option[1] } : (option as ISelectOption);
+    return option;
   }
 }
