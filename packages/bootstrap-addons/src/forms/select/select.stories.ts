@@ -29,6 +29,29 @@ export default {
   },
 } as Meta;
 
-export const Overview: Story = (args) => ({
+const Overview: Story = (args) => ({
   props: args,
 });
+
+const Multiple: Story = (args) => ({
+  props: args,
+});
+
+Multiple.args = {
+  multiple: true,
+  value: ['2', '3'],
+};
+
+const LargeOptions: Story = (args) => ({
+  props: args,
+});
+
+LargeOptions.args = {
+  options: Array.from({ length: 1000 }).map((v, i) => ({
+    value: i,
+    text: `Option ${i}`,
+  })),
+};
+
+// eslint-disable-next-line
+export { Overview, Multiple, LargeOptions };

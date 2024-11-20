@@ -13,6 +13,8 @@ import {
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
+import { Filter } from './filter';
+
 const BS_SIZE_MULTIPLIER = {
   lg: 1.125,
   sm: 0.875,
@@ -21,13 +23,15 @@ const BS_SIZE_MULTIPLIER = {
 @customElement({
   name: 'bs-select',
   template,
-  dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem],
+  dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter],
 })
 export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   resetUnknownValue: boolean = true;
 
   control!: HTMLFieldSetElement;
+
+  filter: string = '';
 
   attached() {
     if (this.multiple) {

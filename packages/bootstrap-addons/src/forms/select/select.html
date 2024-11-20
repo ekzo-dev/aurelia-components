@@ -33,18 +33,19 @@
       ${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? '&nbsp;'}
     </button>
     <bs-dropdown-menu>
-      <div class="search">
-        <input class="form-control" placeholder="Search options" />
+      <div bs-dropdown-item="text">
+        <input class="form-control" placeholder="Filter options" type="search" value.bind="filter & debounce:250" />
       </div>
+      <hr bs-dropdown-item="divider" />
       <button
         type="button"
-        repeat.for="option of ungroupedOptions"
+        repeat.for="option of ungroupedOptions | filter:filter"
         bs-dropdown-item="active.bind: option === selectedOption; disabled.bind: option.disabled"
         click.trigger="selectOption(option)"
       >
         ${option.text}
       </button>
-      <template repeat.for="[k, v] of groupedOptions">
+      <template repeat.for="[k, v] of groupedOptions | filter:filter">
         <h6 bs-dropdown-item="header">${k}</h6>
         <button
           class="ps-4"
