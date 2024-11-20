@@ -33,6 +33,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
   filter: string = '';
 
+  optionsCount: number = 0;
+
   attached() {
     if (this.multiple) {
       this.#setHeight();
@@ -89,8 +91,11 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       options = Object.entries(options);
     }
 
+    this.optionsCount = (options as []).length;
+
+    const isEntries = Array.isArray(options[0]);
     const option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
-      const val: unknown = Array.isArray(option) ? option[0] : (option as ISelectOption).value;
+      const val: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
       return matcher ? matcher(value, val) : value === val;
     });
@@ -101,6 +106,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       void Promise.resolve().then(() => (this.value = undefined));
     }
 
-    return Array.isArray(option) ? { value: option[0], text: option[1] } : (option as ISelectOption);
+    return isEntries ? { value: option[0], text: option[1] } : (option as ISelectOption);
   }
 }

@@ -27,16 +27,16 @@
     <input
       class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
       bs-dropdown-toggle="arrow.bind: false"
-      value="${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text}"
+      value="${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? ''}"
       disabled.bind="disabled"
       required.bind="required"
-      readonly
+      keydown.trigger="$event.preventDefault()"
     />
     <bs-dropdown-menu>
-      <div bs-dropdown-item="text" if.bind="options.length > 10">
+      <div bs-dropdown-item="text" if.bind="optionsCount > 10">
         <input class="form-control" placeholder="Filter options" type="search" value.bind="filter & debounce:250" />
       </div>
-      <hr bs-dropdown-item="divider" if.bind="options.length > 10" />
+      <hr bs-dropdown-item="divider" if.bind="optionsCount > 10" />
       <button
         type="button"
         repeat.for="option of ungroupedOptions | filter:filter"
