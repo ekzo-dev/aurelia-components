@@ -7,6 +7,8 @@ export class Filter {
     list: Map<string, ISelectOption[]> | ISelectOption[],
     search: string
   ): Map<string, ISelectOption[]> | ISelectOption[] {
+    if (search === '') return list;
+
     const cb = (option: { text: string }) => option.text.toLowerCase().includes(search.toLowerCase());
 
     if (list instanceof Map) {
