@@ -8,18 +8,14 @@
 bs-select {
   display: block;
 
-  .form-select {
-    text-align: left;
+  > .form-select {
+    cursor: default;
   }
 
-  bs-dropdown-menu {
+  > bs-dropdown-menu {
     width: 100%;
     max-height: 100vh;
     overflow-y: auto;
-  }
-
-  .search {
-    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
   }
 
   > .form-control {
@@ -40,7 +36,7 @@ bs-select {
     }
   }
 
-  &.form-floating {
+  &.form-floating:not(.dropdown) {
     > label {
       height: auto;
       width: auto;

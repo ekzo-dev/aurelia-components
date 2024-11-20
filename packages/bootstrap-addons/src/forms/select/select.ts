@@ -97,7 +97,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
     // reset value next tick if needed
     if (option === undefined && value !== undefined && this.resetUnknownValue) {
-      Promise.resolve().then(() => (this.value = undefined));
+      console.info('[bootstrap-addons] resetting <bs-select> unknown value');
+      void Promise.resolve().then(() => (this.value = undefined));
     }
 
     return Array.isArray(option) ? { value: option[0], text: option[1] } : (option as ISelectOption);

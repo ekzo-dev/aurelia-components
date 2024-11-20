@@ -15,6 +15,7 @@ export default {
   args: {
     label: 'Label',
     options: [
+      { value: undefined, text: '' },
       { value: '1', text: 'One', disabled: true },
       { value: '2', text: 'Two' },
       { value: '3', text: 'Three', group: 'Group' },
