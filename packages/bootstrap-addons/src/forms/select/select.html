@@ -33,10 +33,10 @@
       readonly
     />
     <bs-dropdown-menu>
-      <div bs-dropdown-item="text">
+      <div bs-dropdown-item="text" if.bind="options.length > 10">
         <input class="form-control" placeholder="Filter options" type="search" value.bind="filter & debounce:250" />
       </div>
-      <hr bs-dropdown-item="divider" />
+      <hr bs-dropdown-item="divider" if.bind="options.length > 10" />
       <button
         type="button"
         repeat.for="option of ungroupedOptions | filter:filter"
