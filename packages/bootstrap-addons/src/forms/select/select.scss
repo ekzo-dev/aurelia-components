@@ -12,13 +12,16 @@ bs-select {
     cursor: default;
   }
 
-  > bs-dropdown-menu {
-    width: 100%;
+  .dropdown-menu {
+    width: max-content;
+    min-width: 100%;
+    max-width: 100vw;
     max-height: 50vh;
     overflow-y: auto;
   }
 
-  .dropdown-item {
+  .dropdown-item,
+  .dropdown-header {
     white-space: normal;
   }
 

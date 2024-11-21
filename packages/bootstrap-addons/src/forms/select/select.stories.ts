@@ -45,12 +45,13 @@ Multiple.args = {
 
 const LargeOptions: Story = (args) => ({
   props: args,
+  template: '<bs-select value.bind="value" options.bind="options" label.bind="label" style="width: 400px"></bs-select>',
 });
 
 LargeOptions.args = {
   options: Array.from({ length: 1000 }).map((v, i) => ({
     value: i,
-    text: `Option ${i}`,
+    text: `Option ${i} has long content which forces dropdown menu to scale larger that select box`,
   })),
 };
 
