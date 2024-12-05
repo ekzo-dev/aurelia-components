@@ -18,6 +18,9 @@ export class BsInput extends BaseField implements HTMLInputBase {
   @bindable()
   type: string = 'text';
 
+  @bindable()
+  inputmode?: string;
+
   @bindable({ mode: BindingMode.twoWay })
   value!: string;
 
