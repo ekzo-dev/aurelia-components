@@ -50,7 +50,7 @@ const LargeOptions: Story = (args) => ({
 
 LargeOptions.args = {
   options: Array.from({ length: 1000 }).map((v, i) => ({
-    value: i,
+    value: i.toString(),
     text: `Option ${i} has long content which forces dropdown menu to scale larger that select box`,
   })),
 };

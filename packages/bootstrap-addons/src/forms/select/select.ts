@@ -31,6 +31,16 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
   optionsCount: number = 0;
 
+  deactivating: boolean = false;
+
+  binding() {
+    this.deactivating = false;
+  }
+
+  unbinding() {
+    this.deactivating = true;
+  }
+
   attached() {
     if (this.multiple) {
       this.#setHeight();
@@ -80,6 +90,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get selectedOption(): ISelectOption | undefined {
+    if (this['__raw__'].deactivating) return;
+
     const { matcher, value } = this;
     let { options } = this;
 
