@@ -56,7 +56,7 @@
           class="ps-4"
           type="button"
           repeat.for="option of v"
-          bs-dropdown-item="active.bind: option === selectedOption; disabled.bind: option.disabled"
+          bs-dropdown-item="active.bind: option.value === selectedOption.value; disabled.bind: option.disabled"
           click.trigger="selectOption(option)"
         >
           ${option.text || '&nbsp;'}
