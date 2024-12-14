@@ -27,10 +27,6 @@ export class BsDropdownItem extends BaseAttribute {
   }
 
   get classes(): string[] {
-    return [
-      `dropdown-${this.type === 'text' ? 'item-text' : this.type}`,
-      this.active ? 'active' : '',
-      this.disabled ? 'disabled' : '',
-    ].filter(Boolean);
+    return [`dropdown-${this.type === 'text' ? 'item-text' : this.type}`, this.active ? 'active' : ''].filter(Boolean);
   }
 }
