@@ -1,0 +1,20 @@
+<template>
+  <label for="${id}" if.bind="label" class="form-label">${label}</label>
+  <fieldset class="${classes}" id="${id}">
+    <input type="number" class="form-control" min="0" value.bind="duration.years" disabled.bind="disabled" />
+    <span class="input-group-text">y</span>
+    <input type="number" class="form-control" min="0" value.bind="duration.months" disabled.bind="disabled" />
+    <span class="input-group-text">m</span>
+    <input type="number" class="form-control" min="0" value.bind="duration.days" disabled.bind="disabled" />
+    <span class="input-group-text">d</span>
+    <input type="number" class="form-control" min="0" value.bind="duration.hours" disabled.bind="disabled" />
+    <span class="input-group-text">h</span>
+    <input type="number" class="form-control" min="0" value.bind="duration.minutes" disabled.bind="disabled" />
+    <span class="input-group-text">m</span>
+    <input type="number" class="form-control" min="0" value.bind="duration.seconds" disabled.bind="disabled" />
+    <input if.bind="required" required value.bind="value" />
+    <span class="input-group-text">s</span>
+  </fieldset>
+  <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
+  <div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
+</template>
