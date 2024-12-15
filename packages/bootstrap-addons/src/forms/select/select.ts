@@ -34,6 +34,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   deactivating: boolean = false;
 
   binding() {
+    super.binding();
     this.deactivating = false;
   }
 
