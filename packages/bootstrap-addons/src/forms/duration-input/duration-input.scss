@@ -11,7 +11,7 @@ bs-duration-input {
     position: relative;
   }
 
-  input {
+  input[type='number'] {
     border: 0;
     min-inline-size: 2ch;
     appearance: textfield;
@@ -39,7 +39,7 @@ bs-duration-input {
 
 @supports not (field-sizing: content) {
   bs-duration-input {
-    input {
+    input[type='number'] {
       inline-size: 3ch;
     }
   }
