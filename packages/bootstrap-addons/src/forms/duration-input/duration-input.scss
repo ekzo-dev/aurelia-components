@@ -9,6 +9,21 @@ bs-duration-input {
 
   fieldset {
     position: relative;
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    &:focus-within {
+      color: $input-focus-color;
+      background-color: $input-focus-bg;
+      border-color: $input-focus-border-color;
+      outline: 0;
+
+      @if $enable-shadows {
+        @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+      } @else {
+        // Avoid using mixin so we can pass custom focus shadow properly
+        box-shadow: $input-focus-box-shadow;
+      }
+    }
   }
 
   input[type='number'] {
@@ -34,6 +49,18 @@ bs-duration-input {
     bottom: 0;
     opacity: 0;
     pointer-events: none;
+  }
+}
+
+.was-validated bs-duration-input {
+  .form-control:invalid:focus-within,
+  .form-control.is-invalid:focus-within {
+    box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%);
+  }
+
+  .form-control:valid:focus-within,
+  .form-control.is-valid:focus-within {
+    box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 25%);
   }
 }
 

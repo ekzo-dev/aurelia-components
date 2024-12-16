@@ -6,7 +6,7 @@ import '@formatjs/intl-durationformat/polyfill';
 
 import { BaseField, Size } from '@ekzo-dev/bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, BindingMode, customElement } from 'aurelia';
+import { bindable, BindingMode, customElement, resolve } from 'aurelia';
 
 interface IDuration {
   years?: string;
@@ -21,7 +21,7 @@ interface IDuration {
   name: 'bs-duration-input',
   template,
 })
-export class BsDurationInput extends BaseField {
+export class BsDurationInput extends BaseField implements EventListenerObject {
   @bindable({ mode: BindingMode.twoWay })
   get value(): string {
     const { years, months, days, hours, minutes, seconds } = this.duration;
@@ -32,6 +32,64 @@ export class BsDurationInput extends BaseField {
     return date || time ? `P${date}${time ? 'T' + time : ''}` : '';
   }
   set value(value: string | null | undefined) {
+    this.parseDuration(value);
+  }
+
+  @bindable()
+  bsSize?: Size;
+
+  @bindable(coerceBoolean)
+  floatingLabel: boolean = false;
+
+  readonly host = resolve(HTMLElement);
+
+  duration: IDuration = {};
+
+  labels: IDuration = this.#getLabels();
+
+  controls!: NodeListOf<HTMLInputElement>;
+
+  get classes(): string {
+    return [
+      'form-control',
+      this.bsSize ? `form-control-${this.bsSize}` : null,
+      this.valid === true ? 'is-valid' : null,
+      this.valid === false ? 'is-invalid' : null,
+    ]
+      .filter(Boolean)
+      .join(' ');
+  }
+
+  attaching() {
+    this.controls = this.host.querySelectorAll('input[type=number]');
+    this.controls.forEach((control) => {
+      control.addEventListener('keypress', this);
+      control.addEventListener('paste', this);
+    });
+  }
+
+  detached() {
+    this.controls.forEach((control) => {
+      control.removeEventListener('keypress', this);
+      control.removeEventListener('paste', this);
+    });
+  }
+
+  handleEvent(event: KeyboardEvent | ClipboardEvent): void {
+    const data = event instanceof KeyboardEvent ? event.key : event.clipboardData.getData('text');
+
+    // don't allow non-numeric values
+    if (!/^\d+$/.test(data)) {
+      event.preventDefault();
+    }
+
+    // allow pasting full duration value, e.g. P2YT2H
+    if (event instanceof ClipboardEvent && data.startsWith('P')) {
+      this.parseDuration(data);
+    }
+  }
+
+  private parseDuration(value: string) {
     const match = value?.match(/^P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
 
     if (match) {
@@ -46,27 +104,6 @@ export class BsDurationInput extends BaseField {
     } else {
       this.duration = {};
     }
-  }
-
-  @bindable()
-  bsSize?: Size;
-
-  @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
-
-  duration: IDuration = {};
-
-  labels: IDuration = this.#getLabels();
-
-  get classes(): string {
-    return [
-      'form-control',
-      this.bsSize ? `form-control-${this.bsSize}` : null,
-      this.valid === true ? 'is-valid' : null,
-      this.valid === false ? 'is-invalid' : null,
-    ]
-      .filter(Boolean)
-      .join(' ');
   }
 
   #getLabels(): IDuration {
