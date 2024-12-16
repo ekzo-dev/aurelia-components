@@ -89,6 +89,10 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
     }
   }
 
+  focus() {
+    this.controls.item(0).focus();
+  }
+
   private parseDuration(value: string) {
     const match = value?.match(/^P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
 

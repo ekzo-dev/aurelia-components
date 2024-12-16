@@ -24,6 +24,10 @@ bs-duration-input {
         box-shadow: $input-focus-box-shadow;
       }
     }
+
+    span {
+      user-select: none;
+    }
   }
 
   input[type='number'] {
@@ -33,6 +37,7 @@ bs-duration-input {
     outline: 0;
     text-align: right;
     field-sizing: content;
+    background: transparent;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -41,7 +46,7 @@ bs-duration-input {
     }
   }
 
-  input[required] {
+  input[type='text'] {
     position: absolute;
     height: 100%;
     width: 100%;

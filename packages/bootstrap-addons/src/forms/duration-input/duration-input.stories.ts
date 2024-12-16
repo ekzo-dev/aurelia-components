@@ -33,7 +33,6 @@ const Validation: Story = (args): StoryFnAureliaReturnType => ({
 
 Validation.args = {
   required: true,
-  floatingLabel: true,
 };
 
 // eslint-disable-next-line
