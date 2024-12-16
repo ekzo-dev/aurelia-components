@@ -31,8 +31,8 @@ export class BsDurationInput extends BaseField {
 
     return date || time ? `P${date}${time ? 'T' + time : ''}` : '';
   }
-  set value(value: string) {
-    const match = value.match(/^P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
+  set value(value: string | null | undefined) {
+    const match = value?.match(/^P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
 
     if (match) {
       this.duration = {
