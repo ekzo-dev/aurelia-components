@@ -17,6 +17,10 @@ interface IDuration {
   seconds?: string;
 }
 
+/**
+ * https://github.com/whatwg/html/issues/5488
+ * https://github.com/tc39/proposal-intl-duration-format
+ */
 @customElement({
   name: 'bs-duration-input',
   template,
