@@ -15,16 +15,13 @@ import { BaseField } from '../base-field';
 })
 export class BsRadio extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
-  checked!: any;
+  checked!: unknown;
 
   @bindable()
-  model?: any;
+  value?: unknown;
 
   @bindable()
-  value?: string;
-
-  @bindable()
-  matcher?: (a: any, b: any) => boolean;
+  matcher?: (a: unknown, b: unknown) => boolean;
 
   @bindable(coerceBoolean)
   inline: boolean = false;

@@ -1,33 +1,40 @@
-import { IDialogController, IDialogDomRenderer } from '@aurelia/dialog';
-import { IContainer } from '@aurelia/kernel';
-import { Controller, ICustomElementController, IPlatform } from '@aurelia/runtime-html';
-import { INode, InstanceProvider, Registration, resolve } from 'aurelia';
+import { IDialogController, IDialogDom, IDialogDomRenderer, IDialogSettings } from '@aurelia/dialog';
+import { Controller, IContainer, INode, InstanceProvider, IPlatform, Registration, resolve } from 'aurelia';
 
 import { BsModal } from './modal';
 
-export class BsDialogDomRenderer implements EventListenerObject {
-  /** @internal */
-  protected static inject = [IPlatform, IContainer, IDialogController];
+const overlay = document.createElement('div');
 
-  private controller: ICustomElementController<BsModal>;
-
-  private modal: HTMLElement;
-
-  constructor(
-    private readonly platform: IPlatform = resolve(IPlatform),
-    private readonly container: IContainer = resolve(IContainer),
-    private readonly dialogController: IDialogController = resolve(IDialogController)
-  ) {}
+export class BsDialogDomRenderer {
+  private readonly platform = resolve(IPlatform);
+  private readonly container = resolve(IContainer);
+  private readonly controller = resolve(IDialogController);
 
   public static register(container: IContainer) {
-    Registration.transient(IDialogDomRenderer, this).register(container);
+    container.register(Registration.singleton(IDialogDomRenderer, this));
   }
 
-  public render(componentController: ICustomElementController) {
-    const { container, platform } = this;
-    const { settings } = this.dialogController;
-    const dialogHost = settings.host ?? platform.document.body;
+  public render(host: HTMLElement, settings: IDialogSettings): IDialogDom {
+    const { platform } = this;
+    let deactivating = false;
+
+    // create dialog host element
     const modal = platform.document.createElement('bs-modal');
+
+    const onHide = () => {
+      modal.removeEventListener('hide.bs.modal', onHide);
+
+      if (!deactivating) {
+        // call cancel on controller if modal closing is caused by any Bootstrap events
+        this.controller.cancel();
+      }
+    };
+
+    modal.addEventListener('hide.bs.modal', onHide);
+    host.appendChild(modal);
+
+    // create container
+    const container = this.container.createChild();
 
     container.registerResolver(
       platform.HTMLElement,
@@ -37,42 +44,26 @@ export class BsDialogDomRenderer implements EventListenerObject {
       )
     );
 
-    const viewModel = container.invoke(BsModal);
+    // activate Bootstrap modal component
+    const dialog = container.invoke(BsModal);
+    const controller = Controller.$el<BsModal>(container, dialog, modal, null);
 
-    // configure modal to auto open when attached, show() returns a Promise that will wait for animation to complete
-    viewModel['attached'] = (): Promise<void> => viewModel.show();
-    // TODO: pass settings to viewModel through DialogService.open(...)
-    Object.assign(viewModel, {});
+    dialog.size = 'xl';
+    controller.activate(controller, null);
 
-    const controller = Controller.$el<BsModal>(container, viewModel, modal, {
-      projections: {
-        default: componentController['_compiledDef'],
+    return {
+      contentHost: modal.querySelector('div.modal-body'),
+      overlay,
+      show: () => dialog.show(),
+      hide: () => {
+        deactivating = true;
+
+        return dialog.hide();
       },
-    });
-
-    controller.addChild(componentController);
-
-    dialogHost.append(modal);
-    modal.addEventListener('hide.bs.modal', this);
-
-    this.modal = modal;
-    this.controller = controller;
-
-    return controller.activate(controller, null, componentController.scope);
-  }
-
-  async dispose(): Promise<void> {
-    const { controller, modal } = this;
-
-    modal.removeEventListener('hide.bs.modal', this);
-
-    await controller.viewModel.hide();
-    await controller.deactivate(controller, null);
-
-    modal.remove();
-  }
-
-  handleEvent(object: Event) {
-    this.dialogController.cancel();
+      dispose: () => {
+        controller.deactivate(controller, null);
+        modal.remove();
+      },
+    };
   }
 }

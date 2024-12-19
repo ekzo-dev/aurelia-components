@@ -1,0 +1,70 @@
+<template class="${floatingLabel ? 'form-floating' : ''} ${!multiple ? 'dropdown' : ''}">
+  <label for="${id}" if.bind="label && !floatingLabel" class="form-label">${label}</label>
+  <fieldset
+    if.bind="multiple"
+    class="form-control ${bsSize ? `form-control-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+    title.bind="title & attr"
+    name.bind="name & attr"
+    form.bind="form & attr"
+    disabled.bind="disabled"
+    ref="control"
+    id="${id}"
+  >
+    <select if.bind="required && !value?.length" multiple required></select>
+    <div class="form-check" repeat.for="option of ungroupedOptions">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        checked.bind="value"
+        model.bind="option.value"
+        disabled.bind="option.disabled"
+        id="${id+$index}"
+      />
+      <label class="form-check-label" for="${id+$index}">${option.text}</label>
+    </div>
+  </fieldset>
+  <template else>
+    <input
+      id.bind="id"
+      class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+      bs-dropdown-toggle="arrow.bind: false"
+      value="${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? ''}"
+      disabled.bind="disabled"
+      required.bind="required"
+      form.bind="form & attr"
+      name.bind="name & attr"
+      title.bind="title & attr"
+      autocomplete="off"
+      keydown.trigger="$event.preventDefault()"
+    />
+    <bs-dropdown-menu>
+      <div bs-dropdown-item="text" if.bind="optionsCount > 10">
+        <input class="form-control" placeholder="Filter options" type="search" value.bind="filter & debounce:250" />
+      </div>
+      <hr bs-dropdown-item="divider" if.bind="optionsCount > 10" />
+      <button
+        type="button"
+        repeat.for="option of ungroupedOptions | filter:filter"
+        bs-dropdown-item="active.bind: option.value === selectedOption.value; disabled.bind: option.disabled"
+        click.trigger="selectOption(option)"
+      >
+        ${option.text || '&nbsp;'}
+      </button>
+      <template repeat.for="[k, v] of groupedOptions | filter:filter">
+        <h6 bs-dropdown-item="header">${k}</h6>
+        <button
+          class="ps-4"
+          type="button"
+          repeat.for="option of v"
+          bs-dropdown-item="active.bind: option.value === selectedOption.value; disabled.bind: option.disabled"
+          click.trigger="selectOption(option)"
+        >
+          ${option.text || '&nbsp;'}
+        </button>
+      </template>
+    </bs-dropdown-menu>
+  </template>
+  <label for="${id}" if.bind="label && floatingLabel"><span>${label}</span></label>
+  <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
+  <div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
+</template>

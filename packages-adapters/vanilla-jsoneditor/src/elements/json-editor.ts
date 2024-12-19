@@ -6,7 +6,6 @@ import type { JSONPatchDocument, JSONPath } from 'immutable-json-patch';
 import type {
   Content,
   ContentErrors,
-  JSONContent,
   JSONEditor,
   JSONEditorPropsOptional,
   JSONEditorSelection,
@@ -19,7 +18,6 @@ import type {
   RenderMenuContext,
   RenderValueComponentDescription,
   RenderValueProps,
-  TextContent,
   TransformModalOptions,
   Validator,
 } from 'vanilla-jsoneditor';
@@ -35,7 +33,7 @@ import { coerceBoolean } from '../utils';
 })
 export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorPropsOptional, 'mode'> {
   @bindable({ mode: BindingMode.twoWay })
-  json: unknown = {};
+  content: Content = { text: '' };
 
   @bindable()
   selection: JSONEditorSelection | null = null;
@@ -126,11 +124,13 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
 
   editor?: JSONEditor;
 
+  editorModule?: typeof import('vanilla-jsoneditor');
+
   readonly $controller: ICustomElementController<this>;
 
-  #contentCache?: unknown;
+  #contentCache?: Content;
 
-  constructor(private readonly host: HTMLElement = resolve(HTMLElement)) {}
+  constructor(protected readonly host: HTMLElement = resolve(HTMLElement)) {}
 
   get(): Content {
     return this.editor?.get();
@@ -180,20 +180,18 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.focus();
   }
 
-  attaching() {
-    this.createEditor();
+  async attaching() {
+    return this.#createEditor();
   }
 
   detaching() {
-    this.destroyEditor();
+    this.#destroyEditor();
   }
 
-  propertyChanged(name: keyof this, value: any): void {
-    if (name === 'json') {
+  propertyChanged(name: keyof this, value: unknown): void {
+    if (name === 'content') {
       if (value !== this.#contentCache) {
-        void this.editor?.update({
-          json: value ?? {},
-        });
+        void this.editor?.update(value as Content);
       }
     } else {
       void this.editor?.updateProps({
@@ -202,11 +200,11 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     }
   }
 
-  protected async createEditor(): Promise<any> {
-    const module = await import('vanilla-jsoneditor');
+  async #createEditor() {
+    this.editorModule = await import('vanilla-jsoneditor');
 
     // prepare props from bindables
-    const props: Record<string, any> = {};
+    const props: Record<string, unknown> = {};
 
     Object.keys(this.$controller.definition.bindables).forEach((name) => {
       if (this[name] !== undefined) {
@@ -214,36 +212,22 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
       }
     });
 
-    this.editor = new module.JSONEditor({
+    this.editor = new this.editorModule.JSONEditor({
       target: this.host,
       props: {
         ...props,
-        content: {
-          json: this.json ?? {},
-        },
         onChange: (content: Content, previousContent: Content, changeStatus: OnChangeStatus) => {
-          try {
-            if ((content as JSONContent).json) {
-              this.#contentCache = (content as JSONContent).json;
-            } else {
-              this.#contentCache = this.parser.parse((content as TextContent).text);
-            }
-
-            this.json = this.#contentCache;
-          } catch (e) {
-            // ignore partially invalid JSON output
-          }
+          this.#contentCache = content;
+          this.content = this.#contentCache;
 
           this.onChange && this.onChange(content, previousContent, changeStatus);
         },
       },
     });
-
-    return module;
   }
 
-  private destroyEditor(): void {
-    this.editor?.destroy();
+  #destroyEditor() {
+    void this.editor?.destroy();
     this.editor = undefined;
   }
 }

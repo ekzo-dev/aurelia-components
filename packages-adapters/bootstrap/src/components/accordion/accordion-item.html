@@ -8,7 +8,7 @@
       <au-slot name="header">${header}</au-slot>
     </button>
   </h2>
-  <div bs-collapse.bind="collapsed" class="accordion-collapse">
+  <div if.bind="render" bs-collapse.bind="collapsed" class="accordion-collapse">
     <div class="accordion-body">
       <au-slot></au-slot>
     </div>

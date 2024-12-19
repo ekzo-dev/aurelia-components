@@ -1,0 +1,28 @@
+<template class="${floatingLabel ? 'form-floating' : ''}">
+  <label for="${id}" if.bind="label && !floatingLabel" class="form-label">${label}</label>
+  <fieldset class="${classes}" disabled.bind="disabled">
+    <input
+      type="text"
+      id="${id}"
+      required.bind="required"
+      value.bind="value"
+      form.bind="form & attr"
+      focus.trigger="focus()"
+    />
+    <input type="number" min="0" value.bind="duration.years" placeholder="--" />
+    <span>${labels.years}</span>
+    <input type="number" min="0" value.bind="duration.months" placeholder="--" />
+    <span>${labels.months}</span>
+    <input type="number" min="0" value.bind="duration.days" placeholder="--" />
+    <span>${labels.days}</span>
+    <input type="number" min="0" value.bind="duration.hours" placeholder="--" />
+    <span>${labels.hours}</span>
+    <input type="number" min="0" value.bind="duration.minutes" placeholder="--" />
+    <span>${labels.minutes}</span>
+    <input type="number" min="0" value.bind="duration.seconds" placeholder="--" />
+    <span>${labels.seconds}</span>
+  </fieldset>
+  <label for="${id}" if.bind="label && floatingLabel"><span>${label}</span></label>
+  <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
+  <div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
+</template>

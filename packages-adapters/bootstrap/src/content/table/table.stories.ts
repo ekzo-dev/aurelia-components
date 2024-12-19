@@ -9,7 +9,7 @@ const meta: Meta = {
   title: 'Bootstrap / Content / Table',
   component: BsTable,
   argTypes: {
-    responsive: selectControl(['', ...BREAKPOINTS]),
+    responsive: selectControl(['', 'always', ...BREAKPOINTS]),
     variant: selectControl(['', ...VARIANTS]),
     size: selectControl(['', 'sm']),
   },

@@ -11,6 +11,12 @@ import { BaseField } from '../base-field';
 
 import { BsRadio } from './radio';
 
+export interface IRadioOption<T = unknown> {
+  value: T;
+  text: string;
+  disabled?: boolean;
+}
+
 @customElement({
   name: 'bs-radio-group',
   template,
@@ -18,13 +24,13 @@ import { BsRadio } from './radio';
 })
 export class BsRadioGroup extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
-  checked!: any;
+  checked!: unknown;
 
   @bindable()
-  options: Map<any, string> | Record<any, string> | Array<[any, string]> = [];
+  options: Array<IRadioOption> | Array<readonly [unknown, string]> | Record<string, string> = [];
 
   @bindable()
-  matcher?: (a: any, b: any) => boolean;
+  matcher?: (a: unknown, b: unknown) => boolean;
 
   @bindable(coerceBoolean)
   inline: boolean = false;
@@ -44,5 +50,24 @@ export class BsRadioGroup extends BaseField {
     if (!this.name) {
       this.name = uniqueId();
     }
+  }
+
+  get radioOptions(): IRadioOption[] {
+    let { options } = this;
+
+    // check object
+    if (options instanceof Object && options.constructor === Object) {
+      options = Object.entries(options);
+    }
+
+    // check entries
+    if (Array.isArray(options[0])) {
+      return (options as Array<readonly [unknown, string]>).map(([k, v]) => ({
+        value: k,
+        text: v,
+      }));
+    }
+
+    return options as IRadioOption[];
   }
 }

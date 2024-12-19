@@ -1,0 +1,78 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/forms/form-select';
+@import '~bootstrap/scss/forms/form-check';
+
+bs-select {
+  display: block;
+
+  > .form-select {
+    cursor: default;
+  }
+
+  .dropdown-menu {
+    width: max-content;
+    min-width: 100%;
+    max-width: 100vw;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .dropdown-item,
+  .dropdown-header {
+    white-space: normal;
+  }
+
+  > .form-control {
+    overflow: auto;
+    position: relative;
+
+    .form-check:last-of-type {
+      margin-bottom: 0;
+    }
+
+    > select {
+      position: absolute;
+      height: 100%;
+      left: 0;
+      bottom: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &.form-floating:not(.dropdown) {
+    > label {
+      height: auto;
+      width: auto;
+      transform: none !important;
+      left: $input-border-width;
+      top: $input-border-width;
+      right: 20px;
+      font-size: 85%;
+      padding-top: 7px;
+      padding-bottom: 5px;
+      opacity: 1 !important;
+      background-color: $input-bg;
+
+      @include border-radius($input-border-radius, 0);
+
+      span {
+        opacity: 0.65;
+      }
+    }
+
+    > .form-control {
+      min-height: add($form-floating-height, 0.5rem);
+      height: auto;
+      padding-top: add($form-floating-input-padding-t, 0.5rem) !important;
+      padding-bottom: $input-padding-y !important;
+
+      &:disabled + label {
+        background-color: $input-disabled-bg;
+      }
+    }
+  }
+}
