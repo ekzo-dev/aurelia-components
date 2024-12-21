@@ -190,7 +190,8 @@ export class BsJsonInput {
   }
 
   #initAjv($schema: string, ajvOptions: Options): Ajv {
-    const regExp = (pattern: string) => new RegExp(pattern, 'v');
+    // use 'u' flag when editing JsonSchema itself, as 2020-12 meta-schema has incompatible with 'v' flag regexp's
+    const regExp = (pattern: string) => new RegExp(pattern, this.jsonSchema === true ? 'u' : 'v');
 
     regExp.code = 'regexp';
 
