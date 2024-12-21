@@ -190,9 +190,16 @@ export class BsJsonInput {
   }
 
   #initAjv($schema: string, ajvOptions: Options): Ajv {
+    const regExp = (pattern: string) => new RegExp(pattern, 'v');
+
+    regExp.code = 'regexp';
+
     const options: Options = {
       strict: false,
       multipleOfPrecision: 2,
+      code: {
+        regExp,
+      },
       ...ajvOptions,
     };
     let ajv: Ajv;
