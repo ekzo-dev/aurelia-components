@@ -27,6 +27,11 @@ import addFormats from 'ajv-formats';
 import { bindable, BindingMode, customElement } from 'aurelia';
 import { JSONValue, parsePath } from 'immutable-json-patch';
 
+const patternMap: Record<string, string> = {
+  '^[A-Za-z_][-A-Za-z0-9._]*$': '^[A-Za-z_][\\-A-Za-z0-9._]*$',
+  '^[A-Za-z][-A-Za-z0-9.:_]*$': '^[A-Za-z][\\-A-Za-z0-9.:_]*$',
+};
+
 @customElement({
   name: 'bs-json-input',
   template,
@@ -190,8 +195,8 @@ export class BsJsonInput {
   }
 
   #initAjv($schema: string, ajvOptions: Options): Ajv {
-    // use 'u' flag when editing JsonSchema itself, as 2020-12 meta-schema has incompatible with 'v' flag regexp's
-    const regExp = (pattern: string) => new RegExp(pattern, this.jsonSchema === true ? 'u' : 'v');
+    // some regexp's in 2019-09/2020-12 meta-schemas are not compatible with 'v' flag, so update them
+    const regExp = (pattern: string) => new RegExp(patternMap[pattern] ?? pattern, 'v');
 
     regExp.code = 'regexp';
 
