@@ -64,6 +64,15 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
   selectOption(option: ISelectOption) {
     this.value = option.value;
+    this.#dispatchEvents();
+  }
+
+  #dispatchEvents() {
+    const change = new Event('change', { bubbles: true });
+    const input = new Event('input', { bubbles: true });
+
+    this.control.dispatchEvent(input);
+    this.control.dispatchEvent(change);
   }
 
   #setHeight(): void {

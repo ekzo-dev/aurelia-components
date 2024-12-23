@@ -36,6 +36,7 @@
       title.bind="title & attr"
       autocomplete="off"
       keydown.trigger="$event.preventDefault()"
+      ref="control"
     />
     <bs-dropdown-menu>
       <div bs-dropdown-item="text" if.bind="optionsCount > 10">
