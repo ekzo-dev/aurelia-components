@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/activestorage",
   "description": "Aurelia Active Storage adapter",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/activestorage",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@rails/activestorage": "~6.1.7-3",
+    "@rails/activestorage": "~6.1.710",
     "@types/rails__activestorage": "~6.0.1"
   },
   "peerDependencies": {

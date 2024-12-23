@@ -112,7 +112,7 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
 
   private input = resolve(HTMLElement) as HTMLInputElement;
 
-  constructor(private options: ActiveStorageOptions) {}
+  private options = resolve(ActiveStorageOptions);
 
   attaching() {
     this.input.addEventListener('change', this);
