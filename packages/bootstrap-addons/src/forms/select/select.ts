@@ -109,6 +109,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
     const { matcher, value, emptyValue } = this;
     let { options } = this;
+    let emptyOption: ISelectOption;
 
     if (options instanceof Object && options.constructor === Object) {
       options = Object.entries(options);
@@ -121,7 +122,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       const currentValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
       if (currentValue == emptyValue) {
-        void Promise.resolve().then(() => (this.emptyOption = { value: currentValue } as ISelectOption));
+        emptyOption = { value: currentValue } as ISelectOption;
       }
 
       return matcher ? matcher(value, currentValue) : value === currentValue;
@@ -129,13 +130,16 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
     option = isEntries && option !== undefined ? { value: option[0], text: option[1] } : (option as ISelectOption);
 
-    // update value next tick if it differs from current
+    // update value next tick
     const foundValue = option?.value;
 
     if (foundValue !== value) {
       console.info(`[bootstrap-addons] updating <bs-select> [id=${this.id}] value to`, foundValue);
       void Promise.resolve().then(() => (this.value = foundValue));
     }
+
+    // update empty option next tick
+    void Promise.resolve().then(() => (this.emptyOption = emptyOption));
 
     return option;
   }
