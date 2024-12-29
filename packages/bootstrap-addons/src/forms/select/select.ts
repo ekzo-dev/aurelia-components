@@ -10,7 +10,7 @@ import {
   BsSelect as BaseBsSelect,
   ISelectOption,
 } from '@ekzo-dev/bootstrap';
-import { customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
 
 import { Filter } from './filter';
 
@@ -25,6 +25,9 @@ const BS_SIZE_MULTIPLIER = {
   dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter],
 })
 export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
+  @bindable()
+  emptyValue?: unknown = null;
+
   control!: HTMLFieldSetElement;
 
   filter: string = '';
@@ -32,6 +35,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   optionsCount: number = 0;
 
   deactivating: boolean = false;
+
+  emptyOption?: ISelectOption;
 
   binding() {
     super.binding();
@@ -102,7 +107,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   get selectedOption(): ISelectOption | undefined {
     if (this['__raw__'].deactivating) return;
 
-    const { matcher, value } = this;
+    const { matcher, value, emptyValue } = this;
     let { options } = this;
 
     if (options instanceof Object && options.constructor === Object) {
@@ -114,6 +119,10 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     const isEntries = Array.isArray(options[0]);
     let option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
       const currentValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
+
+      if (currentValue == emptyValue) {
+        void Promise.resolve().then(() => (this.emptyOption = { value: currentValue } as ISelectOption));
+      }
 
       return matcher ? matcher(value, currentValue) : value === currentValue;
     });

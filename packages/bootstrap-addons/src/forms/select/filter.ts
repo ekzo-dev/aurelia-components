@@ -5,11 +5,13 @@ import { valueConverter } from 'aurelia';
 export class Filter {
   toView(
     list: Map<string, ISelectOption[]> | ISelectOption[],
-    search: string
+    search: string,
+    emptyOption?: ISelectOption
   ): Map<string, ISelectOption[]> | ISelectOption[] {
-    if (search === '') return list;
+    if (search === '' && emptyOption === undefined) return list;
 
-    const cb = (option: { text: string }) => option.text.toLowerCase().includes(search.toLowerCase());
+    const cb = (option: ISelectOption) =>
+      option.value !== emptyOption?.value && option.text.toLowerCase().includes(search.toLowerCase());
 
     if (list instanceof Map) {
       const result = new Map<string, ISelectOption[]>();
