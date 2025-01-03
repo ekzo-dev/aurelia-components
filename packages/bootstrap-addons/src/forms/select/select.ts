@@ -72,6 +72,14 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.#dispatchEvents();
   }
 
+  get valueText(): string {
+    const { selectedOption, emptyOption } = this;
+
+    return emptyOption && emptyOption.value === selectedOption?.value
+      ? ''
+      : `${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? ''}`;
+  }
+
   #dispatchEvents() {
     const change = new Event('change', { bubbles: true });
     const input = new Event('input', { bubbles: true });
@@ -122,7 +130,10 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       const currentValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
       if (currentValue == emptyValue) {
-        emptyOption = { value: currentValue } as ISelectOption;
+        emptyOption = {
+          value: currentValue,
+          text: isEntries ? option[1] : (option as ISelectOption).text,
+        } as ISelectOption;
       }
 
       return matcher ? matcher(value, currentValue) : value === currentValue;

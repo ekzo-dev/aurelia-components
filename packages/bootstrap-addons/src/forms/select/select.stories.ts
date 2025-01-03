@@ -15,12 +15,14 @@ export default {
   args: {
     label: 'Label',
     options: [
-      { value: undefined, text: '' },
+      { value: undefined, text: 'Select option' },
       { value: '1', text: 'One', disabled: true },
       { value: '2', text: 'Two' },
       { value: '3', text: 'Three', group: 'Group' },
     ],
     value: '2',
+    floatingLabel: false,
+    valid: null,
   },
   argTypes: {
     bsSize: {

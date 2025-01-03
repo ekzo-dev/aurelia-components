@@ -1,15 +1,40 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/maps';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/forms/form-select';
-@import '~bootstrap/scss/forms/form-check';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/forms/form-select';
+@import 'bootstrap/scss/forms/form-check';
+@import 'bootstrap/scss/close';
 
 bs-select {
-  display: block;
-
-  > .form-select {
+  .form-select {
     cursor: default;
+  }
+
+  &:has(.btn-close) .form-select {
+    padding-right: 4rem;
+  }
+
+  .btn-close {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 0.8rem;
+    height: 0.8rem;
+    top: calc(-1px - 1.5rem);
+    left: calc(100% - 3.25rem);
+  }
+
+  .form-select-lg + .btn-close {
+    top: calc(-1px - 1.8rem);
+  }
+
+  .form-select-sm + .btn-close {
+    top: calc(-1px - 1.3rem);
+  }
+
+  &.form-floating .btn-close {
+    top: calc(-1px - 2.15rem) !important;
   }
 
   .dropdown-menu {
@@ -74,5 +99,17 @@ bs-select {
         background-color: $input-disabled-bg;
       }
     }
+  }
+}
+
+/* stylelint-disable */
+.was-validated bs-select:has(.btn-close) .form-select:invalid,
+.was-validated bs-select:has(.btn-close) .form-select:valid,
+bs-select:has(.btn-close) .form-select.is-invalid,
+bs-select:has(.btn-close) .form-select.is-valid {
+  padding-right: 5.5rem !important;
+
+  + .btn-close {
+    left: calc(100% - 4.75rem);
   }
 }
