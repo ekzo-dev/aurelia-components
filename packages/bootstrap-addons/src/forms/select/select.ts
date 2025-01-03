@@ -3,6 +3,7 @@ import template from './select.html';
 import './select.scss';
 
 import {
+  BsCloseButton,
   BsDropdown,
   BsDropdownItem,
   BsDropdownMenu,
@@ -22,7 +23,7 @@ const BS_SIZE_MULTIPLIER = {
 @customElement({
   name: 'bs-select',
   template,
-  dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter],
+  dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter, BsCloseButton],
 })
 export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   @bindable()

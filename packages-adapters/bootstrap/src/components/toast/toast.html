@@ -3,7 +3,7 @@
     <au-slot name="header">
       <div style="margin-right: auto">${header}</div>
     </au-slot>
-    <bs-close-button click.trigger="hide()"></bs-close-button>
+    <button type="button" bs-close-button click.trigger="hide()" aria-label="Close"></button>
   </div>
   <div class="toast-body">
     <au-slot>${body}</au-slot>

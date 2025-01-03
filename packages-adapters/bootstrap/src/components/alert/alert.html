@@ -1,4 +1,11 @@
 <template class="alert alert-${variant} ${dismissible ? 'alert-dismissible fade show' : ''}" role="alert">
   <au-slot></au-slot>
-  <bs-close-button if.bind="dismissible" click.trigger="close()" disabled.bind="disabled"></bs-close-button>
+  <button
+    if.bind="dismissible"
+    bs-close-button
+    click.trigger="close()"
+    type="button"
+    aria-label="Close"
+    disabled.bind="disabled"
+  ></button>
 </template>

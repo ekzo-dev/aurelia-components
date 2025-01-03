@@ -40,9 +40,9 @@
       ref="control"
     />
     <button
-      class="btn-close"
-      type="button"
       if.bind="emptyOption && selectedOption?.value !== emptyOption?.value"
+      bs-close-button
+      type="button"
       click.trigger="selectOption(emptyOption)"
     ></button>
     <bs-dropdown-menu>

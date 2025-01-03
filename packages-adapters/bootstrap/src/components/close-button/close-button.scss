@@ -1,10 +1,2 @@
 @import '../../utils';
-@import '~bootstrap/scss/close';
-
-bs-close-button {
-  display: inline-block;
-
-  button {
-    display: block;
-  }
-}
+@import 'bootstrap/scss/close';

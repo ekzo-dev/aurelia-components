@@ -4,7 +4,6 @@
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/forms/form-select';
 @import 'bootstrap/scss/forms/form-check';
-@import 'bootstrap/scss/close';
 
 bs-select {
   .form-select {
@@ -113,3 +112,4 @@ bs-select:has(.btn-close) .form-select.is-valid {
     left: calc(100% - 4.75rem);
   }
 }
+/* stylelint-enable */

@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"><au-slot name="title">${title}</au-slot></h5>
-        <bs-close-button click.trigger="hide()"></bs-close-button>
+        <button type="button" bs-close-button click.trigger="hide()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <au-slot></au-slot>

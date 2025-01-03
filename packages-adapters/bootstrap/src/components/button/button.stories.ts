@@ -17,7 +17,7 @@ const meta: Meta = {
 export default meta;
 
 const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  template: `<button ${createComponentTemplate(BsButton)}>Button content</button>`,
+  template: `<button type="button" ${createComponentTemplate(BsButton)}>Button content</button>`,
   props: args,
 });
 
