@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bootstrap-addons",
   "description": "Aurelia Bootstrap additional component",
-  "version": "5.2.24",
+  "version": "5.2.25",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/bootstrap-addons",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/bootstrap": "^5.2.18",
+    "@ekzo-dev/bootstrap": "^5.2.19",
     "@ekzo-dev/vanilla-jsoneditor": "^0.23.7",
     "@ekzo-dev/toolkit": "^1.2.4",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
