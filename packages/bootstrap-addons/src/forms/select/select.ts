@@ -88,7 +88,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       this.popperConfig = {
         strategy: 'fixed',
       };
-      dropdownMenu.style.minWidth = `${this.host.offsetWidth}px`;
+      dropdownMenu.style.minWidth = `${host.offsetWidth}px`;
     } else {
       this.popperConfig = null;
       dropdownMenu.style.minWidth = undefined;
