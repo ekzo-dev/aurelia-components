@@ -1,3 +1,4 @@
+import { BsButton, BsOffcanvas } from '@ekzo-dev/bootstrap';
 import { extractArgTypes, Meta, Story } from '@storybook/aurelia';
 
 import { selectControl } from '../../../../../.storybook/helpers';
@@ -57,5 +58,23 @@ LargeOptions.args = {
   })),
 };
 
+const InModal: Story = (args) => ({
+  props: args,
+  template: `
+<button bs-button click.trigger="offcanvas.toggle()">Open modal</button>
+<bs-offcanvas component.ref="offcanvas">
+  <bs-select value.bind="value" options.bind="options" label.bind="label" style="width: 100%"></bs-select>
+  <div style="height: 2000px"></div>
+</bs-offcanvas>`,
+  components: [BsOffcanvas, BsButton],
+});
+
+InModal.args = {
+  options: Array.from({ length: 1000 }).map((v, i) => ({
+    value: i.toString(),
+    text: `Option ${i} has long content which forces dropdown menu to scale larger that select box`,
+  })),
+};
+
 // eslint-disable-next-line
-export { Overview, Multiple, LargeOptions };
+export { Overview, Multiple, LargeOptions, InModal };

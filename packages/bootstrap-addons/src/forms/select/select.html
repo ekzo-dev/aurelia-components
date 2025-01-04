@@ -45,7 +45,7 @@
       type="button"
       click.trigger="selectOption(emptyOption)"
     ></button>
-    <bs-dropdown-menu>
+    <bs-dropdown-menu popper-config.bind="popperConfig">
       <div bs-dropdown-item="text" if.bind="optionsCount > 10">
         <input class="form-control" placeholder="Filter options" type="search" value.bind="filter & debounce:250" />
       </div>
@@ -53,7 +53,8 @@
       <button
         type="button"
         repeat.for="option of ungroupedOptions | filter:filter:emptyOption"
-        bs-dropdown-item="active.bind: option.value === selectedOption?.value; disabled.bind: option.disabled"
+        class="dropdown-item ${option.value === selectedOption?.value ? 'active' : ''}"
+        disabled.bind="option.disabled"
         click.trigger="selectOption(option)"
       >
         ${option.text || '&nbsp;'}
@@ -61,10 +62,10 @@
       <template repeat.for="[k, v] of groupedOptions | filter:filter:emptyOption">
         <h6 bs-dropdown-item="header">${k}</h6>
         <button
-          class="ps-4"
           type="button"
           repeat.for="option of v"
-          bs-dropdown-item="active.bind: option.value === selectedOption?.value; disabled.bind: option.disabled"
+          class="ps-4 dropdown-item ${option.value === selectedOption?.value ? 'active' : ''}"
+          disabled.bind="option.disabled"
           click.trigger="selectOption(option)"
         >
           ${option.text || '&nbsp;'}

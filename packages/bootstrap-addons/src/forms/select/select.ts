@@ -2,6 +2,9 @@ import template from './select.html';
 
 import './select.scss';
 
+import type { Options } from '@popperjs/core';
+import type { Tooltip } from 'bootstrap';
+
 import {
   BsCloseButton,
   BsDropdown,
@@ -11,7 +14,7 @@ import {
   BsSelect as BaseBsSelect,
   ISelectOption,
 } from '@ekzo-dev/bootstrap';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { Filter } from './filter';
 
@@ -29,6 +32,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   @bindable()
   emptyValue?: unknown = null;
 
+  host = resolve(HTMLElement);
+
   control!: HTMLFieldSetElement;
 
   filter: string = '';
@@ -38,6 +43,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   deactivating: boolean = false;
 
   emptyOption?: ISelectOption;
+
+  popperConfig: Partial<Options> | Tooltip.PopperConfigFunction | null = null;
 
   binding() {
     super.binding();
@@ -53,6 +60,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       this.#setHeight();
       this.#scrollToSelected();
     }
+
+    this.setPopperConfig();
   }
 
   propertyChanged(name: keyof this) {
@@ -65,6 +74,24 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
         if (this.multiple) {
           setTimeout(() => this.#setHeight());
         }
+    }
+  }
+
+  setPopperConfig() {
+    if (this.multiple) return;
+
+    const { host } = this;
+    const parentModal = host.closest('.modal-body,.popover-body,.offcanvas-body');
+    const dropdownMenu: HTMLElement = host.querySelector('.dropdown-menu');
+
+    if (parentModal != null) {
+      this.popperConfig = {
+        strategy: 'fixed',
+      };
+      dropdownMenu.style.minWidth = `${this.host.offsetWidth}px`;
+    } else {
+      this.popperConfig = null;
+      dropdownMenu.style.minWidth = undefined;
     }
   }
 
