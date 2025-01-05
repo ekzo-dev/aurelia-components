@@ -40,7 +40,7 @@
       ref="control"
     />
     <button
-      if.bind="emptyOption && selectedOption?.value !== emptyOption?.value"
+      if.bind="emptyOption && selectedOption?.value !== emptyOption?.value && !disabled"
       bs-close-button
       type="button"
       click.trigger="selectOption(emptyOption)"

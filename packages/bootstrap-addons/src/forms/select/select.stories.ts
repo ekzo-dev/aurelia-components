@@ -48,7 +48,8 @@ Multiple.args = {
 
 const LargeOptions: Story = (args) => ({
   props: args,
-  template: '<bs-select value.bind="value" options.bind="options" label.bind="label" style="width: 400px"></bs-select>',
+  template:
+    '<bs-select value.bind="value" options.bind="options" label.bind="label" style="width: 400px; max-width: 100%"></bs-select>',
 });
 
 LargeOptions.args = {
