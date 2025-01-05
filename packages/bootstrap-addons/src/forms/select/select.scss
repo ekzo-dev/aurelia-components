@@ -10,6 +10,7 @@ bs-select {
   }
 
   &:has(.btn-close) .form-select {
+    margin-bottom: -0.8rem;
     padding-right: 4rem;
   }
 
@@ -19,20 +20,20 @@ bs-select {
     box-sizing: border-box;
     width: 0.8rem;
     height: 0.8rem;
-    top: calc(-1px - 1.5rem);
+    top: calc(-1px - 0.7rem);
     left: calc(100% - 3.25rem);
   }
 
   .form-select-lg + .btn-close {
-    top: calc(-1px - 1.8rem);
+    top: calc(-1px - 1rem);
   }
 
   .form-select-sm + .btn-close {
-    top: calc(-1px - 1.3rem);
+    top: calc(-1px - 0.5rem);
   }
 
   &.form-floating .btn-close {
-    top: calc(-1px - 2.15rem) !important;
+    top: calc(-1px - 1.35rem) !important;
   }
 
   .dropdown-menu {
