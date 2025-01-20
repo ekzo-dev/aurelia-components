@@ -11,7 +11,7 @@ export class Filter {
     if (search === '' && emptyOption === undefined) return list;
 
     const cb = (option: ISelectOption) =>
-      option.value !== emptyOption?.value && option.text.toLowerCase().includes(search.toLowerCase());
+      option.value !== emptyOption?.value && (option.text ?? '').toLowerCase().includes(search.toLowerCase());
 
     if (list instanceof Map) {
       const result = new Map<string, ISelectOption[]>();
