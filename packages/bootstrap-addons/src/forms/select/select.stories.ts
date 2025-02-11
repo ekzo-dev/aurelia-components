@@ -15,13 +15,6 @@ export default {
   },
   args: {
     label: 'Label',
-    options: [
-      { value: undefined, text: 'Select option' },
-      { value: '1', text: 'One', disabled: true },
-      { value: '2', text: 'Two' },
-      { value: '3', text: 'Three', group: 'Group' },
-    ],
-    value: '2',
     floatingLabel: false,
     valid: null,
   },
@@ -37,6 +30,16 @@ const Overview: Story = (args) => ({
   props: args,
 });
 
+Overview.args = {
+  options: [
+    { value: undefined, text: 'Select option' },
+    { value: '1', text: 'One', disabled: true },
+    { value: '2', text: 'Two' },
+    { value: '3', text: 'Three', group: 'Group' },
+  ],
+  value: '2',
+};
+
 const Multiple: Story = (args) => ({
   props: args,
 });
@@ -44,6 +47,11 @@ const Multiple: Story = (args) => ({
 Multiple.args = {
   multiple: true,
   value: ['2', '3'],
+  options: [
+    { value: '1', text: 'One', disabled: true },
+    { value: '2', text: 'Two' },
+    { value: '3', text: 'Three', group: 'Group' },
+  ],
 };
 
 const LargeOptions: Story = (args) => ({

@@ -18,11 +18,6 @@ import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurel
 
 import { Filter } from './filter';
 
-const BS_SIZE_MULTIPLIER = {
-  lg: 1.125,
-  sm: 0.875,
-};
-
 @customElement({
   name: 'bs-select',
   template,
@@ -49,6 +44,10 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   binding() {
     super.binding();
     this.deactivating = false;
+
+    if (this.multiple && !Array.isArray(this.value)) {
+      this.value = [];
+    }
   }
 
   unbinding() {
@@ -56,30 +55,10 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   attached() {
-    if (this.multiple) {
-      this.#setHeight();
-      this.#scrollToSelected();
-    }
-
     this.setPopperConfig();
   }
 
-  propertyChanged(name: keyof this) {
-    switch (name) {
-      case 'size':
-
-      case 'bsSize':
-
-      case 'floatingLabel':
-        if (this.multiple) {
-          setTimeout(() => this.#setHeight());
-        }
-    }
-  }
-
   setPopperConfig() {
-    if (this.multiple) return;
-
     const { host } = this;
     const parentModal = host.closest('.modal-body,.popover-body,.offcanvas-body');
     const dropdownMenu: HTMLElement = host.querySelector('.dropdown-menu');
@@ -95,17 +74,37 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     }
   }
 
+  optionId(index: number, parentIndex?: number): string {
+    return `${this.id}${parentIndex != null ? '-g' + parentIndex.toString() : ''}-${index}`;
+  }
+
   selectOption(option: ISelectOption) {
     this.value = option.value;
     this.#dispatchEvents();
   }
 
   get valueText(): string {
+    // if (this.multiple) {
+    //
+    // }
+
     const { selectedOption, emptyOption } = this;
 
     return emptyOption && emptyOption.value === selectedOption?.value
       ? ''
       : `${selectedOption?.group ? selectedOption.group + ' / ' : ''}${selectedOption?.text ?? ''}`;
+  }
+
+  get showClear(): boolean {
+    return (
+      !this.disabled &&
+      ((this.emptyOption && this.selectedOption?.value !== this.emptyOption.value) ||
+        (this.multiple && (this.value as unknown[]).length > 0))
+    );
+  }
+
+  clear() {
+    this.selectOption(this.multiple ? { value: [], text: '' } : this.emptyOption);
   }
 
   #dispatchEvents() {
@@ -116,32 +115,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.control.dispatchEvent(change);
   }
 
-  #setHeight(): void {
-    const { style } = this.control;
-
-    if (this.size > 0) {
-      const { borderTopWidth, borderBottomWidth, paddingTop, paddingBottom } = getComputedStyle(this.control);
-
-      style.height = `calc(${
-        this.size * 1.625 * (this.bsSize ? BS_SIZE_MULTIPLIER[this.bsSize] : 1)
-      }rem + ${borderTopWidth} + ${borderBottomWidth} + ${paddingTop} + ${paddingBottom} - 2px)`;
-    } else if (style.height) {
-      style.height = undefined;
-    }
-  }
-
-  #scrollToSelected() {
-    const selected = this.control.querySelector<HTMLInputElement>('input:checked');
-
-    if (selected) {
-      const { paddingTop } = getComputedStyle(this.control);
-
-      this.control.scrollTo({ top: selected.parentElement.offsetTop - parseInt(paddingTop) });
-    }
-  }
-
   get selectedOption(): ISelectOption | undefined {
-    if (this['__raw__'].deactivating) return;
+    if (this['__raw__'].deactivating || this.multiple) return;
 
     const { matcher, value, emptyValue } = this;
     let { options } = this;
