@@ -44,11 +44,11 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
-    this.createDropdown();
+    this.#createDropdown();
   }
 
   detaching() {
-    this.destroyDropdown();
+    this.#destroyDropdown();
   }
 
   propertyChanged(name: keyof this) {
@@ -64,8 +64,8 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
       case 'offset':
 
       case 'popperConfig':
-        this.destroyDropdown();
-        this.createDropdown();
+        this.#destroyDropdown();
+        this.#createDropdown();
     }
   }
 
@@ -81,7 +81,11 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
     this.dropdown?.toggle();
   }
 
-  private createDropdown() {
+  update(): void {
+    this.dropdown?.update();
+  }
+
+  #createDropdown() {
     // try to find toggle element and connect to it
     const selector = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
     const toggle = this.element.parentElement?.querySelector(selector);
@@ -96,7 +100,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
     });
   }
 
-  private destroyDropdown() {
+  #destroyDropdown() {
     this.dropdown?.dispose();
     this.dropdown = undefined;
   }
