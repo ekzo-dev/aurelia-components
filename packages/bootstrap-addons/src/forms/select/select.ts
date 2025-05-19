@@ -116,9 +116,13 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get selectedOption(): ISelectOption | undefined {
-    if (this['__raw__'].deactivating || this.multiple) return;
+    const thisRaw = this['__raw__'] as this;
 
-    const { matcher, value, emptyValue } = this;
+    if (thisRaw.deactivating || this.multiple) return;
+
+    const { value, emptyValue } = this;
+    // take matcher from unproxied object to avoid unnecessary getter call
+    const { matcher } = thisRaw;
     let { options } = this;
     let emptyOption: ISelectOption;
 
