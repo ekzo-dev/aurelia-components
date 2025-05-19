@@ -134,19 +134,20 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
     const isEntries = Array.isArray(options[0]);
     let option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
-      const currentValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
+      const optionValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
-      if (currentValue == emptyValue) {
+      if (optionValue == emptyValue) {
         emptyOption = {
-          value: currentValue,
-          text: isEntries ? option[1] : (option as ISelectOption).text,
+          value: optionValue,
+          text: isEntries ? (option[1] as string) : (option as ISelectOption).text,
         } as ISelectOption;
       }
 
-      return matcher ? matcher(value, currentValue) : value === currentValue;
+      return matcher ? matcher(value, optionValue) : value === optionValue;
     });
 
-    option = isEntries && option !== undefined ? { value: option[0], text: option[1] } : (option as ISelectOption);
+    option =
+      isEntries && option !== undefined ? { value: option[0], text: option[1] as string } : (option as ISelectOption);
 
     // update value next tick
     const foundValue = option?.value;
