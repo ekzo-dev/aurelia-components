@@ -2,8 +2,6 @@ import template from './duration-input.html';
 
 import './duration-input.scss';
 
-import '@formatjs/intl-durationformat/polyfill';
-
 import { BaseField, Size } from '@ekzo-dev/bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement, resolve } from 'aurelia';
