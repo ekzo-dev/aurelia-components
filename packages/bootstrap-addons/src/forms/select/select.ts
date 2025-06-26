@@ -84,9 +84,13 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get valueText(): string {
-    // if (this.multiple) {
-    //
-    // }
+    if (this.multiple) {
+      const { options, value } = this;
+
+      return (value as [])
+        .map((val) => (options as ISelectOption[]).find((option) => option.value === val).text)
+        .join(', ');
+    }
 
     const { selectedOption, emptyOption } = this;
 
