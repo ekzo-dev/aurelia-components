@@ -4,16 +4,13 @@ import './duration-input.scss';
 
 import { BaseField, Size } from '@ekzo-dev/bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { Temporal } from '@js-temporal/polyfill';
 import { bindable, BindingMode, customElement, resolve } from 'aurelia';
 
-interface IDuration {
-  years?: string;
-  months?: string;
-  days?: string;
-  hours?: string;
-  minutes?: string;
-  seconds?: string;
-}
+type Duration = Partial<Pick<Temporal.Duration, 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds'>>;
+type DurationLabels = {
+  [K in keyof Duration]: string;
+};
 
 /**
  * https://github.com/whatwg/html/issues/5488
@@ -28,13 +25,18 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   get value(): string {
     const { years, months, days, hours, minutes, seconds } = this.duration;
 
-    const date = `${years ? years + 'Y' : ''}${months ? months + 'M' : ''}${days ? days + 'D' : ''}`;
-    const time = `${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}${seconds ? seconds + 'S' : ''}`;
-
-    return date || time ? `P${date}${time ? 'T' + time : ''}` : '';
+    return Temporal.Duration.from({
+      // at least one field must be present for correct formatting
+      years: years ?? 0,
+      months,
+      days,
+      hours,
+      minutes,
+      seconds,
+    }).toString();
   }
   set value(value: string | null | undefined) {
-    this.parseDuration(value);
+    this._parseDuration(value);
   }
 
   @bindable()
@@ -45,9 +47,9 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
 
   readonly host = resolve(HTMLElement);
 
-  duration: IDuration = {};
+  duration!: Duration;
 
-  labels: IDuration = this.#getLabels();
+  labels: DurationLabels = this.#getLabels();
 
   controls!: NodeListOf<HTMLInputElement>;
 
@@ -87,7 +89,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
 
     // allow pasting full duration value, e.g. P2YT2H
     if (event instanceof ClipboardEvent && data.startsWith('P')) {
-      this.parseDuration(data);
+      this._parseDuration(data);
     }
   }
 
@@ -95,24 +97,29 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
     this.controls.item(0).focus();
   }
 
-  private parseDuration(value: string) {
-    const match = value?.match(/^P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
+  private _parseDuration(value: string) {
+    try {
+      const duration = Temporal.Duration.from(value);
 
-    if (match) {
       this.duration = {
-        years: match[1],
-        months: match[2],
-        days: match[3],
-        hours: match[4],
-        minutes: match[5],
-        seconds: match[6],
+        years: duration.years,
+        months: duration.months,
+        days: duration.days,
+        hours: duration.hours,
+        minutes: duration.minutes,
+        seconds: duration.seconds,
       };
-    } else {
-      this.duration = {};
+    } catch (error) {
+      if (error instanceof RangeError) {
+        console.warn(`[bs-duration-input] ${error.message}`);
+        this.duration = {};
+      } else {
+        throw error;
+      }
     }
   }
 
-  #getLabels(): IDuration {
+  #getLabels(): DurationLabels {
     const str: string = new Intl['DurationFormat'](navigator.language, { style: 'narrow' }).format({
       years: 1,
       months: 1,
