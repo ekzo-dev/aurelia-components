@@ -1,14 +1,9 @@
-import {
-  createDialogConfiguration,
-  DialogService,
-  IDialogController,
-  IDialogDom,
-  IDialogDomRenderer,
-  IDialogGlobalOptions,
-} from '@aurelia/dialog';
-import { Controller, IContainer, INode, InstanceProvider, IPlatform, noop, Registration, resolve } from 'aurelia';
+import { createDialogConfiguration, IDialogController, IDialogDom, IDialogDomRenderer } from '@aurelia/dialog';
+import { onResolve } from '@aurelia/kernel';
+import { registerHostNode } from '@aurelia/runtime-html';
+import { Controller, IContainer, IPlatform, noop, resolve } from 'aurelia';
 
-import { BsModal, ModalFullscreen, ModalSize } from '.';
+import { BsModal, ModalFullscreen, ModalSize } from './modal';
 
 export type DialogRenderOptionsBootstrap = {
   /**
@@ -58,19 +53,9 @@ export type DialogRenderOptionsBootstrap = {
   focus?: boolean;
 };
 
-export class DialogGlobalOptionsBootstrap implements DialogRenderOptionsBootstrap {
-  public static register(container: IContainer): void {
-    container.register(Registration.singleton(IDialogGlobalOptions, this));
-  }
-}
-
 export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRenderOptionsBootstrap> {
   private readonly platform = resolve(IPlatform);
   private readonly container = resolve(IContainer);
-
-  public static register(container: IContainer) {
-    container.register(Registration.singleton(IDialogDomRenderer, this));
-  }
 
   public render(host: HTMLElement, requestor: IDialogController, options: DialogRenderOptionsBootstrap): IDialogDom {
     const { platform } = this;
@@ -84,7 +69,7 @@ export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRend
 
       if (!deactivating) {
         // call cancel on controller if modal closing is caused by any Bootstrap events
-        requestor.cancel();
+        void requestor.cancel();
       }
     };
 
@@ -94,20 +79,14 @@ export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRend
     // create container
     const container = this.container.createChild();
 
-    container.registerResolver(
-      platform.HTMLElement,
-      container.registerResolver(
-        platform.Element,
-        container.registerResolver(INode, new InstanceProvider('ElementResolver', modal))
-      )
-    );
+    registerHostNode(container, modal);
 
     // activate Bootstrap modal component
     const dialog = container.invoke(BsModal);
     const controller = Controller.$el<BsModal>(container, dialog, modal, null);
 
     Object.assign(dialog, options);
-    controller.activate(controller, null);
+    void controller.activate(controller, null);
 
     return {
       contentHost: modal.querySelector('div.modal-body'),
@@ -118,16 +97,19 @@ export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRend
         return dialog.hide();
       },
       dispose: () => {
-        controller.deactivate(controller, null);
-        // remove element next tick to allow Bootstrap finish it's logic
-        Promise.resolve().then(() => modal.remove());
+        void onResolve(controller.deactivate(controller, null), () => {
+          // remove element next tick to allow Bootstrap finish it's logic
+          void Promise.resolve().then(() => modal.remove());
+        });
       },
     };
   }
 }
 
-export const DialogConfigurationBootstrap = createDialogConfiguration<DialogRenderOptionsBootstrap>(noop, [
-  DialogService,
-  DialogDomRendererBootstrap,
-  DialogGlobalOptionsBootstrap,
-]);
+export const DialogConfigurationBootstrap = createDialogConfiguration<DialogRenderOptionsBootstrap>(
+  noop,
+  class {
+    renderer = DialogDomRendererBootstrap;
+    options: DialogRenderOptionsBootstrap = {};
+  }
+);
