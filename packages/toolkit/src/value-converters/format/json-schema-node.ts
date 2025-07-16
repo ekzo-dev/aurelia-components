@@ -31,7 +31,7 @@ export class FormatJsonSchemaNode {
           case 'date':
 
           case 'time':
-            return new FormatDatetime().toView(value, definition.format);
+            return new FormatDatetime().toView(value as string, definition.format);
 
           case 'tel':
             return new FormatPhone().toView(value as string);
