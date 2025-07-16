@@ -6,7 +6,7 @@ import type { JSONPatchDocument, JSONPath } from 'immutable-json-patch';
 import type {
   Content,
   ContentErrors,
-  JSONEditor,
+  JsonEditor as JSONEditor,
   JSONEditorPropsOptional,
   JSONEditorSelection,
   JSONParser,
@@ -14,6 +14,7 @@ import type {
   JSONPathParser,
   MenuItem,
   OnChangeStatus,
+  OnExpand,
   QueryLanguage,
   RenderMenuContext,
   RenderValueComponentDescription,
@@ -128,24 +129,24 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
 
   readonly $controller: ICustomElementController<this>;
 
-  #contentCache?: Content;
+  protected readonly host = resolve(HTMLElement);
 
-  constructor(protected readonly host: HTMLElement = resolve(HTMLElement)) {}
+  #contentCache?: Content;
 
   get(): Content {
     return this.editor?.get();
   }
 
-  set(content: Content): Promise<void> {
+  set(content: Content): void {
     return this.editor?.set(content);
   }
 
-  patch(operations: JSONPatchDocument): Promise<JSONPatchResult> {
+  patch(operations: JSONPatchDocument): JSONPatchResult {
     return this.editor?.patch(operations);
   }
 
-  expand(callback: (path: JSONPath) => boolean): Promise<void> {
-    return this.editor?.expand(callback);
+  expand(path: JSONPath, callback?: OnExpand): void {
+    return this.editor?.expand(path, callback);
   }
 
   transform(options: TransformModalOptions): void {
@@ -156,11 +157,11 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.scrollTo(path);
   }
 
-  findElement(path: JSONPath): Element {
+  findElement(path: JSONPath): Element | undefined {
     return this.editor?.findElement(path);
   }
 
-  acceptAutoRepair(): Promise<Content> {
+  acceptAutoRepair(): Content {
     return this.editor?.acceptAutoRepair();
   }
 
@@ -168,15 +169,15 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.refresh();
   }
 
-  validate(): ContentErrors | null {
+  validate(): ContentErrors | undefined {
     return this.editor?.validate();
   }
 
-  select(newSelection: JSONEditorSelection | null): Promise<void> {
+  select(newSelection?: JSONEditorSelection): void {
     return this.editor?.select(newSelection);
   }
 
-  focus(): Promise<void> {
+  focus(): void {
     return this.editor?.focus();
   }
 
@@ -212,7 +213,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
       }
     });
 
-    this.editor = new this.editorModule.JSONEditor({
+    this.editor = this.editorModule.createJSONEditor({
       target: this.host,
       props: {
         ...props,
