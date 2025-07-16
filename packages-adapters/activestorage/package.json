@@ -13,7 +13,7 @@
     "@types/rails__activestorage": "~6.0.1"
   },
   "peerDependencies": {
-    "aurelia": "^2.0.0-beta.8"
+    "aurelia": "^2.0.0-beta.25"
   },
   "main": "src/index.ts",
   "files": [
