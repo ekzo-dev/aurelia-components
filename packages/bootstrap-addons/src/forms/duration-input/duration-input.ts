@@ -47,7 +47,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
 
   readonly host = resolve(HTMLElement);
 
-  duration!: Duration;
+  duration: Duration = {};
 
   labels: DurationLabels = this.#getLabels();
 
