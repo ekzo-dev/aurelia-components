@@ -6,6 +6,8 @@ import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 
 import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
+import { coerceBoolean } from '../utils';
+
 @customElement({
   name: 'monaco-editor',
   template,
@@ -17,6 +19,9 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
   @bindable()
   language?: string;
 
+  @bindable(coerceBoolean)
+  readOnly: boolean = false;
+
   readonly host = resolve(HTMLElement);
 
   loading: boolean = true;
@@ -27,8 +32,8 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
 
   #editor: typeof editor;
 
-  async attaching() {
-    return this.#createEditor();
+  attached() {
+    void this.#createEditor();
   }
 
   detaching() {
@@ -59,6 +64,7 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
       value: this.value,
       language: this.language,
       automaticLayout: true,
+      readOnly: this.readOnly,
     });
     this.#editorInstance.onDidChangeModelContent(() => {
       const val = this.#editorInstance.getValue();
