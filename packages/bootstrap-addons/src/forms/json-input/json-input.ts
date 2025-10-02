@@ -20,12 +20,12 @@ import type {
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { JsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
-import Ajv, { ErrorObject, Options } from 'ajv';
+import Ajv, { ErrorObject, Options, ValidateFunction } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
 import { bindable, BindingMode, customElement } from 'aurelia';
-import { JSONValue, parsePath } from 'immutable-json-patch';
+import { parsePath } from 'immutable-json-patch';
 
 const patternMap: Record<string, string> = {
   '^[A-Za-z_][-A-Za-z0-9._]*$': '^[A-Za-z_][\\-A-Za-z0-9._]*$',
@@ -76,12 +76,13 @@ export class BsJsonInput {
 
   onRenderValue = (props: RenderValueProps): RenderValueComponentDescription[] => {
     let result: RenderValueComponentDescription[] | null;
-    const { jsonSchema } = this;
+    // const { jsonSchema } = this;
     const { editorModule } = this.editorComponent;
 
-    if (jsonSchema && typeof jsonSchema === 'object') {
-      result = editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
-    }
+    // TODO: this does not support bundled schemas and complex refs. So need to make own implementation later
+    // if (jsonSchema && typeof jsonSchema === 'object') {
+    //   result = editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
+    // }
 
     return result ?? editorModule.renderValue(props);
   };
@@ -156,15 +157,17 @@ export class BsJsonInput {
       const ajv = rawThis.#initAjv(jsonSchema.$schema as string, ajvOptions);
 
       addFormats(ajv);
-      const validate = ajv.compile(rawJsonSchema);
+      let validate: ValidateFunction;
 
-      if (validate.errors) {
-        throw validate.errors[0];
+      try {
+        validate = ajv.compile(rawJsonSchema);
+      } catch (e) {
+        console.error('Validator compilation error.', e);
       }
 
       return (json: unknown): ValidationError[] => {
         // do not validate empty documents
-        if (json === undefined) return [];
+        if (json === undefined || !validate) return [];
 
         validate(json);
 
@@ -236,7 +239,7 @@ export class BsJsonInput {
     this.input.setCustomValidity(errors?.length ? message : '');
 
     return (errors || []).map((error) => ({
-      path: parsePath(json as JSONValue, error.instancePath),
+      path: parsePath(json, error.instancePath),
       message: error.message || 'Unknown error',
       severity: 'warning' as ValidationSeverity,
     }));
