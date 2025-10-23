@@ -33,25 +33,16 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
   filter: string = '';
 
-  optionsCount: number = 0;
-
-  deactivating: boolean = false;
-
   emptyOption?: ISelectOption;
 
   popperConfig: Partial<Options> | Tooltip.PopperConfigFunction | null = null;
 
   binding() {
     super.binding();
-    this.deactivating = false;
 
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [];
     }
-  }
-
-  unbinding() {
-    this.deactivating = true;
   }
 
   attached() {
@@ -100,6 +91,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get showClear(): boolean {
+    console.warn(`BsSelect #${this.id}: get showClear`);
+
     return (
       !this.disabled &&
       ((this.emptyOption && this.selectedOption?.value !== this.emptyOption.value) ||
@@ -119,22 +112,24 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.control.dispatchEvent(change);
   }
 
+  get optionsCount(): number {
+    const { options } = this;
+    const isObj = options instanceof Object && options.constructor === Object;
+
+    return isObj ? Object.keys(options).length : (options as []).length;
+  }
+
   get selectedOption(): ISelectOption | undefined {
-    const thisRaw = this['__raw__'] as this;
+    console.warn(`BsSelect #${this.id}: get selectedOption`);
+    if (this.multiple) return;
 
-    if (thisRaw.deactivating || this.multiple) return;
-
-    const { value, emptyValue } = this;
-    // take matcher from unproxied object to avoid unnecessary getter call
-    const { matcher } = thisRaw;
+    const { value, emptyValue, matcher } = this;
     let { options } = this;
     let emptyOption: ISelectOption;
 
     if (options instanceof Object && options.constructor === Object) {
       options = Object.entries(options);
     }
-
-    this.optionsCount = (options as []).length;
 
     const isEntries = Array.isArray(options[0]);
     let option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
