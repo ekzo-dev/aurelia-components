@@ -26,6 +26,7 @@ import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
 import { bindable, BindingMode, customElement } from 'aurelia';
 import { parsePath } from 'immutable-json-patch';
+import { compileSchema, JsonError, JsonSchema, SchemaNode } from 'json-schema-library';
 
 const patternMap: Record<string, string> = {
   '^[A-Za-z_][-A-Za-z0-9._]*$': '^[A-Za-z_][\\-A-Za-z0-9._]*$',
@@ -158,20 +159,38 @@ export class BsJsonInput {
 
       addFormats(ajv);
       let validate: ValidateFunction;
+      let schema: SchemaNode;
+
+      try {
+        schema = compileSchema(rawJsonSchema as JsonSchema);
+      } catch (e) {
+        console.error('json-schema-library validator compilation error', e);
+      }
 
       try {
         validate = ajv.compile(rawJsonSchema);
       } catch (e) {
-        console.error('Validator compilation error.', e);
+        console.error('AJV validator compilation error', e);
       }
 
       return (json: unknown): ValidationError[] => {
         // do not validate empty documents
-        if (json === undefined || !validate) return [];
+        if (json === undefined) return [];
 
-        validate(json);
+        let allErrors: ValidationError[] = [];
 
-        return rawThis.#processErrors(validate.errors, json);
+        if (schema) {
+          const { errors } = schema.validate(json);
+
+          allErrors = rawThis.#processErrors(errors, json);
+        }
+
+        if (validate) {
+          validate(json);
+          allErrors = allErrors.concat(rawThis.#processErrorsAjv(validate.errors, json));
+        }
+
+        return allErrors;
       };
     } else if (schemaVersion != null && !disabled) {
       const ajv = rawThis.#initAjv(schemaVersion, ajvOptions);
@@ -182,7 +201,7 @@ export class BsJsonInput {
 
         void ajv.validateSchema(json);
 
-        return rawThis.#processErrors(ajv.errors, json);
+        return rawThis.#processErrorsAjv(ajv.errors, json);
       };
     }
   }
@@ -233,7 +252,7 @@ export class BsJsonInput {
     return (schema.$defs ?? schema.definitions) as JSONSchemaDefinitions;
   }
 
-  #processErrors(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
+  #processErrorsAjv(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
     const message = this.jsonSchema === true ? 'JSON is not a valid JSONSchema' : 'JSON does not match schema';
 
     this.input.setCustomValidity(errors?.length ? message : '');
@@ -242,6 +261,18 @@ export class BsJsonInput {
       path: parsePath(json, error.instancePath),
       message: error.message || 'Unknown error',
       severity: 'warning' as ValidationSeverity,
+    }));
+  }
+
+  #processErrors(errors: JsonError[] | null, json: unknown): ValidationError[] {
+    const message = this.jsonSchema === true ? 'JSON is not a valid JSONSchema' : 'JSON does not match schema';
+
+    this.input.setCustomValidity(errors?.length ? message : '');
+
+    return (errors || []).map((error) => ({
+      path: parsePath(json, error.data.pointer),
+      message: error.message || 'Unknown error',
+      severity: 'error' as ValidationSeverity,
     }));
   }
 }
