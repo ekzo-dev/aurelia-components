@@ -2,11 +2,13 @@ import template from './monaco-editor.html';
 
 import './monaco-editor.css';
 
-import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
+import type { editor } from 'monaco-editor';
 
 import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { coerceBoolean } from '../utils';
+
+export type EditorModule = typeof import('monaco-editor');
 
 @customElement({
   name: 'monaco-editor',
@@ -57,7 +59,9 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
   }
 
   async #createEditor() {
-    const module = await import('monaco-editor/esm/vs/editor/editor.api');
+    const module: EditorModule = await import('monaco-editor');
+
+    this.#triggerLoadEvent(module);
 
     this.#editor = module.editor;
     this.#editorInstance = this.#editor.create(this.host, {
@@ -79,5 +83,11 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
   #destroyEditor() {
     this.#editorInstance?.dispose();
     this.#editorInstance = undefined;
+  }
+
+  #triggerLoadEvent(module: EditorModule) {
+    const event = new CustomEvent<EditorModule>('monaco-loaded', { bubbles: true, cancelable: true, detail: module });
+
+    this.host.dispatchEvent(event);
   }
 }

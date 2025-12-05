@@ -1,1 +1,1 @@
-export { MonacoEditor } from './elements/monaco-editor';
+export { EditorModule, MonacoEditor } from './elements/monaco-editor-element';

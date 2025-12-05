@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/monaco-editor",
   "description": "Aurelia Monaco Editor adapter",
-  "version": "0.52.1",
+  "version": "0.55.1",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/monaco-editor",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "monaco-editor": "~0.52.2"
+    "monaco-editor": "~0.55.1"
   },
   "peerDependencies": {
     "aurelia": "^2.0.0-beta.25"
