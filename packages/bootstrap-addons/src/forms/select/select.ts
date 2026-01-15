@@ -49,6 +49,12 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.setPopperConfig();
   }
 
+  valueChanged(value: unknown): void {
+    if (this.multiple && !Array.isArray(value)) {
+      this.value = [];
+    }
+  }
+
   setPopperConfig() {
     const { host } = this;
     const parentModal = host.closest('.modal-body,.popover-body,.offcanvas-body');
@@ -78,9 +84,9 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     if (this.multiple) {
       const { options, value } = this;
 
-      return (value as [])
-        .map((val) => (options as ISelectOption[]).find((option) => option.value === val).text)
-        .join(', ');
+      return Array.isArray(value)
+        ? value.map((val) => (options as ISelectOption[]).find((option) => option.value === val).text).join(', ')
+        : '';
     }
 
     const { selectedOption, emptyOption } = this;
@@ -96,7 +102,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     return (
       !this.disabled &&
       ((this.emptyOption && this.selectedOption?.value !== this.emptyOption.value) ||
-        (this.multiple && (this.value as unknown[]).length > 0))
+        (this.multiple && Array.isArray(this.value) && this.value.length > 0))
     );
   }
 
