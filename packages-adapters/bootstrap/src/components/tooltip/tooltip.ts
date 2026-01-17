@@ -18,7 +18,10 @@ export type TooltipTrigger =
   | 'hover focus'
   | 'click hover focus';
 
-@customAttribute('bs-tooltip')
+@customAttribute({
+  name: 'bs-tooltip',
+  defaultProperty: 'title',
+})
 export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
   @bindable(coerceBoolean)
   animation: boolean = true;
@@ -68,7 +71,7 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
     <div class="tooltip-inner"></div>
   </div>`;
 
-  @bindable({ primary: true })
+  @bindable()
   title: string | Element | ((this: HTMLElement) => string | Element) = '';
 
   @bindable()

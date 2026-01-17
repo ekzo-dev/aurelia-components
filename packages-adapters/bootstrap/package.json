@@ -16,8 +16,8 @@
     "bootstrap-icons": "^1.13.1"
   },
   "peerDependencies": {
-    "aurelia": "^2.0.0-beta.25",
-    "@aurelia/dialog": "^2.0.0-beta.25"
+    "aurelia": "^2.0.0-rc.0",
+    "@aurelia/dialog": "^2.0.0-rc.0"
   },
   "main": "src/index.ts",
   "files": [

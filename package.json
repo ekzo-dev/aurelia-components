@@ -36,12 +36,12 @@
     "publish:pre-release:beta": "lerna publish from-package --npm-tag beta"
   },
   "dependencies": {
-    "aurelia": "^2.0.0-beta.25",
+    "aurelia": "^2.0.0-rc.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@aurelia/ts-jest": "^2.0.0-beta.25",
-    "@aurelia/webpack-loader": "^2.0.0-beta.25",
+    "@aurelia/ts-jest": "^2.0.0-rc.0",
+    "@aurelia/webpack-loader": "^2.0.0-rc.0",
     "@aurelia/storybook": "^1.0.2",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",

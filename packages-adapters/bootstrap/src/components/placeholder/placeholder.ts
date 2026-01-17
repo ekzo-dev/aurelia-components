@@ -10,9 +10,12 @@ export type BsPlaceholderAnimation = 'glow' | 'wave';
 
 const prefix = (name: string) => `placeholder-${name}`;
 
-@customAttribute('bs-placeholder')
+@customAttribute({
+  name: 'bs-placeholder',
+  defaultProperty: 'animation',
+})
 export class BsPlaceholder extends BaseAttribute {
-  @bindable({ primary: true, type: String })
+  @bindable()
   animation?: BsPlaceholderAnimation;
 
   @bindable({ type: String })

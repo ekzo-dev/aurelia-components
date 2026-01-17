@@ -20,17 +20,20 @@ export const defaultConfig: IDragNDropConfig = {
   canDrop: true,
 };
 
-@customAttribute('drag-n-drop')
+@customAttribute({
+  name: 'drag-n-drop',
+  defaultProperty: 'config',
+})
 export class DragNDropCustomAttribute {
   /* all-in-one config */
-  @bindable({ primary: true })
+  @bindable()
   config: IDragNDropConfig;
 
   /**
    * the value associated with the element (ie: index, ID)
    */
   @bindable({ mode: BindingMode.twoWay })
-  payload: any;
+  payload: unknown;
 
   /**
    * set through drag-n-drop - hides the element if true

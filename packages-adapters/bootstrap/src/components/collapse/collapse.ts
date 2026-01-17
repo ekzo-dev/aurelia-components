@@ -6,9 +6,12 @@ import { Collapse } from 'bootstrap';
 
 import { BaseAttribute } from '../base-attribute';
 
-@customAttribute('bs-collapse')
+@customAttribute({
+  name: 'bs-collapse',
+  defaultProperty: 'collapsed',
+})
 export class BsCollapse extends BaseAttribute implements Collapse.Options {
-  @bindable({ primary: true })
+  @bindable(coerceBoolean)
   collapsed: boolean = true;
 
   @bindable(coerceBoolean)

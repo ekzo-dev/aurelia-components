@@ -8,9 +8,12 @@ import { BaseAttribute } from '../base-attribute';
 
 const prefix = (name: string) => `list-group-item-${name}`;
 
-@customAttribute('bs-list-group-item')
+@customAttribute({
+  name: 'bs-list-group-item',
+  defaultProperty: 'variant',
+})
 export class BsListGroupItem extends BaseAttribute {
-  @bindable({ primary: true, type: String })
+  @bindable()
   variant?: Variant;
 
   @bindable(coerceBoolean)
