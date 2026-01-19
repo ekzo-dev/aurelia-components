@@ -23,20 +23,20 @@ type DurationLabels = {
 export class BsDurationInput extends BaseField implements EventListenerObject {
   @bindable({ mode: BindingMode.twoWay })
   get value(): string {
-    const { years, months, days, hours, minutes, seconds } = this.duration;
+    const { duration } = this;
 
-    return Temporal.Duration.from({
-      // at least one field must be present for correct formatting
-      years: years ?? 0,
-      months,
-      days,
-      hours,
-      minutes,
-      seconds,
-    }).toString();
+    if (Object.values(duration).every((v) => v == null || v.toString() === '')) {
+      return '';
+    }
+
+    return Temporal.Duration.from(duration).toString();
   }
-  set value(value: string | null | undefined) {
-    this._parseDuration(value);
+  set value(value: unknown) {
+    if (value == null || value === '') {
+      this.duration = {};
+    } else {
+      this._parseDuration(value.toString());
+    }
   }
 
   @bindable()
