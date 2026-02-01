@@ -7,9 +7,12 @@ import { BaseAttribute } from '../base-attribute';
 
 export type BsDropdownDirection = 'down' | 'up' | 'end' | 'start';
 
-@customAttribute('bs-dropdown')
+@customAttribute({
+  name: 'bs-dropdown',
+  defaultProperty: 'direction',
+})
 export class BsDropdown extends BaseAttribute {
-  @bindable({ primary: true, type: String })
+  @bindable()
   direction: BsDropdownDirection = 'down';
 
   @bindable(coerceBoolean)

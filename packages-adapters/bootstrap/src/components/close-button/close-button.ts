@@ -1,15 +1,17 @@
-import template from './close-button.html';
-
 import './close-button.scss';
 
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+// import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customAttribute } from 'aurelia';
 
-@customElement({
-  name: 'bs-close-button',
-  template,
-})
-export class BsCloseButton implements ICustomElementViewModel {
-  @bindable(coerceBoolean)
-  disabled: boolean = false;
+import { BaseAttribute } from '../base-attribute';
+
+@customAttribute('bs-close-button')
+export class BsCloseButton extends BaseAttribute {
+  // TODO: change to @bindable(coerceBoolean) after Aurelia upgrade
+  @bindable()
+  white: boolean = false;
+
+  get classes(): string[] {
+    return ['btn-close', this.white ? 'btn-close-white' : ''].filter(Boolean);
+  }
 }

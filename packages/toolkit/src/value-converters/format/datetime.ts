@@ -6,15 +6,15 @@ import { format } from 'date-fns';
  */
 @valueConverter('formatDatetime')
 export class FormatDatetime {
-  patterns = {
+  patterns: Record<string, string> = {
     'date-time': 'dd.MM.yyyy HH:mm',
     date: 'dd.MM.yyyy',
     time: 'HH:mm',
   };
 
-  toView(value, pattern, empty = null): string {
+  toView(value: string, pattern: string, empty: string = null): string {
     if (!value) return empty ?? value;
-    pattern = this.patterns[pattern] || pattern;
+    pattern = this.patterns[pattern] ?? pattern;
 
     return format(new Date(value), pattern);
   }

@@ -2,8 +2,9 @@ import template from './dropdown-menu.html';
 
 import './dropdown.scss';
 
+import type { Boundary, Options, Rect } from '@popperjs/core';
+
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import * as Popper from '@popperjs/core';
 import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 import { Dropdown, type Tooltip } from 'bootstrap';
 
@@ -18,7 +19,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   autoClose: boolean | 'inside' | 'outside' = true;
 
   @bindable()
-  boundary: Popper.Boundary | Element = 'clippingParents';
+  boundary: Boundary | Element = 'clippingParents';
 
   @bindable()
   display: 'dynamic' | 'static' = 'dynamic';
@@ -27,10 +28,10 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   offset: Dropdown.Offset | string | Dropdown.OffsetFunction = [0, 2];
 
   @bindable()
-  popperConfig: Partial<Popper.Options> | Tooltip.PopperConfigFunction | null = null;
+  popperConfig: Partial<Options> | Tooltip.PopperConfigFunction | null = null;
 
   @bindable()
-  reference: 'toggle' | 'parent' | Element | Popper.Rect = 'toggle';
+  reference: 'toggle' | 'parent' | Element | Rect = 'toggle';
 
   @bindable(coerceBoolean)
   dark: boolean = false;
@@ -43,15 +44,14 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
   constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
 
   attached() {
-    this.createDropdown();
+    this.#createDropdown();
   }
 
   detaching() {
-    this.destroyDropdown();
+    this.#destroyDropdown();
   }
 
   propertyChanged(name: keyof this) {
-    // TODO: correctly configure update
     switch (name) {
       case 'autoClose':
 
@@ -60,14 +60,12 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
       case 'display':
 
       case 'reference':
-        this.destroyDropdown();
-        this.createDropdown();
-        break;
 
       case 'offset':
 
       case 'popperConfig':
-        this.dropdown?.update();
+        this.#destroyDropdown();
+        this.#createDropdown();
     }
   }
 
@@ -83,7 +81,11 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
     this.dropdown?.toggle();
   }
 
-  private createDropdown() {
+  update(): void {
+    this.dropdown?.update();
+  }
+
+  #createDropdown() {
     // try to find toggle element and connect to it
     const selector = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
     const toggle = this.element.parentElement?.querySelector(selector);
@@ -98,7 +100,7 @@ export class BsDropdownMenu implements ICustomElementViewModel, Dropdown.Options
     });
   }
 
-  private destroyDropdown() {
+  #destroyDropdown() {
     this.dropdown?.dispose();
     this.dropdown = undefined;
   }

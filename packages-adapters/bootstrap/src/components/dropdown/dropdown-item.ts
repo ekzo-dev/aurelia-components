@@ -8,9 +8,12 @@ import { BaseAttribute } from '../base-attribute';
 
 export type BsDropdownItemType = 'item' | 'divider' | 'text' | 'header';
 
-@customAttribute('bs-dropdown-item')
+@customAttribute({
+  name: 'bs-dropdown-item',
+  defaultProperty: 'type',
+})
 export class BsDropdownItem extends BaseAttribute {
-  @bindable({ primary: true })
+  @bindable()
   type: BsDropdownItemType = 'item';
 
   @bindable()

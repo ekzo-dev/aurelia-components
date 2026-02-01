@@ -20,12 +20,18 @@ import type {
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { JsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
-import Ajv, { ErrorObject, Options } from 'ajv';
+import Ajv, { ErrorObject, Options, ValidateFunction } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
 import { bindable, BindingMode, customElement } from 'aurelia';
-import { JSONValue, parsePath } from 'immutable-json-patch';
+import { parsePath } from 'immutable-json-patch';
+import { compileSchema, JsonError, JsonSchema, SchemaNode } from 'json-schema-library';
+
+const patternMap: Record<string, string> = {
+  '^[A-Za-z_][-A-Za-z0-9._]*$': '^[A-Za-z_][\\-A-Za-z0-9._]*$',
+  '^[A-Za-z][-A-Za-z0-9.:_]*$': '^[A-Za-z][\\-A-Za-z0-9.:_]*$',
+};
 
 @customElement({
   name: 'bs-json-input',
@@ -71,12 +77,13 @@ export class BsJsonInput {
 
   onRenderValue = (props: RenderValueProps): RenderValueComponentDescription[] => {
     let result: RenderValueComponentDescription[] | null;
-    const { jsonSchema } = this;
+    // const { jsonSchema } = this;
     const { editorModule } = this.editorComponent;
 
-    if (jsonSchema && typeof jsonSchema === 'object') {
-      result = editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
-    }
+    // TODO: this does not support bundled schemas and complex refs. So need to make own implementation later
+    // if (jsonSchema && typeof jsonSchema === 'object') {
+    //   result = editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
+    // }
 
     return result ?? editorModule.renderValue(props);
   };
@@ -151,19 +158,39 @@ export class BsJsonInput {
       const ajv = rawThis.#initAjv(jsonSchema.$schema as string, ajvOptions);
 
       addFormats(ajv);
-      const validate = ajv.compile(rawJsonSchema);
+      let validate: ValidateFunction;
+      let schema: SchemaNode;
 
-      if (validate.errors) {
-        throw validate.errors[0];
+      try {
+        schema = compileSchema(rawJsonSchema as JsonSchema);
+      } catch (e) {
+        console.error('json-schema-library validator compilation error', e);
+      }
+
+      try {
+        validate = ajv.compile(rawJsonSchema);
+      } catch (e) {
+        console.error('AJV validator compilation error', e);
       }
 
       return (json: unknown): ValidationError[] => {
         // do not validate empty documents
         if (json === undefined) return [];
 
-        validate(json);
+        let allErrors: ValidationError[] = [];
 
-        return rawThis.#processErrors(validate.errors, json);
+        if (schema) {
+          const { errors } = schema.validate(json);
+
+          allErrors = rawThis.#processErrors(errors, json);
+        }
+
+        if (validate) {
+          validate(json);
+          allErrors = allErrors.concat(rawThis.#processErrorsAjv(validate.errors, json));
+        }
+
+        return allErrors;
       };
     } else if (schemaVersion != null && !disabled) {
       const ajv = rawThis.#initAjv(schemaVersion, ajvOptions);
@@ -174,7 +201,7 @@ export class BsJsonInput {
 
         void ajv.validateSchema(json);
 
-        return rawThis.#processErrors(ajv.errors, json);
+        return rawThis.#processErrorsAjv(ajv.errors, json);
       };
     }
   }
@@ -190,9 +217,17 @@ export class BsJsonInput {
   }
 
   #initAjv($schema: string, ajvOptions: Options): Ajv {
+    // some regexp's in 2019-09/2020-12 meta-schemas are not compatible with 'v' flag, so update them
+    const regExp = (pattern: string) => new RegExp(patternMap[pattern] ?? pattern, 'v');
+
+    regExp.code = 'regexp';
+
     const options: Options = {
       strict: false,
       multipleOfPrecision: 2,
+      code: {
+        regExp,
+      },
       ...ajvOptions,
     };
     let ajv: Ajv;
@@ -217,15 +252,27 @@ export class BsJsonInput {
     return (schema.$defs ?? schema.definitions) as JSONSchemaDefinitions;
   }
 
-  #processErrors(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
+  #processErrorsAjv(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
     const message = this.jsonSchema === true ? 'JSON is not a valid JSONSchema' : 'JSON does not match schema';
 
     this.input.setCustomValidity(errors?.length ? message : '');
 
     return (errors || []).map((error) => ({
-      path: parsePath(json as JSONValue, error.instancePath),
+      path: parsePath(json, error.instancePath),
       message: error.message || 'Unknown error',
       severity: 'warning' as ValidationSeverity,
+    }));
+  }
+
+  #processErrors(errors: JsonError[] | null, json: unknown): ValidationError[] {
+    const message = this.jsonSchema === true ? 'JSON is not a valid JSONSchema' : 'JSON does not match schema';
+
+    this.input.setCustomValidity(errors?.length ? message : '');
+
+    return (errors || []).map((error) => ({
+      path: parsePath(json, error.data.pointer),
+      message: error.message || 'Unknown error',
+      severity: 'error' as ValidationSeverity,
     }));
   }
 }

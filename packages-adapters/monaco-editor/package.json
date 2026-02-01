@@ -1,16 +1,18 @@
 {
-  "name": "@ekzo-dev/bs-select-multiple",
-  "description": "Aurelia Bootstrap select multiple control",
-  "version": "5.2.4",
-  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/bs-select-multiple",
+  "name": "@ekzo-dev/monaco-editor",
+  "description": "Aurelia Monaco Editor adapter",
+  "version": "0.55.1",
+  "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/monaco-editor",
   "repository": {
     "type": "git",
     "url": "https://github.com/ekzo-dev/aurelia-components.git"
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/bootstrap": "^5.2.11",
-    "@ekzo-dev/toolkit": "^1.2.3"
+    "monaco-editor": "~0.55.1"
+  },
+  "peerDependencies": {
+    "aurelia": "^2.0.0-rc.0"
   },
   "main": "src/index.ts",
   "files": [

@@ -1,4 +1,4 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
+import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
 
 import { BsCloseButton } from '.';
 
@@ -15,5 +15,6 @@ const meta: Meta = {
 export default meta;
 
 export const Overview: Story = (args): StoryFnAureliaReturnType => ({
+  template: `<button type="button" ${createComponentTemplate(BsCloseButton)}></button>`,
   props: args,
 });

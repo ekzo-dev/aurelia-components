@@ -22,9 +22,12 @@ export type ButtonVariant =
 
 const prefix = (name: string) => `btn-${name}`;
 
-@customAttribute('bs-button')
+@customAttribute({
+  name: 'bs-button',
+  defaultProperty: 'variant',
+})
 export class BsButton extends BaseAttribute {
-  @bindable({ type: String, primary: true })
+  @bindable()
   variant: ButtonVariant = 'primary';
 
   @bindable({ type: String })

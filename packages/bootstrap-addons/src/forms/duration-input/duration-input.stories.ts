@@ -9,7 +9,7 @@ const meta: Meta = {
   title: 'Ekzo / Bootstrap Addons / Forms / Duration input',
   component: BsDurationInput,
   args: {
-    value: 'P5DT1H',
+    value: 'P5DT1Hasds',
     label: 'Duration',
   },
   argTypes: {
@@ -27,7 +27,7 @@ const Validation: Story = (args): StoryFnAureliaReturnType => ({
   props: args,
   template: `<form class='was-validated'>${createComponentTemplate(
     BsDurationInput
-  )}<br><button bs-button>Validate</button></form>`,
+  )}<br>\${value} <button bs-button>Validate</button></form>`,
   components: [BsButton],
 });
 

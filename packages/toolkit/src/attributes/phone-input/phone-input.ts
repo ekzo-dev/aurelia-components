@@ -4,9 +4,12 @@ import { AsYouType, CountryCode } from 'libphonenumber-js';
 /**
  * TODO: не рабочий вариант, нужно доделывать
  */
-@customAttribute('phone-input')
+@customAttribute({
+  name: 'phone-input',
+  defaultProperty: 'country',
+})
 export class PhoneInputCustomAttribute {
-  @bindable({ primary: true })
+  @bindable()
   country: CountryCode;
 
   input: HTMLInputElement;
