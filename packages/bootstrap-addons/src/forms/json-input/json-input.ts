@@ -17,16 +17,17 @@ import type {
   Validator,
 } from 'vanilla-jsoneditor';
 
+import { ProxyObservable } from '@aurelia/runtime';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { JsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
-import Ajv, { ErrorObject, Options, ValidateFunction } from 'ajv';
+import Ajv, { ErrorObject, Options } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
 import { bindable, BindingMode, customElement } from 'aurelia';
 import { parsePath } from 'immutable-json-patch';
-import { compileSchema, JsonError, JsonSchema, SchemaNode } from 'json-schema-library';
+import { CompileOptions, compileSchema, JsonError, SchemaNode } from 'json-schema-library';
 
 const patternMap: Record<string, string> = {
   '^[A-Za-z_][-A-Za-z0-9._]*$': '^[A-Za-z_][\\-A-Za-z0-9._]*$',
@@ -48,11 +49,11 @@ export class BsJsonInput {
   @bindable(coerceBoolean)
   disabled: boolean = false;
 
-  @bindable({ set: (v) => (v === '' || v === true || v === 'true' ? true : v) })
-  jsonSchema?: JSONSchema | boolean;
+  @bindable({ set: (v: BsJsonInput['jsonSchema'] | string) => (v === '' || v === true || v === 'true' ? true : v) })
+  jsonSchema?: JSONSchema | SchemaNode | boolean;
 
   @bindable()
-  ajvOptions: Options = {};
+  validatorOptions?: CompileOptions;
 
   @bindable()
   jsonEditorOptions: JSONEditorPropsOptional = {};
@@ -148,52 +149,24 @@ export class BsJsonInput {
   }
 
   get validator(): Validator | undefined {
-    const { schemaVersion, disabled, ajvOptions, jsonSchema } = this;
-    // use raw object because proxies don't work with private properties
-    const rawThis = this['__raw__'] as BsJsonInput;
-    // use jsonSchema from raw object to pass original (non-proxied) object to AJV
-    const { jsonSchema: rawJsonSchema } = rawThis;
+    const { schemaVersion, disabled, jsonSchema } = this;
+    const rawThis = ProxyObservable.getRaw<BsJsonInput>(this);
 
-    if (jsonSchema && typeof jsonSchema === 'object' && !disabled) {
-      const ajv = rawThis.#initAjv(jsonSchema.$schema as string, ajvOptions);
+    if (disabled) return;
 
-      addFormats(ajv);
-      let validate: ValidateFunction;
-      let schema: SchemaNode;
-
-      try {
-        schema = compileSchema(rawJsonSchema as JsonSchema);
-      } catch (e) {
-        console.error('json-schema-library validator compilation error', e);
-      }
-
-      try {
-        validate = ajv.compile(rawJsonSchema);
-      } catch (e) {
-        console.error('AJV validator compilation error', e);
-      }
+    if (jsonSchema && typeof jsonSchema === 'object') {
+      const schema = rawThis.#initJsonSchemaLibrary();
 
       return (json: unknown): ValidationError[] => {
         // do not validate empty documents
-        if (json === undefined) return [];
+        if (json === undefined || !schema) return [];
 
-        let allErrors: ValidationError[] = [];
+        const { errors } = schema.validate(json);
 
-        if (schema) {
-          const { errors } = schema.validate(json);
-
-          allErrors = rawThis.#processErrors(errors, json);
-        }
-
-        if (validate) {
-          validate(json);
-          allErrors = allErrors.concat(rawThis.#processErrorsAjv(validate.errors, json));
-        }
-
-        return allErrors;
+        return rawThis.#processErrors(errors, json);
       };
-    } else if (schemaVersion != null && !disabled) {
-      const ajv = rawThis.#initAjv(schemaVersion, ajvOptions);
+    } else if (schemaVersion != null) {
+      const ajv = rawThis.#initAjv(schemaVersion);
 
       return (json: unknown): ValidationError[] => {
         // do not validate empty documents
@@ -216,7 +189,7 @@ export class BsJsonInput {
     }
   }
 
-  #initAjv($schema: string, ajvOptions: Options): Ajv {
+  #initAjv($schema: string): Ajv {
     // some regexp's in 2019-09/2020-12 meta-schemas are not compatible with 'v' flag, so update them
     const regExp = (pattern: string) => new RegExp(patternMap[pattern] ?? pattern, 'v');
 
@@ -228,7 +201,7 @@ export class BsJsonInput {
       code: {
         regExp,
       },
-      ...ajvOptions,
+      allErrors: true,
     };
     let ajv: Ajv;
 
@@ -245,7 +218,26 @@ export class BsJsonInput {
         ajv = new Ajv(options);
     }
 
+    addFormats(ajv);
+
     return ajv;
+  }
+
+  #initJsonSchemaLibrary(): SchemaNode | undefined {
+    const { jsonSchema } = this;
+
+    // already a SchemaNode
+    if ((jsonSchema as SchemaNode).evaluationPath) {
+      return jsonSchema as SchemaNode;
+    }
+
+    try {
+      return compileSchema(jsonSchema as JSONSchema, this.validatorOptions);
+    } catch (e) {
+      console.error('json-schema-library validator compilation error', e);
+
+      return;
+    }
   }
 
   #getSchemaDefinitions(schema: JSONSchema): JSONSchemaDefinitions {
@@ -272,7 +264,7 @@ export class BsJsonInput {
     return (errors || []).map((error) => ({
       path: parsePath(json, error.data.pointer),
       message: error.message || 'Unknown error',
-      severity: 'error' as ValidationSeverity,
+      severity: 'warning' as ValidationSeverity,
     }));
   }
 }
