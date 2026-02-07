@@ -1,18 +1,11 @@
 <template class="${floatingLabel ? 'form-floating' : ''}">
-  <label for="${id}" if.bind="label && !floatingLabel" class="form-label">${label}</label>
+  <label for.one-time="id" if.bind="label && !floatingLabel" class="form-label">${label}</label>
   <select
-    id="${id}"
+    id.one-time="id"
     class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
-    multiple.bind="multiple"
     value.bind="value"
-    required.bind="required"
-    disabled.bind="disabled"
-    size.bind="size & attr"
-    form.bind="form & attr"
-    name.bind="name & attr"
-    title.bind="title & attr"
-    autocomplete.bind="autocomplete & attr"
     matcher.bind="matcher"
+    ref="control"
   >
     <option
       repeat.for="option of ungroupedOptions"
@@ -33,7 +26,7 @@
       </option>
     </optgroup>
   </select>
-  <label for="${id}" if.bind="label && floatingLabel">${label}</label>
+  <label for.one-time="id" if.bind="label && floatingLabel">${label}</label>
   <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>
   <div class="valid-feedback" if.bind="validFeedback">${validFeedback}</div>
 </template>

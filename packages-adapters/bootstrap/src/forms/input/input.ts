@@ -51,7 +51,10 @@ export class BsInput extends BaseField implements HTMLInputBase {
   @bindable()
   pattern?: string;
 
-  /* property is named like this to avoid collision with IActivationHooks['accept'] */
+  /**
+   * property is named like this to avoid collision with IActivationHooks['accept']
+   * TODO: rename after https://github.com/aurelia/aurelia/issues/2383
+   */
   @bindable()
   fileAccept?: string;
 
@@ -71,12 +74,10 @@ export class BsInput extends BaseField implements HTMLInputBase {
   bsSize?: Size;
 
   @bindable()
-  datalist: string[] = [];
+  datalist?: string[];
 
   @bindable()
   autocomplete?: string;
-
-  input!: HTMLInputElement;
 
   datalistId!: string;
 
@@ -87,6 +88,11 @@ export class BsInput extends BaseField implements HTMLInputBase {
     this.datalistId = uniqueId();
   }
 
+  bound() {
+    super.bound();
+    this.datalistChanged(this.datalist);
+  }
+
   placeholderChanged(): void {
     this.#ensurePlaceholder();
   }
@@ -95,10 +101,18 @@ export class BsInput extends BaseField implements HTMLInputBase {
     this.#ensurePlaceholder();
   }
 
+  datalistChanged(newValue: string[], oldValue?: string[]): void {
+    if (newValue != null) {
+      this.control.setAttribute('datalist', this.datalistId);
+    } else if (oldValue) {
+      this.control.removeAttribute('datalist');
+    }
+  }
+
   valueChanged(): void {
     // TODO: binding to file does not currently work on Aurelia 2 out of the box, need to investigate
-    if (this.input.type === 'file') {
-      this.files = this.input.files!;
+    if (this.control.type === 'file') {
+      this.files = this.control.files!;
     }
   }
 

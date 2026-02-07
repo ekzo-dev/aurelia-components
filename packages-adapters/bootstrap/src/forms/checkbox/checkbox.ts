@@ -45,12 +45,13 @@ export class BsCheckbox extends BaseField {
   @bindable(coerceBoolean)
   reverse: boolean = false;
 
-  readonly input!: HTMLInputElement;
+  bound() {
+    super.bound();
+    this.indeterminateChanged();
+  }
 
   indeterminateChanged() {
-    if (this.input) {
-      this.input.indeterminate = this.indeterminate;
-    }
+    this.control.indeterminate = this.indeterminate;
   }
 
   get classes(): string {

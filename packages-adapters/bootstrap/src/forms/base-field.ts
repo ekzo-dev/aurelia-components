@@ -3,6 +3,27 @@ import './common.scss';
 import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
 import { bindable, ICustomElementViewModel } from 'aurelia';
 
+const stringProperties = new Set<string>([
+  'name',
+  'form',
+  'title',
+  'autocomplete',
+  'placeholder',
+  'type',
+  'step',
+  'min',
+  'max',
+  'size',
+  'minlength',
+  'maxlength',
+  'pattern',
+  'fileAccept',
+  'inputmode',
+  'rows',
+]);
+const booleanProperties = new Set<string>(['disabled', 'required', 'readonly', 'multiple']);
+const allProperties = [...stringProperties, ...booleanProperties];
+
 export class BaseField implements ICustomElementViewModel {
   @bindable()
   name?: string;
@@ -34,16 +55,40 @@ export class BaseField implements ICustomElementViewModel {
   @bindable()
   form?: string;
 
+  readonly control!: HTMLInputElement;
+
   binding() {
     if (!this.id) {
       this.id = uniqueId();
     }
   }
 
-  /**
-   * Пустой метод для работы обработчика в дочерних классах, не удалять!
-   * Без него дочерние обработчики почему-то не срабатывают
-   * @param value
-   */
-  valueChanged(value: any): void {}
+  bound() {
+    allProperties.forEach((prop) => {
+      if (this[prop] != null) {
+        this.propertyChanged(prop, this[prop]);
+      }
+    });
+  }
+
+  propertyChanged(key: PropertyKey, newValue: unknown, oldValue?: unknown) {
+    const { control } = this;
+    const prop = key.toString();
+
+    if (!control || prop === 'value') return;
+
+    if (stringProperties.has(prop)) {
+      const isEmpty = newValue == null || newValue === '';
+      // TODO: remove after https://github.com/aurelia/aurelia/issues/2383
+      const attr = prop === 'fileAccept' ? 'accept' : prop;
+
+      if (isEmpty && oldValue) {
+        control.removeAttribute(attr);
+      } else if (!isEmpty) {
+        control.setAttribute(attr, newValue.toString());
+      }
+    } else if (booleanProperties.has(prop)) {
+      control[prop] = newValue;
+    }
+  }
 }

@@ -29,8 +29,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
 
   host = resolve(HTMLElement);
 
-  control!: HTMLFieldSetElement;
-
   filter: string = '';
 
   emptyOption?: ISelectOption;
@@ -97,8 +95,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get showClear(): boolean {
-    console.warn(`BsSelect #${this.id}: get showClear`);
-
     return (
       !this.disabled &&
       ((this.emptyOption && this.selectedOption?.value !== this.emptyOption.value) ||
@@ -126,7 +122,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get selectedOption(): ISelectOption | undefined {
-    console.warn(`BsSelect #${this.id}: get selectedOption`);
     if (this.multiple) return;
 
     const { value, emptyValue, matcher } = this;
