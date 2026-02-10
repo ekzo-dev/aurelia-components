@@ -53,6 +53,12 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     }
   }
 
+  propertyChanged(key: PropertyKey, newValue: unknown, oldValue?: unknown) {
+    super.propertyChanged(key, newValue, oldValue);
+    // multiple must not be set on control
+    this.control.removeAttribute('multiple');
+  }
+
   setPopperConfig() {
     const { host } = this;
     const parentModal = host.closest('.modal-body,.popover-body,.offcanvas-body');
