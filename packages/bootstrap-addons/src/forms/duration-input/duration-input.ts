@@ -5,7 +5,7 @@ import './duration-input.scss';
 import { BaseField, Size } from '@ekzo-dev/bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { Temporal } from '@js-temporal/polyfill';
-import { bindable, BindingMode, customElement, resolve } from 'aurelia';
+import { bindable, BindingMode, customElement } from 'aurelia';
 
 type Duration = Partial<Pick<Temporal.Duration, 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds'>>;
 type DurationLabels = {
@@ -44,8 +44,6 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
 
   @bindable(coerceBoolean)
   floatingLabel: boolean = false;
-
-  readonly host = resolve(HTMLElement);
 
   duration: Duration = {};
 
