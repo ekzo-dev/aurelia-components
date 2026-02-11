@@ -63,6 +63,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   }
 
   attaching() {
+    super.attaching();
     this.controls = this.host.querySelectorAll('input[type=number]');
     this.controls.forEach((control) => {
       control.addEventListener('keypress', this);
