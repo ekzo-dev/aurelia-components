@@ -1,15 +1,16 @@
-import template from './navbar-nav.html';
-
 import './navbar.scss';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel } from 'aurelia';
+import { bindable, customAttribute } from 'aurelia';
 
-@customElement({
-  name: 'bs-navbar-nav',
-  template,
-})
-export class BsNavbarNav implements ICustomElementViewModel {
+import { BaseAttribute } from '../base-attribute';
+
+@customAttribute('bs-navbar-nav')
+export class BsNavbarNav extends BaseAttribute {
   @bindable(coerceBoolean)
   scroll: boolean = false;
+
+  get classes(): string[] {
+    return ['navbar-nav', this.scroll ? 'navbar-nav-scroll' : ''].filter(Boolean);
+  }
 }
