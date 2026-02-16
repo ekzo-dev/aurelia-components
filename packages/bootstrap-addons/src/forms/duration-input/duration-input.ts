@@ -101,15 +101,12 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   private _parseDuration(value: string) {
     try {
       const duration = Temporal.Duration.from(value);
+      const result = {};
 
-      this.duration = {
-        years: duration.years,
-        months: duration.months,
-        days: duration.days,
-        hours: duration.hours,
-        minutes: duration.minutes,
-        seconds: duration.seconds,
-      };
+      durationKeys.forEach((key) => {
+        result[key] = duration[key] ? duration[key].toString() : '';
+      });
+      this.duration = result;
     } catch (error) {
       if (error instanceof RangeError) {
         console.warn(`[bs-duration-input] ${error.message}`);
