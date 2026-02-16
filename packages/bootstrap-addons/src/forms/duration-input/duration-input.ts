@@ -12,6 +12,8 @@ type DurationLabels = {
   [K in keyof Duration]: string;
 };
 
+const durationKeys = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'] as const;
+
 /**
  * https://github.com/whatwg/html/issues/5488
  * https://github.com/tc39/proposal-intl-duration-format
@@ -25,7 +27,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   get value(): string {
     const { duration } = this;
 
-    if (Object.values(duration).every((v) => v == null || v.toString() === '')) {
+    if (durationKeys.every((v) => duration[v] == null || duration[v].toString() === '')) {
       return '';
     }
 
