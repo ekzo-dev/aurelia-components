@@ -45,7 +45,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   bsSize?: Size;
 
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
+  floatingLabel: boolean = this.config.floatingLabels;
 
   duration: Duration = {};
 

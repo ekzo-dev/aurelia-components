@@ -3,6 +3,8 @@ import './common.scss';
 import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
 import { bindable, ICustomElementViewModel, queueTask, resolve } from 'aurelia';
 
+import { IBootstrapOptions } from '../configuration';
+
 const stringProperties = new Set<string>([
   'name',
   'form',
@@ -50,7 +52,12 @@ export class BaseField implements ICustomElementViewModel {
   validFeedback?: string;
 
   @bindable()
-  invalidFeedback?: string;
+  get invalidFeedback(): string {
+    return this._invalidFeedback ?? this._validationMessage;
+  }
+  set invalidFeedback(value: string) {
+    this._invalidFeedback = value;
+  }
 
   @bindable()
   form?: string;
@@ -62,9 +69,12 @@ export class BaseField implements ICustomElementViewModel {
 
   readonly host = resolve(HTMLElement);
 
-  #textElement?: HTMLElement;
+  protected readonly config = resolve(IBootstrapOptions);
 
-  #useInvalidEvent: boolean = true;
+  private _validationMessage?: string;
+  private _invalidFeedback?: string;
+
+  #textElement?: HTMLElement;
 
   bound() {
     allProperties.forEach((prop) => {
@@ -73,8 +83,8 @@ export class BaseField implements ICustomElementViewModel {
       }
     });
 
-    if (this.#useInvalidEvent && this.control) {
-      this.invalidFeedback = this.control.validationMessage;
+    if (this.config.htmlValidationMessages && this.control) {
+      this._validationMessage = this.control.validationMessage;
     }
   }
 
@@ -106,9 +116,9 @@ export class BaseField implements ICustomElementViewModel {
     if (!control) return;
 
     if (prop === 'value') {
-      if (this.#useInvalidEvent) {
+      if (this.config.htmlValidationMessages) {
         queueTask(() => {
-          this.invalidFeedback = control.validationMessage;
+          this._validationMessage = control.validationMessage;
         });
       }
     } else if (stringProperties.has(prop)) {

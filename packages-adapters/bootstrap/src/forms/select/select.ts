@@ -31,7 +31,7 @@ export class BsSelect extends BaseField {
   multiple: boolean = false;
 
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
+  floatingLabel: boolean = this.config.floatingLabels;
 
   @bindable(coerceNumber)
   size?: number;

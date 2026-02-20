@@ -62,7 +62,7 @@ export class BsInput extends BaseField implements HTMLInputBase {
   placeholder?: string;
 
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
+  floatingLabel: boolean = this.config.floatingLabels;
 
   @bindable(coerceBoolean)
   readonly: boolean = false;

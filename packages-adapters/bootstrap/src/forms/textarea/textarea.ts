@@ -23,7 +23,7 @@ export class BsTextarea extends BaseField {
   placeholder?: string;
 
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
+  floatingLabel: boolean = this.config.floatingLabels;
 
   @bindable()
   maxlength?: number;
