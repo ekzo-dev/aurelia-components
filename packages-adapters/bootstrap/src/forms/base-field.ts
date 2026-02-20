@@ -1,7 +1,7 @@
 import './common.scss';
 
 import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
-import { bindable, ICustomElementViewModel, resolve } from 'aurelia';
+import { bindable, ICustomElementViewModel, queueTask, resolve } from 'aurelia';
 
 const stringProperties = new Set<string>([
   'name',
@@ -29,7 +29,7 @@ export class BaseField implements ICustomElementViewModel {
   name?: string;
 
   @bindable()
-  id?: string;
+  id: string = uniqueId();
 
   @bindable()
   label?: string;
@@ -64,11 +64,7 @@ export class BaseField implements ICustomElementViewModel {
 
   #textElement?: HTMLElement;
 
-  binding() {
-    if (!this.id) {
-      this.id = uniqueId();
-    }
-  }
+  #useInvalidEvent: boolean = true;
 
   bound() {
     allProperties.forEach((prop) => {
@@ -76,6 +72,10 @@ export class BaseField implements ICustomElementViewModel {
         this.propertyChanged(prop, this[prop]);
       }
     });
+
+    if (this.#useInvalidEvent && this.control) {
+      this.invalidFeedback = this.control.validationMessage;
+    }
   }
 
   attaching() {
@@ -103,9 +103,15 @@ export class BaseField implements ICustomElementViewModel {
     const { control } = this;
     const prop = key.toString();
 
-    if (!control || prop === 'value') return;
+    if (!control) return;
 
-    if (stringProperties.has(prop)) {
+    if (prop === 'value') {
+      if (this.#useInvalidEvent) {
+        queueTask(() => {
+          this.invalidFeedback = control.validationMessage;
+        });
+      }
+    } else if (stringProperties.has(prop)) {
       const isEmpty = newValue == null || newValue === '';
       // TODO: remove after https://github.com/aurelia/aurelia/issues/2383
       const attr = prop === 'fileAccept' ? 'accept' : prop;

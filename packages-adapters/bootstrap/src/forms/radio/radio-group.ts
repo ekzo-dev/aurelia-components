@@ -45,11 +45,7 @@ export class BsRadioGroup extends BaseField {
   buttonVariant: ButtonVariant = 'primary';
 
   binding() {
-    super.binding();
-
-    if (!this.name) {
-      this.name = uniqueId();
-    }
+    this.name ??= uniqueId();
   }
 
   get radioOptions(): IRadioOption[] {

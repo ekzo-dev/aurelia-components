@@ -36,8 +36,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   popperConfig: Partial<Options> | Tooltip.PopperConfigFunction | null = null;
 
   binding() {
-    super.binding();
-
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [];
     }

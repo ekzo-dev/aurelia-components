@@ -1,14 +1,8 @@
 <template class="${floatingLabel ? 'form-floating' : ''}">
   <label for.one-time="id" if.bind="label && !floatingLabel" class="form-label">${label}</label>
   <fieldset class="${classes}" disabled.bind="disabled">
-    <input
-      type="text"
-      id.one-time="id"
-      required.bind="required"
-      value.bind="value"
-      form.bind="form & attr"
-      focus.trigger="focus()"
-    />
+    <input type="text" id.one-time="id" value.bind="value" focus.trigger="focus()" ref="control" />
+
     <input type="number" min="0" value.bind="duration.years" placeholder="--" />
     <span>${labels.years}</span>
     <input type="number" min="0" value.bind="duration.months" placeholder="--" />

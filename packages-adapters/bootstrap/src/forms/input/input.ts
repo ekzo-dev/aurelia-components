@@ -79,17 +79,11 @@ export class BsInput extends BaseField implements HTMLInputBase {
   @bindable()
   autocomplete?: string;
 
-  datalistId!: string;
-
-  binding(): void {
-    super.binding();
-    this.#ensurePlaceholder();
-
-    this.datalistId = uniqueId();
-  }
+  datalistId: string = uniqueId();
 
   bound() {
     super.bound();
+    this.#ensurePlaceholder();
     this.datalistChanged(this.datalist);
   }
 
@@ -110,9 +104,8 @@ export class BsInput extends BaseField implements HTMLInputBase {
   }
 
   valueChanged(): void {
-    // TODO: binding to file does not currently work on Aurelia 2 out of the box, need to investigate
     if (this.control.type === 'file') {
-      this.files = this.control.files!;
+      this.files = this.control.files;
     }
   }
 

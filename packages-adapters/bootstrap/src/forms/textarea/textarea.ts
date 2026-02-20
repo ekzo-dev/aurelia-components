@@ -38,7 +38,6 @@ export class BsTextarea extends BaseField {
   autocomplete?: string;
 
   binding(): void {
-    super.binding();
     this.#ensurePlaceholder();
   }
 
