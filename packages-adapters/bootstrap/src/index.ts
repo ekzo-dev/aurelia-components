@@ -12,6 +12,9 @@ const BootstrapConfiguration = createConfiguration({}, [
 ]);
 
 export * from './components';
+// modal and offcanvas dialog impls must be exported separately not to be registered as resources automatically
+export * from './components/modal/dialog-impl';
+export * from './components/offcanvas/dialog-impl';
 export * from './content';
 export * from './forms';
 export * from './types';

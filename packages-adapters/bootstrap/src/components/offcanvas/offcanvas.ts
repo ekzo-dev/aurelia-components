@@ -7,6 +7,7 @@ import { bindable, customElement, ICustomElementViewModel, observable, resolve }
 import { Offcanvas } from 'bootstrap';
 
 import { Breakpoint } from '../../types';
+import { coerceBooleanOrString } from '../../utils';
 import { BsCloseButton } from '../close-button';
 
 export type OffcanvasPlacement = 'start' | 'end' | 'top' | 'bottom';
@@ -26,11 +27,8 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
   @bindable(coerceBoolean)
   scroll: boolean = false;
 
-  @bindable(coerceBoolean)
-  backdrop: boolean = true;
-
-  @bindable(coerceBoolean)
-  static: boolean = false;
+  @bindable(coerceBooleanOrString('static'))
+  backdrop: boolean | 'static' = true;
 
   @bindable(coerceBoolean)
   keyboard: boolean = true;
@@ -46,7 +44,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
 
   private offcanvas?: Offcanvas;
 
-  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
+  private readonly element: HTMLElement = resolve(HTMLElement);
 
   attaching() {
     this.createOffcanvas();
@@ -108,7 +106,7 @@ export class BsOffcanvas implements ICustomElementViewModel, Offcanvas.Options {
     const { element } = this;
 
     this.offcanvas = new Offcanvas(element, {
-      backdrop: this.backdrop && this.static ? 'static' : this.backdrop,
+      backdrop: this.backdrop,
       scroll: this.scroll,
       keyboard: this.keyboard,
     });
