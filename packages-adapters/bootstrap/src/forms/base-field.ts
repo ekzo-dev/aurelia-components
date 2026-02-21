@@ -136,6 +136,15 @@ export class BaseField implements ICustomElementViewModel {
     }
   }
 
+  /**
+   * Set custom validity message for the element
+   * @param error
+   */
+  setCustomValidity(error: string) {
+    this.control?.setCustomValidity(error);
+    this._validationMessage = error;
+  }
+
   #createElement(name: string, attributes: Record<string, string>, content: string | HTMLElement) {
     const elem = document.createElement(name);
 
