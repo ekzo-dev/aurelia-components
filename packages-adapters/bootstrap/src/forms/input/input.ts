@@ -58,11 +58,17 @@ export class BsInput extends BaseField implements HTMLInputBase {
   @bindable()
   fileAccept?: string;
 
-  @bindable()
-  placeholder?: string;
-
   @bindable(coerceBoolean)
   floatingLabel: boolean = this.config.floatingLabels;
+
+  @bindable()
+  get placeholder(): string {
+    // https://getbootstrap.com/docs/5.3/forms/floating-labels/#example
+    return !this._placeholder && this.floatingLabel ? ' ' : this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+  }
 
   @bindable(coerceBoolean)
   readonly: boolean = false;
@@ -81,18 +87,11 @@ export class BsInput extends BaseField implements HTMLInputBase {
 
   datalistId: string = uniqueId();
 
+  private _placeholder?: string;
+
   bound() {
     super.bound();
-    this.#ensurePlaceholder();
     this.datalistChanged(this.datalist);
-  }
-
-  placeholderChanged(): void {
-    this.#ensurePlaceholder();
-  }
-
-  floatingLabelChanged(): void {
-    this.#ensurePlaceholder();
   }
 
   datalistChanged(newValue: string[], oldValue?: string[]): void {
@@ -118,13 +117,5 @@ export class BsInput extends BaseField implements HTMLInputBase {
     ]
       .filter(Boolean)
       .join(' ');
-  }
-
-  #ensurePlaceholder(): void {
-    // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
-    // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
-    if (this.floatingLabel && !this.placeholder) {
-      this.placeholder = ' ';
-    }
   }
 }

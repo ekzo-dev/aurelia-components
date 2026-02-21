@@ -3,6 +3,7 @@
   <select
     id.one-time="id"
     class="form-select ${bsSize ? `form-select-${bsSize}` : ''} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
+    multiple.bind="multiple"
     value.bind="value"
     matcher.bind="matcher"
     ref="control"

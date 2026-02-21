@@ -19,11 +19,17 @@ export class BsTextarea extends BaseField {
   @bindable()
   rows: number = 3;
 
-  @bindable()
-  placeholder?: string;
-
   @bindable(coerceBoolean)
   floatingLabel: boolean = this.config.floatingLabels;
+
+  @bindable()
+  get placeholder(): string {
+    // https://getbootstrap.com/docs/5.3/forms/floating-labels/#example
+    return !this._placeholder && this.floatingLabel ? ' ' : this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+  }
 
   @bindable()
   maxlength?: number;
@@ -37,23 +43,5 @@ export class BsTextarea extends BaseField {
   @bindable()
   autocomplete?: string;
 
-  binding(): void {
-    this.#ensurePlaceholder();
-  }
-
-  placeholderChanged(): void {
-    this.#ensurePlaceholder();
-  }
-
-  floatingLabelChanged(): void {
-    this.#ensurePlaceholder();
-  }
-
-  #ensurePlaceholder(): void {
-    // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
-    // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
-    if (this.floatingLabel && !this.placeholder) {
-      this.placeholder = ' ';
-    }
-  }
+  private _placeholder?: string;
 }

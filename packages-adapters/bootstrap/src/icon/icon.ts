@@ -29,6 +29,6 @@ export class BsIcon {
   #setIcon(): void {
     // to support simple binding to SVG attributes from template one needs to include Aurelia SVGAnalyzer
     // we use a simpler approach with custom setAttribute()
-    this.use.setAttribute('href', `${this._options.iconsSpritePath}#${this.name}`);
+    this.use.setAttribute('xlink:href', `${this._options.iconsSpritePath}#${this.name}`);
   }
 }
