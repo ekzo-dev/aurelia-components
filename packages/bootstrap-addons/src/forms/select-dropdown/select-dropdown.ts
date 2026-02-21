@@ -1,6 +1,6 @@
-import template from './select.html';
+import template from './select-dropdown.html';
 
-import './select.scss';
+import './select-dropdown.scss';
 
 import type { Options } from '@popperjs/core';
 import type { Tooltip } from 'bootstrap';
@@ -11,23 +11,21 @@ import {
   BsDropdownItem,
   BsDropdownMenu,
   BsDropdownToggle,
-  BsSelect as BaseBsSelect,
+  BsSelect,
   ISelectOption,
 } from '@ekzo-dev/bootstrap';
-import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, queueTask } from 'aurelia';
 
 import { Filter } from './filter';
 
 @customElement({
-  name: 'bs-select',
+  name: 'bs-select-dropdown',
   template,
   dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter, BsCloseButton],
 })
-export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
+export class BsSelectDropdown extends BsSelect implements ICustomElementViewModel {
   @bindable()
   emptyValue?: unknown = null;
-
-  host = resolve(HTMLElement);
 
   filter: string = '';
 
@@ -45,7 +43,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.setPopperConfig();
   }
 
-  valueChanged(value: unknown): void {
+  valueChanged(value: unknown) {
     if (this.multiple && !Array.isArray(value)) {
       this.value = [];
     }
@@ -157,12 +155,12 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     const foundValue = option?.value;
 
     if (foundValue !== value) {
-      console.info(`[bootstrap-addons] updating <bs-select> [id=${this.id}] value to`, foundValue);
-      void Promise.resolve().then(() => (this.value = foundValue));
+      queueTask(() => (this.value = foundValue));
     }
 
     // update empty option next tick
-    void Promise.resolve().then(() => (this.emptyOption = emptyOption));
+    // TODO: investigate if next tick is still needed
+    queueTask(() => (this.emptyOption = emptyOption));
 
     return option;
   }
