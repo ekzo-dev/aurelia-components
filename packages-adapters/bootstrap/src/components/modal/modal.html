@@ -2,13 +2,15 @@
   <div class.bind="classes" ref="dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><au-slot name="title">${title}</au-slot></h5>
+        <h5 class="modal-title">
+          <au-slot name="title">${title}</au-slot>
+        </h5>
         <button type="button" bs-close-button click.trigger="hide()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <au-slot></au-slot>
-        <au-slot name="body"></au-slot>
       </div>
+      <!-- footer must have no text nodes as it is hidden by :empty selector -->
       <div class="modal-footer"><au-slot name="footer"></au-slot></div>
     </div>
   </div>
