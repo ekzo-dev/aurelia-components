@@ -41,6 +41,6 @@ export class BsPlaceholder extends BaseAttribute {
   }
 
   get classes(): string[] {
-    return ['placeholder', this.size ? prefix(this.size) : null].filter(Boolean);
+    return ['placeholder', this.size ? prefix(this.size) : ''].filter(Boolean);
   }
 }

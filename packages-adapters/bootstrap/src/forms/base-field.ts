@@ -52,7 +52,7 @@ export class BaseField implements ICustomElementViewModel {
   validFeedback?: string;
 
   @bindable()
-  get invalidFeedback(): string {
+  get invalidFeedback(): string | undefined {
     return this._invalidFeedback ?? this._validationMessage;
   }
   set invalidFeedback(value: string) {
@@ -65,7 +65,7 @@ export class BaseField implements ICustomElementViewModel {
   @bindable()
   text?: string | HTMLElement;
 
-  readonly control?: HTMLInputElement;
+  readonly control!: HTMLInputElement;
 
   readonly host = resolve(HTMLElement);
 
@@ -78,8 +78,8 @@ export class BaseField implements ICustomElementViewModel {
 
   bound() {
     allProperties.forEach((prop) => {
-      if (this[prop] != null) {
-        this.propertyChanged(prop, this[prop]);
+      if (this[prop as keyof this] != null) {
+        this.propertyChanged(prop, this[prop as keyof this]);
       }
     });
 
@@ -92,7 +92,7 @@ export class BaseField implements ICustomElementViewModel {
     this.textChanged(this.text);
   }
 
-  textChanged(value: string | HTMLElement) {
+  textChanged(value?: string | HTMLElement) {
     const element = this.#textElement;
 
     if (value && !element) {
@@ -105,7 +105,7 @@ export class BaseField implements ICustomElementViewModel {
     } else if (!value && element) {
       this.control?.removeAttribute('aria-describedby');
       element.remove();
-      this.#textElement = null;
+      this.#textElement = undefined;
     }
   }
 
@@ -132,12 +132,16 @@ export class BaseField implements ICustomElementViewModel {
         control.setAttribute(attr, newValue.toString());
       }
     } else if (booleanProperties.has(prop)) {
-      control[prop] = newValue;
+      if (newValue) {
+        control.setAttribute(prop, '');
+      } else {
+        control.removeAttribute(prop);
+      }
     }
   }
 
   /**
-   * Set custom validity message for the element
+   * Set a custom validity message for the element
    * @param error
    */
   setCustomValidity(error: string) {

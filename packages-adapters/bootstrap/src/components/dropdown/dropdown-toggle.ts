@@ -30,6 +30,6 @@ export class BsDropdownToggle extends BaseAttribute {
   }
 
   get classes(): string[] {
-    return [this.arrow ? 'dropdown-toggle' : null, this.split ? 'dropdown-toggle-split' : null].filter(Boolean);
+    return [this.arrow ? 'dropdown-toggle' : '', this.split ? 'dropdown-toggle-split' : ''].filter(Boolean);
   }
 }

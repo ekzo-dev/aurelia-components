@@ -2,7 +2,6 @@ import template from './table.html';
 
 import './table.scss';
 
-import { ICustomElementController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
@@ -40,16 +39,14 @@ export class BsTable implements ICustomElementViewModel {
 
   table!: HTMLTableElement;
 
-  readonly $controller: ICustomElementController<this>;
-
-  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
+  readonly element = resolve(HTMLElement);
 
   attached() {
     this.table = this.element.querySelector('table')!;
 
     this.table.classList.add('table');
-    Object.keys(this.$controller.definition.bindables).forEach((name) => {
-      this.propertyChanged(name as keyof this, this[name]);
+    Object.keys((this as ICustomElementViewModel).$controller!.definition.bindables).forEach((name) => {
+      this.propertyChanged(name as keyof this, this[name as keyof this]);
     });
   }
 

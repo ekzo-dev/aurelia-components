@@ -25,7 +25,6 @@ export class BsPopover extends BsTooltip implements Popover.Options {
   </div>`;
 
   @bindable()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   popperConfig: Partial<Popover.Options> | Tooltip.PopperConfigFunction | null = null;
 

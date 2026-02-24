@@ -6,7 +6,7 @@ const p = (value: number): string => String(value).padStart(2, '0');
 
 @valueConverter('dateTimeInput')
 export class DateTimeInputValueConverter {
-  toView(value: string, type: DataType): string {
+  toView(value: string, type: DataType): string | undefined {
     if (value == null || value === '') return undefined;
 
     if (type === 'date-time') {
@@ -30,7 +30,7 @@ export class DateTimeInputValueConverter {
     return undefined;
   }
 
-  fromView(value: string, type: DataType): string {
+  fromView(value: string, type: DataType): string | undefined {
     if (value == null || value === '') return undefined;
 
     if (type === 'date-time') {

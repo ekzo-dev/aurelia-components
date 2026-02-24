@@ -1,6 +1,5 @@
 import type { GroupOptions, Options } from 'sortablejs';
 
-import { ICustomAttributeController } from '@aurelia/runtime-html';
 import { bindable, customAttribute, ICustomAttributeViewModel, resolve } from 'aurelia';
 import SortableLib from 'sortablejs';
 
@@ -81,8 +80,6 @@ export class Sortable implements ICustomAttributeViewModel, Options {
 
   readonly host = resolve(HTMLElement);
 
-  readonly $controller!: ICustomAttributeController<this>;
-
   attached() {
     this.#createSortable();
   }
@@ -92,15 +89,16 @@ export class Sortable implements ICustomAttributeViewModel, Options {
   }
 
   propertyChanged(name: keyof Options, value: Options[keyof Options]): void {
-    this.sortable.option(name, value);
+    this.sortable?.option(name, value);
   }
 
   #createSortable() {
     // prepare options from bindables
     const options: Options = {};
 
-    Object.keys(this.$controller.definition.bindables).forEach((name) => {
+    Object.keys((this as ICustomAttributeViewModel).$controller!.definition.bindables).forEach((name) => {
       if (this[name as keyof this] !== undefined) {
+        // @ts-ignore
         options[name] = this[name as keyof this];
       }
     });

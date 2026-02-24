@@ -135,7 +135,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
       };
 
       this.element.addEventListener(event, listener);
-      this.modal[show ? 'show' : 'hide']();
+      this.modal?.[show ? 'show' : 'hide']();
     });
   }
 

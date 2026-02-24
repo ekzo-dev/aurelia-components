@@ -76,7 +76,7 @@ export class DialogRendererBootstrapOffcanvas implements IDialogDomRenderer<Dial
     void controller.activate(controller, null);
 
     return {
-      contentHost: offcanvas.querySelector('div.offcanvas-body'),
+      contentHost: offcanvas.querySelector('div.offcanvas-body')!,
       show: () => dialog.show(),
       hide: () => {
         deactivating = true;

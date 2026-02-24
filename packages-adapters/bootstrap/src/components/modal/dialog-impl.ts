@@ -89,7 +89,7 @@ export class DialogRendererBootstrapModal implements IDialogDomRenderer<DialogOp
     void controller.activate(controller, null);
 
     return {
-      contentHost: modal.querySelector('div.modal-body'),
+      contentHost: modal.querySelector('div.modal-body')!,
       show: () => dialog.show(),
       hide: () => {
         deactivating = true;

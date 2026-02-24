@@ -45,7 +45,7 @@ export class BsSelect extends BaseField {
   @bindable()
   matcher?: (a: unknown, b: unknown) => boolean;
 
-  getValue(key: unknown): string {
+  getValue(key: unknown): string | undefined {
     return key == null || key === '' ? '' : undefined;
   }
 
@@ -54,6 +54,7 @@ export class BsSelect extends BaseField {
     const { options } = this;
 
     // check object/entries
+    // @ts-ignore
     if ((options instanceof Object && options.constructor === Object) || Array.isArray(options[0])) {
       return result;
     }
@@ -84,6 +85,7 @@ export class BsSelect extends BaseField {
     }
 
     // check entries
+    // @ts-ignore
     if (Array.isArray(options[0])) {
       return (options as Array<readonly [unknown, string]>).map(([k, v]) => ({
         value: k,

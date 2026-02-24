@@ -26,9 +26,9 @@ export class BsListGroup extends BaseAttribute {
   protected get classes(): string[] {
     return [
       'list-group',
-      this.flush ? prefix('flush') : null,
-      this.numbered ? prefix('numbered') : null,
-      this.horizontal ? prefix(`horizontal${this.horizontal === 'always' ? '' : `-${this.horizontal}`}`) : null,
+      this.flush ? prefix('flush') : '',
+      this.numbered ? prefix('numbered') : '',
+      this.horizontal ? prefix(`horizontal${this.horizontal === 'always' ? '' : `-${this.horizontal}`}`) : '',
     ].filter(Boolean);
   }
 }

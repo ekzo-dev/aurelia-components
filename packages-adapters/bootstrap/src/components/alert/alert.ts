@@ -40,7 +40,7 @@ export class BsAlert implements ICustomElementViewModel {
   }
 
   close(): void {
-    return this.#alert.close();
+    return this.#alert?.close();
   }
 
   #createAlert() {

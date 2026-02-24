@@ -62,7 +62,7 @@ export class BsInput extends BaseField implements HTMLInputBase {
   floatingLabel: boolean = this.config.floatingLabels;
 
   @bindable()
-  get placeholder(): string {
+  get placeholder(): string | undefined {
     // https://getbootstrap.com/docs/5.3/forms/floating-labels/#example
     return !this._placeholder && this.floatingLabel ? ' ' : this._placeholder;
   }
@@ -94,7 +94,7 @@ export class BsInput extends BaseField implements HTMLInputBase {
     this.datalistChanged(this.datalist);
   }
 
-  datalistChanged(newValue: string[], oldValue?: string[]): void {
+  datalistChanged(newValue?: string[], oldValue?: string[]): void {
     if (newValue != null) {
       this.control.setAttribute('datalist', this.datalistId);
     } else if (oldValue) {
@@ -104,7 +104,7 @@ export class BsInput extends BaseField implements HTMLInputBase {
 
   valueChanged(): void {
     if (this.control.type === 'file') {
-      this.files = this.control.files;
+      this.files = this.control.files!;
     }
   }
 

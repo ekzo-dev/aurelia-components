@@ -58,7 +58,7 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
   setPopperConfig() {
     const { host } = this;
     const parentModal = host.closest('.modal-body,.popover-body,.offcanvas-body');
-    const dropdownMenu: HTMLElement = host.querySelector('.dropdown-menu');
+    const dropdownMenu: HTMLElement = host.querySelector('.dropdown-menu')!;
 
     if (parentModal != null) {
       this.popperConfig = {
@@ -67,7 +67,7 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
       dropdownMenu.style.minWidth = `${host.offsetWidth}px`;
     } else {
       this.popperConfig = null;
-      dropdownMenu.style.minWidth = undefined;
+      dropdownMenu.style.minWidth = '';
     }
   }
 
@@ -75,8 +75,8 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
     return `${this.id}${parentIndex != null ? '-g' + parentIndex.toString() : ''}-${index}`;
   }
 
-  selectOption(option: ISelectOption) {
-    this.value = option.value;
+  selectOption(option?: ISelectOption) {
+    this.value = option?.value;
     this.#dispatchEvents();
   }
 
@@ -85,7 +85,7 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
       const { options, value } = this;
 
       return Array.isArray(value)
-        ? value.map((val) => (options as ISelectOption[]).find((option) => option.value === val).text).join(', ')
+        ? value.map((val) => (options as ISelectOption[]).find((option) => option.value === val)!.text).join(', ')
         : '';
     }
 
@@ -134,13 +134,16 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
       options = Object.entries(options);
     }
 
+    // @ts-ignore
     const isEntries = Array.isArray(options[0]);
     let option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
+      // @ts-ignore
       const optionValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
       if (optionValue == emptyValue) {
         emptyOption = {
           value: optionValue,
+          // @ts-ignore
           text: isEntries ? (option[1] as string) : (option as ISelectOption).text,
         } as ISelectOption;
       }
@@ -149,6 +152,7 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
     });
 
     option =
+      // @ts-ignore
       isEntries && option !== undefined ? { value: option[0], text: option[1] as string } : (option as ISelectOption);
 
     // update value next tick

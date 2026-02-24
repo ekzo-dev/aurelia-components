@@ -21,7 +21,7 @@ import { ProxyObservable } from '@aurelia/runtime';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { JsonEditor } from '@ekzo-dev/vanilla-jsoneditor';
 import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons/faUpRightAndDownLeftFromCenter';
-import Ajv, { ErrorObject, Options } from 'ajv';
+import Ajv, { type AnySchema, type ErrorObject, type Options } from 'ajv';
 import Ajv2019 from 'ajv/dist/2019';
 import Ajv2020 from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
@@ -49,7 +49,7 @@ export class BsJsonInput {
   @bindable(coerceBoolean)
   disabled: boolean = false;
 
-  @bindable({ set: (v: BsJsonInput['jsonSchema'] | string) => (v === '' || v === true || v === 'true' ? true : v) })
+  @bindable({ set: (v: unknown) => (v === '' || v === true || v === 'true' ? true : v) })
   jsonSchema?: JSONSchema | SchemaNode | boolean;
 
   @bindable()
@@ -77,7 +77,7 @@ export class BsJsonInput {
   }
 
   onRenderValue = (props: RenderValueProps): RenderValueComponentDescription[] => {
-    let result: RenderValueComponentDescription[] | null;
+    // let result: RenderValueComponentDescription[] | null;
     // const { jsonSchema } = this;
     const { editorModule } = this.editorComponent;
 
@@ -86,7 +86,7 @@ export class BsJsonInput {
     //   result = editorModule.renderJSONSchemaEnum(props, jsonSchema, this.#getSchemaDefinitions(jsonSchema));
     // }
 
-    return result ?? editorModule.renderValue(props);
+    return editorModule!.renderValue(props);
   };
 
   onRenderMenu = (items: MenuItem[]): MenuItem[] | undefined => {
@@ -140,12 +140,12 @@ export class BsJsonInput {
     return this.required && (this.value == null || this.value === '');
   }
 
-  get schemaVersion(): string {
+  get schemaVersion(): string | undefined {
     if (this.jsonSchema !== true) return undefined;
 
-    const { value } = this;
+    const value = this.value as JSONSchema;
 
-    return value == null || value['$schema'] == null ? '' : (value['$schema'] as string);
+    return value == null || value.$schema == null ? '' : (value.$schema as string);
   }
 
   get validator(): Validator | undefined {
@@ -172,7 +172,7 @@ export class BsJsonInput {
         // do not validate empty documents
         if (json === undefined) return [];
 
-        void ajv.validateSchema(json);
+        void ajv.validateSchema(json as AnySchema);
 
         return rawThis.#processErrorsAjv(ajv.errors, json);
       };
@@ -244,7 +244,7 @@ export class BsJsonInput {
     return (schema.$defs ?? schema.definitions) as JSONSchemaDefinitions;
   }
 
-  #processErrorsAjv(errors: ErrorObject[] | null, json: unknown): ValidationError[] {
+  #processErrorsAjv(errors: ErrorObject[] | null | undefined, json: unknown): ValidationError[] {
     const message = this.jsonSchema === true ? 'JSON is not a valid JSONSchema' : 'JSON does not match schema';
 
     this.input.setCustomValidity(errors?.length ? message : '');

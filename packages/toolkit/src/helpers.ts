@@ -9,12 +9,12 @@ export function uniqueId(): string {
 
 // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
 export const coerceBoolean = {
-  set: (v: string | boolean) =>
+  set: (v: unknown): boolean | undefined =>
     v === '' || v === true || v === 'true' ? true : v === false || v === 'false' ? false : undefined,
 };
 
 export const coerceNumber = {
-  set: (v: string | number) => (v == null ? v : parseInt(v.toString(), 10)),
+  set: (v: unknown): number | undefined => (v == null ? (v as undefined) : parseInt(v.toString(), 10)),
 };
 
 /**
@@ -75,7 +75,7 @@ export function deepUnwrap<T>(value: T, isJson = false, seen?: Set<object>): T {
   const result: Record<string, unknown> = {};
 
   for (const key of Object.keys(raw)) {
-    result[key] = deepUnwrap(raw[key], isJson, seen);
+    result[key] = deepUnwrap(raw[key as keyof T], isJson, seen);
   }
 
   return result as T;

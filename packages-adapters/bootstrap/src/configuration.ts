@@ -5,19 +5,19 @@ export interface IBootstrapOptions {
    * Use form floating labels
    * https://getbootstrap.com/docs/5.3/forms/floating-labels/
    */
-  floatingLabels?: boolean;
+  floatingLabels: boolean;
   /**
    * Use native HTML validation messages as invalid feedback
    */
-  htmlValidationMessages?: boolean;
+  htmlValidationMessages: boolean;
   /**
    * Auto register all available components. Disable if you need to manually register only subset of components
    */
-  registerComponents?: boolean;
+  registerComponents: boolean;
   /**
    * Icons SVG sprite location. May be external or local, then bundler (Vite/Webpack) must be configured to include it
    */
-  iconsSpritePath?: string;
+  iconsSpritePath: string;
 }
 
 const defaultOptions: IBootstrapOptions = {
@@ -29,7 +29,7 @@ const defaultOptions: IBootstrapOptions = {
 
 export const IBootstrapOptions = DI.createInterface<IBootstrapOptions>('IBootstrapOptions');
 
-export function createConfiguration(opts: IBootstrapOptions, resources: any[]) {
+export function createConfiguration(opts: Partial<IBootstrapOptions>, resources: any[]) {
   return {
     register(container: IContainer): void {
       const finalOptions = { ...defaultOptions, ...opts };
@@ -41,7 +41,7 @@ export function createConfiguration(opts: IBootstrapOptions, resources: any[]) {
         container.register(resources);
       }
     },
-    customize(options: IBootstrapOptions) {
+    customize(options: Partial<IBootstrapOptions>) {
       return createConfiguration(options, resources);
     },
   };

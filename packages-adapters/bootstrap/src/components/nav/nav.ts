@@ -37,6 +37,6 @@ export class BsNavLink extends BaseAttribute {
   disabled: boolean = false;
 
   get classes(): string[] {
-    return ['nav-link', this.active ? 'active' : null, this.disabled ? 'disabled' : null].filter(Boolean);
+    return ['nav-link', this.active ? 'active' : '', this.disabled ? 'disabled' : ''].filter(Boolean);
   }
 }

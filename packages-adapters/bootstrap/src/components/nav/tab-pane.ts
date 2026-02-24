@@ -39,11 +39,11 @@ export class BsTabPane extends BaseAttribute {
   }
 
   show() {
-    Tab.getInstance(this.tab)?.show();
+    Tab.getInstance(this.tab!)?.show();
   }
 
   get classes(): string[] {
-    return ['tab-pane', this.fade ? 'fade' : null].filter(Boolean);
+    return ['tab-pane', this.fade ? 'fade' : ''].filter(Boolean);
   }
 
   private createTab() {
@@ -65,7 +65,7 @@ export class BsTabPane extends BaseAttribute {
 
   private destroyTab() {
     this.tab?.removeAttribute(TOGGLE);
-    Tab.getInstance(this.tab)?.dispose();
+    Tab.getInstance(this.tab!)?.dispose();
     this.tab = undefined;
   }
 }

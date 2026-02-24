@@ -57,6 +57,7 @@ export class BsRadioGroup extends BaseField {
     }
 
     // check entries
+    // @ts-ignore
     if (Array.isArray(options[0])) {
       return (options as Array<readonly [unknown, string]>).map(([k, v]) => ({
         value: k,

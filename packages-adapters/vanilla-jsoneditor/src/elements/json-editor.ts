@@ -23,10 +23,8 @@ import type {
   Validator,
 } from 'vanilla-jsoneditor';
 
-import { ICustomElementController } from '@aurelia/runtime-html';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
-
-import { coerceBoolean } from '../utils';
 
 @customElement({
   name: 'json-editor',
@@ -37,7 +35,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   content: Content = { text: '' };
 
   @bindable()
-  selection: JSONEditorSelection | null = null;
+  selection?: JSONEditorSelection;
 
   @bindable()
   mode: 'text' | 'tree' | 'table' = 'tree';
@@ -109,7 +107,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   onRenderValue?: (props: RenderValueProps) => RenderValueComponentDescription[];
 
   @bindable()
-  onSelect?: (selection: JSONEditorSelection | null) => void;
+  onSelect?: (selection: JSONEditorSelection | undefined) => void;
 
   @bindable()
   onRenderMenu?: (items: MenuItem[], context: RenderMenuContext) => MenuItem[] | undefined;
@@ -127,13 +125,11 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
 
   editorModule?: typeof import('vanilla-jsoneditor');
 
-  readonly $controller: ICustomElementController<this>;
-
   protected readonly host = resolve(HTMLElement);
 
   #contentCache?: Content;
 
-  get(): Content {
+  get(): Content | undefined {
     return this.editor?.get();
   }
 
@@ -141,7 +137,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.set(content);
   }
 
-  patch(operations: JSONPatchDocument): JSONPatchResult {
+  patch(operations: JSONPatchDocument): JSONPatchResult | undefined {
     return this.editor?.patch(operations);
   }
 
@@ -153,7 +149,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.transform(options);
   }
 
-  scrollTo(path: JSONPath): Promise<void> {
+  scrollTo(path: JSONPath): Promise<void> | undefined {
     return this.editor?.scrollTo(path);
   }
 
@@ -161,11 +157,11 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     return this.editor?.findElement(path);
   }
 
-  acceptAutoRepair(): Content {
+  acceptAutoRepair(): Content | undefined {
     return this.editor?.acceptAutoRepair();
   }
 
-  refresh(): Promise<void> {
+  refresh(): Promise<void> | undefined {
     return this.editor?.refresh();
   }
 
@@ -207,9 +203,9 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
     // prepare props from bindables
     const props: Record<string, unknown> = {};
 
-    Object.keys(this.$controller.definition.bindables).forEach((name) => {
-      if (this[name] !== undefined) {
-        props[name] = this[name];
+    Object.keys((this as ICustomElementViewModel).$controller!.definition.bindables).forEach((name) => {
+      if (this[name as keyof this] !== undefined) {
+        props[name] = this[name as keyof this];
       }
     });
 

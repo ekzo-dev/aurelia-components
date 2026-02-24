@@ -23,7 +23,7 @@ export class BsTextarea extends BaseField {
   floatingLabel: boolean = this.config.floatingLabels;
 
   @bindable()
-  get placeholder(): string {
+  get placeholder(): string | undefined {
     // https://getbootstrap.com/docs/5.3/forms/floating-labels/#example
     return !this._placeholder && this.floatingLabel ? ' ' : this._placeholder;
   }
