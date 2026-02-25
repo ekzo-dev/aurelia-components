@@ -10,9 +10,9 @@ export class GsItem implements ICustomElementViewModel {
   @bindable()
   options: GridStackWidget = {};
 
-  constructor(public readonly element: GridItemHTMLElement = resolve(HTMLElement)) {}
+  readonly element: GridItemHTMLElement = resolve(HTMLElement);
 
   optionsChanged() {
-    this.element.gridstackNode?.grid.update(this.element, this.options);
+    this.element.gridstackNode?.grid?.update(this.element, this.options);
   }
 }

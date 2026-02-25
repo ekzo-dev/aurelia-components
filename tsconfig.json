@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "skipLibCheck": true,
+    "strict": true,
     "paths": {
       "@ekzo-dev/*": ["packages/*/src", "packages-adapters/*/src"]
     }
