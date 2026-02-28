@@ -4,7 +4,11 @@ import htmlImport from '@ayatkyo/vite-plugin-html-import';
 import { type InlineConfig, mergeConfig } from 'vite';
 
 const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineConfig | Promise<InlineConfig> } = {
-  stories: ['../packages-adapters/**/*input.stories.ts'],
+  stories: [
+    '../packages-adapters/**/forms/*/*.stories.ts',
+    '../packages-adapters/**/icon/*.stories.ts',
+    '../packages-adapters/**/content/*/*.stories.ts',
+  ],
   addons: ['@storybook/addon-links'],
   framework: {
     name: '@aurelia/storybook',

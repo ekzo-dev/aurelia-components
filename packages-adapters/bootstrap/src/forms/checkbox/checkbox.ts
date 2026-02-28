@@ -16,16 +16,16 @@ import { BaseField } from '../base-field';
 })
 export class BsCheckbox extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
-  checked!: boolean | any[];
+  checked!: boolean | unknown[];
 
   @bindable()
-  model?: any;
+  model?: unknown;
 
   @bindable()
   value?: string;
 
   @bindable()
-  matcher?: (a: any, b: any) => boolean;
+  matcher?: (a: unknown, b: unknown) => boolean;
 
   @bindable(coerceBoolean)
   inline: boolean = false;
@@ -46,6 +46,7 @@ export class BsCheckbox extends BaseField {
   reverse: boolean = false;
 
   bound() {
+    console.log('checked', this.checked);
     super.bound();
     this.indeterminateChanged();
   }
