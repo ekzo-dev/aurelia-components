@@ -1,29 +1,20 @@
-// import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-//
-// import { selectControl } from '../../../../../.storybook/helpers';
-// import { SIZES } from '../../constants';
-//
-// import { BsInput } from '.';
-//
-// const meta: Meta = {
-//   title: 'Bootstrap / Forms / Input',
-//   component: BsInput,
-//   parameters: {
-//     actions: {
-//       handles: ['change', 'input'],
-//     },
-//   },
-//   args: {
-//     label: 'Label',
-//   },
-//   argTypes: {
-//     size: selectControl(['', ...SIZES]),
-//   },
-// };
-//
-// const Overview: Story = (args): StoryFnAureliaReturnType => ({
-//   props: args,
-// });
-//
-// export default meta;
-// export { Overview };
+import { BsInput } from '.';
+
+const meta = {
+  title: 'Bootstrap / Forms / Input',
+  component: BsInput,
+  render: () => ({
+    template: `<bs-input value.bind='value'></bs-input>`,
+  }),
+  argTypes: {
+    value: { control: 'text' },
+  },
+};
+
+export default meta;
+
+export const Overview = {
+  args: {
+    value: 'Hello from Storybook!',
+  },
+};
