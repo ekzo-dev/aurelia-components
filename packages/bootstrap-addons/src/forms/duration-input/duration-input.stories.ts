@@ -13,7 +13,10 @@
 //     label: 'Duration',
 //   },
 //   argTypes: {
-//     bsSize: selectControl(['', 'sm', 'lg']),
+//     bsSize: {
+  control: 'select',
+  options: ['', 'sm', 'lg'],
+},
 //   },
 // };
 //

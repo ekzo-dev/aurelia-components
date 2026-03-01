@@ -21,7 +21,10 @@
 // //   argTypes: {
 // //     bsSize: {
 // //       ...extractArgTypes(BsSelectDropdown).bsSize,
-// //       ...selectControl(['', 'sm', 'lg']),
+// //       ...{
+//   control: 'select',
+//   options: ['', 'sm', 'lg'],
+// },
 // //     },
 // //   },
 // // } as Meta;

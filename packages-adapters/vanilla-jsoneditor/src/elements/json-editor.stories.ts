@@ -8,8 +8,14 @@
 //   title: 'VanillaJsoneditor / JsonEditor',
 //   component: JsonEditor,
 //   argTypes: {
-//     theme: selectControl(['default', 'dark']),
-//     mode: selectControl(['tree', 'text', 'table']),
+//     theme: {
+//   control: 'select',
+//   options: ['default', 'dark'],
+// },
+//     mode: {
+//   control: 'select',
+//   options: ['tree', 'text', 'table'],
+// },
 //   },
 // };
 //

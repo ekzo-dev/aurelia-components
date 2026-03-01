@@ -1,20 +1,25 @@
-// import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-//
-// import { BsCloseButton } from '.';
-//
-// const meta: Meta = {
-//   title: 'Bootstrap / Components / Close button',
-//   component: BsCloseButton,
-//   parameters: {
-//     actions: {
-//       handles: ['click'],
-//     },
-//   },
-// };
-//
-// export default meta;
-//
-// export const Overview: Story = (args): StoryFnAureliaReturnType => ({
-//   template: `<button type="button" ${createComponentTemplate(BsCloseButton)}></button>`,
-//   props: args,
-// });
+import { BsCloseButton } from '.';
+
+const meta = {
+  title: 'Bootstrap / Components / Close button',
+  component: BsCloseButton,
+  render: () => ({
+    template: `<button type="button" bs-close-button="white.bind: white"></button>`,
+  }),
+  parameters: {
+    actions: {
+      handles: ['click'],
+    },
+  },
+  argTypes: {
+    white: { control: 'boolean' },
+  },
+};
+
+export default meta;
+
+export const Overview = {
+  args: {
+    white: false,
+  },
+};

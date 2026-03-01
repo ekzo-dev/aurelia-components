@@ -5,9 +5,7 @@ import { type InlineConfig, mergeConfig } from 'vite';
 
 const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineConfig | Promise<InlineConfig> } = {
   stories: [
-    '../packages-adapters/**/forms/*/*.stories.ts',
-    '../packages-adapters/**/icon/*.stories.ts',
-    '../packages-adapters/**/content/*/*.stories.ts',
+    '../packages-adapters/bootstrap/**/*.stories.ts',
   ],
   addons: ['@storybook/addon-links'],
   framework: {
