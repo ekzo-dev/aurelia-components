@@ -12,7 +12,6 @@ const meta = {
       button-size.bind='buttonSize'
       button-variant.bind='buttonVariant'
       name.bind='name'
-      id.bind='id'
       label.bind='label'
       title.bind='title'
       disabled.bind='disabled'
@@ -63,7 +62,6 @@ const meta = {
 
     // BaseField properties
     name: { control: 'text' },
-    id: { control: 'text' },
     label: { control: 'text' },
     title: { control: 'text' },
     disabled: { control: 'boolean' },
@@ -98,7 +96,6 @@ export const RadioGroup = {
       button-size.bind='buttonSize'
       button-variant.bind='buttonVariant'
       name.bind='name'
-      id.bind='id'
       label.bind='label'
       title.bind='title'
       disabled.bind='disabled'
@@ -161,7 +158,6 @@ export const RadioGroup = {
     invalidFeedback: { control: 'text' },
     form: { control: 'text' },
     text: { control: 'text' },
-    id: { control: 'text' },
     value: { control: false },
   },
   args: {

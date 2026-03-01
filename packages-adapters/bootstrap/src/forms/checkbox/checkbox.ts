@@ -46,7 +46,6 @@ export class BsCheckbox extends BaseField {
   reverse: boolean = false;
 
   bound() {
-    console.log('checked', this.checked);
     super.bound();
     this.indeterminateChanged();
   }

@@ -15,7 +15,6 @@ const meta = {
       indeterminate.bind='indeterminate'
       reverse.bind='reverse'
       name.bind='name'
-      id.bind='id'
       label.bind='label'
       title.bind='title'
       disabled.bind='disabled'
@@ -69,7 +68,6 @@ const meta = {
 
     // BaseField properties
     name: { control: 'text' },
-    id: { control: 'text' },
     label: { control: 'text' },
     title: { control: 'text' },
     disabled: { control: 'boolean' },
@@ -107,7 +105,6 @@ Selected: \${checked}`,
     checked: { control: 'object' },
     label: { control: false },
     name: { control: false },
-    id: { control: false },
     title: { control: false },
     disabled: { control: false },
     required: { control: false },

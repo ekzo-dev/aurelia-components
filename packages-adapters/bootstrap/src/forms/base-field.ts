@@ -31,9 +31,6 @@ export class BaseField implements ICustomElementViewModel {
   name?: string;
 
   @bindable()
-  id: string = uniqueId();
-
-  @bindable()
   label?: string;
 
   @bindable()
@@ -68,6 +65,8 @@ export class BaseField implements ICustomElementViewModel {
   readonly control!: HTMLInputElement;
 
   readonly host = resolve(HTMLElement);
+
+  readonly id = uniqueId();
 
   protected readonly config = resolve(IBootstrapOptions);
 
