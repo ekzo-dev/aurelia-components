@@ -26,9 +26,15 @@ const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineCo
       define: {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'development'),
       },
-      plugins: [
-        htmlImport(),
-      ],
+      plugins: [htmlImport()],
+      // Optional: Silence Sass deprecation warnings. See note below.
+      css: {
+        preprocessorOptions: {
+          scss: {
+            silenceDeprecations: ['import', 'color-functions', 'global-builtin', 'if-function'],
+          },
+        },
+      },
     });
   },
 };

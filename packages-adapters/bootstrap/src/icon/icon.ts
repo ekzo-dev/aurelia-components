@@ -3,6 +3,7 @@ import template from './icon.html';
 import './icon.scss';
 
 import { bindable, customElement, resolve } from 'aurelia';
+import iconsUrl from 'bootstrap-icons/bootstrap-icons.svg';
 
 import { IBootstrapOptions } from '../configuration';
 
@@ -18,7 +19,7 @@ export class BsIcon {
 
   private readonly _options = resolve(IBootstrapOptions);
 
-  attaching() {
+  bound() {
     this.#setIcon();
   }
 
@@ -27,8 +28,10 @@ export class BsIcon {
   }
 
   #setIcon(): void {
+    const url = this._options.iconsSpritePath ?? (iconsUrl as string);
+
     // to support simple binding to SVG attributes from template one needs to include Aurelia SVGAnalyzer
     // we use a simpler approach with custom setAttribute()
-    this.use.setAttribute('xlink:href', `${this._options.iconsSpritePath}#${this.name}`);
+    this.use.setAttribute('xlink:href', `${url}#${this.name}`);
   }
 }

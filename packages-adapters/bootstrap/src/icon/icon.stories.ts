@@ -1390,34 +1390,19 @@ export const Overview = {
   },
 };
 
-const iconsListPart1 = iconsList.slice(0, Math.floor(iconsList.length / 2));
-
-export const iconsExample1 = {
+export const AllIcons = {
   render: () => ({
-    template: `<div repeat.for="icon of iconsListPart1">
-      <bs-icon name.bind="icon" title.bind="icon"></bs-icon>&nbsp;\${icon}
+    template: `<div style="display: grid; grid-template-columns: repeat(10, auto); gap: 2rem">
+      <div repeat.for="icon of iconsList">
+        <bs-icon name.one-time="icon" style='font-size: 200%'></bs-icon>
+        <div style='font-size: 80%; color: #7f7f7f'>\${icon}</div>
+      </div>
     </div>`,
   }),
   argTypes: {
     name: { control: false },
   },
   args: {
-    iconsListPart1,
-  },
-};
-
-const iconsListPart2 = iconsList.slice(Math.floor(iconsList.length / 2));
-
-export const iconsExample2 = {
-  render: () => ({
-    template: `<div repeat.for="icon of iconsListPart2">
-      <bs-icon name.bind="icon" title.bind="icon"></bs-icon>&nbsp;\${icon}
-    </div>`,
-  }),
-  argTypes: {
-    name: { control: false },
-  },
-  args: {
-    iconsListPart2,
+    iconsList,
   },
 };

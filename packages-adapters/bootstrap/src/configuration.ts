@@ -17,14 +17,13 @@ export interface IBootstrapOptions {
   /**
    * Icons SVG sprite location. May be external or local, then bundler (Vite/Webpack) must be configured to include it
    */
-  iconsSpritePath: string;
+  iconsSpritePath?: string;
 }
 
 const defaultOptions: IBootstrapOptions = {
   floatingLabels: false,
   htmlValidationMessages: true,
   registerComponents: true,
-  iconsSpritePath: 'bootstrap-icons.svg',
 };
 
 export const IBootstrapOptions = DI.createInterface<IBootstrapOptions>('IBootstrapOptions');
