@@ -14,9 +14,9 @@
 //   },
 //   argTypes: {
 //     bsSize: {
-  control: 'select',
-  options: ['', 'sm', 'lg'],
-},
+//  control: 'select',
+//  options: ['', 'sm', 'lg'],
+//},
 //   },
 // };
 //

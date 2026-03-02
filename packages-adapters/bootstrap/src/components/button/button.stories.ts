@@ -5,14 +5,8 @@ const meta = {
   component: BsButton,
   render: () => ({
     template: `<button type="button"
-      bs-button.bind='variant'
-      size.bind='size'
-      disabled.bind='disabled'
-      active.bind='active'
-      toggle-state.bind='toggleState'
-    >
-      \${content}
-    </button>`,
+      bs-button='variant.bind: variant; size.bind: size; disabled.bind: disabled; active.bind: active; toggle-state.bind: toggleState'
+    >Button</button>`,
   }),
   argTypes: {
     variant: {
@@ -39,12 +33,11 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['', 'sm', 'lg'],
     },
     disabled: { control: 'boolean' },
     active: { control: 'boolean' },
     toggleState: { control: 'boolean' },
-    content: { control: 'text' },
   },
 };
 
@@ -53,6 +46,5 @@ export default meta;
 export const Overview = {
   args: {
     variant: 'primary',
-    content: 'Button content',
   },
 };

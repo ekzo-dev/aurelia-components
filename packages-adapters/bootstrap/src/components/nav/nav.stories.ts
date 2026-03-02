@@ -5,18 +5,18 @@ const meta = {
   component: BsNav,
   render: () => ({
     template: `<ul bs-nav="type.bind: type; fill.bind: fill">
-  <bs-nav-item>
+  <li bs-nav-item>
     <a href="#" bs-nav-link="active.bind: true">Active</a>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <a href="#" bs-nav-link>Link</a>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <a href="#" bs-nav-link>Link</a>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <a href="#" bs-nav-link="disabled.bind: true">Disabled</a>
-  </bs-nav-item>
+  </li>
 </ul>`,
   }),
   parameters: {
@@ -48,10 +48,10 @@ export const BaseNav = {
 export const UsingDropdowns = {
   render: () => ({
     template: `<ul bs-nav="type.bind: type; fill.bind: fill">
-  <bs-nav-item>
+  <li bs-nav-item>
     <a href="#" bs-nav-link="active.bind: true">Active</a>
-  </bs-nav-item>
-  <bs-nav-item bs-dropdown>
+  </li>
+  <li bs-nav-item bs-dropdown>
     <a href="#" bs-nav-link bs-dropdown-toggle>Dropdown</a>
     <bs-dropdown-menu>
       <a bs-dropdown-item>Action</a>
@@ -60,13 +60,13 @@ export const UsingDropdowns = {
       <hr bs-dropdown-item="divider">
       <a bs-dropdown-item>Separated link</a>
     </bs-dropdown-menu>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <a href="#" bs-nav-link>Link</a>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <a href="#" bs-nav-link="disabled.bind: true">Disabled</a>
-  </bs-nav-item>
+  </li>
 </ul>`,
   }),
   args: {
@@ -79,18 +79,18 @@ export const TabsWithContent = {
   render: () => ({
     template: `<div>
 <ul bs-nav="type.bind: type; fill.bind: fill">
-  <bs-nav-item>
+  <li bs-nav-item>
     <button bs-nav-link="active.bind: true" id="home-tab">Home</button>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <button bs-nav-link id="profile-tab">Profile</button>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <button bs-nav-link id="contact-tab">Contact</button>
-  </bs-nav-item>
-  <bs-nav-item>
+  </li>
+  <li bs-nav-item>
     <button bs-nav-link="disabled.bind: true" id="disabled-tab">Disabled</button>
-  </bs-nav-item>
+  </li>
 </ul>
 <div bs-tab-content style="margin-top: 1rem">
   <div bs-tab-pane="home-tab">This is some placeholder content the Home tab's associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other .nav-powered navigation.</div>

@@ -40,6 +40,7 @@ Guidance for Claude Code when working with this Aurelia 2 app.
 - Custom elements are kebab-case in markup, classes are PascalCase
 - Clean up in `detaching`, `unbinding`, or `dispose` as appropriate
 - `.delegate` has been removed in Aurelia 2, use `.trigger` instead
+- Custom attribute usage in HTML follows HTML style attribute syntax
 
 ### DI Registration
 - Register resources and services with `Aurelia.register(...)` or `container.register(...)`
