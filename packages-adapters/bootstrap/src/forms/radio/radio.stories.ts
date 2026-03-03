@@ -31,11 +31,11 @@ const meta = {
     inline: { control: 'boolean' },
     mode: {
       control: 'select',
-      options: [undefined, 'button'],
+      options: ['button'],
     },
     buttonSize: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['sm', 'lg'],
     },
     buttonVariant: {
       control: 'select',
@@ -66,10 +66,7 @@ const meta = {
     title: { control: 'text' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    valid: {
-      control: 'select',
-      options: [undefined, true, false],
-    },
+    valid: { control: 'boolean' },
     validFeedback: { control: 'text' },
     invalidFeedback: { control: 'text' },
     form: { control: 'text' },
@@ -115,11 +112,11 @@ export const RadioGroup = {
     inline: { control: 'boolean' },
     mode: {
       control: 'select',
-      options: [undefined, 'button'],
+      options: ['button'],
     },
     buttonSize: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['sm', 'lg'],
     },
     buttonVariant: {
       control: 'select',
@@ -150,10 +147,7 @@ export const RadioGroup = {
     title: { control: false },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    valid: {
-      control: 'select',
-      options: [undefined, true, false],
-    },
+    valid: { control: 'boolean' },
     validFeedback: { control: 'text' },
     invalidFeedback: { control: 'text' },
     form: { control: 'text' },

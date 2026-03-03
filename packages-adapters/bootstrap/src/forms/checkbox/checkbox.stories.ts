@@ -33,11 +33,11 @@ const meta = {
     inline: { control: 'boolean' },
     mode: {
       control: 'select',
-      options: [undefined, 'switch', 'button'],
+      options: ['switch', 'button'],
     },
     buttonSize: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['sm', 'lg'],
     },
     buttonVariant: {
       control: 'select',
@@ -70,10 +70,7 @@ const meta = {
     title: { control: 'text' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    valid: {
-      control: 'select',
-      options: [undefined, true, false],
-    },
+    valid: { control: 'boolean' },
     validFeedback: { control: 'text' },
     invalidFeedback: { control: 'text' },
     form: { control: 'text' },

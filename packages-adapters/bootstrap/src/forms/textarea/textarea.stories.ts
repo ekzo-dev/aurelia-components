@@ -35,7 +35,7 @@ const meta = {
     minlength: { control: 'number' },
     size: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['sm', 'lg'],
     },
     autocomplete: { control: 'text' },
 
@@ -45,10 +45,7 @@ const meta = {
     title: { control: 'text' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    valid: {
-      control: 'select',
-      options: [undefined, true, false],
-    },
+    valid: { control: 'boolean' },
     validFeedback: { control: 'text' },
     invalidFeedback: { control: 'text' },
     form: { control: 'text' },

@@ -6,6 +6,7 @@ import { type InlineConfig, mergeConfig } from 'vite';
 const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineConfig | Promise<InlineConfig> } = {
   stories: [
     '../packages-adapters/bootstrap/**/*.stories.ts',
+    '../packages/bootstrap-addons/**/*.stories.ts',
   ],
   addons: ['@storybook/addon-links'],
   framework: {
@@ -27,7 +28,7 @@ const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineCo
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'development'),
       },
       plugins: [htmlImport()],
-      // Optional: Silence Sass deprecation warnings. See note below.
+      // https://getbootstrap.com/docs/5.3/getting-started/vite/#configure-vite
       css: {
         preprocessorOptions: {
           scss: {

@@ -53,15 +53,15 @@ const meta = {
     borderless: { control: 'boolean' },
     size: {
       control: 'select',
-      options: [undefined, 'sm'],
+      options: ['sm'],
     },
     variant: {
       control: 'select',
-      options: [undefined, 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'],
+      options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'],
     },
     responsive: {
       control: 'select',
-      options: [undefined, 'always', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['always', 'sm', 'md', 'lg', 'xl', 'xxl'],
     },
   },
 };

@@ -58,7 +58,7 @@ const meta = {
     },
     inputmode: {
       control: 'select',
-      options: [undefined, 'none', 'text', 'decimal', 'numeric', 'tel', 'search', 'email', 'url'],
+      options: ['none', 'text', 'decimal', 'numeric', 'tel', 'search', 'email', 'url'],
     },
     value: { control: 'text' },
     minlength: { control: 'number' },
@@ -75,7 +75,7 @@ const meta = {
     size: { control: 'number' },
     bsSize: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['sm', 'lg'],
     },
     autocomplete: { control: 'text' },
 
@@ -85,10 +85,7 @@ const meta = {
     title: { control: 'text' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    valid: {
-      control: 'select',
-      options: [undefined, true, false],
-    },
+    valid: { control: 'boolean' },
     validFeedback: { control: 'text' },
     invalidFeedback: { control: 'text' },
     form: { control: 'text' },

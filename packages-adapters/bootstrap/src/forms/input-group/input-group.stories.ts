@@ -13,7 +13,7 @@ const meta = {
   argTypes: {
     size: {
       control: 'select',
-      options: [undefined, 'sm', 'lg'],
+      options: ['sm', 'lg'],
     },
   },
 };
