@@ -2,11 +2,12 @@ import template from './radio-group.html';
 
 import './radio.scss';
 
-import { coerceBoolean, Iterable, uniqueId } from '@ekzo-dev/toolkit';
+import { coerceBoolean, Iterable } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { ButtonVariant } from '../../components';
 import { Size } from '../../types';
+import { uniqueId } from '../../utils';
 import { BaseField } from '../base-field';
 
 import { BsRadio } from './radio';

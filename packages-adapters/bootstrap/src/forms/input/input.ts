@@ -2,10 +2,11 @@ import template from './input.html';
 
 import './input.scss';
 
-import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { Size } from '../../types';
+import { uniqueId } from '../../utils';
 import { BaseField } from '../base-field';
 
 type HTMLInputBase = Partial<Omit<HTMLInputElement, 'form' | 'autocomplete'> & { form: string; autocomplete: string }>;

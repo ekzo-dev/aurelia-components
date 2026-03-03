@@ -1,12 +1,5 @@
 import { ProxyObservable, queueTask } from '@aurelia/runtime';
 
-/**
- * Generate unique identifier
- */
-export function uniqueId(): string {
-  return 'id' + Math.random().toString(36).substring(2, 9);
-}
-
 // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
 export const coerceBoolean = {
   set: (v: unknown): boolean | undefined =>

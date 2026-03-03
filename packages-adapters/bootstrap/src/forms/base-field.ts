@@ -1,9 +1,10 @@
 import './common.scss';
 
-import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, ICustomElementViewModel, queueTask, resolve } from 'aurelia';
 
 import { IBootstrapOptions } from '../configuration';
+import { uniqueId } from '../utils';
 
 const stringProperties = new Set<string>([
   'name',
