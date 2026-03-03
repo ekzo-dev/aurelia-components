@@ -2,10 +2,10 @@ import template from './icon.html';
 
 import './icon.scss';
 
-import { bindable, customElement } from 'aurelia';
+import { bindable, customElement, resolve } from 'aurelia';
+import iconsUrl from 'bootstrap-icons/bootstrap-icons.svg';
 
-// TODO make icons path configurable local/remote
-const spritePath = 'bootstrap-icons.svg';
+import { IBootstrapOptions } from '../configuration';
 
 @customElement({
   name: 'bs-icon',
@@ -17,19 +17,21 @@ export class BsIcon {
 
   use!: HTMLElement;
 
-  attaching() {
-    this.setIcon();
+  private readonly _options = resolve(IBootstrapOptions);
+
+  bound() {
+    this.#setIcon();
   }
 
   nameChanged() {
-    this.setIcon();
+    this.#setIcon();
   }
 
-  private setIcon(): void {
+  #setIcon(): void {
+    const url = this._options.iconsSpritePath ?? (iconsUrl as string);
+
     // to support simple binding to SVG attributes from template one needs to include Aurelia SVGAnalyzer
     // we use a simpler approach with custom setAttribute()
-    this.use.setAttribute('xlink:href', `${spritePath}#${this.name}`);
-    // SVG 2 removed the need for the xlink namespace, so instead of xlink:href you should use href
-    this.use.setAttribute('href', `${spritePath}#${this.name}`);
+    this.use.setAttribute('xlink:href', `${url}#${this.name}`);
   }
 }

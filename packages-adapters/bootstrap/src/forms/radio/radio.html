@@ -1,20 +1,16 @@
 <template class="${mode === 'button' ? '' : 'form-check'} ${inline ? 'form-check-inline' : ''}">
   <input
-    id="${id}"
+    id.one-time="id"
     class="${mode === 'button' ? 'btn-check' : 'form-check-input'} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
     type="radio"
     checked.bind="checked"
     model.bind="value"
     matcher.bind="matcher"
-    disabled.bind="disabled"
-    required.bind="required"
-    form.bind="form & attr"
-    name.bind="name & attr"
-    title.bind="title & attr"
+    ref="control"
   />
   <label
     class="${mode === 'button' ? `btn btn-${buttonVariant} ${buttonSize ? `btn-${buttonSize}` : ''}` : 'form-check-label'"
-    for="${id}"
+    for.one-time="id"
     if.bind="label"
     >${label}</label
   >

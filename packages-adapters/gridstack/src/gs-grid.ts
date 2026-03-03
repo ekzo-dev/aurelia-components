@@ -16,7 +16,7 @@ export class GsGrid {
   options: GridStackOptions = {};
 
   @slotted('gs-item')
-  private slottedItems: GridItemHTMLElement[];
+  private slottedItems!: GridItemHTMLElement[];
 
   grid?: GridStack;
 
@@ -49,11 +49,12 @@ export class GsGrid {
 
     if (options.column === 'auto' && parentItem) {
       autoColumn = true;
-      options.column = parentItem.gridstackNode.w || 1;
+      options.column = parentItem.gridstackNode?.w || 1;
       options.disableOneColumnMode = true;
     }
 
     this.grid = GridStack.init(options, this.element);
+    // @ts-ignore
     this.grid['_autoColumn'] = autoColumn;
 
     // init items
@@ -70,12 +71,12 @@ export class GsGrid {
     if (!grid || !elements) return;
 
     // start update transaction
-    this.grid.batchUpdate();
+    this.grid?.batchUpdate();
 
     // remove missing widgets
     const removed = grid.engine.nodes.filter((x) => !elements.find((el) => el === x.el));
 
-    removed.forEach((x) => grid.removeWidget(x.el, false));
+    removed.forEach((x) => grid.removeWidget(x.el!, false));
 
     // add new widgets
     elements.forEach((element) => {
@@ -86,7 +87,7 @@ export class GsGrid {
       grid.addWidget(element, item.options);
 
       if (element.dataset.hasSubgrid) {
-        const subgrid = element.querySelector('gs-grid');
+        const subgrid = element.querySelector('gs-grid')!;
         const component = CustomElement.for<GsGrid>(subgrid).viewModel;
 
         component.createGrid(element);
@@ -95,13 +96,13 @@ export class GsGrid {
 
     // commit changes
     grid.engine.removedNodes = removed;
-    this.grid.batchUpdate(false);
+    this.grid?.batchUpdate(false);
   }
 
   private findParentItem(el: HTMLElement): GridItemHTMLElement | null {
     while (el) {
       if (el.nodeName === 'GS-ITEM') return el;
-      el = el.parentElement;
+      el = el.parentElement!;
     }
 
     return null;

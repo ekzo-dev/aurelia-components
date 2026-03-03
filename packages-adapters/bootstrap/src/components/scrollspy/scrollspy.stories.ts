@@ -1,36 +1,12 @@
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
-import { BsNav, BsNavItem, BsNavLink } from '../nav';
-import { BsNavbar, BsNavbarBrand } from '../navbar';
-
 import { BsScrollspy } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Components / ScrollSpy',
   component: BsScrollspy,
-  args: {
-    target: 'navbar-example2',
-  },
-};
-
-export default meta;
-
-const Navbar: Story = (args): StoryFnAureliaReturnType => ({
-  components: [
-    BsNavbar,
-    BsNavbarBrand,
-    BsNav,
-    BsNavItem,
-    BsNavLink,
-    BsDropdownItem,
-    BsDropdown,
-    BsDropdownToggle,
-    BsDropdownMenu,
-  ],
-  template: `
+  render: () => ({
+    template: `<div>
 <bs-navbar id="navbar-example2" class="px-3 mb-3 bg-light">
   <a bs-navbar-brand href="#">Navbar</a>
   <bs-nav type="pills">
@@ -48,9 +24,7 @@ const Navbar: Story = (args): StoryFnAureliaReturnType => ({
   </bs-nav>
 </bs-navbar>
 
-<div ${createComponentTemplate(
-    BsScrollspy
-  )} class="bg-light p-3 rounded-2" tabindex="0" style="height: 200px; overflow: auto; margin-top: .5rem;">
+<div bs-scrollspy="target.bind: target; smoothScroll.bind: smoothScroll" class="bg-light p-3 rounded-2" tabindex="0" style="height: 200px; overflow: auto; margin-top: .5rem;">
   <h4 id="scrollspyHeading1">First heading</h4>
   <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
   <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
@@ -67,8 +41,19 @@ const Navbar: Story = (args): StoryFnAureliaReturnType => ({
   <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
   <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
 </div>
-  `,
-  props: args,
-});
+</div>`,
+  }),
+  argTypes: {
+    target: { control: 'text' },
+    smoothScroll: { control: 'boolean' },
+  },
+};
 
-export { Navbar };
+export default meta;
+
+export const Navbar = {
+  args: {
+    target: 'navbar-example2',
+    smoothScroll: false,
+  },
+};

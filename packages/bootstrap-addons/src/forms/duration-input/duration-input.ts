@@ -5,12 +5,19 @@ import './duration-input.scss';
 import { BaseField, Size } from '@ekzo-dev/bootstrap';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { Temporal } from '@js-temporal/polyfill';
-import { bindable, BindingMode, customElement, resolve } from 'aurelia';
+import { bindable, BindingMode, customElement } from 'aurelia';
 
-type Duration = Partial<Pick<Temporal.Duration, 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds'>>;
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P];
+};
+type Duration = Writable<
+  Partial<Pick<Temporal.Duration, 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds'>>
+>;
 type DurationLabels = {
   [K in keyof Duration]: string;
 };
+
+const durationKeys: (keyof Duration)[] = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'] as const;
 
 /**
  * https://github.com/whatwg/html/issues/5488
@@ -25,7 +32,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   get value(): string {
     const { duration } = this;
 
-    if (Object.values(duration).every((v) => v == null || v.toString() === '')) {
+    if (durationKeys.every((v) => duration[v] == null || duration[v].toString() === '')) {
       return '';
     }
 
@@ -43,9 +50,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   bsSize?: Size;
 
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
-
-  readonly host = resolve(HTMLElement);
+  floatingLabel: boolean = this.config.floatingLabels;
 
   duration: Duration = {};
 
@@ -65,6 +70,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   }
 
   attaching() {
+    super.attaching();
     this.controls = this.host.querySelectorAll('input[type=number]');
     this.controls.forEach((control) => {
       control.addEventListener('keypress', this);
@@ -80,7 +86,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   }
 
   handleEvent(event: KeyboardEvent | ClipboardEvent): void {
-    const data = event instanceof KeyboardEvent ? event.key : event.clipboardData.getData('text');
+    const data = event instanceof KeyboardEvent ? event.key : event.clipboardData!.getData('text');
 
     // don't allow non-numeric values
     if (!/^\d+$/.test(data)) {
@@ -100,15 +106,12 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   private _parseDuration(value: string) {
     try {
       const duration = Temporal.Duration.from(value);
+      const result: Duration = {};
 
-      this.duration = {
-        years: duration.years,
-        months: duration.months,
-        days: duration.days,
-        hours: duration.hours,
-        minutes: duration.minutes,
-        seconds: duration.seconds,
-      };
+      durationKeys.forEach((key) => {
+        result[key] = duration[key] ? duration[key] : undefined;
+      });
+      this.duration = result;
     } catch (error) {
       if (error instanceof RangeError) {
         console.warn(`[bs-duration-input] ${error.message}`);
@@ -120,6 +123,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
   }
 
   #getLabels(): DurationLabels {
+    // @ts-ignore
     const str: string = new Intl['DurationFormat'](navigator.language, { style: 'narrow' }).format({
       years: 1,
       months: 1,

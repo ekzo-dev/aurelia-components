@@ -58,7 +58,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
 
   private dialog!: HTMLDivElement;
 
-  constructor(private readonly element: HTMLElement = resolve(HTMLElement)) {}
+  private readonly element: HTMLElement = resolve(HTMLElement);
 
   attaching() {
     this.createModal();
@@ -135,7 +135,7 @@ export class BsModal implements ICustomElementViewModel, Modal.Options, EventLis
       };
 
       this.element.addEventListener(event, listener);
-      this.modal[show ? 'show' : 'hide']();
+      this.modal?.[show ? 'show' : 'hide']();
     });
   }
 

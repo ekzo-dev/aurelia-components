@@ -1,145 +1,43 @@
-// import type { StorybookConfig } from 'storybook/internal/types';
-import { StorybookConfigWebpack } from '@storybook/builder-webpack5';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import path from 'path';
+import type { StorybookConfig } from 'storybook/internal/types';
 
-const config: StorybookConfigWebpack = {
-  // stories: ['./*.stories.mdx', '../packages-adapters/**/*.stories.ts', '../packages/**/*.stories.ts'],
-  stories: ['./*.stories.mdx', '../packages-adapters/bootstrap/src/components/alert/*.stories.ts'],
-  addons: [
-    // '@storybook/addon-links'
+import htmlImport from '@ayatkyo/vite-plugin-html-import';
+import { type InlineConfig, mergeConfig } from 'vite';
+
+const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineConfig | Promise<InlineConfig> } = {
+  stories: [
+    '../packages-adapters/bootstrap/**/*.stories.ts',
+    '../packages/bootstrap-addons/**/*.stories.ts',
   ],
+  addons: ['@storybook/addon-links'],
   framework: {
     name: '@aurelia/storybook',
     options: {},
   },
   core: {
-    builder: '@storybook/builder-webpack5',
+    builder: '@storybook/builder-vite',
   },
-  webpackFinal: (config) => {
-    return {
-      ...config,
-      // target: 'es2020',
-      // module: {
-      //   ...config.module,
-      //   rules: [
-      //     ...config.module.rules,
-      //     {
-      //       test: /\.js$/,
-      //       enforce: 'pre',
-      //       use: ['source-map-loader'],
-      //     },
-      //   ],
-      // },
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve.alias,
-          ...[
-            'fetch-client',
-            'kernel',
-            'metadata',
-            'platform',
-            'platform-browser',
-            'route-recognizer',
-            'router',
-            'router-lite',
-            'runtime',
-            'runtime-html',
-            'testing',
-            'webpack-loader',
-          ].reduce(
-            (map, pkg) => {
-              const name = `@aurelia/${pkg}`;
+  viteFinal: (viteConfig: InlineConfig) => {
+    // Ensure problematic Aurelia deps are excluded from pre-bundling.
+    viteConfig.optimizeDeps = viteConfig.optimizeDeps ?? {};
+    viteConfig.optimizeDeps.exclude = Array.from(
+      new Set([...(viteConfig.optimizeDeps.exclude ?? []), '@aurelia/runtime-html'])
+    );
 
-              map[name] = path.resolve(__dirname, '../node_modules', name, 'dist/esm/index.dev.mjs');
-
-              return map;
-            },
-            {
-              aurelia: path.resolve(__dirname, '../node_modules/aurelia/dist/esm/index.dev.mjs'),
-              // add your development aliasing here
-            }
-          ),
+    return mergeConfig(viteConfig, {
+      define: {
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'development'),
+      },
+      plugins: [htmlImport()],
+      // https://getbootstrap.com/docs/5.3/getting-started/vite/#configure-vite
+      css: {
+        preprocessorOptions: {
+          scss: {
+            silenceDeprecations: ['import', 'color-functions', 'global-builtin', 'if-function'],
+          },
         },
       },
-      plugins: [
-        ...config.plugins,
-        new CopyWebpackPlugin({
-          patterns: [{ from: './node_modules/bootstrap-icons/bootstrap-icons.svg' }],
-        }),
-      ],
-    };
+    });
   },
 };
 
 export default config;
-
-// module.exports = {
-//   stories: ['./*.stories.mdx', '../packages-adapters/**/*.stories.ts', '../packages/**/*.stories.ts'],
-//   addons: [
-//     '@storybook/addon-links',
-//     '@storybook/addon-essentials',
-//     '@storybook/addon-a11y',
-//     'storybook-addon-performance/register',
-//     'storybook-addon-pseudo-states',
-//   ],
-//   framework: '@storybook/aurelia',
-//   core: {
-//     builder: 'webpack5',
-//     channelOptions: {
-//       allowClass: false,
-//     },
-//   },
-//   webpackFinal: (config) => {
-//     // console.log('webpack', config);
-//     return {
-//       ...config,
-//       // target: 'es2020',
-//       // module: {
-//       //   ...config.module,
-//       //   rules: [
-//       //     ...config.module.rules,
-//       //     {
-//       //       test: /\.js$/,
-//       //       enforce: 'pre',
-//       //       use: ['source-map-loader'],
-//       //     },
-//       //   ],
-//       // },
-//       resolve: {
-//         ...config.resolve,
-//         alias: {
-//           ...config.resolve.alias,
-//           ...[
-//             'fetch-client',
-//             'kernel',
-//             'metadata',
-//             'platform',
-//             'platform-browser',
-//             'route-recognizer',
-//             'router',
-//             'router-lite',
-//             'runtime',
-//             'runtime-html',
-//             'testing',
-//             'webpack-loader',
-//           ].reduce((map, pkg) => {
-//             const name = `@aurelia/${pkg}`;
-//             map[name] = path.resolve(__dirname, '../node_modules', name, 'dist/esm/index.dev.mjs');
-//             return map;
-//           }, {
-//             'aurelia': path.resolve(__dirname, '../node_modules/aurelia/dist/esm/index.dev.mjs'),
-//             // add your development aliasing here
-//           })
-//         }
-//       },
-//       plugins: [
-//         ...config.plugins,
-//         new CopyWebpackPlugin({
-//           patterns: [{ from: './node_modules/bootstrap-icons/bootstrap-icons.svg' }],
-//         }),
-//       ],
-//     };
-//   },
-// };

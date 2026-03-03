@@ -1,24 +1,17 @@
 <template class="${classes}">
   <input
-    id="${id}"
+    id.one-time="id"
     class="${mode === 'button' ? 'btn-check' : 'form-check-input'} ${valid ? 'is-valid' : valid === false ? 'is-invalid' : ''}"
     type="checkbox"
     checked.bind="checked"
-    value.bind="value"
-    model.bind="model"
+    model.bind="value"
     matcher.bind="matcher"
-    indeterminate.bind="indeterminate"
-    disabled.bind="disabled"
-    required.bind="required"
-    form.bind="form & attr"
-    name.bind="name & attr"
-    title.bind="title & attr"
-    ref="input"
+    ref="control"
   />
   <label
     if.bind="label != null"
     class="${mode === 'button' ? `btn btn-${buttonVariant} ${buttonSize ? `btn-${buttonSize}` : ''}` : 'form-check-label'"
-    for="${id}"
+    for.one-time="id"
     >${label}</label
   >
   <div class="invalid-feedback" if.bind="invalidFeedback">${invalidFeedback}</div>

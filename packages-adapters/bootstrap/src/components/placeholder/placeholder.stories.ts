@@ -1,29 +1,13 @@
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { selectControl } from '../../../../../.storybook/helpers';
-import { BsButton } from '../button';
-import { BsCard, BsCardBody } from '../card';
-
 import { BsPlaceholder } from '.';
 
-const meta: Meta = {
+const meta = {
   component: BsPlaceholder,
   title: 'Bootstrap / Components / Placeholder',
-  argTypes: {
-    size: selectControl(['', 'sm', 'lg', 'xs']),
-    animation: selectControl(['', 'glow', 'wave']),
-  },
-};
-
-export default meta;
-
-const Example: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsCard, BsCardBody, BsButton],
-  template: `
-<div class="d-flex justify-content-around">
+  render: () => ({
+    template: `<div class="d-flex justify-content-around">
   <bs-card style="width: 18rem">
     <svg class="card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
       <title>Placeholder</title>
@@ -42,40 +26,57 @@ const Example: Story = (args): StoryFnAureliaReturnType => ({
     </svg>
     <bs-card-body>
       <h5>
-        <span class="col-6" ${createComponentTemplate(BsPlaceholder)}></span>
+        <span class="col-6" bs-placeholder="animation.bind: animation; size.bind: size"></span>
       </h5>
       <p>
-        <span class="col-7" ${createComponentTemplate(BsPlaceholder)}></span>
-        <span class="col-4" ${createComponentTemplate(BsPlaceholder)}></span>
-        <span class="col-4" ${createComponentTemplate(BsPlaceholder)}></span>
-        <span class="col-6" ${createComponentTemplate(BsPlaceholder)}></span>
-        <span class="col-8" ${createComponentTemplate(BsPlaceholder)}></span>
+        <span class="col-7" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+        <span class="col-4" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+        <span class="col-4" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+        <span class="col-6" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+        <span class="col-8" bs-placeholder="animation.bind: animation; size.bind: size"></span>
       </p>
-      <a href="#" tabindex="-1" class="col-6" bs-button="disabled: true" bs-placeholder></a>
+      <a href="#" tabindex="-1" class="col-6" bs-button="disabled: true" bs-placeholder="animation.bind: animation; size.bind: size"></a>
     </bs-card-body>
   </bs-card>
-</div>
-  `,
-  props: args,
-});
-
-Example.args = {
-  animation: 'glow',
+</div>`,
+  }),
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['', 'sm', 'lg', 'xs'],
+    },
+    animation: {
+      control: 'select',
+      options: ['', 'glow', 'wave'],
+    },
+  },
 };
 
-const Color: Story = (args): StoryFnAureliaReturnType => ({
-  template: `
-<span class="col-12" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-primary" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-secondary" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-success" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-danger" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-warning" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-info" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-light" ${createComponentTemplate(BsPlaceholder)}></span>
-<span class="col-12 bg-dark" ${createComponentTemplate(BsPlaceholder)}></span>
-  `,
-  props: args,
-});
+export default meta;
 
-export { Color, Example };
+export const Example = {
+  args: {
+    size: '',
+    animation: 'glow',
+  },
+};
+
+export const Color = {
+  render: () => ({
+    template: `<div>
+<span class="col-12" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-primary" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-secondary" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-success" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-danger" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-warning" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-info" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-light" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+<span class="col-12 bg-dark" bs-placeholder="animation.bind: animation; size.bind: size"></span>
+</div>`,
+  }),
+  args: {
+    size: '',
+    animation: '',
+  },
+};

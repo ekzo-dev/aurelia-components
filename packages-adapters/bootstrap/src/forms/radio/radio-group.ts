@@ -2,11 +2,12 @@ import template from './radio-group.html';
 
 import './radio.scss';
 
-import { coerceBoolean, Iterable, uniqueId } from '@ekzo-dev/toolkit';
+import { coerceBoolean, Iterable } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { ButtonVariant } from '../../components';
 import { Size } from '../../types';
+import { uniqueId } from '../../utils';
 import { BaseField } from '../base-field';
 
 import { BsRadio } from './radio';
@@ -45,11 +46,7 @@ export class BsRadioGroup extends BaseField {
   buttonVariant: ButtonVariant = 'primary';
 
   binding() {
-    super.binding();
-
-    if (!this.name) {
-      this.name = uniqueId();
-    }
+    this.name ??= uniqueId();
   }
 
   get radioOptions(): IRadioOption[] {
@@ -61,6 +58,7 @@ export class BsRadioGroup extends BaseField {
     }
 
     // check entries
+    // @ts-ignore
     if (Array.isArray(options[0])) {
       return (options as Array<readonly [unknown, string]>).map(([k, v]) => ({
         value: k,

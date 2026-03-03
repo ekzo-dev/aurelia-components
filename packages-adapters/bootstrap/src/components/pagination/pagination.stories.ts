@@ -1,36 +1,44 @@
-import { Meta, Story } from '@storybook/aurelia';
+import { BsPagination } from '.';
 
-import { BsPagination, BsPaginationItem } from '.';
-
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Components / Pagination',
   component: BsPagination,
-};
-
-export default meta;
-
-const Overview: Story = (args) => ({
-  props: args,
-  components: [BsPaginationItem],
-  innerHtml: `
+  render: () => ({
+    template: `<bs-pagination size.bind="size">
   <bs-pagination-item>Previous</bs-pagination-item>
   <bs-pagination-item>1</bs-pagination-item>
   <bs-pagination-item>2</bs-pagination-item>
   <bs-pagination-item>3</bs-pagination-item>
   <bs-pagination-item>Next</bs-pagination-item>
-  `,
-});
+</bs-pagination>`,
+  }),
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['', 'sm', 'lg'],
+    },
+  },
+};
 
-const DisabledAndActiveStates: Story = (args) => ({
-  props: args,
-  components: [BsPaginationItem],
-  innerHtml: `
+export default meta;
+
+export const Overview = {
+  args: {
+    size: '',
+  },
+};
+
+export const DisabledAndActiveStates = {
+  render: () => ({
+    template: `<bs-pagination size.bind="size">
   <bs-pagination-item disabled>Previous</bs-pagination-item>
   <bs-pagination-item>1</bs-pagination-item>
   <bs-pagination-item active>2</bs-pagination-item>
   <bs-pagination-item>3</bs-pagination-item>
   <bs-pagination-item>Next</bs-pagination-item>
-  `,
-});
-
-export { DisabledAndActiveStates, Overview };
+</bs-pagination>`,
+  }),
+  args: {
+    size: '',
+  },
+};

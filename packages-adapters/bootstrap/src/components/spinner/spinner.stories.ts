@@ -1,40 +1,45 @@
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { selectControl } from '../../../../../.storybook/helpers';
-import { BsButton } from '../button';
-
 import { BsSpinner } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Components / Spinner',
   component: BsSpinner,
+  render: () => ({
+    template: `<bs-spinner type.bind="type" size.bind="size"></bs-spinner>`,
+  }),
   argTypes: {
-    type: selectControl(['border', 'grow']),
-    size: selectControl(['', 'sm']),
+    type: {
+      control: 'select',
+      options: ['border', 'grow'],
+    },
+    size: {
+      control: 'select',
+      options: ['', 'sm'],
+    },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  props: args,
-});
-
-const Buttons: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  template: `
-<button bs-button disabled>
-  ${createComponentTemplate(BsSpinner)}
-</button>
-<button bs-button disabled>
-  ${createComponentTemplate(BsSpinner)} Loading...
-</button>
-  `,
-  props: args,
-});
-
-Buttons.args = {
-  size: 'sm',
+export const Overview = {
+  args: {
+    type: 'border',
+    size: '',
+  },
 };
 
-export { Buttons, Overview };
+export const Buttons = {
+  render: () => ({
+    template: `<div>
+<button bs-button disabled>
+  <bs-spinner type.bind="type" size.bind="size"></bs-spinner>
+</button>
+<button bs-button disabled>
+  <bs-spinner type.bind="type" size.bind="size"></bs-spinner> Loading...
+</button>
+</div>`,
+  }),
+  args: {
+    type: 'border',
+    size: 'sm',
+  },
+};

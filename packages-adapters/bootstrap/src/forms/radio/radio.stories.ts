@@ -1,45 +1,162 @@
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { disableControl, selectControl } from '../../../../../.storybook/helpers';
-
 import { BsRadio, BsRadioGroup } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Forms / Radio',
   component: BsRadio,
-  parameters: {
-    actions: {
-      handles: ['change', 'input'],
-    },
-  },
+  render: () => ({
+    template: `<bs-radio
+      checked.bind='checked'
+      value.bind='value'
+      inline.bind='inline'
+      mode.bind='mode'
+      button-size.bind='buttonSize'
+      button-variant.bind='buttonVariant'
+      name.bind='name'
+      label.bind='label'
+      title.bind='title'
+      disabled.bind='disabled'
+      required.bind='required'
+      valid.bind='valid'
+      valid-feedback.bind='validFeedback'
+      invalid-feedback.bind='invalidFeedback'
+      form.bind='form'
+      text.bind='text'
+    ></bs-radio>`,
+  }),
   argTypes: {
-    mode: selectControl(['', 'button']),
+    // BsRadio properties
+    checked: { control: 'text' },
+    value: { control: 'text' },
+    matcher: { control: false },
+    inline: { control: 'boolean' },
+    mode: {
+      control: 'select',
+      options: ['button'],
+    },
+    buttonSize: {
+      control: 'select',
+      options: ['sm', 'lg'],
+    },
+    buttonVariant: {
+      control: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'light',
+        'dark',
+        'link',
+        'outline-primary',
+        'outline-secondary',
+        'outline-success',
+        'outline-danger',
+        'outline-warning',
+        'outline-info',
+        'outline-light',
+        'outline-dark',
+      ],
+    },
+
+    // BaseField properties
+    name: { control: 'text' },
+    label: { control: 'text' },
+    title: { control: 'text' },
+    disabled: { control: 'boolean' },
+    required: { control: 'boolean' },
+    valid: { control: 'boolean' },
+    validFeedback: { control: 'text' },
+    invalidFeedback: { control: 'text' },
+    form: { control: 'text' },
+    text: { control: 'text' },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  props: args,
-});
-
-Overview.args = {
-  label: 'Default radio',
+export const Overview = {
+  args: {
+    label: 'Default radio',
+    buttonVariant: 'primary',
+  },
 };
 
-const RadioGroup: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsRadioGroup],
-  template: createComponentTemplate(BsRadioGroup),
-  props: args,
-});
+export const RadioGroup = {
+  render: () => ({
+    template: `<bs-radio-group
+      checked.bind='checked'
+      options.bind='options'
+      inline.bind='inline'
+      mode.bind='mode'
+      button-size.bind='buttonSize'
+      button-variant.bind='buttonVariant'
+      name.bind='name'
+      label.bind='label'
+      title.bind='title'
+      disabled.bind='disabled'
+      required.bind='required'
+      valid.bind='valid'
+      valid-feedback.bind='validFeedback'
+      invalid-feedback.bind='invalidFeedback'
+      form.bind='form'
+      text.bind='text'
+    ></bs-radio-group>`,
+  }),
+  argTypes: {
+    // BsRadioGroup properties
+    checked: { control: 'text' },
+    options: { control: 'object' },
+    matcher: { control: false },
+    inline: { control: 'boolean' },
+    mode: {
+      control: 'select',
+      options: ['button'],
+    },
+    buttonSize: {
+      control: 'select',
+      options: ['sm', 'lg'],
+    },
+    buttonVariant: {
+      control: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'light',
+        'dark',
+        'link',
+        'outline-primary',
+        'outline-secondary',
+        'outline-success',
+        'outline-danger',
+        'outline-warning',
+        'outline-info',
+        'outline-light',
+        'outline-dark',
+      ],
+    },
 
-RadioGroup.args = {
-  options: { '0': 'Default radio', '1': 'Default checked radio' },
-  checked: '1',
+    // BaseField properties
+    name: { control: 'text' },
+    label: { control: 'text' },
+    title: { control: false },
+    disabled: { control: 'boolean' },
+    required: { control: 'boolean' },
+    valid: { control: 'boolean' },
+    validFeedback: { control: 'text' },
+    invalidFeedback: { control: 'text' },
+    form: { control: 'text' },
+    text: { control: 'text' },
+    value: { control: false },
+  },
+  args: {
+    options: { '0': 'Default radio', '1': 'Default checked radio' },
+    checked: '1',
+    buttonVariant: 'primary',
+  },
 };
-RadioGroup.argTypes = {
-  id: disableControl,
-  title: disableControl,
-};
-
-export { Overview, RadioGroup };

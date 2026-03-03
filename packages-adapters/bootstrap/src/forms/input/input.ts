@@ -2,10 +2,11 @@ import template from './input.html';
 
 import './input.scss';
 
-import { coerceBoolean, uniqueId } from '@ekzo-dev/toolkit';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement } from 'aurelia';
 
 import { Size } from '../../types';
+import { uniqueId } from '../../utils';
 import { BaseField } from '../base-field';
 
 type HTMLInputBase = Partial<Omit<HTMLInputElement, 'form' | 'autocomplete'> & { form: string; autocomplete: string }>;
@@ -51,15 +52,24 @@ export class BsInput extends BaseField implements HTMLInputBase {
   @bindable()
   pattern?: string;
 
-  /* property is named like this to avoid collision with IActivationHooks['accept'] */
+  /**
+   * property is named like this to avoid collision with IActivationHooks['accept']
+   * TODO: rename after https://github.com/aurelia/aurelia/issues/2383
+   */
   @bindable()
   fileAccept?: string;
 
-  @bindable()
-  placeholder?: string;
-
   @bindable(coerceBoolean)
-  floatingLabel: boolean = false;
+  floatingLabel: boolean = this.config.floatingLabels;
+
+  @bindable()
+  get placeholder(): string | undefined {
+    // https://getbootstrap.com/docs/5.3/forms/floating-labels/#example
+    return !this._placeholder && this.floatingLabel ? ' ' : this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+  }
 
   @bindable(coerceBoolean)
   readonly: boolean = false;
@@ -71,34 +81,31 @@ export class BsInput extends BaseField implements HTMLInputBase {
   bsSize?: Size;
 
   @bindable()
-  datalist: string[] = [];
+  datalist?: string[];
 
   @bindable()
   autocomplete?: string;
 
-  input!: HTMLInputElement;
+  datalistId: string = uniqueId();
 
-  datalistId!: string;
+  private _placeholder?: string;
 
-  binding(): void {
-    super.binding();
-    this.#ensurePlaceholder();
-
-    this.datalistId = uniqueId();
+  bound() {
+    super.bound();
+    this.datalistChanged(this.datalist);
   }
 
-  placeholderChanged(): void {
-    this.#ensurePlaceholder();
-  }
-
-  floatingLabelChanged(): void {
-    this.#ensurePlaceholder();
+  datalistChanged(newValue?: string[], oldValue?: string[]): void {
+    if (newValue != null) {
+      this.control.setAttribute('datalist', this.datalistId);
+    } else if (oldValue) {
+      this.control.removeAttribute('datalist');
+    }
   }
 
   valueChanged(): void {
-    // TODO: binding to file does not currently work on Aurelia 2 out of the box, need to investigate
-    if (this.input.type === 'file') {
-      this.files = this.input.files!;
+    if (this.control.type === 'file') {
+      this.files = this.control.files!;
     }
   }
 
@@ -111,13 +118,5 @@ export class BsInput extends BaseField implements HTMLInputBase {
     ]
       .filter(Boolean)
       .join(' ');
-  }
-
-  #ensurePlaceholder(): void {
-    // A placeholder is required on each <input> as our method of CSS-only floating labels uses the
-    // :placeholder-shown pseudo-element https://getbootstrap.com/docs/5.2/forms/floating-labels/#example
-    if (this.floatingLabel && !this.placeholder) {
-      this.placeholder = ' ';
-    }
   }
 }

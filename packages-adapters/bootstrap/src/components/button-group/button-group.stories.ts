@@ -1,47 +1,54 @@
 import './button-group.stories.scss';
 
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { selectControl } from '../../../../../.storybook/helpers';
 import { SIZES } from '../../constants';
-import { BsButton } from '../button';
-import { BsDropdown, BsDropdownItem, BsDropdownMenu, BsDropdownToggle } from '../dropdown';
 
 import { BsButtonGroup } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Components / Button group',
   component: BsButtonGroup,
+  render: () => ({
+    template: `<bs-button-group size.bind="size" vertical.bind="vertical">
+  <button bs-button>Left</button>
+  <button bs-button>Middle</button>
+  <button bs-button>Right</button>
+</bs-button-group>`,
+  }),
   argTypes: {
-    size: selectControl(['', ...SIZES]),
+    size: {
+      control: 'select',
+      options: ['', ...SIZES],
+    },
+    vertical: { control: 'boolean' },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  innerHtml: `
-<button bs-button>Left</button>
-<button bs-button>Middle</button>
-<button bs-button>Right</button>
-`,
-  props: args,
-});
+export const Overview = {
+  args: {
+    size: '',
+    vertical: false,
+  },
+};
 
-const MixedStyles: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  innerHtml: `
+export const MixedStyles = {
+  render: () => ({
+    template: `<bs-button-group size.bind="size" vertical.bind="vertical">
   <button bs-button="danger">Left</button>
   <button bs-button="warning">Middle</button>
   <button bs-button="success">Right</button>
-  `,
-  props: args,
-});
+</bs-button-group>`,
+  }),
+  args: {
+    size: '',
+    vertical: false,
+  },
+};
 
-const ButtonToolbar: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  template: `
+export const ButtonToolbar = {
+  render: () => ({
+    template: `<div>
 <bs-button-group class="me-2" vertical.bind="vertical" size.bind="size">
   <button bs-button>1</button>
   <button bs-button>2</button>
@@ -55,21 +62,20 @@ const ButtonToolbar: Story = (args): StoryFnAureliaReturnType => ({
   <button bs-button="secondary">7</button>
 </bs-button-group>
 
-${createComponentTemplate(
-  BsButtonGroup,
-  `
+<bs-button-group vertical.bind="vertical" size.bind="size">
   <button bs-button="info">8</button>
-  `
-)}`,
-  props: args,
-});
+</bs-button-group>
+</div>`,
+  }),
+  args: {
+    size: '',
+    vertical: false,
+  },
+};
 
-const Nesting: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, BsDropdown],
-  template: `
-${createComponentTemplate(
-  BsButtonGroup,
-  `
+export const Nesting = {
+  render: () => ({
+    template: `<bs-button-group size.bind="size" vertical.bind="vertical">
   <button bs-button>1</button>
   <button bs-button>2</button>
   <bs-button-group size.bind="size" bs-dropdown>
@@ -79,9 +85,10 @@ ${createComponentTemplate(
       <a bs-dropdown-item>Dropdown link</a>
     </bs-dropdown-menu>
   </bs-button-group>
-  `
-)}`,
-  props: args,
-});
-
-export { ButtonToolbar, MixedStyles, Nesting, Overview };
+</bs-button-group>`,
+  }),
+  args: {
+    size: '',
+    vertical: false,
+  },
+};

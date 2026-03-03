@@ -1,68 +1,123 @@
-import { Meta, Story } from '@storybook/aurelia';
-
-import { disableControl, selectControl } from '../../../../../.storybook/helpers';
-import { SIZES, VARIANTS } from '../../constants';
-
 import { BsCheckbox } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Forms / Checkbox',
   component: BsCheckbox,
-  parameters: {
-    actions: {
-      handles: ['change', 'input'],
-    },
-  },
-  args: {
-    label: 'Some label',
-  },
+  render: () => ({
+    template: `<bs-checkbox
+      checked.bind='checked'
+      value.bind='value'
+      inline.bind='inline'
+      mode.bind='mode'
+      button-size.bind='buttonSize'
+      button-variant.bind='buttonVariant'
+      indeterminate.bind='indeterminate'
+      reverse.bind='reverse'
+      name.bind='name'
+      label.bind='label'
+      title.bind='title'
+      disabled.bind='disabled'
+      required.bind='required'
+      valid.bind='valid'
+      valid-feedback.bind='validFeedback'
+      invalid-feedback.bind='invalidFeedback'
+      form.bind='form'
+      text.bind='text'
+    ></bs-checkbox>`,
+  }),
   argTypes: {
-    mode: selectControl(['switch', 'button']),
-    buttonVariant: selectControl([...VARIANTS, 'link', ...VARIANTS.map((v) => `outline-${v}`)]),
-    buttonSize: selectControl(['', ...SIZES]),
+    // BsCheckbox properties
+    checked: { control: 'boolean' },
+    value: { control: 'object' },
+    matcher: { control: false },
+    inline: { control: 'boolean' },
+    mode: {
+      control: 'select',
+      options: ['switch', 'button'],
+    },
+    buttonSize: {
+      control: 'select',
+      options: ['sm', 'lg'],
+    },
+    buttonVariant: {
+      control: 'select',
+      options: [
+        'primary',
+        'secondary',
+        'success',
+        'danger',
+        'warning',
+        'info',
+        'light',
+        'dark',
+        'link',
+        'outline-primary',
+        'outline-secondary',
+        'outline-success',
+        'outline-danger',
+        'outline-warning',
+        'outline-info',
+        'outline-light',
+        'outline-dark',
+      ],
+    },
+    indeterminate: { control: 'boolean' },
+    reverse: { control: 'boolean' },
+
+    // BaseField properties
+    name: { control: 'text' },
+    label: { control: 'text' },
+    title: { control: 'text' },
+    disabled: { control: 'boolean' },
+    required: { control: 'boolean' },
+    valid: { control: 'boolean' },
+    validFeedback: { control: 'text' },
+    invalidFeedback: { control: 'text' },
+    form: { control: 'text' },
+    text: { control: 'text' },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args) => ({
-  props: args,
-});
+export const Overview = {
+  args: {
+    checked: false,
+    label: 'Some label',
+    buttonVariant: 'primary',
+  },
+};
 
-const BindingToArray: Story = (args) => ({
-  template: `
-<bs-checkbox label="One" value="1" checked.bind="checked"></bs-checkbox>
+export const BindingToArray = {
+  render: () => ({
+    template: `<bs-checkbox label="One" value="1" checked.bind="checked"></bs-checkbox>
 <bs-checkbox label="Two" value="2" checked.bind="checked"></bs-checkbox>
 <bs-checkbox label="Three" value="3" checked.bind="checked"></bs-checkbox>
 <br>
-Selected: \${checked}
-  `,
-  props: args,
-});
-
-BindingToArray.argTypes = {
-  label: disableControl,
-  name: disableControl,
-  id: disableControl,
-  title: disableControl,
-  disabled: disableControl,
-  required: disableControl,
-  valid: disableControl,
-  validFeedback: disableControl,
-  invalidFeedback: disableControl,
-  model: disableControl,
-  value: disableControl,
-  matcher: disableControl,
-  mode: disableControl,
-  buttonSize: disableControl,
-  buttonVariant: disableControl,
-  indeterminate: disableControl,
-  form: disableControl,
-  inline: disableControl,
-  reverse: disableControl,
+Selected: \${checked}`,
+  }),
+  argTypes: {
+    checked: { control: 'object' },
+    label: { control: false },
+    name: { control: false },
+    title: { control: false },
+    disabled: { control: false },
+    required: { control: false },
+    valid: { control: false },
+    validFeedback: { control: false },
+    invalidFeedback: { control: false },
+    value: { control: false },
+    matcher: { control: false },
+    mode: { control: false },
+    buttonSize: { control: false },
+    buttonVariant: { control: false },
+    indeterminate: { control: false },
+    form: { control: false },
+    inline: { control: false },
+    reverse: { control: false },
+    text: { control: false },
+  },
+  args: {
+    checked: ['1'],
+  },
 };
-BindingToArray.args = {
-  checked: [],
-};
-
-export { BindingToArray, Overview };

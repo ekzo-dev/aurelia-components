@@ -1,39 +1,84 @@
 import { BsButton } from '@ekzo-dev/bootstrap';
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { selectControl } from '../../../../../.storybook/helpers';
 
 import { BsDurationInput } from '.';
 
-const meta: Meta = {
-  title: 'Ekzo / Bootstrap Addons / Forms / Duration input',
+const meta = {
+  title: 'Bootstrap Addons / Forms / Duration input',
   component: BsDurationInput,
-  args: {
-    value: 'P5DT1Hasds',
-    label: 'Duration',
-  },
+  render: () => ({
+    template: `<bs-duration-input
+      value.bind='value'
+      bs-size.bind='bsSize'
+      floating-label.bind='floatingLabel'
+      name.bind='name'
+      label.bind='label'
+      title.bind='title'
+      disabled.bind='disabled'
+      required.bind='required'
+      valid.bind='valid'
+      valid-feedback.bind='validFeedback'
+      invalid-feedback.bind='invalidFeedback'
+      form.bind='form'
+      text.bind='text'
+    ></bs-duration-input>`,
+  }),
   argTypes: {
-    bsSize: selectControl(['', 'sm', 'lg']),
+    // BsDurationInput properties
+    value: { control: 'text' },
+    bsSize: {
+      control: 'select',
+      options: ['sm', 'lg'],
+    },
+    floatingLabel: { control: 'boolean' },
+
+    // BaseField properties
+    name: { control: 'text' },
+    label: { control: 'text' },
+    title: { control: 'text' },
+    disabled: { control: 'boolean' },
+    required: { control: 'boolean' },
+    valid: { control: 'boolean' },
+    validFeedback: { control: 'text' },
+    invalidFeedback: { control: 'text' },
+    form: { control: 'text' },
+    text: { control: 'text' },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  props: args,
-});
-
-const Validation: Story = (args): StoryFnAureliaReturnType => ({
-  props: args,
-  template: `<form class='was-validated'>${createComponentTemplate(
-    BsDurationInput
-  )}<br>\${value} <button bs-button>Validate</button></form>`,
-  components: [BsButton],
-});
-
-Validation.args = {
-  required: true,
+export const Overview = {
+  args: {
+    value: 'P5DT1H',
+    label: 'Duration',
+  },
 };
 
-// eslint-disable-next-line
-export { Overview, Validation };
+export const Validation = {
+  render: () => ({
+    template: `<form class='was-validated'>
+      <bs-duration-input
+        value.bind='value'
+        bs-size.bind='bsSize'
+        floating-label.bind='floatingLabel'
+        name.bind='name'
+        label.bind='label'
+        title.bind='title'
+        disabled.bind='disabled'
+        required.bind='required'
+        valid.bind='valid'
+        valid-feedback.bind='validFeedback'
+        invalid-feedback.bind='invalidFeedback'
+        form.bind='form'
+        text.bind='text'
+      ></bs-duration-input>
+      <br>\${value}
+      <button bs-button>Validate</button>
+    </form>`,
+    components: [BsButton],
+  }),
+  args: {
+    label: 'Duration',
+    required: true,
+  },
+};

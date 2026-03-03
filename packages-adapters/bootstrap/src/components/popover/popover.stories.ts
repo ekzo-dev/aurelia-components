@@ -1,71 +1,60 @@
 import './popover.stories.scss';
 
-import { createComponentTemplate, Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { selectControl } from '../../../../../.storybook/helpers';
 import { TOOLTIP_PLACEMENTS, TOOLTIP_TRIGGERS } from '../../constants';
-import { BsButton } from '../button';
 
 import { BsPopover } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Components / Popover',
   component: BsPopover,
+  render: () => ({
+    template: `<div class="container text-center"><br><br><br><br><br><br>
+    <button bs-button bs-popover="title.bind: title; content.bind: content; placement.bind: placement; trigger.bind: trigger; html.bind: html">Open popover</button>
+</div>`,
+  }),
   parameters: {
     actions: {
       handles: ['show.bs.popover', 'shown.bs.popover', 'hide.bs.popover', 'hidden.bs.popover', 'inserted.bs.popover'],
     },
   },
-  args: {
-    title: 'Popover title',
-    content: "And here's some amazing content. It's very engaging. Right?",
-  },
   argTypes: {
-    placement: selectControl(TOOLTIP_PLACEMENTS),
-    trigger: selectControl(TOOLTIP_TRIGGERS),
+    title: { control: 'text' },
+    content: { control: 'text' },
+    placement: {
+      control: 'select',
+      options: TOOLTIP_PLACEMENTS,
+    },
+    trigger: {
+      control: 'select',
+      options: TOOLTIP_TRIGGERS,
+    },
+    html: { control: 'boolean' },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  template: `
-<div class="container text-center"><br><br><br><br><br><br>
-    <button bs-button ${createComponentTemplate(BsPopover)}>Open popover</button>
-</div>
-  `,
-  props: args,
-});
-
-const HtmlInPopover: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  template: `
-<div class="container text-center"><br><br><br><br><br><br>
-    <button bs-button ${createComponentTemplate(BsPopover)}>Open popover</button>
-</div>
-  `,
-  props: args,
-});
-
-HtmlInPopover.args = {
-  content: "And here's <em><u>some</u> amazing</em> content. <strong>It's very engaging</strong>. Right?",
-  html: true,
+export const Overview = {
+  args: {
+    title: 'Popover title',
+    content: "And here's some amazing content. It's very engaging. Right?",
+    placement: 'right',
+    trigger: 'click',
+    html: false,
+  },
 };
 
-// todo story with customTemplate
-/*const CustomTemplate: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton,],
-  template: `
-<div class="container text-center"><br><br><br><br><br><br>
-    <button bs-button ${createComponentTemplate(BsPopover)}>Open popover</button>
-</div>
-  `,
-  props: args,
-});
-CustomTemplate.args = {
-  template:
-    `<div class='popover popover-example' style='background-color: darkred;' role='popover'><div class='popover-arrow'></div><div class='popover-inner'>Test</div></div>`,
-};*/
-
-export { HtmlInPopover, Overview };
+export const HtmlInPopover = {
+  render: () => ({
+    template: `<div class="container text-center"><br><br><br><br><br><br>
+    <button bs-button bs-popover="title.bind: title; content.bind: content; placement.bind: placement; trigger.bind: trigger; html.bind: html">Open popover</button>
+</div>`,
+  }),
+  args: {
+    title: 'Popover title',
+    content: "And here's <em><u>some</u> amazing</em> content. <strong>It's very engaging</strong>. Right?",
+    placement: 'right',
+    trigger: 'click',
+    html: true,
+  },
+};

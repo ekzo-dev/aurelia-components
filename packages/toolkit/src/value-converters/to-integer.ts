@@ -15,12 +15,11 @@ export class ToInteger {
   private format(value: AllowedTypes) {
     let result;
 
-    if (typeof value === 'number' || value === null || value === undefined) {
+    if (typeof value === 'number' || value == null) {
       result = value;
     } else if (value === '') {
       result = null;
     } else if (Array.isArray(value)) {
-      // для массивов необходимо именно форматировать значения внутри существующего массива, а не создавать новый!!
       result = value;
       result.forEach((item) => {
         item = this.convertIfNumeric(item);

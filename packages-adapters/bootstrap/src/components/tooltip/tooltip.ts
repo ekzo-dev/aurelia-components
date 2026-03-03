@@ -3,7 +3,6 @@ import './tooltip.scss';
 
 import type * as Popper from '@popperjs/core';
 
-import { ICustomAttributeController } from '@aurelia/runtime-html';
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customAttribute, ICustomAttributeViewModel, resolve } from 'aurelia';
 import { Tooltip } from 'bootstrap';
@@ -22,12 +21,12 @@ export type TooltipTrigger =
   name: 'bs-tooltip',
   defaultProperty: 'title',
 })
-export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
+export class BsTooltip implements Partial<Tooltip.Options>, ICustomAttributeViewModel {
   @bindable(coerceBoolean)
   animation: boolean = true;
 
   @bindable()
-  allowList: Record<keyof HTMLElementTagNameMap | '*', Array<string | RegExp>> | undefined;
+  allowList?: Record<keyof HTMLElementTagNameMap | '*', Array<string | RegExp>>;
 
   @bindable()
   boundary: Popper.Boundary = 'clippingParents';
@@ -60,7 +59,7 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
   sanitize: boolean = true;
 
   @bindable()
-  sanitizeFn: () => void | null = null;
+  sanitizeFn?: () => void | null;
 
   @bindable()
   selector: string | false = false;
@@ -76,8 +75,6 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
 
   @bindable()
   trigger: TooltipTrigger = 'hover focus';
-
-  readonly $controller: ICustomAttributeController<this>;
 
   protected tooltip?: Tooltip;
 
@@ -146,9 +143,10 @@ export class BsTooltip implements Tooltip.Options, ICustomAttributeViewModel {
   protected getOptions(): Partial<Tooltip.Options> {
     const options: Partial<Tooltip.Options> = {};
 
-    Object.keys(this.$controller.definition.bindables).forEach((name) => {
-      if (this[name] !== undefined) {
-        options[name] = this[name] as never;
+    Object.keys((this as ICustomAttributeViewModel).$controller!.definition.bindables).forEach((name) => {
+      if (this[name as keyof this] !== undefined) {
+        // @ts-ignore
+        options[name] = this[name as keyof this];
       }
     });
 

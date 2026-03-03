@@ -1,14 +1,16 @@
 import { ICustomAttributeViewModel, resolve } from 'aurelia';
 
 export abstract class BaseAttribute implements ICustomAttributeViewModel {
+  disabled?: boolean;
+
   protected readonly element: HTMLElement = resolve(HTMLElement);
 
   attaching(): void {
     this.setClass(this.classes);
 
     // apply disabled to set initial attributes for button/input
-    if (this['disabled'] !== undefined) {
-      this.disabledChanged(this['disabled']);
+    if (this.disabled !== undefined) {
+      this.disabledChanged(this.disabled);
     }
   }
 

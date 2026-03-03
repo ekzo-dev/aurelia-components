@@ -10,7 +10,7 @@ import { BaseAttribute } from '../base-attribute';
   name: 'bs-collapse',
   defaultProperty: 'collapsed',
 })
-export class BsCollapse extends BaseAttribute implements Collapse.Options {
+export class BsCollapse extends BaseAttribute implements Partial<Collapse.Options> {
   @bindable(coerceBoolean)
   collapsed: boolean = true;
 
@@ -18,7 +18,7 @@ export class BsCollapse extends BaseAttribute implements Collapse.Options {
   horizontal: boolean = false;
 
   @bindable()
-  parent: string | Element = undefined;
+  parent?: string | Element;
 
   @bindable()
   toggle: boolean = false;
@@ -66,6 +66,6 @@ export class BsCollapse extends BaseAttribute implements Collapse.Options {
   }
 
   protected get classes(): string[] {
-    return ['collapse', this.horizontal ? 'collapse-horizontal' : null].filter(Boolean);
+    return ['collapse', this.horizontal ? 'collapse-horizontal' : ''].filter(Boolean);
   }
 }

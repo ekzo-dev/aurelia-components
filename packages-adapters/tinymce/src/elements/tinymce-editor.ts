@@ -122,7 +122,7 @@ export class TinymceEditor {
   }
 
   private destroyEditor() {
-    tinymce.remove(this.editor);
+    tinymce.remove(this.editor!);
     this.editor = undefined;
   }
 

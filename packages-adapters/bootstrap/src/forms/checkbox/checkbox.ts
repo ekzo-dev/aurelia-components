@@ -16,16 +16,13 @@ import { BaseField } from '../base-field';
 })
 export class BsCheckbox extends BaseField {
   @bindable({ mode: BindingMode.twoWay })
-  checked!: boolean | any[];
+  checked!: boolean | unknown[];
 
   @bindable()
-  model?: any;
+  value?: unknown;
 
   @bindable()
-  value?: string;
-
-  @bindable()
-  matcher?: (a: any, b: any) => boolean;
+  matcher?: (a: unknown, b: unknown) => boolean;
 
   @bindable(coerceBoolean)
   inline: boolean = false;
@@ -45,20 +42,21 @@ export class BsCheckbox extends BaseField {
   @bindable(coerceBoolean)
   reverse: boolean = false;
 
-  readonly input!: HTMLInputElement;
+  bound() {
+    super.bound();
+    this.indeterminateChanged();
+  }
 
   indeterminateChanged() {
-    if (this.input) {
-      this.input.indeterminate = this.indeterminate;
-    }
+    this.control.indeterminate = this.indeterminate;
   }
 
   get classes(): string {
     return [
-      this.mode === 'button' ? null : 'form-check',
-      this.mode === 'switch' ? 'form-switch' : null,
-      this.inline ? 'form-check-inline' : null,
-      this.reverse ? 'form-check-reverse' : null,
+      this.mode === 'button' ? '' : 'form-check',
+      this.mode === 'switch' ? 'form-switch' : '',
+      this.inline ? 'form-check-inline' : '',
+      this.reverse ? 'form-check-reverse' : '',
     ]
       .filter(Boolean)
       .join(' ');

@@ -1,8 +1,3 @@
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { disableControl } from '../../../../.storybook/helpers';
-import { BsPagination } from '../components';
-
 import { BsIcon } from '.';
 
 const iconsList = [
@@ -1372,58 +1367,42 @@ const iconsList = [
   'x-octagon',
   'x-octagon-fill',
 ];
-// В инспекторе видно, что код иконки есть, но не отображается в Canvas
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Icons',
   component: BsIcon,
+  render: () => ({
+    template: `<bs-icon name.bind='name'></bs-icon>`,
+  }),
+  argTypes: {
+    name: {
+      control: 'select',
+      options: iconsList,
+    },
+  },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  props: {
-    ...args,
+export const Overview = {
+  args: {
+    name: 'alarm',
   },
-});
-
-Overview.args = {
-  name: 'activity',
 };
 
-const iconsListPart1 = iconsList.slice(0, Math.floor(iconsList.length / 2));
-const iconsExample1: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsIcon, BsPagination],
-  template: `
-     <div repeat.for="icon of iconsListPart1">
-      <bs-icon name="\${icon}" title="\${icon}"></bs-icon>&nbsp;\${icon}
-    </div>
-`,
-  props: {
-    ...args,
-    iconsListPart1,
+export const AllIcons = {
+  render: () => ({
+    template: `<div style="display: grid; grid-template-columns: repeat(10, auto); gap: 2rem">
+      <div repeat.for="icon of iconsList">
+        <bs-icon name.one-time="icon" style='font-size: 200%'></bs-icon>
+        <div style='font-size: 80%; color: #7f7f7f'>\${icon}</div>
+      </div>
+    </div>`,
+  }),
+  argTypes: {
+    name: { control: false },
   },
-});
-
-iconsExample1.argTypes = {
-  name: disableControl,
-};
-
-const iconsListPart2 = iconsList.slice(Math.floor(iconsList.length / 2));
-const iconsExample2: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsIcon, BsPagination],
-  template: `
-     <div repeat.for="icon of iconsListPart2">
-            <bs-icon name="\${icon}" title="\${icon}"></bs-icon>&nbsp;\${icon}
-    </div>
-`,
-  props: {
-    ...args,
-    iconsListPart2,
+  args: {
+    iconsList,
   },
-});
-
-iconsExample2.argTypes = {
-  name: disableControl,
 };
-export { iconsExample1, iconsExample2, Overview };

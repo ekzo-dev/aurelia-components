@@ -12,7 +12,7 @@ export interface AsBlob extends Partial<Blob> {
 /**
  * TODO: issue on https://github.com/rails/rails/tree/main/activestorage/app/javascript/activestorage to export DirectUploadController
  */
-function dispatchEvent(element, type, eventInit: CustomEventInit = {}) {
+function dispatchEvent(element: HTMLInputElement, type: string, eventInit: CustomEventInit = {}) {
   const { disabled } = element;
   const { bubbles, cancelable, detail } = eventInit;
   const event = new CustomEvent<AsBlob>(type, {
@@ -35,10 +35,10 @@ class DirectUploadController implements DirectUploadDelegate {
   directUpload: DirectUpload;
 
   constructor(
-    private input,
-    private file,
-    private url,
-    private headers: Record<string, string>
+    private input: HTMLInputElement,
+    private file: File,
+    private url: string,
+    private headers?: Record<string, string>
   ) {
     this.directUpload = new DirectUpload(this.file, this.url, this);
     this.dispatch('initialize');
@@ -72,7 +72,7 @@ class DirectUploadController implements DirectUploadDelegate {
     return dispatchEvent(this.input, `direct-upload:${name}`, { detail });
   }
 
-  dispatchError(error) {
+  dispatchError(error: any) {
     const event = this.dispatch('error', { error });
 
     if (!event.defaultPrevented) {
@@ -103,7 +103,7 @@ class DirectUploadController implements DirectUploadDelegate {
 })
 export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerObject {
   @bindable()
-  endpoint: IEndpoint = null;
+  endpoint?: IEndpoint;
 
   @bindable()
   clear: boolean = false;
@@ -123,7 +123,7 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
   }
 
   handleEvent(_: Event): void {
-    if (this.input.files.length) {
+    if (this.input.files?.length) {
       this.save(this.input.files);
     }
   }
@@ -140,7 +140,7 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
     }
 
     for (let i = 0; i < files.length; ++i) {
-      const file = files.item(i);
+      const file = files.item(i)!;
 
       const controller = new DirectUploadController(this.input, file, endpoint.url, endpoint.headers);
 
@@ -148,7 +148,7 @@ export class AsDirectUpload implements ICustomAttributeViewModel, EventListenerO
         this.uploading--;
 
         if (this.uploading === 0 && this.clear) {
-          this.input.value = null;
+          this.input.value = '';
         }
       });
 

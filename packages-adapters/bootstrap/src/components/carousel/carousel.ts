@@ -44,7 +44,7 @@ export class BsCarousel implements ICustomElementViewModel, Carousel.Options, Ev
   dark: boolean = false;
 
   @slotted('.carousel-item')
-  items: HTMLElement[];
+  items!: HTMLElement[];
 
   activeSlide: number = 0;
 

@@ -1,11 +1,11 @@
 import { createDialogConfiguration, IDialogController, IDialogDom, IDialogDomRenderer } from '@aurelia/dialog';
 import { onResolve } from '@aurelia/kernel';
 import { registerHostNode } from '@aurelia/runtime-html';
-import { Controller, IContainer, IPlatform, noop, resolve } from 'aurelia';
+import { Controller, IContainer, IPlatform, noop, queueTask, resolve } from 'aurelia';
 
 import { BsModal, ModalFullscreen, ModalSize } from './modal';
 
-export type DialogRenderOptionsBootstrap = {
+export type DialogOptionsBootstrapModal = {
   /**
    * Title of the modal
    */
@@ -53,11 +53,11 @@ export type DialogRenderOptionsBootstrap = {
   focus?: boolean;
 };
 
-export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRenderOptionsBootstrap> {
+export class DialogRendererBootstrapModal implements IDialogDomRenderer<DialogOptionsBootstrapModal> {
   private readonly platform = resolve(IPlatform);
   private readonly container = resolve(IContainer);
 
-  public render(host: HTMLElement, requestor: IDialogController, options: DialogRenderOptionsBootstrap): IDialogDom {
+  public render(host: HTMLElement, requestor: IDialogController, options: DialogOptionsBootstrapModal): IDialogDom {
     const { platform } = this;
     let deactivating = false;
 
@@ -89,7 +89,7 @@ export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRend
     void controller.activate(controller, null);
 
     return {
-      contentHost: modal.querySelector('div.modal-body'),
+      contentHost: modal.querySelector('div.modal-body')!,
       show: () => dialog.show(),
       hide: () => {
         deactivating = true;
@@ -99,17 +99,17 @@ export class DialogDomRendererBootstrap implements IDialogDomRenderer<DialogRend
       dispose: () => {
         void onResolve(controller.deactivate(controller, null), () => {
           // remove element next tick to allow Bootstrap finish it's logic
-          void Promise.resolve().then(() => modal.remove());
+          queueTask(() => modal.remove());
         });
       },
     };
   }
 }
 
-export const DialogConfigurationBootstrap = createDialogConfiguration<DialogRenderOptionsBootstrap>(
+export const DialogConfigurationBootstrapModal = createDialogConfiguration<DialogOptionsBootstrapModal>(
   noop,
   class {
-    renderer = DialogDomRendererBootstrap;
-    options: DialogRenderOptionsBootstrap = {};
+    renderer = DialogRendererBootstrapModal;
+    options: DialogOptionsBootstrapModal = {};
   }
 );

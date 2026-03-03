@@ -1,7 +1,10 @@
 @import '@ekzo-dev/bootstrap/src/utils';
 @import 'bootstrap/scss/forms/form-check';
 
-bs-select.addon {
+bs-select-dropdown {
+  display: block;
+  width: 100%;
+
   .form-select {
     cursor: default;
   }
@@ -56,10 +59,10 @@ bs-select.addon {
 }
 
 /* stylelint-disable */
-.was-validated bs-select.addon:has(.btn-close) .form-select:invalid,
-.was-validated bs-select.addon:has(.btn-close) .form-select:valid,
-bs-select.addon:has(.btn-close) .form-select.is-invalid,
-bs-select.addon:has(.btn-close) .form-select.is-valid {
+.was-validated bs-select-dropdown:has(.btn-close) .form-select:invalid,
+.was-validated bs-select-dropdown:has(.btn-close) .form-select:valid,
+bs-select-dropdown:has(.btn-close) .form-select.is-invalid,
+bs-select-dropdown:has(.btn-close) .form-select.is-valid {
   padding-right: 5.5rem !important;
 
   + .btn-close {

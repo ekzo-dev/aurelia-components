@@ -52,7 +52,7 @@ export class BsToast implements ICustomElementViewModel, Toast.Options {
     return this.waitAnimation(false);
   }
 
-  isShown(): boolean {
+  isShown(): boolean | undefined {
     return this.toast?.isShown();
   }
 

@@ -10,7 +10,7 @@ interface IActiveStorageOptions {
 }
 
 export class ActiveStorageOptions implements IActiveStorageOptions {
-  constructor(public directUploadEndpoint: IEndpoint = null) {}
+  constructor(public directUploadEndpoint: IEndpoint) {}
 }
 
 export const IActiveStorageOptions = DI.createInterface<IActiveStorageOptions>('IActiveStorageOptions');

@@ -22,13 +22,14 @@ export class BsAccordion implements ICustomElementViewModel {
   @children({
     filter: (el: HTMLElement) => el.tagName === 'BS-ACCORDION-ITEM',
   })
-  items: BsAccordionItem[];
+  items!: BsAccordionItem[];
 
+  // @ts-ignore
   @watch((self: BsAccordion) => self.items.map((item) => item.collapsed))
   itemExpanded(newValue: boolean[], oldValue: boolean[]) {
     if (this.alwaysOpen || oldValue.length === 0) return;
 
-    const expanded = newValue.findIndex((v, i) => v === false && v !== oldValue[i]);
+    const expanded = newValue.findIndex((v, i) => !v && v !== oldValue[i]);
 
     if (expanded >= 0) {
       this.items.forEach((item, i) => {

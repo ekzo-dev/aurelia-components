@@ -1,42 +1,48 @@
-import 'bootstrap/dist/css/bootstrap-utilities.min.css';
-
-import { Meta, Story, StoryFnAureliaReturnType } from '@storybook/aurelia';
-
-import { selectControl } from '../../../../../.storybook/helpers';
-import { VARIANTS } from '../../constants';
-import { BsButton } from '../button';
-
 import { BsBadge } from '.';
 
-const meta: Meta = {
+const meta = {
   title: 'Bootstrap / Components / Badge',
   component: BsBadge,
+  render: () => ({
+    template: `<bs-badge
+      variant.bind='variant'
+      pill.bind='pill'
+    >
+      \${content}
+    </bs-badge>`,
+  }),
   argTypes: {
-    variant: selectControl(VARIANTS),
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'],
+    },
+    pill: { control: 'boolean' },
+    content: { control: 'text' },
   },
 };
 
 export default meta;
 
-const Overview: Story = (args): StoryFnAureliaReturnType => ({
-  innerHtml: 'NEW',
-  props: args,
-});
-
-const Positioned: Story = (args): StoryFnAureliaReturnType => ({
-  components: [BsButton],
-  template: `
-<button bs-button class="position-relative">
-  INBOX
-  <bs-badge pill.bind="pill" variant.bind="variant" class="position-absolute top-0 start-100 translate-middle">99+</bs-badge>
-</button>
-  `,
-  props: args,
-});
-
-Positioned.args = {
-  variant: 'danger',
-  pill: false,
+export const Overview = {
+  args: {
+    variant: 'primary',
+    pill: false,
+    content: 'NEW',
+  },
 };
 
-export { Overview, Positioned };
+export const Positioned = {
+  render: () => ({
+    template: `<button bs-button class="position-relative">
+      INBOX
+      <bs-badge pill.bind="pill" variant.bind="variant" class="position-absolute top-0 start-100 translate-middle">99+</bs-badge>
+    </button>`,
+  }),
+  argTypes: {
+    content: { control: false },
+  },
+  args: {
+    variant: 'danger',
+    pill: false,
+  },
+};

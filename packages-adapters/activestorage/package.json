@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/activestorage",
   "description": "Aurelia Active Storage adapter",
-  "version": "6.1.2",
+  "version": "6.1.3",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/activestorage",
   "repository": {
     "type": "git",

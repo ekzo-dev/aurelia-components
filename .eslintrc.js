@@ -25,5 +25,6 @@ module.exports = {
   rules: {
     // FIXME: 'typescript-recommended' fails on this rule
     'node/no-unsupported-features/es-syntax': 'warn',
+    '@typescript-eslint/ban-ts-comment': 'warn',
   },
 };

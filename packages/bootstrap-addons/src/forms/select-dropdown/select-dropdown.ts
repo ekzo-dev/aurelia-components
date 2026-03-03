@@ -1,6 +1,6 @@
-import template from './select.html';
+import template from './select-dropdown.html';
 
-import './select.scss';
+import './select-dropdown.scss';
 
 import type { Options } from '@popperjs/core';
 import type { Tooltip } from 'bootstrap';
@@ -11,25 +11,21 @@ import {
   BsDropdownItem,
   BsDropdownMenu,
   BsDropdownToggle,
-  BsSelect as BaseBsSelect,
+  BsSelect,
   ISelectOption,
 } from '@ekzo-dev/bootstrap';
-import { bindable, customElement, ICustomElementViewModel, resolve } from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel, queueTask } from 'aurelia';
 
 import { Filter } from './filter';
 
 @customElement({
-  name: 'bs-select',
+  name: 'bs-select-dropdown',
   template,
   dependencies: [BsDropdown, BsDropdownMenu, BsDropdownToggle, BsDropdownItem, Filter, BsCloseButton],
 })
-export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
+export class BsSelectDropdown extends BsSelect implements ICustomElementViewModel {
   @bindable()
   emptyValue?: unknown = null;
-
-  host = resolve(HTMLElement);
-
-  control!: HTMLFieldSetElement;
 
   filter: string = '';
 
@@ -38,8 +34,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   popperConfig: Partial<Options> | Tooltip.PopperConfigFunction | null = null;
 
   binding() {
-    super.binding();
-
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [];
     }
@@ -49,16 +43,22 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     this.setPopperConfig();
   }
 
-  valueChanged(value: unknown): void {
+  valueChanged(value: unknown) {
     if (this.multiple && !Array.isArray(value)) {
       this.value = [];
     }
   }
 
+  propertyChanged(key: PropertyKey, newValue: unknown, oldValue?: unknown) {
+    super.propertyChanged(key, newValue, oldValue);
+    // multiple must not be set on control
+    this.control.removeAttribute('multiple');
+  }
+
   setPopperConfig() {
     const { host } = this;
     const parentModal = host.closest('.modal-body,.popover-body,.offcanvas-body');
-    const dropdownMenu: HTMLElement = host.querySelector('.dropdown-menu');
+    const dropdownMenu: HTMLElement = host.querySelector('.dropdown-menu')!;
 
     if (parentModal != null) {
       this.popperConfig = {
@@ -67,7 +67,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       dropdownMenu.style.minWidth = `${host.offsetWidth}px`;
     } else {
       this.popperConfig = null;
-      dropdownMenu.style.minWidth = undefined;
+      dropdownMenu.style.minWidth = '';
     }
   }
 
@@ -75,8 +75,8 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     return `${this.id}${parentIndex != null ? '-g' + parentIndex.toString() : ''}-${index}`;
   }
 
-  selectOption(option: ISelectOption) {
-    this.value = option.value;
+  selectOption(option?: ISelectOption) {
+    this.value = option?.value;
     this.#dispatchEvents();
   }
 
@@ -85,7 +85,7 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       const { options, value } = this;
 
       return Array.isArray(value)
-        ? value.map((val) => (options as ISelectOption[]).find((option) => option.value === val).text).join(', ')
+        ? value.map((val) => (options as ISelectOption[]).find((option) => option.value === val)!.text).join(', ')
         : '';
     }
 
@@ -97,8 +97,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get showClear(): boolean {
-    console.warn(`BsSelect #${this.id}: get showClear`);
-
     return (
       !this.disabled &&
       ((this.emptyOption && this.selectedOption?.value !== this.emptyOption.value) ||
@@ -126,7 +124,6 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
   }
 
   get selectedOption(): ISelectOption | undefined {
-    console.warn(`BsSelect #${this.id}: get selectedOption`);
     if (this.multiple) return;
 
     const { value, emptyValue, matcher } = this;
@@ -137,13 +134,16 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
       options = Object.entries(options);
     }
 
+    // @ts-ignore
     const isEntries = Array.isArray(options[0]);
     let option = (options as Array<ISelectOption | readonly [unknown, string]>).find((option) => {
+      // @ts-ignore
       const optionValue: unknown = isEntries ? option[0] : (option as ISelectOption).value;
 
       if (optionValue == emptyValue) {
         emptyOption = {
           value: optionValue,
+          // @ts-ignore
           text: isEntries ? (option[1] as string) : (option as ISelectOption).text,
         } as ISelectOption;
       }
@@ -152,18 +152,19 @@ export class BsSelect extends BaseBsSelect implements ICustomElementViewModel {
     });
 
     option =
+      // @ts-ignore
       isEntries && option !== undefined ? { value: option[0], text: option[1] as string } : (option as ISelectOption);
 
     // update value next tick
     const foundValue = option?.value;
 
     if (foundValue !== value) {
-      console.info(`[bootstrap-addons] updating <bs-select> [id=${this.id}] value to`, foundValue);
-      void Promise.resolve().then(() => (this.value = foundValue));
+      queueTask(() => (this.value = foundValue));
     }
 
     // update empty option next tick
-    void Promise.resolve().then(() => (this.emptyOption = emptyOption));
+    // TODO: investigate if next tick is still needed
+    queueTask(() => (this.emptyOption = emptyOption));
 
     return option;
   }

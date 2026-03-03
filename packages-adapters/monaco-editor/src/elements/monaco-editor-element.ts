@@ -4,9 +4,8 @@ import './monaco-editor.css';
 
 import type { editor } from 'monaco-editor';
 
+import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
-
-import { coerceBoolean } from '../utils';
 
 export type EditorModule = typeof import('monaco-editor');
 
@@ -16,7 +15,7 @@ export type EditorModule = typeof import('monaco-editor');
 })
 export class MonacoEditor implements ICustomElementViewModel, editor.IStandaloneEditorConstructionOptions {
   @bindable({ mode: BindingMode.twoWay })
-  value: string;
+  value?: string;
 
   @bindable()
   language?: string;
@@ -28,11 +27,11 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
 
   loading: boolean = true;
 
-  #editorInstance: editor.IStandaloneCodeEditor;
+  #editorInstance?: editor.IStandaloneCodeEditor;
 
   #valueCache?: string;
 
-  #editor: typeof editor;
+  #editor?: typeof editor;
 
   attached() {
     void this.#createEditor();
@@ -52,7 +51,7 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
         break;
 
       case 'language':
-        this.#editor.setModelLanguage(this.#editorInstance.getModel(), value as string);
+        this.#editor?.setModelLanguage(this.#editorInstance!.getModel()!, value as string);
 
         break;
     }
@@ -71,7 +70,7 @@ export class MonacoEditor implements ICustomElementViewModel, editor.IStandalone
       readOnly: this.readOnly,
     });
     this.#editorInstance.onDidChangeModelContent(() => {
-      const val = this.#editorInstance.getValue();
+      const val = this.#editorInstance?.getValue();
 
       this.#valueCache = val;
       this.value = val;

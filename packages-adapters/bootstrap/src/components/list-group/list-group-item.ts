@@ -40,10 +40,10 @@ export class BsListGroupItem extends BaseAttribute {
   get classes(): string[] {
     return [
       'list-group-item',
-      this.disabled ? 'disabled' : null,
-      this.active ? 'active' : null,
-      this.action ? prefix('action') : null,
-      this.variant ? prefix(this.variant) : null,
+      this.disabled ? 'disabled' : '',
+      this.active ? 'active' : '',
+      this.action ? prefix('action') : '',
+      this.variant ? prefix(this.variant) : '',
     ].filter(Boolean);
   }
 }
