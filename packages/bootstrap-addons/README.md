@@ -36,178 +36,41 @@ Aurelia
 
 ## Components
 
+| Component | Description | Documentation |
+|-----------|-------------|---------------|
+| **Duration Input** | Form control for entering time durations in ISO 8601 format | [View docs](./src/forms/duration-input/README.md) |
+| **JSON Input** | Powerful JSON editor with schema validation support | [View docs](./src/forms/json-input/README.md) |
+| **Select Dropdown** | Enhanced select component with improved styling and functionality | [View docs](./src/forms/select-dropdown/README.md) |
+
+## Quick Examples
+
 ### Duration Input
-
-A form control for entering time durations in ISO 8601 format (e.g., `P5DT1H` for 5 days and 1 hour).
-
-**Features:**
-- ISO 8601 duration format support
-- Separate inputs for days, hours, minutes, seconds
-- Integration with Bootstrap form validation
-- Floating label support
-- Size variants (sm, lg)
-
-**Example:**
 
 ```html
 <bs-duration-input
   value.bind="duration"
   label="Duration"
   required.bind="true"
-  floating-label.bind="true"
-  bs-size="lg"
 ></bs-duration-input>
 ```
 
-**Bindable Properties:**
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `value` | `string` | - | Two-way bound ISO 8601 duration string |
-| `bsSize` | `'sm' \| 'lg'` | - | Bootstrap size variant |
-| `floatingLabel` | `boolean` | `false` | Enable floating label style |
-| `name` | `string` | - | Input name attribute |
-| `label` | `string` | - | Label text |
-| `disabled` | `boolean` | `false` | Disable the input |
-| `required` | `boolean` | `false` | Mark as required |
-| `valid` | `boolean` | - | Validation state |
-| `validFeedback` | `string` | - | Valid feedback message |
-| `invalidFeedback` | `string` | - | Invalid feedback message |
-
 ### JSON Input
-
-A powerful JSON editor with schema validation support, powered by [vanilla-jsoneditor](https://github.com/josdejong/svelte-jsoneditor).
-
-**Features:**
-- JSON Schema validation
-- Tree and text editing modes
-- Syntax highlighting
-- Error highlighting
-- Auto-completion
-- Search and replace
-- Undo/redo support
-
-**Example:**
 
 ```html
 <bs-json-input
   value.bind="jsonData"
   json-schema.bind="schema"
-  required.bind="true"
-  disabled.bind="false"
 ></bs-json-input>
 ```
 
-**With JSON Schema:**
-
-```typescript
-export class MyComponent {
-  jsonData = { name: 'John', age: 30 };
-
-  schema = {
-    type: 'object',
-    properties: {
-      name: { type: 'string' },
-      age: { type: 'number', minimum: 0 }
-    },
-    required: ['name', 'age']
-  };
-}
-```
-
-**Bindable Properties:**
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `value` | `any` | - | Two-way bound JSON value |
-| `jsonSchema` | `object \| boolean` | - | JSON Schema for validation. Use `true` for schema editor mode |
-| `required` | `boolean` | `false` | Mark as required |
-| `disabled` | `boolean` | `false` | Disable the editor |
-| `validatorOptions` | `object` | - | Options for json-schema-library validator |
-| `jsonEditorOptions` | `object` | - | Options for vanilla-jsoneditor |
-
 ### Select Dropdown
-
-An enhanced select component with improved styling and functionality, extending the base `BsSelect` component.
-
-**Features:**
-- Single and multi-select support
-- Custom option rendering
-- Empty value handling
-- Bootstrap styling
-- Floating label support
-- Size variants (sm, lg)
-- Performance optimized for large datasets
-
-**Example:**
 
 ```html
 <bs-select-dropdown
   value.bind="selectedValue"
   options.bind="countries"
   label="Country"
-  multiple.bind="false"
-  floating-label.bind="true"
-  bs-size="sm"
 ></bs-select-dropdown>
-```
-
-**With Options Array:**
-
-```typescript
-export class MyComponent {
-  countries = [
-    { value: 'us', text: 'United States' },
-    { value: 'uk', text: 'United Kingdom' },
-    { value: 'ca', text: 'Canada' }
-  ];
-
-  selectedValue = 'us';
-}
-```
-
-**With Key-Value Object:**
-
-```typescript
-export class MyComponent {
-  countries = {
-    'us': 'United States',
-    'uk': 'United Kingdom',
-    'ca': 'Canada'
-  };
-}
-```
-
-**Bindable Properties:**
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `value` | `any \| any[]` | - | Selected value(s), array for multiple mode |
-| `options` | `ISelectOption[] \| [any, string][] \| Record<string, string>` | `[]` | Options as array or object |
-| `multiple` | `boolean` | `false` | Enable multi-select mode |
-| `floatingLabel` | `boolean` | `false` | Enable floating label style |
-| `size` | `number` | - | Number of visible options |
-| `bsSize` | `'sm' \| 'lg'` | - | Bootstrap size variant |
-| `autocomplete` | `string` | - | Autocomplete attribute |
-| `matcher` | `function` | - | Custom value matching function |
-| `emptyValue` | `any` | - | Value to use for empty selection |
-| `name` | `string` | - | Input name attribute |
-| `label` | `string` | - | Label text |
-| `disabled` | `boolean` | `false` | Disable the select |
-| `required` | `boolean` | `false` | Mark as required |
-| `valid` | `boolean` | - | Validation state |
-
-## Types
-
-### ISelectOption
-
-```typescript
-interface ISelectOption<T = unknown> {
-  value: T;
-  text: string;
-  disabled?: boolean;
-  group?: string;
-}
 ```
 
 ## Dependencies
