@@ -19,10 +19,7 @@ export class BsCheckbox extends BaseField {
   checked!: boolean | unknown[];
 
   @bindable()
-  model?: unknown;
-
-  @bindable()
-  value?: string;
+  value?: unknown;
 
   @bindable()
   matcher?: (a: unknown, b: unknown) => boolean;
@@ -56,10 +53,10 @@ export class BsCheckbox extends BaseField {
 
   get classes(): string {
     return [
-      this.mode === 'button' ? null : 'form-check',
-      this.mode === 'switch' ? 'form-switch' : null,
-      this.inline ? 'form-check-inline' : null,
-      this.reverse ? 'form-check-reverse' : null,
+      this.mode === 'button' ? '' : 'form-check',
+      this.mode === 'switch' ? 'form-switch' : '',
+      this.inline ? 'form-check-inline' : '',
+      this.reverse ? 'form-check-reverse' : '',
     ]
       .filter(Boolean)
       .join(' ');

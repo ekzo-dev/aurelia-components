@@ -6,7 +6,6 @@ const meta = {
   render: () => ({
     template: `<bs-checkbox
       checked.bind='checked'
-      model.bind='model'
       value.bind='value'
       inline.bind='inline'
       mode.bind='mode'
@@ -29,8 +28,7 @@ const meta = {
   argTypes: {
     // BsCheckbox properties
     checked: { control: 'boolean' },
-    model: { control: 'object' },
-    value: { control: 'text' },
+    value: { control: 'object' },
     matcher: { control: false },
     inline: { control: 'boolean' },
     mode: {
@@ -95,9 +93,9 @@ export const Overview = {
 
 export const BindingToArray = {
   render: () => ({
-    template: `<bs-checkbox label="One" model="1" checked.bind="checked"></bs-checkbox>
-<bs-checkbox label="Two" model="2" checked.bind="checked"></bs-checkbox>
-<bs-checkbox label="Three" model="3" checked.bind="checked"></bs-checkbox>
+    template: `<bs-checkbox label="One" value="1" checked.bind="checked"></bs-checkbox>
+<bs-checkbox label="Two" value="2" checked.bind="checked"></bs-checkbox>
+<bs-checkbox label="Three" value="3" checked.bind="checked"></bs-checkbox>
 <br>
 Selected: \${checked}`,
   }),
@@ -111,7 +109,6 @@ Selected: \${checked}`,
     valid: { control: false },
     validFeedback: { control: false },
     invalidFeedback: { control: false },
-    model: { control: false },
     value: { control: false },
     matcher: { control: false },
     mode: { control: false },

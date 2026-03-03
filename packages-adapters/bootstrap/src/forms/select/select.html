@@ -10,18 +10,18 @@
   >
     <option
       repeat.for="option of ungroupedOptions"
-      model.bind="option.value"
-      disabled.bind="option.disabled"
-      value.bind="getValue(option.value) & attr"
+      model.one-time="option.value"
+      disabled.one-time="option.disabled"
+      value.one-time="getValue(option.value) & attr"
     >
       ${option.text}
     </option>
     <optgroup repeat.for="[k, v] of groupedOptions" label="${k}">
       <option
         repeat.for="option of v"
-        model.bind="option.value"
-        disabled.bind="option.disabled"
-        value.bind="getValue(option.value) & attr"
+        model.one-time="option.value"
+        disabled.one-time="option.disabled"
+        value.one-time="getValue(option.value) & attr"
       >
         ${option.text}
       </option>

@@ -29,7 +29,7 @@
             type="checkbox"
             checked.bind="value"
             matcher.bind="matcher"
-            model.one-time="option.value"
+            value.one-time="option.value"
             disabled.one-time="option.disabled"
             id.one-time="optionId($index)"
           />
@@ -45,7 +45,7 @@
               type="checkbox"
               checked.bind="value"
               matcher.bind="matcher"
-              model.one-time="option.value"
+              value.one-time="option.value"
               disabled.one-time="option.disabled"
               id.one-time="optionId($index, $parent.$index)"
             />
