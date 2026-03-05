@@ -1,1 +1,1 @@
-export { JsonEditor } from './elements/json-editor';
+export { VanillaJsoneditor } from './vanilla-jsoneditor';

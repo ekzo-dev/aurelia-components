@@ -1,12 +1,12 @@
-import template from './json-editor.html';
+import template from './vanilla-jsoneditor.html';
 
-import './json-editor.css';
+import './vanilla-jsoneditor.css';
 
 import type { JSONPatchDocument, JSONPath } from 'immutable-json-patch';
 import type {
   Content,
   ContentErrors,
-  JsonEditor as JSONEditor,
+  JsonEditor,
   JSONEditorPropsOptional,
   JSONEditorSelection,
   JSONParser,
@@ -27,10 +27,10 @@ import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, BindingMode, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 @customElement({
-  name: 'json-editor',
+  name: 'vanilla-jsoneditor',
   template,
 })
-export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorPropsOptional, 'mode'> {
+export class VanillaJsoneditor implements ICustomElementViewModel, Omit<JSONEditorPropsOptional, 'mode'> {
   @bindable({ mode: BindingMode.twoWay })
   content: Content = { text: '' };
 
@@ -121,7 +121,7 @@ export class JsonEditor implements ICustomElementViewModel, Omit<JSONEditorProps
   @bindable()
   onBlur?: () => void;
 
-  editor?: JSONEditor;
+  editor?: JsonEditor;
 
   editorModule?: typeof import('vanilla-jsoneditor');
 

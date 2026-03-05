@@ -6,6 +6,7 @@ import { type InlineConfig, mergeConfig } from 'vite';
 const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineConfig | Promise<InlineConfig> } = {
   stories: [
     '../packages-adapters/bootstrap/**/*.stories.ts',
+    '../packages-adapters/vanilla-jsoneditor/**/*.stories.ts',
     '../packages/bootstrap-addons/**/*.stories.ts',
   ],
   addons: ['@storybook/addon-links'],
