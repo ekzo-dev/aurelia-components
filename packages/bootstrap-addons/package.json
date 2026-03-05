@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bootstrap-addons",
   "description": "Aurelia Bootstrap additional component",
-  "version": "5.3.21",
+  "version": "5.3.22",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages/bootstrap-addons",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ekzo-dev/bootstrap": "~5.3.6",
+    "@ekzo-dev/bootstrap": "~5.3.9",
     "@ekzo-dev/toolkit": "^1.3.0",
     "@js-temporal/polyfill": "^0.5.1"
   },
