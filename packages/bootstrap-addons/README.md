@@ -39,7 +39,6 @@ Aurelia
 | Component | Description | Documentation |
 |-----------|-------------|---------------|
 | **Duration Input** | Form control for entering time durations in ISO 8601 format | [View docs](./src/forms/duration-input/README.md) |
-| **JSON Input** | Powerful JSON editor with schema validation support | [View docs](./src/forms/json-input/README.md) |
 | **Select Dropdown** | Enhanced select component with improved styling and functionality | [View docs](./src/forms/select-dropdown/README.md) |
 
 ## Quick Examples
@@ -52,15 +51,6 @@ Aurelia
   label="Duration"
   required.bind="true"
 ></bs-duration-input>
-```
-
-### JSON Input
-
-```html
-<bs-json-input
-  value.bind="jsonData"
-  json-schema.bind="schema"
-></bs-json-input>
 ```
 
 ### Select Dropdown
@@ -78,11 +68,7 @@ Aurelia
 This package uses:
 
 - **@ekzo-dev/bootstrap** - Core Bootstrap components for Aurelia 2
-- **@ekzo-dev/vanilla-jsoneditor** - Aurelia 2 adapter for vanilla-jsoneditor
 - **@ekzo-dev/toolkit** - Utility functions and helpers
-- **vanilla-jsoneditor** - JSON editor component
-- **json-schema-library** - JSON Schema validation
-- **ajv** - Another JSON Schema validator
 - **@js-temporal/polyfill** - Temporal API polyfill for date/time handling
 
 ## Browser Support
