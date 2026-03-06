@@ -1,7 +1,7 @@
 import template from './bs-stepper.html';
 
 import 'bs-stepper/dist/css/bs-stepper.min.css';
-import './bs-stepper.scss';
+import './bs-stepper.css';
 
 import { coerceBoolean } from '@ekzo-dev/toolkit';
 import { bindable, customElement, ICustomElementViewModel, observable, resolve } from 'aurelia';
