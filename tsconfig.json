@@ -13,7 +13,8 @@
     "strict": true,
     "paths": {
       "@ekzo-dev/*": ["packages/*/src", "packages-adapters/*/src"]
-    }
+    },
+    "types": ["vite/client"]
   },
   "include": ["packages/*/src", "packages-adapters/*/src", ".storybook"],
   "exclude": ["dist", "node_modules", "test"],
