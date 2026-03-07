@@ -1,1 +1,1 @@
-export * from './attributes/sortable';
+export * from './sortable';
