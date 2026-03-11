@@ -1,7 +1,7 @@
 import template from './bs-stepper-step.html';
 
 import { ICustomElementController } from '@aurelia/runtime-html';
-import { bindable, CustomElement, customElement, resolve } from 'aurelia';
+import { bindable, CustomElement, customElement, ICustomElementViewModel, resolve } from 'aurelia';
 
 import { type BsStepper } from './index';
 
@@ -9,7 +9,7 @@ import { type BsStepper } from './index';
   name: 'bs-stepper-step',
   template,
 })
-export class BsStepperStep {
+export class BsStepperStep implements ICustomElementViewModel {
   @bindable()
   label!: string;
 
@@ -20,7 +20,7 @@ export class BsStepperStep {
 
   #stepper?: BsStepper;
 
-  readonly #host: HTMLElement = resolve(HTMLElement);
+  readonly #host = resolve(HTMLElement);
 
   attaching() {
     this.#host.setAttribute('id', this.id);
@@ -30,7 +30,7 @@ export class BsStepperStep {
     this.#registerInStepper();
   }
 
-  detached() {
+  detaching() {
     this.#unregisterFromStepper();
   }
 

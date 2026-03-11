@@ -35,19 +35,18 @@ export class BsStepper implements ICustomElementViewModel {
 
   readonly #element = resolve(HTMLElement);
 
-  attached() {
-    this.#createStepper();
-  }
-
-  detached() {
+  detaching() {
     this.#destroyStepper();
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  @watch('steps.length', { flush: 'sync' })
+  @watch('steps.length')
   stepsChanged() {
     if (this.#stepper) {
       this.#destroyStepper();
+    }
+
+    if (this.steps.length) {
       this.#createStepper();
     }
   }
