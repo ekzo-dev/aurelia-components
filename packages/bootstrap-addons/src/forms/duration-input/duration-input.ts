@@ -78,7 +78,7 @@ export class BsDurationInput extends BaseField implements EventListenerObject {
     });
   }
 
-  detached() {
+  detaching() {
     this.controls.forEach((control) => {
       control.removeEventListener('keypress', this);
       control.removeEventListener('paste', this);

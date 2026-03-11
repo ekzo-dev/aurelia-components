@@ -70,30 +70,25 @@ The main container component for the stepper.
 
 #### Bindable Properties
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `linear` | `boolean` | `true` | If `true`, users must complete steps in order. If `false`, users can navigate to any step. |
-| `animation` | `boolean` | `false` | Enable fade animation when switching between steps. |
-| `vertical` | `boolean` | `false` | Display stepper in vertical layout instead of horizontal. |
+| Property    | Type      | Default | Description                                                                                |
+| ----------- | --------- | ------- | ------------------------------------------------------------------------------------------ |
+| `linear`    | `boolean` | `true`  | If `true`, users must complete steps in order. If `false`, users can navigate to any step. |
+| `animation` | `boolean` | `false` | Enable fade animation when switching between steps.                                        |
+| `vertical`  | `boolean` | `false` | Display stepper in vertical layout instead of horizontal.                                  |
 
 #### Methods
 
-| Method | Parameters | Description |
-|--------|------------|-------------|
-| `next()` | - | Navigate to the next step. |
-| `previous()` | - | Navigate to the previous step. |
+| Method           | Parameters           | Description                                         |
+| ---------------- | -------------------- | --------------------------------------------------- |
+| `next()`         | -                    | Navigate to the next step.                          |
+| `previous()`     | -                    | Navigate to the previous step.                      |
 | `to(stepNumber)` | `stepNumber: number` | Navigate to a specific step by its index (0-based). |
-| `reset()` | - | Reset the stepper to the first step. |
+| `reset()`        | -                    | Reset the stepper to the first step.                |
 
 #### Example with All Properties
 
 ```html
-<bs-stepper
-  linear.bind="true"
-  animation.bind="true"
-  vertical.bind="false"
-  component.ref="stepper">
-
+<bs-stepper linear.bind="true" animation.bind="true" vertical.bind="false" component.ref="stepper">
   <bs-stepper-step number="1" label="Account">
     <!-- Step content -->
   </bs-stepper-step>
@@ -110,18 +105,18 @@ Individual step component that must be placed inside `<bs-stepper>`.
 
 #### Bindable Properties
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `label` | `string` | Yes | The label displayed in the step header. |
-| `number` | `string` | No | The number or icon displayed in the step circle. If not provided, steps will be auto-numbered. |
+| Property | Type     | Required | Description                                                                                    |
+| -------- | -------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `label`  | `string` | Yes      | The label displayed in the step header.                                                        |
+| `number` | `string` | No       | The number or icon displayed in the step circle. If not provided, steps will be auto-numbered. |
 
 #### Example
 
 ```html
 <bs-stepper-step number="1" label="Personal Information">
   <form>
-    <input type="text" placeholder="Name">
-    <input type="email" placeholder="Email">
+    <input type="text" placeholder="Name" />
+    <input type="email" placeholder="Email" />
   </form>
 </bs-stepper-step>
 ```
@@ -135,12 +130,12 @@ Users must complete steps in order:
 ```html
 <bs-stepper linear.bind="true" component.ref="stepper">
   <bs-stepper-step number="1" label="Basic Info">
-    <input type="text" placeholder="Name">
+    <input type="text" placeholder="Name" />
     <button click.trigger="stepper.next()">Next</button>
   </bs-stepper-step>
 
   <bs-stepper-step number="2" label="Contact">
-    <input type="email" placeholder="Email">
+    <input type="email" placeholder="Email" />
     <button click.trigger="stepper.previous()">Back</button>
     <button click.trigger="stepper.next()">Next</button>
   </bs-stepper-step>
@@ -250,36 +245,23 @@ export class RegistrationForm {
 ```
 
 ```html
-<bs-stepper
-  linear.bind="true"
-  animation.bind="true"
-  component.ref="stepper">
-
+<bs-stepper linear.bind="true" animation.bind="true" component.ref="stepper">
   <bs-stepper-step number="1" label="Email">
     <h3>Enter your email</h3>
-    <input
-      type="email"
-      value.bind="formData.email"
-      placeholder="Email address">
+    <input type="email" value.bind="formData.email" placeholder="Email address" />
     <button click.trigger="validateEmail()">Next</button>
   </bs-stepper-step>
 
   <bs-stepper-step number="2" label="Password">
     <h3>Create a password</h3>
-    <input
-      type="password"
-      value.bind="formData.password"
-      placeholder="Password (min 8 characters)">
+    <input type="password" value.bind="formData.password" placeholder="Password (min 8 characters)" />
     <button click.trigger="stepper.previous()">Back</button>
     <button click.trigger="validatePassword()">Next</button>
   </bs-stepper-step>
 
   <bs-stepper-step number="3" label="Profile">
     <h3>Tell us about yourself</h3>
-    <input
-      type="text"
-      value.bind="formData.name"
-      placeholder="Full name">
+    <input type="text" value.bind="formData.name" placeholder="Full name" />
     <button click.trigger="stepper.previous()">Back</button>
     <button click.trigger="stepper.next()">Next</button>
   </bs-stepper-step>
@@ -289,7 +271,7 @@ export class RegistrationForm {
     <p><strong>Email:</strong> ${formData.email}</p>
     <p><strong>Name:</strong> ${formData.name}</p>
     <label>
-      <input type="checkbox" checked.bind="formData.agreed">
+      <input type="checkbox" checked.bind="formData.agreed" />
       I agree to the terms and conditions
     </label>
     <button click.trigger="stepper.previous()">Back</button>
