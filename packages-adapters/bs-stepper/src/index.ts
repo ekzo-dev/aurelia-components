@@ -1,2 +1,2 @@
-export * from './elements/bs-stepper';
-export * from './elements/bs-stepper-step';
+export * from './bs-stepper';
+export * from './bs-stepper-step';

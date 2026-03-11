@@ -9,6 +9,7 @@ const config: StorybookConfig & { viteFinal?: (config: InlineConfig) => InlineCo
     '../packages-adapters/vanilla-jsoneditor/**/*.stories.ts',
     '../packages-adapters/monaco-editor/**/*.stories.ts',
     '../packages-adapters/sortable/**/*.stories.ts',
+    '../packages-adapters/bs-stepper/**/*.stories.ts',
     '../packages/bootstrap-addons/**/*.stories.ts',
   ],
   addons: ['@storybook/addon-links'],

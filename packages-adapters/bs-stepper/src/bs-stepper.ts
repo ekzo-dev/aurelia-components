@@ -3,11 +3,11 @@ import template from './bs-stepper.html';
 import 'bs-stepper/dist/css/bs-stepper.min.css';
 import './bs-stepper.css';
 
-import { coerceBoolean } from '@ekzo-dev/toolkit';
-import { bindable, customElement, ICustomElementViewModel, observable, resolve } from 'aurelia';
-import Stepper from 'bs-stepper';
+import type { BsStepperStep } from './bs-stepper-step';
 
-import { type BsStepperStep } from '../index';
+import { coerceBoolean } from '@ekzo-dev/toolkit';
+import { bindable, customElement, ICustomElementViewModel, resolve, watch } from 'aurelia';
+import Stepper from 'bs-stepper';
 
 export interface IBsStepperEventDetail {
   to: number;
@@ -29,61 +29,63 @@ export class BsStepper implements ICustomElementViewModel {
   @bindable(coerceBoolean)
   vertical: boolean = false;
 
-  @observable()
   readonly steps: BsStepperStep[] = [];
 
-  private stepper?: Stepper;
+  #stepper?: Stepper;
 
-  constructor(public readonly element: HTMLElement = resolve(HTMLElement)) {}
+  readonly #element = resolve(HTMLElement);
 
   attached() {
-    this.createStepper();
+    this.#createStepper();
   }
 
   detached() {
-    this.destroyStepper();
+    this.#destroyStepper();
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @watch('steps.length', { flush: 'sync' })
   stepsChanged() {
-    // TODO: may be will be handled by propertyChanged(), not tested
-    this.destroyStepper();
-    this.createStepper();
+    if (this.#stepper) {
+      this.#destroyStepper();
+      this.#createStepper();
+    }
   }
 
-  propertyChanged(): void {
-    this.destroyStepper();
-    this.createStepper();
+  propertyChanged() {
+    this.#destroyStepper();
+    this.#createStepper();
   }
 
   next() {
-    this.stepper?.next();
+    return this.#stepper?.next();
   }
 
-  previous(): void {
-    this.stepper?.previous();
+  previous() {
+    return this.#stepper?.previous();
   }
 
-  to(stepNumber: number): void {
-    this.stepper?.to(stepNumber);
+  to(stepNumber: number) {
+    return this.#stepper?.to(stepNumber);
   }
 
-  reset(): void {
-    this.stepper?.reset();
+  reset() {
+    return this.#stepper?.reset();
   }
 
-  private createStepper() {
-    this.stepper = new Stepper(this.element, {
+  #createStepper() {
+    this.#stepper = new Stepper(this.#element, {
       linear: this.linear,
       animation: this.animation,
     });
   }
 
-  private destroyStepper() {
-    this.stepper?.destroy();
-    this.stepper = undefined;
+  #destroyStepper() {
+    this.#stepper?.destroy();
+    this.#stepper = undefined;
 
     // manually remove library classes, it does not do it
-    const element = this.element;
+    const element = this.#element;
 
     element.classList.remove('linear');
     element.querySelectorAll('div.step').forEach((step) => {
