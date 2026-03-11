@@ -20,7 +20,7 @@ const stringProperties = new Set<string>([
   'minlength',
   'maxlength',
   'pattern',
-  'fileAccept',
+  'accept',
   'inputmode',
   'rows',
 ]);
@@ -123,13 +123,11 @@ export class BaseField implements ICustomElementViewModel {
       }
     } else if (stringProperties.has(prop)) {
       const isEmpty = newValue == null || newValue === '';
-      // TODO: remove after https://github.com/aurelia/aurelia/issues/2383
-      const attr = prop === 'fileAccept' ? 'accept' : prop;
 
       if (isEmpty && oldValue) {
-        control.removeAttribute(attr);
+        control.removeAttribute(prop);
       } else if (!isEmpty) {
-        control.setAttribute(attr, newValue.toString());
+        control.setAttribute(prop, newValue.toString());
       }
     } else if (booleanProperties.has(prop)) {
       if (newValue) {

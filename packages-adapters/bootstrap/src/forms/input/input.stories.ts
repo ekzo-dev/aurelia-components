@@ -16,7 +16,7 @@ const meta = {
       multiple.bind='multiple'
       disabled.bind='disabled'
       pattern.bind='pattern'
-      file-accept.bind='fileAccept'
+      accept.bind='accept'
       floating-label.bind='floatingLabel'
       placeholder.bind='placeholder'
       readonly.bind='readonly'
@@ -68,7 +68,7 @@ const meta = {
     step: { control: 'text' },
     multiple: { control: 'boolean' },
     pattern: { control: 'text' },
-    fileAccept: { control: 'text' },
+    accept: { control: 'text' },
     floatingLabel: { control: 'boolean' },
     placeholder: { control: 'text' },
     readonly: { control: 'boolean' },

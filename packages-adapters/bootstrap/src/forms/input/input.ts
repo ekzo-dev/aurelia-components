@@ -57,7 +57,7 @@ export class BsInput extends BaseField implements HTMLInputBase {
    * TODO: rename after https://github.com/aurelia/aurelia/issues/2383
    */
   @bindable()
-  fileAccept?: string;
+  accept?: string;
 
   @bindable(coerceBoolean)
   floatingLabel: boolean = this.config.floatingLabels;
