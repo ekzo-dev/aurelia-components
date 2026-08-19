@@ -97,9 +97,9 @@ export class BsInput extends BaseField implements HTMLInputBase {
 
   datalistChanged(newValue?: string[], oldValue?: string[]): void {
     if (newValue != null) {
-      this.control.setAttribute('datalist', this.datalistId);
+      this.control.setAttribute('list', this.datalistId);
     } else if (oldValue) {
-      this.control.removeAttribute('datalist');
+      this.control.removeAttribute('list');
     }
   }
 
