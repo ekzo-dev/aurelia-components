@@ -18,12 +18,13 @@ export class BsStepperStep implements ICustomElementViewModel {
 
   readonly id: string = `id${Math.random().toString(36).substring(2, 9)}`;
 
+  /** The step's element, which the stepper orders its steps by */
+  readonly host = resolve(HTMLElement);
+
   #stepper?: BsStepper;
 
-  readonly #host = resolve(HTMLElement);
-
   attaching() {
-    this.#host.setAttribute('id', this.id);
+    this.host.setAttribute('id', this.id);
   }
 
   attached() {
@@ -35,11 +36,19 @@ export class BsStepperStep implements ICustomElementViewModel {
   }
 
   #registerInStepper(): void {
-    const stepper = this.#findStepper(this.#host);
+    const stepper = this.#findStepper(this.host);
 
     if (stepper) {
       this.#stepper = stepper.viewModel;
-      this.#stepper.steps.push(this);
+
+      // In the order of the document, not of attaching: a step attaches once all of its content has, so one holding
+      // a component that attaches asynchronously comes after the steps that follow it
+      const steps = this.#stepper.steps;
+      const next = steps.findIndex(
+        (step) => (this.host.compareDocumentPosition(step.host) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0
+      );
+
+      steps.splice(next === -1 ? steps.length : next, 0, this);
     } else {
       console.error('Invalid usage of <bs-stepper-step> component outside of <bs-stepper>');
     }

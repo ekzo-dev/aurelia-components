@@ -1,7 +1,7 @@
 {
   "name": "@ekzo-dev/bs-stepper",
   "description": "Aurelia Bootstrap stepper adapter",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "homepage": "https://github.com/ekzo-dev/aurelia-components/tree/main/packages-adapters/bs-stepper",
   "repository": {
     "type": "git",
@@ -34,9 +34,15 @@
       "<rootDir>/test/**/*.spec.ts"
     ],
     "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.ts"
+    ],
     "transform": {
       "\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
       "\\.(ts|html)$": "@aurelia/ts-jest"
+    },
+    "moduleNameMapper": {
+      "\\.css$": "jest-transform-stub"
     },
     "collectCoverage": true,
     "collectCoverageFrom": [

@@ -11,7 +11,11 @@
     ref="control"
   />
   <button if.bind="showClear" bs-close-button type="button" click.trigger="clear()"></button>
-  <bs-dropdown-menu popper-config.bind="popperConfig" auto-close.bind="multiple ? 'outside' : true">
+  <bs-dropdown-menu
+    component.ref="menu"
+    popper-config.bind="popperConfig"
+    auto-close.bind="multiple ? 'outside' : true"
+  >
     <template if.bind="optionsCount > 10">
       <div bs-dropdown-item="text">
         <input class="form-control" placeholder="Filter options" type="search" value.bind="filter & debounce:250" />

@@ -33,6 +33,8 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
 
   popperConfig: Partial<Options> | Tooltip.PopperConfigFunction | null = null;
 
+  readonly menu!: BsDropdownMenu;
+
   binding() {
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [];
@@ -50,6 +52,13 @@ export class BsSelectDropdown extends BsSelect implements ICustomElementViewMode
   }
 
   propertyChanged(key: PropertyKey, newValue: unknown, oldValue?: unknown) {
+    // an open menu has to be closed before the control takes the disabled attribute: Bootstrap
+    // closes menus from a document click listener that skips disabled toggles, and its own hide()
+    // is a no-op on one, so a menu left open at that point stays open for good
+    if (key === 'disabled' && newValue) {
+      this.menu?.hide();
+    }
+
     super.propertyChanged(key, newValue, oldValue);
     // multiple must not be set on control
     this.control.removeAttribute('multiple');
